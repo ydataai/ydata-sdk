@@ -1,4 +1,4 @@
-VENV := $(PWD)/.venv
+VENV := $(PWD)/env
 PYTHON := python
 PIP := $(PYTHON) -m pip
 
@@ -14,9 +14,9 @@ else
 endif
 
 venv3: ### Creates a virtual environment for this project
-	test -d $(VENV) || $(PYTHON) -m venv $(VENV)
+	test -d $(VENV) || $(PYTHON) -m venv $(VENV) && source $(VENV)/bin/activate
 	$(PIP) install --upgrade pip
-	$(PIP) install -e ".[dev]"
+	$(PIP) install -e ".[dev,test]"
 
 clean: clean-build clean-pyc ### Cleans artifacts
 
@@ -37,6 +37,12 @@ install: ### Installs regular dependencies
 
 install-dev: ### Installs regular and dev dependencies
 	$(PIP) install -e ".[dev]"
+
+install-test: ### Installs regular and test dependencies
+	$(PIP) install -e ".[dev]"
+
+install-all: ### Installs regular, dev and test dependencies
+	$(PIP) install -e ".[dev,test]"
 
 package:
 	rm -rf build dist

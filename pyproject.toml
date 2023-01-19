@@ -31,6 +31,8 @@ dev = [
     "twine",
     "flit==3.8.0",
     "pylint==2.15.10",
+]
+test = [
     "pytest==6.2.5",
     "pytest-bdd==4.0.*",
     "pytest-cov==2.11.*",
