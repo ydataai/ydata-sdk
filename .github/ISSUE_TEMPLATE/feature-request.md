@@ -8,8 +8,8 @@ assignees: ''
 ---
 
 **Don't forget to assign:**
-* Project
-* Milestone (if any)
+*   Project
+*   Milestone (if any)
 
 ## Description of the feature
 * A clear and concise description of the business idea
@@ -23,5 +23,5 @@ Then [a set of consequences should occur]
 Links to other tasks that may depend or be dependent on this one.
 
 ## Additional context
-* Link to the notion, if any
-* Screenshots for the UI
+*   Link to the notion, if any
+*   Screenshots for the UI

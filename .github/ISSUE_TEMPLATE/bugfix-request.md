@@ -8,8 +8,8 @@ assignees: ''
 ---
 
 **Don't forget to assign:**
-* Project
-* Milestone (if any)
+*   Project
+*   Milestone (if any)
 
 **Environment:** dev|prod
 
@@ -29,8 +29,8 @@ If applicable, add screenshots to help explain your problem.
 Links to other tasks that may depend or be dependent of this one.
 
 ## Additional context
-* Browser being used
-* Info used to reproduce
-* Credentials or userid
-* Logs
-* Links
+*   Browser being used
+*   Info used to reproduce
+*   Credentials or userid
+*   Logs
+*   Links
