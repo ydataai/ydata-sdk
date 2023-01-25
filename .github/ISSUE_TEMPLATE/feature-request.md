@@ -12,8 +12,8 @@ assignees: ''
 *   Milestone (if any)
 
 ## Description of the feature
-* A clear and concise description of the business idea
-* Helpful documentation
+*   A clear and concise description of the business idea
+*   Helpful documentation
 Acceptance criteria (if applicable)
 Given [context] 
 When [a specific action is performed] 
