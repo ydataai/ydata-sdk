@@ -17,7 +17,6 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    "numpy==1.21.*",
 ]
 
 [project.license]

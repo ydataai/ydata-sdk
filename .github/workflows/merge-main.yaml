@@ -10,7 +10,7 @@ on:
 jobs:
   prepare:
     name: Calculate Version and Build Number
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     outputs:
       build_number: ${{ steps.build_number.outputs.value }}
@@ -44,7 +44,7 @@ jobs:
     if: needs.prepare.outputs.new_release == 'true'
 
     name: Generates Prerelease
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     needs:
     - prepare
