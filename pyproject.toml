@@ -45,7 +45,7 @@ test = [
 ]
 
 [tool.flit.module]
-name = "ydata-sdk"
+name = "ydata.sdk"
 
 [tool.flit.sdist]
 exclude = [
