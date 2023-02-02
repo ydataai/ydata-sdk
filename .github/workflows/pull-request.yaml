@@ -1,0 +1,57 @@
+name: Pull Request
+
+
+
+on:
+  push:
+    branches:
+    - renovate/**
+  pull_request:
+    branches:
+    - main
+
+
+
+jobs:
+  cancel_previous:
+    name: 'Cancel Previous Runs'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 3
+
+    steps:
+    - uses: ydataai/cancel-workflow-action@0.7.0
+      with:
+        ignore_sha: true
+        access_token: ${{ secrets.ACCESS_TOKEN }}
+
+
+  validate:
+    name: Validate
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Cache pip dependencies
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        make install-all
+
+    # - name: Validate code formatting
+    #   run: make lint
+
+    # - name: Unit Tests
+    #   run: |
+    #     make test

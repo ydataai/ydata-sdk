@@ -1,0 +1,5 @@
+# To allow validation of only one commit, usually the one that defines the title
+# I think that is achieved with these options set to true.
+# https://github.com/Ezard/semantic-prs#configuration-options
+titleOnly: true
+allowRevertCommits: true

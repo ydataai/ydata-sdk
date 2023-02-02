@@ -1,0 +1,77 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.8.0,<4"]
+
+[project]
+name = "ydata-sdk"
+authors = [
+    {name = "YData", email = "opensource@ydata.ai"},
+]
+description = "Python package developer's cheat sheet (using pyproject.toml)."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+dynamic = [
+    "version",
+]
+dependencies = [
+]
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Home = "https://github.com/ydataai/ydata-sdk"
+
+[project.optional-dependencies]
+dev = [
+    "twine",
+    "flit==3.8.0",
+    "pylint==2.15.10",
+]
+test = [
+    "pytest==6.2.5",
+    "pytest-bdd==4.0.*",
+    "pytest-cov==2.11.*",
+    "pytest-xdist==2.2.*",
+]
+
+[tool.flit.module]
+name = "ydata-sdk"
+
+[tool.flit.sdist]
+exclude = [
+    ".github/*",
+    "docs/*",
+    "examples/*",
+    "tests/*",
+    ".editorconfig",
+    ".python-version",
+    ".gitignore",
+    ".releaserc.json",
+    "CODE_OF_CONDUCT.md",
+    "Makefile",
+]
+
+[tool.pytest.ini_options]
+mccabe-complexity = 10
+
+[tool.pylint]
+max-locals = 15
+max-returns = 6
+max-branches = 12
+max-statements = 50
+max-parents = 7
+max-attributes = 7
+min-public-methods = 2
+max-public-methods = 20
+max-module-lines = 1000
+max-line-length = 120
+disable = [
+    "W0511", # fixme
+    "W0311", # bad-indentation
+    "C0330", # bad-continuation
+    "R0903", # too-few-public-methods
+]
