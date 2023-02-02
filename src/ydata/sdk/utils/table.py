@@ -1,0 +1,6 @@
+MISSING_NAME = 'Unknown'
+MISSING_DATE = 'Not available'
+MISSING_STATUS = 'Not available'
+MISSING_COUNT = '?'
+MISSING_CONNECTOR_UID = 'Unknown'
+MISSING_DATATYPE = '-'

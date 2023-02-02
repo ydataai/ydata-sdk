@@ -2,7 +2,7 @@ site_name: YData SDK
 repo_url: https://github.com/ydataai/ydata-sdk
 repo_name: ydataai/ydata-sdk
 edit_uri: ""
-dev_addr: 0.0.0.0:1234
+dev_addr: 0.0.0.0:2345
 site_dir: "static/docs"
 nav:
   - Getting started:
@@ -17,9 +17,18 @@ nav:
   - Reference:
     - Changelog: 'reference/changelog.md'
     - API:
-      - GAN: 'reference/api/synthesizers/gan.md'
-      - Regular:
-        - CGAN: 'reference/api/synthesizers/cgan.md'
+      - Client: 'reference/api/common/client.md'
+      - Connectors:
+        - 'Connector': 'reference/api/connectors/connector.md'
+      - DataSources:
+        - 'DataSource': 'reference/api/datasources/datasource.md'
+        - 'DataSourceAttrs': 'reference/api/datasources/attributes.md'
+        - 'Metadata': 'reference/api/datasources/metadata.md'
+      - Synthesizers:
+        - Synthesizer: 'reference/api/synthesizers/base.md'
+        - Regular: 'reference/api/synthesizers/regular.md'
+        - TimeSeries: 'reference/api/synthesizers/timeseries.md'
+      - Types: 'reference/api/common/types.md'
 theme:
   name: material
   language: en
@@ -47,7 +56,6 @@ theme:
     - navigation.sections
     - navigation.indexes
     - toc.follow
-    - toc.integrate
     - toc.integrate
   icon:
     admonition:
@@ -111,8 +119,24 @@ extra:
   social:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/ydataai
+watch:
+  - src
 plugins:
-  - mkdocstrings
   - search:
         lang: en
-        foo: bar
+  - autorefs
+  - mkdocstrings:
+      custom_templates: templates
+      default_handler: python
+      handlers:
+        python:
+          selection:
+            filters: ["!^_", "!^__"]
+          import:
+          - https://docs.python.org/3/objects.inv
+          - http://pandas.pydata.org/pandas-docs/stable/objects.inv
+          setup_commands:
+            - import sys
+            - sys.path.append('../src')
+          merge_init_into_class: yes
+          show_submodules: no

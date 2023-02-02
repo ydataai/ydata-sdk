@@ -16,9 +16,15 @@ endif
 venv3: ### Creates a virtual environment for this project
 	test -d $(VENV) || $(PYTHON) -m venv $(VENV) && source $(VENV)/bin/activate
 	$(PIP) install --upgrade pip
-	install-all
+	make install-all
 
-clean: clean-build clean-pyc ### Cleans artifacts
+test:
+	python -m pytest src/
+
+test-cov:
+	python -m pytest --cov=. src/
+
+clean: clean-build clean-pyc clean-env ### Cleans artifacts
 
 clean-build: ### Removes builds
 	find . -type d -iname "build" ! -path "./.venv/*" -exec rm -rf {} +
@@ -47,11 +53,11 @@ install-test: ### Installs regular and test dependencies
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install -e ".[dev,doc,test]"
 
-package:
+package:  ### Builds the package in wheel format
 	rm -rf build dist
 	echo "$(version)" > VERSION
-	flit build
+	$(PYTHON) -m build --wheel
 	twine check dist/*
 
-publish-docs:
+publish-docs: ### Publishes the documentation
 	mike deploy --push --update-aliases $(version) latest
