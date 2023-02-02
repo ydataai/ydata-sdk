@@ -15,8 +15,8 @@ assignees: ''
 *   A clear and concise description of the business idea
 *   Helpful documentation
 Acceptance criteria (if applicable)
-Given [context] 
-When [a specific action is performed] 
+Given [context]
+When [a specific action is performed]
 Then [a set of consequences should occur]
 
 ## Dependencies

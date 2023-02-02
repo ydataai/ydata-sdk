@@ -17,9 +17,13 @@ nav:
   - Reference:
     - Changelog: 'reference/changelog.md'
     - API:
-      - GAN: 'reference/api/synthesizers/gan.md'
-      - Regular:
-        - CGAN: 'reference/api/synthesizers/cgan.md'
+      - Client: 'reference/api/common/client.md'
+      - Connectors: 'reference/api/connectors/connector.md'
+      - DataSources: 'reference/api/datasources/datasource.md'
+      - Synthesizers:
+        - Base: 'reference/api/synthesizers/base.md'
+        - Regular: 'reference/api/synthesizers/regular.md'
+        - TimeSeries: 'reference/api/synthesizers/timeseries.md'
 theme:
   name: material
   language: en
@@ -47,7 +51,6 @@ theme:
     - navigation.sections
     - navigation.indexes
     - toc.follow
-    - toc.integrate
     - toc.integrate
   icon:
     admonition:
@@ -112,7 +115,10 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/ydataai
 plugins:
-  - mkdocstrings
   - search:
         lang: en
         foo: bar
+  - mkdocstrings:
+      enabled: !ENV [ENABLE_MKDOCSTRINGS, true]
+      custom_templates: templates
+      default_handler: python
