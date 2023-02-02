@@ -3,6 +3,7 @@
 }
 .md-typeset :focus-within > .md-annotation__index > ::before {
     transform: none;
+<<<<<<< HEAD
 }
 
 [data-md-color-scheme="ydata"] {
@@ -22,3 +23,6 @@
   --md-typeset-a-color: #007dfc;
   --md-hue: 215;
 }
+=======
+}
+>>>>>>> 4e1a4f3 (docs: configure the doc generator [SD-700])
