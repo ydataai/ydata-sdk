@@ -1,0 +1,40 @@
+site_name: YData SDK
+
+repo_name: ydataai/ydata-sdk
+repo_url: https://github.com/ydataai/ydata-sdk
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: deep orange
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: blue grey
+      accent: deep orange
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+nav:
+  - Getting started:
+    - Overview: 'index.md'
+    - Installation: 'getting-started/installation.md'
+    - Quickstart: 'getting-started/quickstart.md'
+    - Examples: 'getting-started/examples.md'
+  - Support:
+    - Help & Troubleshooting: 'support/help-troubleshooting.md'
+    - Contribution Guidelines: 'support/help-troubleshooting.md'
+  - Reference:
+    - Changelog: 'reference/changelog.md'
+    - API:
+      - Overview: 'reference/api/overview.md'
+      - GAN: 'reference/api/synthesizers/gan.md'
+      - Regular:
+        - CGAN: 'reference/api/synthesizers/cgan.md'
