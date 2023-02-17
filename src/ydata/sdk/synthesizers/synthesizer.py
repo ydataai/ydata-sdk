@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from io import StringIO
 from time import sleep
-from typing import Optional, Union
+from typing import Optional, Tuple, Type, Union
 from uuid import uuid4
 
 from pandas import DataFrame as pdDataFrame
@@ -12,7 +12,8 @@ from ydata.sdk.common.client import Client, get_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import AlreadyFittedError, DataSourceNotAvailableError, NotInitializedError
 from ydata.sdk.common.logger import create_logger
-from ydata.sdk.datasources.datasource import DataSource, Metadata
+from ydata.sdk.datasources import DataSource, LocalDataSource
+from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.status import Status as dsStatus
 from ydata.sdk.synthesizers.models.status import Status
 from ydata.sdk.synthesizers.models.synthesizer import Synthesizer as mSynthesizer
@@ -20,6 +21,8 @@ from ydata.sdk.synthesizers.models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers.models.synthesizers_list import SynthesizersList
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
+
+from ydata.sdk.datasources.models.metadata.metadata import Metadata
 
 
 @typechecked
@@ -44,12 +47,14 @@ class BaseSynthesizer(ABC, ModelMixin):
         Arguments:
             client (Client): (optional) Client to connet to the backend
         """
+        self._init_common(client)
+        self._model: Optional[mSynthesizer] = None
+
+    def _init_common(self, client: Optional[Client] = None):
         self._client = get_client(client)
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
-        self._model: Optional[mSynthesizer] = None
-
-    def fit(self, X: Union[DataSource, pdDataFrame], metadata: Optional[Metadata] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:  # TODO: Target + data
+    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, metadata: Optional[Metadata] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:  # TODO: Target + data
         """Initialize the object.
 
         Arguments:
@@ -63,8 +68,10 @@ class BaseSynthesizer(ABC, ModelMixin):
 
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
-            _X = DataSource(source=X, client=self._client)
+            # TODO: Check that datatype is not None in this case
+            _X = LocalDataSource(source=X, datatype=datatype, client=self._client)
         else:
+            # TODO: is dataype is not None we should raise a warning
             _X = X
 
         if _X.status != dsStatus.AVAILABLE:
@@ -74,9 +81,9 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._fit_from_datasource(X=_X, metadata=metadata, name=name)
 
     @staticmethod
-    def _metadata_to_payload(metadata: Metadata) -> list:
+    def _metadata_to_payload(ds_metadata: Metadata, user_metadata: Optional[Metadata] = None) -> list:
         columns = []
-        for c in metadata.columns:
+        for c in ds_metadata.columns:
             columns.append({
                 'name': c.name,
                 'generation': True,
@@ -89,12 +96,12 @@ class BaseSynthesizer(ABC, ModelMixin):
     def _fit_from_datasource(self, X: DataSource, metadata: Optional[Metadata] = None, name: Optional[str] = None) -> None:
         _name = name if name is not None else str(uuid4())
         # TODO: update based on the user input as well
-        columns = self._metadata_to_payload(X.metadata)
+        columns = self._metadata_to_payload(X.metadata, metadata)
         payload = {
             'name': _name,
             'dataSourceUID': X.uid,
             'metadata': {
-                'dataType': 'tabular',  # TODO: From Datasource / or specified by the user for DataFrame
+                'dataType': X.datatype,
                 "columns": columns,
             },
         }
@@ -104,7 +111,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._model, _ = self._model_from_api(X.datatype, data)
 
     @staticmethod
-    def _model_from_api(datatype: str, data: dict) -> mSynthesizer:
+    def _model_from_api(datatype: str, data: dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
         from ydata.sdk.synthesizers.models.synthesizer_map import TYPE_TO_CLASS
         synth_cls = TYPE_TO_CLASS.get(SynthesizerType(datatype).value)
         data['status'] = synth_cls._resolve_api_status(data['status'])
@@ -147,7 +154,7 @@ class BaseSynthesizer(ABC, ModelMixin):
             return Status.UNKNOWN
 
     @staticmethod
-    def get(id: str, client: Optional[Client] = None) -> SynthesizersList:
+    def get(id: str, client: Optional[Client] = None) -> "BaseSynthesizer":
         """List the synthesizer instances.
 
         Arguments:
