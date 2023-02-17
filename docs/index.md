@@ -1,78 +1,60 @@
-# YData Synthetic
+# YData SDK
 
-
-## TEST 
-
-$$
-\operatorname{ker} f=\{g\in G:f(g)=e_{H}\}{\mbox{.}}
-$$
-
-The `#!python range()` function is used to generate a sequence of numbers.
-``` py title="bubble_sort.py" linenums="1" hl_lines="2 3"
-def bubble_sort(items):
-    for i in range(len(items)):
-        for j in range(len(items) - 1 - i):
-            if items[j] > items[j + 1]:
-                items[j], items[j + 1] = items[j + 1], items[j] # (1)
-```
-
-1. :A lot of loops!
-
-``` yaml
-theme:
-  features:
-    - content.code.annotate # (1)
-```
-
-1. :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
-    text__, images, ... basically anything that can be expressed in Markdown[^1].
-
-[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-## Installation
-
-=== "Windows"
-
-    For Windows
-
-=== "Linux"
-
-    For Linux
-
-
-| Method      | Description                          |
-| ----------- | ------------------------------------ |
-| `GET`       | :material-check:     Fetch resource  |
-| `PUT`       | :material-check-all: Update resource |
-| `DELETE`    | :material-close:     Delete resource |
-
-## Test
-
-``` mermaid
-sequenceDiagram
-  Alice->>John: Hello John, how are you?
-  loop Healthcheck
-      John->>John: Fight against hypochondria
-  end
-  Note right of John: Rational thoughts!
-  John-->>Alice: Great!
-  John->>Bob: How about you?
-  Bob-->>John: Jolly good!
-```
-
-
+[![pypi](https://img.shields.io/pypi/v/ydata-sdk)](https://pypi.org/project/ydata-sdk)
+[![CondaForge](https://img.shields.io/conda/v/conda-forge/pydantic.svg)](https://anaconda.org/conda-forge/pydantic)
+![Pythonversion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)
+[![downloads](https://pepy.tech/badge/pydantic/month)](https://pepy.tech/project/pydantic)
+[![license](https://img.shields.io/github/license/pydantic/pydantic.svg)](https://github.com/pydantic/pydantic/blob/main/LICENSE)
 
 <figure markdown>
-  ![Image title](https://dummyimage.com/600x400/){ width="300" loading=lazy }
-  <figcaption>Image caption</figcaption>
+  ![Image title](https://assets.ydata.ai/YData_logo_colored_black.svg){ width="500" loading=lazy }
 </figure>
 
-## Roadmap
+!!! note "YData SDK for improved data quality everywhere!"
+    Add here some note on what is YData synthetic about
 
-- [X] Important thing 1
-    - [ ] Define stuff
-- [X] Important thing 2
-    - [X] Loops on primitive
-    - [X] Loops on complex objects
-    - [ ] Loops without specific syntax
-- [ ] Nice documentation
+    [Try YData SDK today](https://ydata.ai){ .md-button .md-button--primary }
+
+## Overview
+
+The *YData SDK* is an ecosystem of methods that allows users to, through a python interface, adopt a *Data-Centric* approach towards the AI development. The solution includes a set of integrated components for data ingestion, standardized data quality evaluation and data improvement, such as *synthetic data generation*, allowing an iterative improvement of the datasets used in high-impact business applications.
+
+**Synthetic data** can be used as Machine Learning performance enhancer, to augment or mitigate the presence of bias in real data. Furthermore, it can be used as a Privacy Enhancing Technology, to enable data-sharing initiatives or even to fuel testing environments. 
+
+Under the YData-SDK hood, you can find a set of algorithms and metrics based on statistics and deep learning based techniques, that will help you to accelerate your data preparation. 
+
+## Current functionality
+
+YData SDK is currently composed by the following main modules:
+
+* **Datasources:**
+
+* **Synthesizers:**
+
+* **Synthetic data quality report:**
+
+* **Profiling:** (coming soon???)
+
+## Supported data formats
+
+=== "Tabular"
+    ![Tabular data synthesiszer](https://dummyimage.com/600x400/eee/aaa){ align=right }
+    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
+
+    
+    [Subscribe to our newsletter](#){ .md-button .md-button--primary}
+
+=== "Time-Series"
+    ![Time-series synthesizer](https://dummyimage.com/600x400/eee/aaa){ align=right }
+    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
+
+    
+    [Subscribe to our newsletter](#){ .md-button .md-button--primary}
+
+=== "Transactional"
+    ![Transactional data synthesizer](https://dummyimage.com/600x400/eee/aaa){ align=right }
+    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
+
+    
+    [Subscribe to our newsletter](#){ .md-button .md-button--primary}
+

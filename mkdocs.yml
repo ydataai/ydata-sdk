@@ -10,8 +10,8 @@ nav:
     - Overview: 'index.md'
     - Installation: 'getting-started/installation.md'
     - Quickstart: 'getting-started/quickstart.md'
-    - Examples: 'getting-started/examples.md'
-  - Support: 
+    - Examples: 'getting-started/get_started_synthetic.md'
+  - Support:
     - Help & Troubleshooting: 'support/help-troubleshooting.md'
     - Contribution Guidelines: 'support/help-troubleshooting.md'
   - Reference:
@@ -25,31 +25,29 @@ theme:
   language: en
   palette:
     - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: blue grey
-      accent: deep orange
+      scheme: ydata
       toggle:
         icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
+        name: "Switch to dark mode"
     - media: "(prefers-color-scheme: dark)"
-      primary: blue grey
-      accent: deep orange
       scheme: slate
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode
+        name: "Switch to light mode"
+  logo: 'https://assets.ydata.ai/logo_notext_nbg.png'
   features:
     - content.code.annotate
     - content.tabs.link
     - navigation.instant
     - navigation.tracking
     - navigation.top
+    - navigation.footer
     - header.autohide
     - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
     - navigation.indexes
     - toc.follow
+    - toc.integrate
     - toc.integrate
   icon:
     admonition:
@@ -110,5 +108,11 @@ extra:
   version:
     provider: mike
   generator: false
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/ydataai
 plugins:
   - mkdocstrings
+  - search:
+        lang: en
+        foo: bar
