@@ -47,21 +47,8 @@ class DataSource(ModelMixin):
             model = Connector._model_from_api(data)
             connector = ModelMixin._init_from_model_data(Connector, model)
 
-            payload = {
-                "name": _name,
-                "fileType": "csv",
-                "separator": ",",
-                "dataType": "tabular",
-                "connector": {
-                    "uid": connector.uid,
-                    "type": connector.type
-                }
-            }
-
-            response = self._client.post('/datasource/', json=payload)
-            data: list = response.json()
-            model = DataSource._model_from_api(data)
-            self._model = model
+            self._model = DataSource.create(
+                connector, path=None, name=_name, client=self._client)._model
 
     @property
     def uid(self):
