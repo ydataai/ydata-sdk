@@ -20,6 +20,7 @@ from ydata.sdk.utils.model_utils import filter_dict
 class Connector(ModelMixin):
 
     def __init__(self, connector_type: Union[ConnectorType, str] = None, credentials: dict = None,  name: Optional[str] = None, client: Optional[Client] = None):
+        self._init_common(client)
         self._model: Optional[mConnector] = self._create_model(
             connector_type, credentials, name, client)
 

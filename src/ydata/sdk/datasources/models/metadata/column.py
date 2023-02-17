@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from ydata.utils.data_types import DataType, VariableType
+from ydata.sdk.datasources.models.metadata.data_types import DataType, VariableType
 
 
 class Column(BaseModel):

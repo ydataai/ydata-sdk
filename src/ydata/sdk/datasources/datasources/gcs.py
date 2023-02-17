@@ -15,8 +15,5 @@ class GCSDataSource(DataSource):
             "dataType": datatype,
             "path": path
         }
-        #self._model = self._create_model(connector, mDataSource, config, name=name)
-
-        # connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None
         DataSource.__init__(self, connector=connector, datasource_type=mDataSource,
                             config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
