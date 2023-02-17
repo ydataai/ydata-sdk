@@ -1,7 +1,7 @@
 from io import BytesIO
 from pathlib import Path
 from time import sleep
-from typing import Optional, Union
+from typing import Optional, Union, Type
 from uuid import uuid4
 
 from pandas import DataFrame as pdDataFrame
@@ -19,36 +19,16 @@ from ydata.sdk.utils.model_utils import filter_dict
 
 
 class DataSource(ModelMixin):
-    def __init__(self, source: Optional[Union[pdDataFrame, str, Path]] = None, name: Optional[str] = None, client: Optional[Client] = None):
+    def __init__(self, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
+        self._init_common()
+        self._model: Optional[mDataSource] = self._create_model(connector, datasource_type, config, name, self._client)
+
+        if wait_for_metadata:
+            DataSource._wait_for_metadata(self)
+
+    def _init_common(self, client: Optional[Client] = None):
         self._client = get_client(client)
         self._logger = create_logger(__name__, level=LOG_LEVEL)
-        self._model: Optional[mDataSource] = None
-
-        if source is not None:
-            if isinstance(source, str):
-                source = Path(source)
-
-            if isinstance(source, pdDataFrame):
-                buffer = BytesIO()
-                source.to_csv(buffer)
-                buffer.seek(0)
-                files = {'file': buffer}
-            else:
-                files = {'file': source.open('rb')}
-
-            _name = name if name is not None else str(uuid4())
-            data = {
-                "type": 'file',
-                "name": f"{_name}_connector"
-            }
-
-            response = self._client.post('/connector/', data=data, files=files)
-            data: list = response.json()
-            model = Connector._model_from_api(data)
-            connector = ModelMixin._init_from_model_data(Connector, model)
-
-            self._model = DataSource.create(
-                connector, path=None, name=_name, client=self._client)._model
 
     @property
     def uid(self):
@@ -60,7 +40,11 @@ class DataSource(ModelMixin):
 
     @property
     def status(self):
-        return self._model.status
+        try:
+            self = self.get(self._model.uid, self._client)
+            return self._model.status
+        except Exception:  # noqa: PIE786
+            return Status.UNKNOWN
 
     @property
     def metadata(self):
@@ -97,35 +81,43 @@ class DataSource(ModelMixin):
         datasource = ModelMixin._init_from_model_data(DataSource, model)
         return datasource
 
-    @staticmethod
-    def create(connector: Connector, path: str, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
+    @classmethod
+    def create(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
+        return cls._create(connector=connector, datasource_type=datasource_type, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
+
+    @classmethod
+    def _create(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
+        model = DataSource.__create_model(connector, datasource_type, config, name, client)
+        datasource = ModelMixin._init_from_model_data(DataSource, model)
+
+        if wait_for_metadata:
+            DataSource._wait_for_metadata(datasource)
+
+        return datasource
+
+    @classmethod
+    def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
         _client = get_client(client)
         _name = name if name is not None else str(uuid4())
-        # TODO: Change the payload according to the connector type
         payload = {
             "name": _name,
-            "path": path,  # TODO: parse properly depending on the connector type
-            "fileType": "csv",
-            "separator": ",",
-            "dataType": "tabular",
             "connector": {
                 "uid": connector.uid,
                 "type": connector.type
             }
         }
-
+        payload.update(config)
         response = _client.post('/datasource/', json=payload)
         data: list = response.json()
-        model = DataSource._model_from_api(data)
-        datasource = ModelMixin._init_from_model_data(DataSource, model)
+        return DataSource._model_from_api(data, datasource_type)
 
-        if wait_for_metadata:
-            # TODO: Other "finished" status such as FAILED
-            while datasource.status not in [Status.AVAILABLE]:
-                print(f'Calculating metadata [{datasource.status}]')
-                datasource = DataSource.get(uid=datasource.uid, client=client)
-                sleep(BACKOFF)
-
+    @staticmethod
+    def _wait_for_metadata(datasource):
+        # TODO: Other "finished" status such as FAILED
+        while datasource.status not in [Status.AVAILABLE]:
+            print(f'Calculating metadata [{datasource.status}]')
+            datasource = DataSource.get(uid=datasource.uid, client=datasource._client)
+            sleep(BACKOFF)
         return datasource
 
     @staticmethod
@@ -133,10 +125,15 @@ class DataSource(ModelMixin):
         return Status(api_status.get('state', Status.UNKNOWN.name))
 
     @staticmethod
-    def _model_from_api(data: dict) -> mDataSource:
+    def _model_from_api(data: dict, datasource_type: Type[mDataSource]) -> mDataSource:
         data['datatype'] = data.pop('dataType')
         data['state'] = data['status']
         data['status'] = DataSource._resolve_api_status(data['status'])
-        data = filter_dict(mDataSource, data)
-        model = mDataSource(**data)
+        data = filter_dict(datasource_type, data)
+        model = datasource_type(**data)
         return model
+
+
+
+
+
