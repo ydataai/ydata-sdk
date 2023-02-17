@@ -14,6 +14,7 @@ from ydata.sdk.common.exceptions import AlreadyFittedError, DataSourceNotAvailab
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.datasources import DataSource, LocalDataSource
 from ydata.sdk.datasources.models.datatype import DataSourceType
+from ydata.sdk.datasources.models.metadata.metadata import Metadata
 from ydata.sdk.datasources.models.status import Status as dsStatus
 from ydata.sdk.synthesizers.models.status import Status
 from ydata.sdk.synthesizers.models.synthesizer import Synthesizer as mSynthesizer
@@ -21,8 +22,6 @@ from ydata.sdk.synthesizers.models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers.models.synthesizers_list import SynthesizersList
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
-
-from ydata.sdk.datasources.models.metadata.metadata import Metadata
 
 
 @typechecked

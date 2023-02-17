@@ -7,5 +7,5 @@ from ydata.sdk.datasources.models.filetype import FileType
 @dataclass
 class GCSDataSource(DataSource):
 
-    filetype: FileType = None  # = Field(alias='fileType')
+    filetype: FileType = None
     path: str = None
