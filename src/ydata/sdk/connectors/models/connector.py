@@ -1,13 +1,11 @@
-from dataclasses import dataclass
 from typing import Optional
-from ydata.sdk.connectors.models.connector_type import ConnectorType
+
+from ydata.sdk.common.model import BaseModel
 from ydata.sdk.common.types import UID
+from ydata.sdk.connectors.models.connector_type import ConnectorType
 
-#from ydata.sdk.platform.common.environment import namespace_from_env
 
-
-@dataclass
-class Connector():
+class Connector(BaseModel):
 
     uid: UID
     type: ConnectorType

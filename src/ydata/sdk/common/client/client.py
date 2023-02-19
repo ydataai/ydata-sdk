@@ -25,7 +25,8 @@ class Client(metaclass=SingletonClient):
     codes = codes
 
     def __init__(self, credentials: Optional[Union[str, dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
-        self._base_url = "fabric.dev.aws.ydata.ai"  # TODO: get from env variable / credentials / whatever
+        # TODO: get from env variable / credentials / whatever
+        self._base_url = "fabric.dev.aws.ydata.ai"
         self._scheme = 'https'
         self._headers = {'Authorization': credentials}
         self._project = 'b0ff40f7-e457-48c6-a0e3-6d755b51c31e'  # project
@@ -92,12 +93,13 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def _get_default_project(self):  # TODO: Automatically determine the project based on the token
+    # TODO: Automatically determine the project based on the token
+    def _get_default_project(self):
         response = self.get('/profile')
         return response
 
     def __build_url(self, endpoint: str, params: Optional[dict] = None, data: Optional[dict] = None, json: Optional[dict] = None, files: Optional[dict] = None) -> dict:
-        """Build a request for the backend
+        """Build a request for the backend.
 
         Args:
             endpoint (str): backend endpoint
@@ -131,13 +133,12 @@ class Client(metaclass=SingletonClient):
         return url_data
 
     def __set_global(self) -> None:
-        """Sets a client instance as global
-        """
+        """Sets a client instance as global."""
         # If the client is stateful, close it gracefully!
         Client.GLOBAL_CLIENT = self
 
     def __raise_for_status(self, response: Response) -> None:
-        """Raise an exception if the response is not OK
+        """Raise an exception if the response is not OK.
 
         When an exception is raised, we try to convert it to a ResponseError which is
         a wrapper around a backend error. This usually gives enough context and provides

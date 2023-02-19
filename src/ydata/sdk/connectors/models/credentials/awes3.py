@@ -1,14 +1,14 @@
-from dataclasses import dataclass, field
+from pydantic import Field
 
 from ydata.sdk.connectors.models.credentials.credentials import Credentials
 
-@dataclass
+
 class AWSS3Credentials(Credentials):
     access_key_id: str
     secret_access_key: str
-    region: str = field(default='eu-central-1')
+    region: str = Field(default='eu-central-1')
 
-    def asdict(self) -> dict:
+    def as_payload(self) -> dict:
         return {
             'keyID': self.access_key_id,
             'keySecret': self.secret_access_key

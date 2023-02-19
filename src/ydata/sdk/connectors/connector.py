@@ -3,7 +3,8 @@ from pathlib import Path
 from typing import Optional, Union
 from uuid import uuid4
 
-from ydata.sdk.common.client import Client, get_client
+from ydata.sdk.common.client import Client
+from ydata.sdk.common.client.utils import require_client
 from ydata.sdk.common.config import LOG_LEVEL
 from ydata.sdk.common.exceptions import CredentialTypeError, InvalidConnectorError
 from ydata.sdk.common.logger import create_logger
@@ -12,9 +13,7 @@ from ydata.sdk.connectors.models.connector import Connector as mConnector
 from ydata.sdk.connectors.models.connector_list import ConnectorsList
 from ydata.sdk.connectors.models.connector_type import ConnectorType
 from ydata.sdk.connectors.models.credentials.credentials import Credentials
-from ydata.sdk.connectors.utils import asdict
 from ydata.sdk.utils.model_mixin import ModelMixin
-from ydata.sdk.utils.model_utils import filter_dict
 
 
 class Connector(ModelMixin):
@@ -24,8 +23,9 @@ class Connector(ModelMixin):
         self._model: Optional[mConnector] = self._create_model(
             connector_type, credentials, name, client)
 
+    @require_client
     def _init_common(self, client: Optional[Client] = None):
-        self._client = get_client(client)
+        self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     @property
@@ -37,11 +37,11 @@ class Connector(ModelMixin):
         return self._model.type
 
     @staticmethod
+    @require_client
     def get(uid: UID, client: Optional[Client] = None) -> "Connector":
-        _client = get_client(client)
-        connectors: ConnectorsList = Connector.list(client=_client)
+        connectors: ConnectorsList = Connector.list(client=client)
         data = connectors.get_by_uid(uid)
-        model = Connector._model_from_api(data)
+        model = mConnector(**data)
         connector = ModelMixin._init_from_model_data(Connector, model)
         return connector
 
@@ -72,7 +72,6 @@ class Connector(ModelMixin):
         try:
             from ydata.sdk.connectors.models.connector_map import TYPE_TO_CLASS
             credential_cls = TYPE_TO_CLASS.get(connector_type.value)
-            _credentials = filter_dict(credential_cls, _credentials)
             _credentials = credential_cls(**_credentials)
         except:  # TODO
             raise CredentialTypeError(
@@ -89,39 +88,29 @@ class Connector(ModelMixin):
         return connector
 
     @classmethod
+    @require_client
     def _create_model(cls, connector_type: Union[ConnectorType, str], credentials: Union[str, Path, dict, Credentials], name: Optional[str] = None, client: Optional[Client] = None) -> mConnector:
-        client = get_client(client)
         _name = name if name is not None else str(uuid4())
         _connector_type = Connector._init_connector_type(connector_type)
         _credentials = Connector._init_credentials(_connector_type, credentials)
         payload = {
             "type": _connector_type.value,
-            "credentials": asdict(_credentials),
+            "credentials": _credentials.as_payload(),
             "name": _name
         }
         response = client.post(f'/connector/', json=payload)
         data: list = response.json()
 
-        return Connector._model_from_api(data)
+        return mConnector(**data)
 
     @staticmethod
+    @require_client
     def list(client: Optional[Client] = None) -> ConnectorsList:
         """List the connectors instances.
 
         Arguments:
             client (Client): (optional) Client to connet to the backend
         """
-        _client = get_client(client)
-        response = _client.get('/connector')
-
-        # Analyze response and create ConnectorList
+        response = client.get('/connector')
         data: list = response.json()
-
         return ConnectorsList(data)
-
-    @staticmethod
-    def _model_from_api(data: dict) -> mConnector:
-        connector_cls = mConnector
-        data = filter_dict(connector_cls, data)
-        model = connector_cls(**data)
-        return model

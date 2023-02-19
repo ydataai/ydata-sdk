@@ -1,11 +1,11 @@
-from typing import Optional
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, field
 
 from prettytable import PrettyTable
 from typeguard import typechecked
 
-from ydata.sdk.utils.table import MISSING_DATE, MISSING_NAME, MISSING_STATUS
 from ydata.sdk.utils.list_item_utils import filter_and_assign
+from ydata.sdk.utils.table import MISSING_DATE, MISSING_NAME, MISSING_STATUS
+
 
 @typechecked
 class SynthesizersList(list):

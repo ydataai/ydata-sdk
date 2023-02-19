@@ -3,12 +3,12 @@ from typing import Optional, Union
 from ydata.sdk.common.client import Client
 from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.datasources.datasource import DataSource
-from ydata.sdk.datasources.models.datasources.googlecloudstorage import GCSDataSource as mDataSource
+from ydata.sdk.datasources.models.datasources.aws3 import AWSS3DataSource as mDataSource
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.filetype import FileType
 
 
-class GCSDataSource(DataSource):
+class AWSS3DataSource(DataSource):
 
     def __init__(self, connector: Connector, path: str, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, filetype: Union[FileType, str] = FileType.CSV, separator: str = ",", name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
         config = {

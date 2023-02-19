@@ -1,12 +1,13 @@
 
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, field
 from typing import Any, Optional, Union
 
 from prettytable import PrettyTable
 from typeguard import typechecked
 
-from ydata.sdk.utils.table import MISSING_COUNT, MISSING_DATE, MISSING_NAME
 from ydata.sdk.utils.list_item_utils import filter_and_assign
+from ydata.sdk.utils.table import MISSING_COUNT, MISSING_DATE, MISSING_NAME
+
 
 @typechecked
 class ConnectorsList(list):

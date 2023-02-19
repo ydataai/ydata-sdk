@@ -1,7 +1,7 @@
-from dataclasses import dataclass, asdict as dc_asdict
+from ydata.sdk.common.model import BaseModel
 
-@dataclass
-class Credentials:
-    
-    def asdict(self) -> dict:
-        return dc_asdict(self)
+
+class Credentials(BaseModel):
+
+    def as_payload(self) -> dict:
+        return self.dict()

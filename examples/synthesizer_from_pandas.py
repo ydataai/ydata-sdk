@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 
-from ydata.sdk.common.client import Client
 from ydata.sdk.synthesizers import RegularSynthesizer
 
 
