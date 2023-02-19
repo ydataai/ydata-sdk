@@ -1,5 +1,6 @@
 from ydata.core.enum import StringEnum
 
+
 class Level(StringEnum):
     """Warning levels."""
 

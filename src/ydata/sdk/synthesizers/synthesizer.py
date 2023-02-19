@@ -8,7 +8,8 @@ from pandas import DataFrame as pdDataFrame
 from pandas import read_csv
 from typeguard import typechecked
 
-from ydata.sdk.common.client import Client, get_client
+from ydata.sdk.common.client import Client
+from ydata.sdk.common.client.utils import require_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import AlreadyFittedError, DataSourceNotAvailableError, NotInitializedError
 from ydata.sdk.common.logger import create_logger
@@ -49,8 +50,9 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._init_common(client)
         self._model: Optional[mSynthesizer] = None
 
+    @require_client
     def _init_common(self, client: Optional[Client] = None):
-        self._client = get_client(client)
+        self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, metadata: Optional[Metadata] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:  # TODO: Target + data
@@ -153,14 +155,14 @@ class BaseSynthesizer(ABC, ModelMixin):
             return Status.UNKNOWN
 
     @staticmethod
+    @require_client
     def get(id: str, client: Optional[Client] = None) -> "BaseSynthesizer":
         """List the synthesizer instances.
 
         Arguments:
             client (Client): (optional) Client to connet to the backend
         """
-        _client = get_client(client)
-        response = _client.get(f'/synthesizer/{id}')
+        response = client.get(f'/synthesizer/{id}')
 
         data: list = response.json()
         model, synth_cls = BaseSynthesizer._model_from_api(
@@ -168,6 +170,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         return ModelMixin._init_from_model_data(synth_cls, model)
 
     @staticmethod
+    @require_client
     def list(client: Optional[Client] = None) -> SynthesizersList:
         """List the synthesizer instances.
 
@@ -181,8 +184,7 @@ class BaseSynthesizer(ABC, ModelMixin):
                     e.pop(k, None)
             return data
 
-        _client = get_client(client)
-        response = _client.get('/synthesizer')
+        response = client.get('/synthesizer')
         data: list = response.json()
         data = __process_data(data)
 

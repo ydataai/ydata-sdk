@@ -1,10 +1,11 @@
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, field
 
 from prettytable import PrettyTable
 from typeguard import typechecked
 
-from ydata.sdk.utils.table import MISSING_CONNECTOR_UID, MISSING_DATE, MISSING_NAME, MISSING_STATUS, MISSING_DATATYPE
 from ydata.sdk.utils.list_item_utils import filter_and_assign
+from ydata.sdk.utils.table import MISSING_CONNECTOR_UID, MISSING_DATATYPE, MISSING_DATE, MISSING_NAME, MISSING_STATUS
+
 
 @typechecked
 class DataSourceList(list):

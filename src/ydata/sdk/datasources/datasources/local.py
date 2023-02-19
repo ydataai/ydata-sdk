@@ -7,15 +7,17 @@ from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.client import Client, get_client
 from ydata.sdk.connectors.connector import Connector
+from ydata.sdk.connectors.models.connector import Connector as mConnector
 from ydata.sdk.datasources.datasource import DataSource
 from ydata.sdk.datasources.models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources.models.datatype import DataSourceType
+from ydata.sdk.datasources.models.filetype import FileType
 from ydata.sdk.utils.model_mixin import ModelMixin
 
 
 class LocalDataSource(DataSource):
 
-    def __init__(self, source: Union[pdDataFrame, str, Path], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, filetype: str = 'csv', separator: str = ",", name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
+    def __init__(self, source: Union[pdDataFrame, str, Path], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, filetype: Union[FileType, str] = FileType.CSV, separator: str = ",", name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
 
         if isinstance(source, str):
             source = Path(source)
@@ -37,13 +39,13 @@ class LocalDataSource(DataSource):
         client = get_client(client)
         response = client.post('/connector/', data=data, files=files)
         data: list = response.json()
-        model = Connector._model_from_api(data)
+        model = mConnector(**data)
         connector = ModelMixin._init_from_model_data(Connector, model)
 
         config = {
-            "fileType": filetype,
+            "fileType": FileType(filetype),
             "separator": separator,
-            "dataType": datatype,
+            "dataType": DataSourceType(datatype),
         }
 
         DataSource.__init__(self, connector=connector, datasource_type=mDataSource,

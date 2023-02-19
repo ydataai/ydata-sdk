@@ -1,5 +1,6 @@
 import json
 from contextlib import suppress
+from functools import wraps
 from os import environ
 from pathlib import Path
 from typing import Optional, Union
@@ -55,3 +56,11 @@ def _client_from_env(env_var: str = 'YDATA_CREDENTIALS') -> Optional[Client]:
         with suppress(Exception):
             credentials = json.loads(credentials)
         return get_client(client_or_creds=credentials, set_as_global=True)
+
+
+def require_client(func):
+    @wraps(func)
+    def wrapper_func(*args, **kwargs):
+        kwargs['client'] = get_client(kwargs.get('client'))
+        return func(*args, **kwargs)
+    return wrapper_func

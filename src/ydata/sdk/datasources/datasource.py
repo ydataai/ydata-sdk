@@ -2,7 +2,8 @@ from time import sleep
 from typing import Optional, Type
 from uuid import uuid4
 
-from ydata.sdk.common.client import Client, get_client
+from ydata.sdk.common.client import Client
+from ydata.sdk.common.client.utils import require_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
@@ -23,8 +24,9 @@ class DataSource(ModelMixin):
         if wait_for_metadata:
             DataSource._wait_for_metadata(self)
 
+    @require_client
     def _init_common(self, client: Optional[Client] = None):
-        self._client = get_client(client)
+        self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     @property
@@ -48,6 +50,7 @@ class DataSource(ModelMixin):
         return self._model.metadata
 
     @staticmethod
+    @require_client
     def list(client: Optional[Client] = None) -> DataSourceList:
         def __process_data(data: list) -> list:
             to_del = ['metadata']
@@ -56,17 +59,16 @@ class DataSource(ModelMixin):
                     e.pop(k, None)
             return data
 
-        _client = get_client(client)
-        response = _client.get('/datasource')
+        response = client.get('/datasource')
         data: list = response.json()
         data = __process_data(data)
 
         return DataSourceList(data)
 
     @staticmethod
+    @require_client
     def get(uid: UID, client: Optional[Client] = None) -> "DataSource":
-        _client = get_client(client)
-        response = _client.get(f'/datasource/{uid}')
+        response = client.get(f'/datasource/{uid}')
         data: list = response.json()
 
         # TODO: Move to pydantic model directly
@@ -94,8 +96,8 @@ class DataSource(ModelMixin):
         return datasource
 
     @classmethod
+    @require_client
     def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
-        _client = get_client(client)
         _name = name if name is not None else str(uuid4())
         payload = {
             "name": _name,
@@ -105,7 +107,7 @@ class DataSource(ModelMixin):
             }
         }
         payload.update(config)
-        response = _client.post('/datasource/', json=payload)
+        response = client.post('/datasource/', json=payload)
         data: list = response.json()
         return DataSource._model_from_api(data, datasource_type)
 
