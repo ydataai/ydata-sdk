@@ -3,7 +3,6 @@ from typing import Optional, Union
 from ydata.sdk.common.client import Client
 from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.datasources.datasource import DataSource
-from ydata.sdk.datasources.models.datasources.aws3 import AWSS3DataSource as mDataSource
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.filetype import FileType
 
@@ -14,8 +13,7 @@ class AWSS3DataSource(DataSource):
         config = {
             "fileType": FileType(filetype).value,
             "separator": separator,
-            "dataType": DataSourceType(datatype).value,
             "path": path
         }
-        DataSource.__init__(self, connector=connector, datasource_type=mDataSource,
-                            config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
+        DataSource.__init__(self, connector=connector, datatype=datatype, name=name,
+                            wait_for_metadata=wait_for_metadata, client=client, **config)

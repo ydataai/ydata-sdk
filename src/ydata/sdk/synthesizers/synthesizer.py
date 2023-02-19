@@ -48,7 +48,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         Arguments:
             client (Client): (optional) Client to connet to the backend
         """
-        self._init_common(client)
+        self._init_common(client=client)
         self._model: Optional[mSynthesizer] = None
 
     @require_client
@@ -68,8 +68,6 @@ class BaseSynthesizer(ABC, ModelMixin):
         if self._is_initialized():
             raise AlreadyFittedError()
 
-        datatype = DataSourceType(datatype)
-
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
             # TODO: Check that datatype is not None in this case
@@ -83,6 +81,7 @@ class BaseSynthesizer(ABC, ModelMixin):
             raise DataSourceNotAvailableError(
                 f"The datasource '{_X.uid}' is not available (status = {_X.status.value})")
 
+        datatype = DataSourceType(datatype)
         self._fit_from_datasource(
             X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
 
@@ -97,24 +96,26 @@ class BaseSynthesizer(ABC, ModelMixin):
                 'varType': c.vartype,
                 'entity': False
             }
-        if datatype == DataSourceType.TIMESERIES:
-            for c in dataset_attrs.sortbykey:
-                columns[c]['sortBy'] = True
+        if dataset_attrs is not None:
+            if datatype == DataSourceType.TIMESERIES:
+                for c in dataset_attrs.sortbykey:
+                    columns[c]['sortBy'] = True
 
-            for c in dataset_attrs.entity_id_cols:
-                columns[c]['entity'] = True
+                for c in dataset_attrs.entity_id_cols:
+                    columns[c]['entity'] = True
 
-        for c in dataset_attrs.generate_cols:
-            columns[c]['generation'] = True
+            for c in dataset_attrs.generate_cols:
+                columns[c]['generation'] = True
 
-        for c in dataset_attrs.exclude_cols:
-            columns[c]['generation'] = False
+            for c in dataset_attrs.exclude_cols:
+                columns[c]['generation'] = False
 
-        return columns
+        return list(columns.values())
 
     def _fit_from_datasource(self, X: DataSource, dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         _name = name if name is not None else str(uuid4())
-        columns = self._metadata_to_payload(X.datatype, X.metadata, dataset_attrs)
+        columns = self._metadata_to_payload(
+            DataSourceType(X.datatype), X.metadata, dataset_attrs)
         payload = {
             'name': _name,
             'dataSourceUID': X.uid,
@@ -129,6 +130,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         response = self._client.post('/synthesizer/', json=payload)
         data: list = response.json()
         self._model, _ = self._model_from_api(X.datatype, data)
+        # TODO: Wait here
 
     @staticmethod
     def _model_from_api(datatype: str, data: dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:

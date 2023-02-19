@@ -10,11 +10,3 @@ class GCSDataSource(DataSource):
     filetype: FileType = None
     path: str = None
     separator: str = ','
-
-    def to_payload(self) -> dict:
-        payload = self.to_payload()
-        payload.update({
-            'path': self.path,
-            'separator': self.separator,
-            'fileType': self.filetype
-        })

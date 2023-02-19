@@ -9,7 +9,6 @@ from ydata.sdk.common.client import Client, get_client
 from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.connectors.models.connector import Connector as mConnector
 from ydata.sdk.datasources.datasource import DataSource
-from ydata.sdk.datasources.models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.filetype import FileType
 from ydata.sdk.utils.model_mixin import ModelMixin
@@ -45,8 +44,7 @@ class LocalDataSource(DataSource):
         config = {
             "fileType": FileType(filetype).value,
             "separator": separator,
-            "dataType": DataSourceType(datatype).value,
         }
 
-        DataSource.__init__(self, connector=connector, datasource_type=mDataSource,
-                            config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
+        DataSource.__init__(self, connector=connector, datatype=datatype,
+                            name=name, wait_for_metadata=wait_for_metadata, client=client, **config)
