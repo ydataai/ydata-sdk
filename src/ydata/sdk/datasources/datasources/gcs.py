@@ -12,9 +12,9 @@ class GCSDataSource(DataSource):
 
     def __init__(self, connector: Connector, path: str, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, filetype: Union[FileType, str] = FileType.CSV, separator: str = ",", name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
         config = {
-            "fileType": FileType(filetype),
+            "fileType": FileType(filetype).value,
             "separator": separator,
-            "dataType": DataSourceType(datatype),
+            "dataType": DataSourceType(datatype).value,
             "path": path
         }
         DataSource.__init__(self, connector=connector, datasource_type=mDataSource,

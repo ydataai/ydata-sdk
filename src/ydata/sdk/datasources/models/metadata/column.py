@@ -1,3 +1,5 @@
+from typing import NewType
+
 from pydantic import BaseModel, Field
 
 from ydata.sdk.datasources.models.metadata.data_types import DataType, VariableType
@@ -17,3 +19,11 @@ class Column(BaseModel):
 
     def __str__(self) -> str:
         return super().__repr__()
+
+
+TabularColumn = NewType("TabularColumn", Column)
+
+
+class TimeseriesColumn(Column):
+    sort_by: bool
+    entity: bool

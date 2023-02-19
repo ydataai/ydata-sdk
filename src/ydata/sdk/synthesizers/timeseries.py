@@ -4,6 +4,7 @@ from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
+from ydata.sdk.datasources.models.attributes import DatasourceAttrs
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
@@ -18,6 +19,6 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
 
         return self._sample(payload={"numberOfRecords": n_entities})
 
-    def fit(self, X: Union[DataSource, pdDataFrame], metadata: Optional[Metadata] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def fit(self, X: Union[DataSource, pdDataFrame], dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES,
-                            metadata=metadata, target=target, name=name)
+                            dataset_attrs=dataset_attrs, target=target, name=name)

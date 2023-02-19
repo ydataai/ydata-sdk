@@ -17,7 +17,7 @@ from ydata.sdk.utils.model_utils import filter_dict
 
 class DataSource(ModelMixin):
     def __init__(self, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
-        self._init_common(client)
+        self._init_common(client=client)
         self._model: Optional[mDataSource] = self._create_model(
             connector, datasource_type, config, name, self._client)
 
@@ -86,7 +86,7 @@ class DataSource(ModelMixin):
 
     @classmethod
     def _create(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
-        model = DataSource.__create_model(
+        model = DataSource._create_model(
             connector, datasource_type, config, name, client)
         datasource = ModelMixin._init_from_model_data(DataSource, model)
 
@@ -103,7 +103,7 @@ class DataSource(ModelMixin):
             "name": _name,
             "connector": {
                 "uid": connector.uid,
-                "type": connector.type
+                "type": connector.type.value
             }
         }
         payload.update(config)
