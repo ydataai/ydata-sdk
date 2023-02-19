@@ -43,9 +43,9 @@ class LocalDataSource(DataSource):
         connector = ModelMixin._init_from_model_data(Connector, model)
 
         config = {
-            "fileType": FileType(filetype),
+            "fileType": FileType(filetype).value,
             "separator": separator,
-            "dataType": DataSourceType(datatype),
+            "dataType": DataSourceType(datatype).value,
         }
 
         DataSource.__init__(self, connector=connector, datasource_type=mDataSource,

@@ -114,3 +114,6 @@ class Connector(ModelMixin):
         response = client.get('/connector')
         data: list = response.json()
         return ConnectorsList(data)
+
+    def __repr__(self):
+        return self._model.__repr__()

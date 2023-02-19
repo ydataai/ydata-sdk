@@ -14,6 +14,7 @@ from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import AlreadyFittedError, DataSourceNotAvailableError, NotInitializedError
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.datasources import DataSource, LocalDataSource
+from ydata.sdk.datasources.models.attributes import DatasourceAttrs
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.metadata.metadata import Metadata
 from ydata.sdk.datasources.models.status import Status as dsStatus
@@ -55,7 +56,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
-    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, metadata: Optional[Metadata] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:  # TODO: Target + data
+    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         """Initialize the object.
 
         Arguments:
@@ -67,37 +68,53 @@ class BaseSynthesizer(ABC, ModelMixin):
         if self._is_initialized():
             raise AlreadyFittedError()
 
+        datatype = DataSourceType(datatype)
+
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
             # TODO: Check that datatype is not None in this case
             _X = LocalDataSource(source=X, datatype=datatype, client=self._client)
         else:
             # TODO: is dataype is not None we should raise a warning
+            # TODO: check dataset attributes validity
             _X = X
 
         if _X.status != dsStatus.AVAILABLE:
             raise DataSourceNotAvailableError(
                 f"The datasource '{_X.uid}' is not available (status = {_X.status.value})")
 
-        self._fit_from_datasource(X=_X, metadata=metadata, name=name)
+        self._fit_from_datasource(
+            X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
 
     @staticmethod
-    def _metadata_to_payload(ds_metadata: Metadata, user_metadata: Optional[Metadata] = None) -> list:
-        columns = []
+    def _metadata_to_payload(datatype: DataSourceType, ds_metadata: Metadata, dataset_attrs: Optional[DatasourceAttrs] = None) -> list:
+        columns = {}
         for c in ds_metadata.columns:
-            columns.append({
+            columns[c.name] = {
                 'name': c.name,
                 'generation': True,
                 'dataType': c.datatype,
                 'varType': c.vartype,
                 'entity': False
-            })
+            }
+        if datatype == DataSourceType.TIMESERIES:
+            for c in dataset_attrs.sortbykey:
+                columns[c]['sortBy'] = True
+
+            for c in dataset_attrs.entity_id_cols:
+                columns[c]['entity'] = True
+
+        for c in dataset_attrs.generate_cols:
+            columns[c]['generation'] = True
+
+        for c in dataset_attrs.exclude_cols:
+            columns[c]['generation'] = False
+
         return columns
 
-    def _fit_from_datasource(self, X: DataSource, metadata: Optional[Metadata] = None, name: Optional[str] = None) -> None:
+    def _fit_from_datasource(self, X: DataSource, dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         _name = name if name is not None else str(uuid4())
-        # TODO: update based on the user input as well
-        columns = self._metadata_to_payload(X.metadata, metadata)
+        columns = self._metadata_to_payload(X.datatype, X.metadata, dataset_attrs)
         payload = {
             'name': _name,
             'dataSourceUID': X.uid,
@@ -106,6 +123,8 @@ class BaseSynthesizer(ABC, ModelMixin):
                 "columns": columns,
             },
         }
+        if target is not None:
+            payload['target'] = target
 
         response = self._client.post('/synthesizer/', json=payload)
         data: list = response.json()

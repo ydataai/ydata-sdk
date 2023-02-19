@@ -11,7 +11,7 @@ class BigQueryDataSource(DataSource):
 
     def __init__(self, connector: Connector, query: str, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
         config = {
-            "dataType": DataSourceType(datatype),
+            "dataType": DataSourceType(datatype).value,
             "query": query
         }
         DataSource.__init__(self, connector=connector, datasource_type=mDataSource,
