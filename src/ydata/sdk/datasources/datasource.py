@@ -1,5 +1,5 @@
 from time import sleep
-from typing import Optional, Type
+from typing import Optional, Type, Union
 from uuid import uuid4
 
 from ydata.sdk.common.client import Client
@@ -10,16 +10,20 @@ from ydata.sdk.common.types import UID
 from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.datasources.models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources.models.datasource_list import DataSourceList
+from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.status import Status
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
 
 class DataSource(ModelMixin):
-    def __init__(self, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None):
+
+    def __init__(self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config):
+        from ydata.sdk.datasources.models.connector_to_datasource import CONN_TO_DS
+        datasource_type = CONN_TO_DS.get(connector.type)
         self._init_common(client=client)
         self._model: Optional[mDataSource] = self._create_model(
-            connector, datasource_type, config, name, self._client)
+            connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, client=self._client)
 
         if wait_for_metadata:
             DataSource._wait_for_metadata(self)
@@ -81,13 +85,15 @@ class DataSource(ModelMixin):
         return datasource
 
     @classmethod
-    def create(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
-        return cls._create(connector=connector, datasource_type=datasource_type, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
+    def create(cls, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **kwargs) -> "DataSource":
+        from ydata.sdk.datasources.models.connector_to_datasource import CONN_TO_DS
+        datasource_type = CONN_TO_DS.get(connector.type)
+        return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=kwargs, name=name, wait_for_metadata=wait_for_metadata, client=client)
 
     @classmethod
-    def _create(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
+    def _create(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
         model = DataSource._create_model(
-            connector, datasource_type, config, name, client)
+            connector, datasource_type, datatype, config, name, client)
         datasource = ModelMixin._init_from_model_data(DataSource, model)
 
         if wait_for_metadata:
@@ -97,16 +103,18 @@ class DataSource(ModelMixin):
 
     @classmethod
     @require_client
-    def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], config: dict, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
+    def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
         _name = name if name is not None else str(uuid4())
+        _config = config if config is not None else {}
         payload = {
             "name": _name,
             "connector": {
                 "uid": connector.uid,
                 "type": connector.type.value
-            }
+            },
+            "dataType": datatype.value
         }
-        payload.update(config)
+        payload.update(_config)
         response = client.post('/datasource/', json=payload)
         data: list = response.json()
         return DataSource._model_from_api(data, datasource_type)
