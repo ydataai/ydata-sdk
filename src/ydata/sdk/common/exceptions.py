@@ -31,6 +31,13 @@ class ClientCreationError(ClientException):
     """Raised when a Client could not be created."""
 
 
+class ClientHandshakeError(ClientException):
+    """Raised when handshake could not be performed - likely a token issue"""
+
+    def __init__(self, auth_link: str):
+        self.auth_link = auth_link
+
+
 class ConnectorError(SDKError):
     """Base exception for ConnectorError."""
 
