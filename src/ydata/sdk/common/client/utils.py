@@ -61,12 +61,7 @@ def _client_from_env(env_var: str = 'YDATA_CREDENTIALS') -> Optional[Client]:
 def require_client(func):
     @wraps(func)
     def wrapper_func(*args, **kwargs):
-        print(args)
-        print(kwargs)
         if not any((arg for arg in args if isinstance(arg, Client))):
             kwargs['client'] = get_client(kwargs.get('client'))
-        print(args)
-        print(kwargs)
-        print('------')
         return func(*args, **kwargs)
     return wrapper_func

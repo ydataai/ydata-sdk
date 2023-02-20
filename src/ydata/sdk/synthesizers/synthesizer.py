@@ -130,7 +130,9 @@ class BaseSynthesizer(ABC, ModelMixin):
         response = self._client.post('/synthesizer/', json=payload)
         data: list = response.json()
         self._model, _ = self._model_from_api(X.datatype, data)
-        # TODO: Wait here
+        while self.status != Status.READY:
+            print('Training the synthesizer...')
+            sleep(BACKOFF)
 
     @staticmethod
     def _model_from_api(datatype: str, data: dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
@@ -164,6 +166,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         data = StringIO(response.content.decode())
         return read_csv(data)
 
+    @property
     def status(self) -> Status:
         """Get the status of a synthesizer instance."""
         if not self._is_initialized():
@@ -171,7 +174,7 @@ class BaseSynthesizer(ABC, ModelMixin):
 
         try:
             self = self.get(self._model.uid, self._client)
-            return self.model.status
+            return self._model.status
         except Exception:  # noqa: PIE786
             return Status.UNKNOWN
 
@@ -184,7 +187,6 @@ class BaseSynthesizer(ABC, ModelMixin):
             client (Client): (optional) Client to connet to the backend
         """
         response = client.get(f'/synthesizer/{id}')
-
         data: list = response.json()
         model, synth_cls = BaseSynthesizer._model_from_api(
             data['dataSource']['dataType'], data)
