@@ -15,7 +15,7 @@ from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceNotAvaila
                                          NotInitializedError)
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.datasources import DataSource, LocalDataSource
-from ydata.sdk.datasources.models.attributes import DatasourceAttrs
+from ydata.sdk.datasources.models.attributes import DataSourceAttrs
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.metadata.metadata import Metadata
 from ydata.sdk.datasources.models.status import Status as dsStatus
@@ -57,7 +57,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
-    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DatasourceAttrs, dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DataSourceAttrs, dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         """Initialize the object.
 
         Arguments:
@@ -83,13 +83,13 @@ class BaseSynthesizer(ABC, ModelMixin):
                 f"The datasource '{_X.uid}' is not available (status = {_X.status.value})")
 
         if isinstance(dataset_attrs, dict):
-            dataset_attrs = DatasourceAttrs(**dataset_attrs)
+            dataset_attrs = DataSourceAttrs(**dataset_attrs)
         datatype = DataSourceType(datatype)
         self._fit_from_datasource(
             X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
 
     @staticmethod
-    def _metadata_to_payload(datatype: DataSourceType, ds_metadata: Metadata, dataset_attrs: Optional[DatasourceAttrs] = None) -> list:
+    def _metadata_to_payload(datatype: DataSourceType, ds_metadata: Metadata, dataset_attrs: Optional[DataSourceAttrs] = None) -> list:
         columns = {}
         for c in ds_metadata.columns:
             columns[c.name] = {
@@ -115,7 +115,7 @@ class BaseSynthesizer(ABC, ModelMixin):
 
         return list(columns.values())
 
-    def _fit_from_datasource(self, X: DataSource, dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def _fit_from_datasource(self, X: DataSource, dataset_attrs: Optional[DataSourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         _name = name if name is not None else str(uuid4())
         columns = self._metadata_to_payload(
             DataSourceType(X.datatype), X.metadata, dataset_attrs)
