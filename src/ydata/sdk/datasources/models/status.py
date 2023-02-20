@@ -5,6 +5,7 @@ from ydata.core.enum import StringEnum
 
 class ValidationState(StringEnum):
     PREPARING = 'preparing'
+    VALIDATING = 'validating'
     AVAILABLE = 'available'
     FAILED = 'failed'
     UNKNOWN = 'unknown'

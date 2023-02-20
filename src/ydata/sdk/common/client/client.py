@@ -2,7 +2,7 @@ from contextlib import suppress
 from typing import Optional, Union
 
 from httpx import Client as httpClient
-from httpx import HTTPStatusError, Response
+from httpx import HTTPStatusError, Response, Timeout
 from httpx import codes as http_codes
 from typeguard import typechecked
 
@@ -29,7 +29,8 @@ class Client(metaclass=SingletonClient):
         self._base_url = "fabric.dev.aws.ydata.ai"
         self._scheme = 'https'
         self._headers = {'Authorization': credentials}
-        self._http_client = httpClient(headers=self._headers)
+        self._http_client = httpClient(
+            headers=self._headers, timeout=Timeout(10, read=None))
         self._project = self._get_default_project(credentials)
         self.project = project
         if set_as_global:
