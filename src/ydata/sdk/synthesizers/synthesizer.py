@@ -9,7 +9,7 @@ from pandas import read_csv
 from typeguard import typechecked
 
 from ydata.sdk.common.client import Client
-from ydata.sdk.common.client.utils import require_client
+from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceNotAvailableError, FittingError,
                                          NotInitializedError)
@@ -34,9 +34,7 @@ class BaseSynthesizer(ABC, ModelMixin):
     Methods
     -------
     - `fit`: train a synthesizer instance.
-
     - `sample`: request synthetic data.
-
     - `status`: current status of the synthesizer instance.
     """
 
@@ -52,19 +50,25 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._init_common(client=client)
         self._model: Optional[mSynthesizer] = None
 
-    @require_client
+    @init_client
     def _init_common(self, client: Optional[Client] = None):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DataSourceAttrs, dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
-        """Initialize the object.
+        """Fit the synthesizer.
+
+        The synthesizer accepts as training dataset either a pandas `DataFrame` directly or a YData `DataSource`.
+        When the training dataset is a pandas `DataFrame`, the argument `datatype` is required as it cannot be deduced.
+
+        Similarly, `dataset_attrs` is mandatory for `TimeSeries` dataset to specify the `sortbykey` columns.
 
         Arguments:
-            X (Union[DataSource, pdDataFrame]): Training dataset
-            metadata (Metadata): (optional) Metadata associated to the datasource
+            X (Union[DataSource, pandas.DataFrame]): Training dataset
+            datatype (Optional[Union[DataSourceType, str]]): (optional) Dataset datatype - required if `X` is a `pandas.DataFrame`
+            dataset_attrs (Optional[Union[DataSourceAttrs, dict]]): (optional) Dataset attributes
             target (Optional[str]): (optional) Metadata associated to the datasource
-            anonymize (dict): (optional) Anonymizer configuration
+            name (Optional[str]): (optional) Synthesizer instance name
         """
         if self._is_initialized():
             raise AlreadyFittedError()
@@ -72,9 +76,10 @@ class BaseSynthesizer(ABC, ModelMixin):
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
             # TODO: Check that datatype is not None in this case
+            datatype = DataSourceType(datatype)
             _X = LocalDataSource(source=X, datatype=datatype, client=self._client)
         else:
-            # TODO: is dataype is not None we should raise a warning
+            # TODO: if dataype is not None we should raise a warning
             # TODO: check dataset attributes validity
             _X = X
 
@@ -84,12 +89,23 @@ class BaseSynthesizer(ABC, ModelMixin):
 
         if isinstance(dataset_attrs, dict):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
-        datatype = DataSourceType(datatype)
+
         self._fit_from_datasource(
             X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
 
     @staticmethod
     def _metadata_to_payload(datatype: DataSourceType, ds_metadata: Metadata, dataset_attrs: Optional[DataSourceAttrs] = None) -> list:
+        """Transform a the metadata and dataset attributes into a valid
+        payload.
+
+        Arguments:
+            datatype (DataSourceType): datasource type
+            ds_metadata (Metadata): datasource metadata object
+            dataset_attrs ( Optional[DataSourceAttrs] ): (optional) Dataset attributes
+
+        Returns:
+            payload dictionary
+        """
         columns = {}
         for c in ds_metadata.columns:
             columns[c.name] = {
@@ -153,6 +169,14 @@ class BaseSynthesizer(ABC, ModelMixin):
         """Abstract method to sample from a synthesizer."""
 
     def _sample(self, payload: dict) -> pdDataFrame:
+        """Sample from a synthesizer.
+
+        Arguments:
+            payload (dict): payload configuring the sample request
+
+        Returns:
+            pandas `DataFrame`
+        """
         response = self._client.post(
             f"/synthesizer/{self.model.uid}/sample", json=payload)
 
@@ -174,7 +198,11 @@ class BaseSynthesizer(ABC, ModelMixin):
 
     @property
     def status(self) -> Status:
-        """Get the status of a synthesizer instance."""
+        """Get the status of a synthesizer instance.
+
+        Returns:
+            Synthesizer status
+        """
         if not self._is_initialized():
             return Status.NOT_INITIALIZED
 
@@ -185,26 +213,33 @@ class BaseSynthesizer(ABC, ModelMixin):
             return Status.UNKNOWN
 
     @staticmethod
-    @require_client
-    def get(id: str, client: Optional[Client] = None) -> "BaseSynthesizer":
+    @init_client
+    def get(uid: str, client: Optional[Client] = None) -> "BaseSynthesizer":
         """List the synthesizer instances.
 
         Arguments:
+            id (str): synthesizer instance id
             client (Client): (optional) Client to connet to the backend
+
+        Returns:
+            Synthesizer instance
         """
-        response = client.get(f'/synthesizer/{id}')
+        response = client.get(f'/synthesizer/{uid}')
         data: list = response.json()
         model, synth_cls = BaseSynthesizer._model_from_api(
             data['dataSource']['dataType'], data)
         return ModelMixin._init_from_model_data(synth_cls, model)
 
     @staticmethod
-    @require_client
+    @init_client
     def list(client: Optional[Client] = None) -> SynthesizersList:
         """List the synthesizer instances.
 
         Arguments:
             client (Client): (optional) Client to connet to the backend
+
+        Returns:
+            List of synthesizers
         """
         def __process_data(data: list) -> list:
             to_del = ['metadata', 'report', 'mode']
@@ -220,6 +255,11 @@ class BaseSynthesizer(ABC, ModelMixin):
         return SynthesizersList(data)
 
     def _is_initialized(self) -> bool:
+        """Determine if a synthesizer is instanciated or not.
+
+        Returns:
+            True if the synthesizer is instanciated
+        """
         return self._model is not None
 
     @property
@@ -230,6 +270,17 @@ class BaseSynthesizer(ABC, ModelMixin):
 
     @staticmethod
     def _resolve_api_status(api_status: dict) -> Status:
+        """Determine the status of the Synthesizer.
+
+        The status of the synthesizer instance is determined by the state of
+        its different components.
+
+        Arguments:
+            api_status (dict): json from the endpoint GET /synthesizer
+
+        Returns:
+            Synthesizer Status
+        """
         status = Status(api_status.get('state', Status.UNKNOWN.name))
         prepare = PrepareState(api_status.get('prepare', {}).get(
             'state', PrepareState.UNKNOWN.name))

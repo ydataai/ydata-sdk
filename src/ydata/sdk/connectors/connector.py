@@ -4,7 +4,7 @@ from typing import Optional, Union
 from uuid import uuid4
 
 from ydata.sdk.common.client import Client
-from ydata.sdk.common.client.utils import require_client
+from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import LOG_LEVEL
 from ydata.sdk.common.exceptions import CredentialTypeError, InvalidConnectorError
 from ydata.sdk.common.logger import create_logger
@@ -23,7 +23,7 @@ class Connector(ModelMixin):
         self._model: Optional[mConnector] = self._create_model(
             connector_type, credentials, name, client)
 
-    @require_client
+    @init_client
     def _init_common(self, client: Optional[Client] = None):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
@@ -37,7 +37,7 @@ class Connector(ModelMixin):
         return self._model.type
 
     @staticmethod
-    @require_client
+    @init_client
     def get(uid: UID, client: Optional[Client] = None) -> "Connector":
         connectors: ConnectorsList = Connector.list(client=client)
         data = connectors.get_by_uid(uid)
@@ -88,7 +88,7 @@ class Connector(ModelMixin):
         return connector
 
     @classmethod
-    @require_client
+    @init_client
     def _create_model(cls, connector_type: Union[ConnectorType, str], credentials: Union[str, Path, dict, Credentials], name: Optional[str] = None, client: Optional[Client] = None) -> mConnector:
         _name = name if name is not None else str(uuid4())
         _connector_type = Connector._init_connector_type(connector_type)
@@ -104,7 +104,7 @@ class Connector(ModelMixin):
         return mConnector(**data)
 
     @staticmethod
-    @require_client
+    @init_client
     def list(client: Optional[Client] = None) -> ConnectorsList:
         """List the connectors instances.
 

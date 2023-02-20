@@ -9,6 +9,12 @@ from ydata.sdk.utils.table import MISSING_DATE, MISSING_NAME, MISSING_STATUS
 
 @typechecked
 class SynthesizersList(list):
+    """Representation of the list of `Synthesizer` objects.
+
+    The list inherits directly from Python `list`. The list does not
+    communicate with the backend and thus, represent a snapshot at the
+    moment it is created.
+    """
 
     _HEADER = ["Name", "Status", "ID", "Creation Date"]
 

@@ -35,7 +35,8 @@ class Client(metaclass=SingletonClient):
 
         self._handshake()
 
-        self._project = self._get_default_project(credentials)
+        self._project = project if project is not None else self._get_default_project(
+            credentials)
         self.project = project
         if set_as_global:
             self.__set_global()
@@ -66,6 +67,7 @@ class Client(metaclass=SingletonClient):
 
         Args:
             endpoint (str): GET endpoint
+            cookies (Optional[dict]): (optional) cookies data
             raise_for_status (bool): raise an exception on error
 
         Returns:
@@ -99,8 +101,11 @@ class Client(metaclass=SingletonClient):
         return response
 
     def _handshake(self):
-        """Handshake to determine is the client can connect with its current
-        authorization token."""
+        """Client handshake.
+
+        It is used to determine is the client can connect with its
+        current authorization token.
+        """
         response = self.get('/profiles', params={}, raise_for_status=False)
         if response.status_code == Client.codes.FOUND:
             parser = LinkExtractor()
@@ -121,6 +126,7 @@ class Client(metaclass=SingletonClient):
             data (Optional[Project]): (optional) multipart form data
             json (Optional[dict]): (optional) json data
             files (Optional[dict]): (optional) files to be sent
+            cookies (Optional[dict]): (optional) cookies data
 
         Returns:
             dictionary containing the information to perform a request

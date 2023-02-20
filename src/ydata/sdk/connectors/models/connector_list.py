@@ -11,6 +11,12 @@ from ydata.sdk.utils.table import MISSING_COUNT, MISSING_DATE, MISSING_NAME
 
 @typechecked
 class ConnectorsList(list):
+    """Representation of the list of `Connectors` objects.
+
+    The list inherits directly from Python `list`. The list does not
+    communicate with the backend and thus, represent a snapshot at the
+    moment it is created.
+    """
 
     _HEADER = ["Name", "Type", "# Datasources", "UID", "Creation Date"]
 

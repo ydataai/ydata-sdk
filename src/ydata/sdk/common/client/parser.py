@@ -3,6 +3,8 @@ from typing import Optional
 
 
 class LinkExtractor(HTMLParser):
+    """Simple HTML parser to extract the URL link from the client redirection
+    response."""
 
     link: Optional[str] = None
 
