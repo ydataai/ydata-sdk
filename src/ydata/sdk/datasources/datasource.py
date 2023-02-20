@@ -11,7 +11,7 @@ from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.datasources.models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources.models.datasource_list import DataSourceList
 from ydata.sdk.datasources.models.datatype import DataSourceType
-from ydata.sdk.datasources.models.status import Status
+from ydata.sdk.datasources.models.status import Status, ValidationState
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
@@ -122,7 +122,7 @@ class DataSource(ModelMixin):
     @staticmethod
     def _wait_for_metadata(datasource):
         # TODO: Other "finished" status such as FAILED
-        while datasource.status not in [Status.AVAILABLE]:
+        while datasource.status not in [Status.AVAILABLE, Status.FAILED]:
             print(f'Calculating metadata [{datasource.status}]')
             datasource = DataSource.get(uid=datasource.uid, client=datasource._client)
             sleep(BACKOFF)
@@ -130,7 +130,12 @@ class DataSource(ModelMixin):
 
     @staticmethod
     def _resolve_api_status(api_status: dict) -> Status:
-        return Status(api_status.get('state', Status.UNKNOWN.name))
+        status = Status(api_status.get('state', Status.UNKNOWN.name))
+        validation = ValidationState(api_status.get('validation', {}).get(
+            'state', ValidationState.UNKNOWN.name))
+        if validation == ValidationState.FAILED:
+            status = Status.FAILED
+        return status
 
     @staticmethod
     def _model_from_api(data: dict, datasource_type: Type[mDataSource]) -> mDataSource:
