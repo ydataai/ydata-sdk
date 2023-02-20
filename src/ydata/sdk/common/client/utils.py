@@ -3,48 +3,74 @@ from contextlib import suppress
 from functools import wraps
 from os import environ
 from pathlib import Path
+from time import sleep, time
 from typing import Optional, Union
 
 from ydata.sdk.common.client.client import Client
-from ydata.sdk.common.exceptions import ClientCreationError
+from ydata.sdk.common.config import BACKOFF
+from ydata.sdk.common.exceptions import ClientCreationError, ClientHandshakeError
+
+CLIENT_INIT_TIMEOUT = 5 * 60  # 5 min
+WAITING_FOR_CLIENT = False
 
 
-def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None, set_as_global: bool = False) -> Client:
+def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None, set_as_global: bool = False, wait_for_auth: bool = True) -> Client:
     """Deduce how to initialize or retrieve the client.
 
     This is meant to be a zero configuration for the user.
     """
-    # If a client instance is set globally, return it
-    if not set_as_global and Client.GLOBAL_CLIENT is not None:
-        return Client.GLOBAL_CLIENT
+    client = None
+    global WAITING_FOR_CLIENT
+    try:
 
-    # Client exists, forward it
-    if isinstance(client_or_creds, Client):
-        return client_or_creds
+        # If a client instance is set globally, return it
+        if not set_as_global and Client.GLOBAL_CLIENT is not None:
+            return Client.GLOBAL_CLIENT
 
-    # Explicit credentials
-    if isinstance(client_or_creds, (dict, str, Path)):
-        if isinstance(client_or_creds, str):  # noqa: SIM102
-            if Path(client_or_creds).is_file():
-                client_or_creds = Path(client_or_creds)
+        # Client exists, forward it
+        if isinstance(client_or_creds, Client):
+            return client_or_creds
 
-        if isinstance(client_or_creds, Path):
-            # TODO: Check that the file exists
-            client_or_creds = json.loads(client_or_creds.open().read())
+        # Explicit credentials
+        if isinstance(client_or_creds, (dict, str, Path)):
+            if isinstance(client_or_creds, str):  # noqa: SIM102
+                if Path(client_or_creds).is_file():
+                    client_or_creds = Path(client_or_creds)
 
-        return Client(credentials=client_or_creds)
+            if isinstance(client_or_creds, Path):
+                # TODO: Check that the file exists
+                client_or_creds = json.loads(client_or_creds.open().read())
 
-    # Last try with environment variables
-    if client_or_creds is None:
-        client = _client_from_env()
+            return Client(credentials=client_or_creds)
 
-        if client is None:
-            raise ClientCreationError("Could not initialize a client")
+        # Last try with environment variables
+        if client_or_creds is None:
+            client = _client_from_env(wait_for_auth=wait_for_auth)
 
-        return client
+    except ClientHandshakeError as e:
+        if wait_for_auth:
+            WAITING_FOR_CLIENT = True
+            start = time()
+            login_message_printed = False
+            while client is None:
+                if not login_message_printed:
+                    print(
+                        f"The token needs to be refreshed - please validate your token using:\n\n\tydata-sdk login\n\nor by browsing at the following URL:\n\n\t{e.auth_link}")
+                    login_message_printed = True
+                with suppress(ClientCreationError):
+                    sleep(BACKOFF)
+                    client = get_client(wait_for_auth=False)
+                now = time()
+                if now - start > CLIENT_INIT_TIMEOUT:
+                    WAITING_FOR_CLIENT = False
+                    break
+
+    if client is None and not WAITING_FOR_CLIENT:
+        raise ClientCreationError("Could not initialize a client")
+    return client
 
 
-def _client_from_env(env_var: str = 'YDATA_CREDENTIALS') -> Optional[Client]:
+def _client_from_env(env_var: str = 'YDATA_CREDENTIALS', wait_for_auth: bool = True) -> Optional[Client]:
     """Deduce how to initialize a client from environment variable.
 
     If the environment variable is not defined, the return is None. It
@@ -55,7 +81,7 @@ def _client_from_env(env_var: str = 'YDATA_CREDENTIALS') -> Optional[Client]:
         # Try to load it as a dictionary. If it fails, consider it as str/path to a file
         with suppress(Exception):
             credentials = json.loads(credentials)
-        return get_client(client_or_creds=credentials, set_as_global=True)
+        return get_client(client_or_creds=credentials, set_as_global=True, wait_for_auth=wait_for_auth)
 
 
 def require_client(func):

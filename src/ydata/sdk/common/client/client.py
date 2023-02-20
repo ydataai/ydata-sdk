@@ -6,8 +6,9 @@ from httpx import HTTPStatusError, Response, Timeout
 from httpx import codes as http_codes
 from typeguard import typechecked
 
+from ydata.sdk.common.client.parser import LinkExtractor
 from ydata.sdk.common.client.singleton import SingletonClient
-from ydata.sdk.common.exceptions import ResponseError
+from ydata.sdk.common.exceptions import ClientHandshakeError, ResponseError
 from ydata.sdk.common.types import Project
 
 codes = http_codes
@@ -31,6 +32,9 @@ class Client(metaclass=SingletonClient):
         self._headers = {'Authorization': credentials}
         self._http_client = httpClient(
             headers=self._headers, timeout=Timeout(10, read=None))
+
+        self._handshake()
+
         self._project = self._get_default_project(credentials)
         self.project = project
         if set_as_global:
@@ -93,6 +97,15 @@ class Client(metaclass=SingletonClient):
             self.__raise_for_status(response)
 
         return response
+
+    def _handshake(self):
+        """Handshake to determine is the client can connect with its current
+        authorization token."""
+        response = self.get('/profiles', params={}, raise_for_status=False)
+        if response.status_code == Client.codes.FOUND:
+            parser = LinkExtractor()
+            parser.feed(response.text)
+            raise ClientHandshakeError(auth_link=parser.link)
 
     def _get_default_project(self, token: str):
         response = self.get('/profiles/me', params={}, cookies={'access_token': token})
