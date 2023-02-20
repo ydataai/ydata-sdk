@@ -77,5 +77,9 @@ class AlreadyFittedError(SynthesizerException):
         super().__init__(message)
 
 
+class FittingError(SynthesizerException):
+    """Raised when a Synthesizer fails during training."""
+
+
 class InputError(SDKError):
     """Raised for any user input related error."""

@@ -19,6 +19,6 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
 
         return self._sample(payload={"numberOfRecords": n_entities})
 
-    def fit(self, X: Union[DataSource, pdDataFrame], dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def fit(self, X: Union[DataSource, pdDataFrame], dataset_attrs: DatasourceAttrs, target: Optional[str] = None, name: Optional[str] = None) -> None:
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES,
                             dataset_attrs=dataset_attrs, target=target, name=name)

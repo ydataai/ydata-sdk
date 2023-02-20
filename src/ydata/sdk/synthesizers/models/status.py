@@ -16,6 +16,7 @@ class PrepareState(StringEnum):
     DISCOVERING = 'discovering'
     FINISHED = 'finished'
     FAILED = 'failed'
+    UNKNOWN = 'unknown'
 
 
 class TrainingState(StringEnum):
@@ -39,6 +40,7 @@ ReportStatus = GenericStateErrorStatus[ReportState]
 
 class Status(StringEnum):
     NOT_INITIALIZED = 'not initialized'
+    FAILED = 'failed'
     PREPARE = 'prepare'
     TRAIN = 'train'
     REPORT = 'report'  # Should not be here for SDK

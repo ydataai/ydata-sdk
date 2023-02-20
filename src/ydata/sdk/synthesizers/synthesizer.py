@@ -11,14 +11,15 @@ from typeguard import typechecked
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import require_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
-from ydata.sdk.common.exceptions import AlreadyFittedError, DataSourceNotAvailableError, NotInitializedError
+from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceNotAvailableError, FittingError,
+                                         NotInitializedError)
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.datasources import DataSource, LocalDataSource
 from ydata.sdk.datasources.models.attributes import DatasourceAttrs
 from ydata.sdk.datasources.models.datatype import DataSourceType
 from ydata.sdk.datasources.models.metadata.metadata import Metadata
 from ydata.sdk.datasources.models.status import Status as dsStatus
-from ydata.sdk.synthesizers.models.status import Status
+from ydata.sdk.synthesizers.models.status import PrepareState, Status
 from ydata.sdk.synthesizers.models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers.models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers.models.synthesizers_list import SynthesizersList
@@ -56,7 +57,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
-    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[DatasourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DatasourceAttrs, dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         """Initialize the object.
 
         Arguments:
@@ -81,6 +82,8 @@ class BaseSynthesizer(ABC, ModelMixin):
             raise DataSourceNotAvailableError(
                 f"The datasource '{_X.uid}' is not available (status = {_X.status.value})")
 
+        if isinstance(dataset_attrs, dict):
+            dataset_attrs = DatasourceAttrs(**dataset_attrs)
         datatype = DataSourceType(datatype)
         self._fit_from_datasource(
             X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
@@ -94,12 +97,12 @@ class BaseSynthesizer(ABC, ModelMixin):
                 'generation': True,
                 'dataType': c.datatype,
                 'varType': c.vartype,
-                'entity': False
+                'entity': False,
             }
         if dataset_attrs is not None:
             if datatype == DataSourceType.TIMESERIES:
-                for c in dataset_attrs.sortbykey:
-                    columns[c]['sortBy'] = True
+                for c in ds_metadata.columns:
+                    columns[c.name]['sortBy'] = c.name in dataset_attrs.sortbykey
 
                 for c in dataset_attrs.entity_id_cols:
                     columns[c]['entity'] = True
@@ -125,14 +128,17 @@ class BaseSynthesizer(ABC, ModelMixin):
             },
         }
         if target is not None:
-            payload['target'] = target
+            payload['metadata']['target'] = target
 
         response = self._client.post('/synthesizer/', json=payload)
         data: list = response.json()
         self._model, _ = self._model_from_api(X.datatype, data)
-        while self.status != Status.READY:
+        while self.status not in [Status.READY, Status.FAILED]:
             print('Training the synthesizer...')
             sleep(BACKOFF)
+
+        if self.status == Status.FAILED:
+            raise FittingError('Could not train the synthesizer')
 
     @staticmethod
     def _model_from_api(datatype: str, data: dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
@@ -224,4 +230,9 @@ class BaseSynthesizer(ABC, ModelMixin):
 
     @staticmethod
     def _resolve_api_status(api_status: dict) -> Status:
-        return Status(api_status.get('state', Status.UNKNOWN.name))
+        status = Status(api_status.get('state', Status.UNKNOWN.name))
+        prepare = PrepareState(api_status.get('prepare', {}).get(
+            'state', PrepareState.UNKNOWN.name))
+        if prepare == PrepareState.FAILED:
+            status = Status.FAILED
+        return status
