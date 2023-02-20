@@ -9,6 +9,12 @@ from ydata.sdk.utils.table import MISSING_CONNECTOR_UID, MISSING_DATATYPE, MISSI
 
 @typechecked
 class DataSourceList(list):
+    """Representation of the list of `DataSource` objects.
+
+    The list inherits directly from Python `list`. The list does not
+    communicate with the backend and thus, represent a snapshot at the
+    moment it is created.
+    """
 
     _HEADER = ["Name", "Datatype", "Status", "UID", "Connector UID", "Creation Date"]
 

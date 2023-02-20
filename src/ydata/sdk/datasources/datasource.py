@@ -3,7 +3,7 @@ from typing import Optional, Type, Union
 from uuid import uuid4
 
 from ydata.sdk.common.client import Client
-from ydata.sdk.common.client.utils import require_client
+from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
@@ -28,7 +28,7 @@ class DataSource(ModelMixin):
         if wait_for_metadata:
             self._model = DataSource._wait_for_metadata(self)._model
 
-    @require_client
+    @init_client
     def _init_common(self, client: Optional[Client] = None):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
@@ -54,7 +54,7 @@ class DataSource(ModelMixin):
         return self._model.metadata
 
     @staticmethod
-    @require_client
+    @init_client
     def list(client: Optional[Client] = None) -> DataSourceList:
         def __process_data(data: list) -> list:
             to_del = ['metadata']
@@ -70,7 +70,7 @@ class DataSource(ModelMixin):
         return DataSourceList(data)
 
     @staticmethod
-    @require_client
+    @init_client
     def get(uid: UID, client: Optional[Client] = None) -> "DataSource":
         response = client.get(f'/datasource/{uid}')
         data: list = response.json()
@@ -102,7 +102,7 @@ class DataSource(ModelMixin):
         return datasource
 
     @classmethod
-    @require_client
+    @init_client
     def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
         _name = name if name is not None else str(uuid4())
         _config = config if config is not None else {}
