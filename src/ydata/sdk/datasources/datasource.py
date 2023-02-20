@@ -26,7 +26,7 @@ class DataSource(ModelMixin):
             connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, client=self._client)
 
         if wait_for_metadata:
-            DataSource._wait_for_metadata(self)
+            self._model = DataSource._wait_for_metadata(self)._model
 
     @require_client
     def _init_common(self, client: Optional[Client] = None):
@@ -97,7 +97,7 @@ class DataSource(ModelMixin):
         datasource = ModelMixin._init_from_model_data(DataSource, model)
 
         if wait_for_metadata:
-            DataSource._wait_for_metadata(datasource)
+            datasource = DataSource._wait_for_metadata(datasource)
 
         return datasource
 
