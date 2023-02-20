@@ -29,8 +29,8 @@ class Client(metaclass=SingletonClient):
         self._base_url = "fabric.dev.aws.ydata.ai"
         self._scheme = 'https'
         self._headers = {'Authorization': credentials}
-        self._project = 'b0ff40f7-e457-48c6-a0e3-6d755b51c31e'  # project
         self._http_client = httpClient(headers=self._headers)
+        self._project = self._get_default_project(credentials)
         self.project = project
         if set_as_global:
             self.__set_global()
@@ -56,7 +56,7 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get(self, endpoint: str, raise_for_status=True) -> Response:
+    def get(self, endpoint: str, params: Optional[dict] = None, cookies: Optional[dict] = None, raise_for_status: bool = True) -> Response:
         """GET request to the backend.
 
         Args:
@@ -66,7 +66,7 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint)
+        url_data = self.__build_url(endpoint, params=params, cookies=cookies)
         response = self._http_client.get(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -93,12 +93,12 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    # TODO: Automatically determine the project based on the token
-    def _get_default_project(self):
-        response = self.get('/profile')
-        return response
+    def _get_default_project(self, token: str):
+        response = self.get('/profiles/me', params={}, cookies={'access_token': token})
+        data: dict = response.json()
+        return data['myWorkspace']
 
-    def __build_url(self, endpoint: str, params: Optional[dict] = None, data: Optional[dict] = None, json: Optional[dict] = None, files: Optional[dict] = None) -> dict:
+    def __build_url(self, endpoint: str, params: Optional[dict] = None, data: Optional[dict] = None, json: Optional[dict] = None, files: Optional[dict] = None, cookies: Optional[dict] = None) -> dict:
         """Build a request for the backend.
 
         Args:
@@ -129,6 +129,9 @@ class Client(metaclass=SingletonClient):
 
         if files is not None:
             url_data['files'] = files
+
+        if cookies is not None:
+            url_data['cookies'] = cookies
 
         return url_data
 
