@@ -29,24 +29,24 @@ from ydata.sdk.utils.model_utils import filter_dict
 
 @typechecked
 class BaseSynthesizer(ABC, ModelMixin):
-    """Base class for all synthesizer variants.
+    """Main synthesizer class.
+
+    This class cannot be directly instanciated because of the specificities between [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer] and [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] `sample` methods.
 
     Methods
     -------
     - `fit`: train a synthesizer instance.
     - `sample`: request synthetic data.
     - `status`: current status of the synthesizer instance.
+
+    Note:
+            The synthesizer instance is created in the backend only when the `fit` method is called.
+
+    Arguments:
+        client (Client): (optional) Client to connect to the backend
     """
 
     def __init__(self, client: Optional[Client] = None):
-        """Initialize the synthesizer.
-
-        Note:
-            The synthesizer instance is created in the backend only when the `fit` method is called.
-
-        Arguments:
-            client (Client): (optional) Client to connet to the backend
-        """
         self._init_common(client=client)
         self._model: Optional[mSynthesizer] = None
 
@@ -58,14 +58,14 @@ class BaseSynthesizer(ABC, ModelMixin):
     def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DataSourceAttrs, dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         """Fit the synthesizer.
 
-        The synthesizer accepts as training dataset either a pandas `DataFrame` directly or a YData `DataSource`.
-        When the training dataset is a pandas `DataFrame`, the argument `datatype` is required as it cannot be deduced.
+        The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
+        When the training dataset is a pandas [`DataFrame`][pandas.DataFrame], the argument `datatype` is required as it cannot be deduced.
 
-        Similarly, `dataset_attrs` is mandatory for `TimeSeries` dataset to specify the `sortbykey` columns.
+        Similarly, `dataset_attrs` is mandatory for [`TimeSeries`][ydata.sdk.datasources.DataSourceType.TIMESERIES] dataset to specify the `sortbykey` columns.
 
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
-            datatype (Optional[Union[DataSourceType, str]]): (optional) Dataset datatype - required if `X` is a `pandas.DataFrame`
+            datatype (Optional[Union[DataSourceType, str]]): (optional) Dataset datatype - required if `X` is a [`pandas.DataFrame`][pandas.DataFrame]
             dataset_attrs (Optional[Union[DataSourceAttrs, dict]]): (optional) Dataset attributes
             target (Optional[str]): (optional) Metadata associated to the datasource
             name (Optional[str]): (optional) Synthesizer instance name
@@ -218,8 +218,8 @@ class BaseSynthesizer(ABC, ModelMixin):
         """List the synthesizer instances.
 
         Arguments:
-            id (str): synthesizer instance id
-            client (Client): (optional) Client to connet to the backend
+            uid (str): synthesizer instance uid
+            client (Client): (optional) Client to connect to the backend
 
         Returns:
             Synthesizer instance
@@ -236,7 +236,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         """List the synthesizer instances.
 
         Arguments:
-            client (Client): (optional) Client to connet to the backend
+            client (Client): (optional) Client to connect to the backend
 
         Returns:
             List of synthesizers

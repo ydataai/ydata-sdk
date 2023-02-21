@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from ydata.sdk.common.types import UID
 from ydata.sdk.datasources.__models.datatype import DataSourceType
 from ydata.sdk.datasources.__models.metadata.metadata import Metadata
 from ydata.sdk.datasources.__models.status import State, Status
@@ -9,7 +10,7 @@ from ydata.sdk.datasources.__models.status import State, Status
 @dataclass
 class DataSource():  # BaseModel):
 
-    uid: Optional[str] = None
+    uid: Optional[UID] = None
     author: Optional[str] = None
     name: Optional[str] = None
     datatype: Optional[DataSourceType] = None

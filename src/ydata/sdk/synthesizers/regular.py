@@ -14,7 +14,10 @@ Metadata = dict  # TODO
 class RegularSynthesizer(BaseSynthesizer):
 
     def sample(self, n_samples: int = 1) -> pdDataFrame:
-        """Sample from a TabularSyntesizer instance.
+        """Sample from a.
+
+        [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer]
+        instance.
 
         Arguments:
             n_samples (int): number of rows in the sample
@@ -30,7 +33,7 @@ class RegularSynthesizer(BaseSynthesizer):
     def fit(self, X: Union[DataSource, pdDataFrame], dataset_attrs: Optional[DataSourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         """Fit the synthesizer.
 
-        The synthesizer accepts as training dataset either a pandas `DataFrame` directly or a YData `DataSource`.
+        The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
 
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
