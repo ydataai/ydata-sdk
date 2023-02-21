@@ -3,5 +3,5 @@ from ydata.core.enum import StringEnum
 
 
 class SynthesizerType(StringEnum):
-    TABULAR = 'tabular'
+    REGULAR = 'regular'
     TIMESERIES = 'timeseries'
