@@ -1,9 +1,0 @@
-
---extra-index-url https://pypi.ydata.ai
-
-httpx==0.23.3
-
-ydata-core>=0.2.0
-prettytable==3.6.0
-pydantic==1.10.5
-typeguard==2.13.3
