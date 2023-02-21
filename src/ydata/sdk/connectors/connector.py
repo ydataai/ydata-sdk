@@ -17,6 +17,20 @@ from ydata.sdk.utils.model_mixin import ModelMixin
 
 
 class Connector(ModelMixin):
+    """A [`Connector`][ydata.sdk.connectors.Connector] allows to connect and
+    access data stored in various places. The list of available connectors can
+    be found [here][ydata.sdk.connectors.ConnectorType].
+
+    Arguments:
+        connector_type (Union[ConnectorType, str]): Type of the connector to be created
+        credentials (dict): Connector credentials
+        name (Optional[str]): (optional) Connector name
+        client (Client): (optional) Client to connect to the backend
+
+    Attributes:
+        uid (UID): UID fo the connector instance (creating internally)
+        type (ConnectorType): Type of the connector
+    """
 
     def __init__(self, connector_type: Union[ConnectorType, str] = None, credentials: dict = None,  name: Optional[str] = None, client: Optional[Client] = None):
         self._init_common(client)
@@ -29,7 +43,7 @@ class Connector(ModelMixin):
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     @property
-    def uid(self) -> str:
+    def uid(self) -> UID:
         return self._model.uid
 
     @property
@@ -39,6 +53,15 @@ class Connector(ModelMixin):
     @staticmethod
     @init_client
     def get(uid: UID, client: Optional[Client] = None) -> "Connector":
+        """Get an existing connector.
+
+        Arguments:
+            uid (UID): Connector identifier
+            client (Client): (optional) Client to connect to the backend
+
+        Returns:
+            Connector
+        """
         connectors: ConnectorsList = Connector.list(client=client)
         data = connectors.get_by_uid(uid)
         model = mConnector(**data)
@@ -81,6 +104,17 @@ class Connector(ModelMixin):
 
     @staticmethod
     def create(connector_type: Union[ConnectorType, str], credentials: Union[str, Path, dict, Credentials], name: Optional[str] = None, client: Optional[Client] = None) -> "Connector":
+        """Create a new connector.
+
+        Arguments:
+            connector_type (Union[ConnectorType, str]): Type of the connector to be created
+            credentials (dict): Connector credentials
+            name (Optional[str]): (optional) Connector name
+            client (Client): (optional) Client to connect to the backend
+
+        Returns:
+            New connector
+        """
         model = Connector._create_model(
             connector_type=connector_type, credentials=credentials, name=name, client=client)
         connector = ModelMixin._init_from_model_data(
@@ -109,7 +143,10 @@ class Connector(ModelMixin):
         """List the connectors instances.
 
         Arguments:
-            client (Client): (optional) Client to connet to the backend
+            client (Client): (optional) Client to connect to the backend
+
+        Returns:
+            List of connectors
         """
         response = client.get('/connector')
         data: list = response.json()

@@ -19,13 +19,19 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
 
     This is meant to be a zero configuration for the user.
 
+    Example: Create and set a client globally
+            ```py
+            from ydata.sdk.client import get_client
+            get_client(set_as_global=True)
+            ```
+
     Args:
-        client_or_creds (Optional[Union[Client, dict, str, Path]]): client to forward or credentials for initialization
-        set_as_global (bool): if True, set client as global
-        wait_for_auth (bool): if True, wait for the user to authenticate
+        client_or_creds (Optional[Union[Client, dict, str, Path]]): Client to forward or credentials for initialization
+        set_as_global (bool): If `True`, set client as global
+        wait_for_auth (bool): If `True`, wait for the user to authenticate
 
     Returns:
-        client instance
+        Client instance
     """
     client = None
     global WAITING_FOR_CLIENT

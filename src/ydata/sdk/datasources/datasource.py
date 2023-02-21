@@ -11,12 +11,30 @@ from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.datasources.__models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources.__models.datasource_list import DataSourceList
 from ydata.sdk.datasources.__models.datatype import DataSourceType
+from ydata.sdk.datasources.__models.metadata.metadata import Metadata
 from ydata.sdk.datasources.__models.status import Status, ValidationState
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
 
 class DataSource(ModelMixin):
+    """A [`DataSource`][ydata.sdk.datasources.DataSource] represents a dataset
+    to be used by a Synthesizer as training data.
+
+    Arguments:
+        connector (Connector): Connector from which the datasource is created
+        datatype (Optional[Union[DataSourceType, str]]): (optional) DataSource type
+        name (Optional[str]): (optional) DataSource name
+        wait_for_metadata (bool): If `True`, wait until the metadata is fully calculated
+        client (Client): (optional) Client to connect to the backend
+        **config: Datasource specific configuration
+
+    Attributes:
+        uid (UID): UID fo the datasource instance
+        datatype (DataSourceType): Data source type
+        status (Status): Status of the datasource
+        metadata (Metadata): Metadata associated to the datasource
+    """
 
     def __init__(self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config):
         from ydata.sdk.datasources.__models.connector_to_datasource import CONN_TO_DS
@@ -34,15 +52,15 @@ class DataSource(ModelMixin):
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     @property
-    def uid(self):
+    def uid(self) -> UID:
         return self._model.uid
 
     @property
-    def datatype(self):
+    def datatype(self) -> DataSourceType:
         return self._model.datatype
 
     @property
-    def status(self):
+    def status(self) -> Status:
         try:
             self = self.get(self._model.uid, self._client)
             return self._model.status
@@ -50,12 +68,21 @@ class DataSource(ModelMixin):
             return Status.UNKNOWN
 
     @property
-    def metadata(self):
+    def metadata(self) -> Metadata:
         return self._model.metadata
 
     @staticmethod
     @init_client
     def list(client: Optional[Client] = None) -> DataSourceList:
+        """List the  [`DataSource`][ydata.sdk.datasources.DataSource]
+        instances.
+
+        Arguments:
+            client (Client): (optional) Client to connect to the backend
+
+        Returns:
+            List of datasources
+        """
         def __process_data(data: list) -> list:
             to_del = ['metadata']
             for e in data:
@@ -72,6 +99,15 @@ class DataSource(ModelMixin):
     @staticmethod
     @init_client
     def get(uid: UID, client: Optional[Client] = None) -> "DataSource":
+        """Get an existing [`DataSource`][ydata.sdk.datasources.DataSource].
+
+        Arguments:
+            uid (UID): DataSource identifier
+            client (Client): (optional) Client to connect to the backend
+
+        Returns:
+            DataSource
+        """
         response = client.get(f'/datasource/{uid}')
         data: list = response.json()
 
@@ -85,10 +121,23 @@ class DataSource(ModelMixin):
         return datasource
 
     @classmethod
-    def create(cls, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **kwargs) -> "DataSource":
+    def create(cls, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config) -> "DataSource":
+        """Create a new [`DataSource`][ydata.sdk.datasources.DataSource].
+
+        Arguments:
+            connector (Connector): Connector from which the datasource is created
+            datatype (Optional[Union[DataSourceType, str]]): (optional) DataSource type
+            name (Optional[str]): (optional) DataSource name
+            wait_for_metadata (bool): If `True`, wait until the metadata is fully calculated
+            client (Client): (optional) Client to connect to the backend
+            **config: Datasource specific configuration
+
+        Returns:
+            DataSource
+        """
         from ydata.sdk.datasources.__models.connector_to_datasource import CONN_TO_DS
         datasource_type = CONN_TO_DS.get(connector.type)
-        return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=kwargs, name=name, wait_for_metadata=wait_for_metadata, client=client)
+        return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
 
     @classmethod
     def _create(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":

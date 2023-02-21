@@ -18,6 +18,9 @@ codes = http_codes
 class Client(metaclass=SingletonClient):
     """Main Client class used to abstract the connection to the backend.
 
+    A normal user should not have to instanciate a [`Client`][ydata.sdk.common.client.Client] by itself.
+    However, in the future it will be useful for power-users to manage projects and connections.
+
     Args:
         credentials (Optional[dict]): (optional) Credentials to connect
         project (Optional[Project]): (optional) Project to connect to. If not specified, the client will connect to the default user's project.

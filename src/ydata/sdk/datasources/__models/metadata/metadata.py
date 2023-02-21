@@ -17,6 +17,13 @@ class LongTextStatistics(BaseModel):
 
 
 class Metadata(BaseModel):
+    """The Metadata object contains descriptive information about a.
+
+    [`DataSource`](ydata.sdk.datasources.datasource)
+
+    Attributes:
+        columns (List[Column]): columns information
+    """
     cardinality: Optional[List[Cardinality]] = Field(None)
     columns: List[Column]
     duplicate_rows: int = Field(alias="duplicateRows")
