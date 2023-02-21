@@ -2,7 +2,7 @@ from typing import Optional
 
 from ydata.sdk.common.model import BaseModel
 from ydata.sdk.common.types import UID
-from ydata.sdk.connectors.models.connector_type import ConnectorType
+from ydata.sdk.connectors.__models.connector_type import ConnectorType
 
 
 class Connector(BaseModel):

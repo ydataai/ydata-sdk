@@ -9,10 +9,10 @@ from ydata.sdk.common.config import LOG_LEVEL
 from ydata.sdk.common.exceptions import CredentialTypeError, InvalidConnectorError
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
-from ydata.sdk.connectors.models.connector import Connector as mConnector
-from ydata.sdk.connectors.models.connector_list import ConnectorsList
-from ydata.sdk.connectors.models.connector_type import ConnectorType
-from ydata.sdk.connectors.models.credentials.credentials import Credentials
+from ydata.sdk.connectors.__models.connector import Connector as mConnector
+from ydata.sdk.connectors.__models.connector_list import ConnectorsList
+from ydata.sdk.connectors.__models.connector_type import ConnectorType
+from ydata.sdk.connectors.__models.credentials.credentials import Credentials
 from ydata.sdk.utils.model_mixin import ModelMixin
 
 
@@ -50,7 +50,7 @@ class Connector(ModelMixin):
         if isinstance(connector_type, str):
             try:
                 connector_type = ConnectorType(connector_type)
-            except:
+            except Exception:
                 c_list = ", ".join([c.value for c in ConnectorType])
                 raise InvalidConnectorError(
                     f"ConnectorType '{connector_type}' does not exist.\nValid connector types are: {c_list}.")
@@ -66,14 +66,14 @@ class Connector(ModelMixin):
         if isinstance(credentials, Path):
             try:
                 _credentials = json_loads(credentials.open().read())
-            except Exception as e:
+            except Exception:
                 pass  # TODO: Catch and re-raise
 
         try:
-            from ydata.sdk.connectors.models.connector_map import TYPE_TO_CLASS
+            from ydata.sdk.connectors.__models.connector_map import TYPE_TO_CLASS
             credential_cls = TYPE_TO_CLASS.get(connector_type.value)
             _credentials = credential_cls(**_credentials)
-        except:  # TODO
+        except Exception:
             raise CredentialTypeError(
                 "Could not create the credentials. Verify the path or the structure your credentials.")
 
@@ -98,7 +98,7 @@ class Connector(ModelMixin):
             "credentials": _credentials.as_payload(),
             "name": _name
         }
-        response = client.post(f'/connector/', json=payload)
+        response = client.post('/connector/', json=payload)
         data: list = response.json()
 
         return mConnector(**data)

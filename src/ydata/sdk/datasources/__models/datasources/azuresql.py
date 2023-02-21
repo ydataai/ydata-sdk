@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from ydata.sdk.datasources.models.datasource import DataSource
+from ydata.sdk.datasources.__models.datasource import DataSource
 
 
 @dataclass

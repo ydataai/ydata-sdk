@@ -15,14 +15,14 @@ from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceNotAvaila
                                          NotInitializedError)
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.datasources import DataSource, LocalDataSource
-from ydata.sdk.datasources.models.attributes import DataSourceAttrs
-from ydata.sdk.datasources.models.datatype import DataSourceType
-from ydata.sdk.datasources.models.metadata.metadata import Metadata
-from ydata.sdk.datasources.models.status import Status as dsStatus
-from ydata.sdk.synthesizers.models.status import PrepareState, Status
-from ydata.sdk.synthesizers.models.synthesizer import Synthesizer as mSynthesizer
-from ydata.sdk.synthesizers.models.synthesizer_type import SynthesizerType
-from ydata.sdk.synthesizers.models.synthesizers_list import SynthesizersList
+from ydata.sdk.datasources.__models.attributes import DataSourceAttrs
+from ydata.sdk.datasources.__models.datatype import DataSourceType
+from ydata.sdk.datasources.__models.metadata.metadata import Metadata
+from ydata.sdk.datasources.__models.status import Status as dsStatus
+from ydata.sdk.synthesizers.__models.status import PrepareState, Status
+from ydata.sdk.synthesizers.__models.synthesizer import Synthesizer as mSynthesizer
+from ydata.sdk.synthesizers.__models.synthesizer_type import SynthesizerType
+from ydata.sdk.synthesizers.__models.synthesizers_list import SynthesizersList
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
@@ -158,7 +158,7 @@ class BaseSynthesizer(ABC, ModelMixin):
 
     @staticmethod
     def _model_from_api(datatype: str, data: dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
-        from ydata.sdk.synthesizers.models.synthesizer_map import TYPE_TO_CLASS
+        from ydata.sdk.synthesizers.__models.synthesizer_map import TYPE_TO_CLASS
         synth_cls = TYPE_TO_CLASS.get(SynthesizerType(datatype).value)
         data['status'] = synth_cls._resolve_api_status(data['status'])
         data = filter_dict(mSynthesizer, data)
