@@ -1,4 +1,4 @@
+from ydata.sdk.connectors.__models.connector_type import ConnectorType
 from ydata.sdk.connectors.connector import Connector
-from ydata.sdk.connectors.models.connector_type import ConnectorType
 
 __all__ = ["Connector", "ConnectorType"]

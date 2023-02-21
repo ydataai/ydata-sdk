@@ -1,9 +1,10 @@
+from typing import Any
 
 
 class ModelMixin:
 
     @staticmethod
-    def _init_from_model_data(cls, model) -> "cls":
+    def _init_from_model_data(cls, model) -> Any:
         o = cls.__new__(cls)
         o._model = model
         o._init_common()  # TODO: forward client

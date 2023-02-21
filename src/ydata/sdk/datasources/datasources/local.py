@@ -6,11 +6,11 @@ from uuid import uuid4
 from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.client import Client, get_client
+from ydata.sdk.connectors.__models.connector import Connector as mConnector
 from ydata.sdk.connectors.connector import Connector
-from ydata.sdk.connectors.models.connector import Connector as mConnector
+from ydata.sdk.datasources.__models.datatype import DataSourceType
+from ydata.sdk.datasources.__models.filetype import FileType
 from ydata.sdk.datasources.datasource import DataSource
-from ydata.sdk.datasources.models.datatype import DataSourceType
-from ydata.sdk.datasources.models.filetype import FileType
 from ydata.sdk.utils.model_mixin import ModelMixin
 
 

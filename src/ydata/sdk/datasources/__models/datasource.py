@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from ydata.sdk.datasources.models.datatype import DataSourceType
-from ydata.sdk.datasources.models.metadata.metadata import Metadata
-from ydata.sdk.datasources.models.status import State, Status
+from ydata.sdk.datasources.__models.datatype import DataSourceType
+from ydata.sdk.datasources.__models.metadata.metadata import Metadata
+from ydata.sdk.datasources.__models.status import State, Status
 
 
 @dataclass

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ydata.sdk.datasources.models.metadata.warning_types import Level, WarningType
+from ydata.sdk.datasources.__models.metadata.warning_types import Level, WarningType
 
 
 class Details(BaseModel):

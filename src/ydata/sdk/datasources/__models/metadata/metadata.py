@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
-from ydata.sdk.datasources.models.metadata.column import Column
-from ydata.sdk.datasources.models.metadata.warnings import MetadataWarning
+from ydata.sdk.datasources.__models.metadata.column import Column
+from ydata.sdk.datasources.__models.metadata.warnings import MetadataWarning
 
 
 class Cardinality(BaseModel):

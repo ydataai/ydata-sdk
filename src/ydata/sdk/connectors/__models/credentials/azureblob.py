@@ -1,5 +1,5 @@
 
-from ydata.sdk.connectors.models.credentials.credentials import Credentials
+from ydata.sdk.connectors.__models.credentials.credentials import Credentials
 
 
 class AzureBlobCredentials(Credentials):

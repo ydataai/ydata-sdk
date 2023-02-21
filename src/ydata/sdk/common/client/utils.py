@@ -56,6 +56,7 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
             client = _client_from_env(wait_for_auth=wait_for_auth)
 
     except ClientHandshakeError as e:
+        wait_for_auth = False  # For now deactivate wait_for_auth until the backend is ready
         if wait_for_auth:
             WAITING_FOR_CLIENT = True
             start = time()
@@ -63,7 +64,7 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
             while client is None:
                 if not login_message_printed:
                     print(
-                        f"The token needs to be refreshed - please validate your token using:\n\n\tydata-sdk login\n\nor by browsing at the following URL:\n\n\t{e.auth_link}")
+                        f"The token needs to be refreshed - please validate your token by browsing at the following URL:\n\n\t{e.auth_link}")
                     login_message_printed = True
                 with suppress(ClientCreationError):
                     sleep(BACKOFF)

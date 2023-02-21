@@ -1,7 +1,7 @@
-from ydata.sdk.connectors.models.credentials.credentials import Credentials
+from ydata.sdk.connectors.__models.credentials.credentials import Credentials
 
 
-class GCSCredentials(Credentials):
+class BigQueryCredentials(Credentials):
     project_id: str
     private_key_id: str
     private_key: str

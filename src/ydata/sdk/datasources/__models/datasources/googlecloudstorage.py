@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from ydata.sdk.datasources.models.datasource import DataSource
-from ydata.sdk.datasources.models.filetype import FileType
+from ydata.sdk.datasources.__models.datasource import DataSource
+from ydata.sdk.datasources.__models.filetype import FileType
 
 
 @dataclass
