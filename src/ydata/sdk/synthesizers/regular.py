@@ -11,7 +11,7 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 Metadata = dict  # TODO
 
 
-class TabularSynthesizer(BaseSynthesizer):
+class RegularSynthesizer(BaseSynthesizer):
 
     def sample(self, n_samples: int = 1) -> pdDataFrame:
         """Sample from a TabularSyntesizer instance.
