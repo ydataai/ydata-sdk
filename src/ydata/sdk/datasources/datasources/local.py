@@ -6,10 +6,10 @@ from uuid import uuid4
 from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.client import Client, get_client
-from ydata.sdk.connectors.__models.connector import Connector as mConnector
+from ydata.sdk.connectors._models.connector import Connector as mConnector
 from ydata.sdk.connectors.connector import Connector
-from ydata.sdk.datasources.__models.datatype import DataSourceType
-from ydata.sdk.datasources.__models.filetype import FileType
+from ydata.sdk.datasources._models.datatype import DataSourceType
+from ydata.sdk.datasources._models.filetype import FileType
 from ydata.sdk.datasources.datasource import DataSource
 from ydata.sdk.utils.model_mixin import ModelMixin
 
@@ -23,7 +23,7 @@ class LocalDataSource(DataSource):
 
         if isinstance(source, pdDataFrame):
             buffer = BytesIO()
-            source.to_csv(buffer)
+            source.to_csv(buffer, index=False)
             buffer.seek(0)
             files = {'file': buffer}
         else:

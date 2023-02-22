@@ -1,0 +1,4 @@
+
+
+class DataSourceTypeWarning(UserWarning):
+    pass

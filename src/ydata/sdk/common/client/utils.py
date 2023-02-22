@@ -52,7 +52,6 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
                     client_or_creds = Path(client_or_creds)
 
             if isinstance(client_or_creds, Path):
-                # TODO: Check that the file exists
                 client_or_creds = json.loads(client_or_creds.open().read())
 
             return Client(credentials=client_or_creds)
@@ -79,9 +78,14 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
                 if now - start > CLIENT_INIT_TIMEOUT:
                     WAITING_FOR_CLIENT = False
                     break
+    except Exception as e:
+        raise ClientCreationError(
+            f"Could not initialize a client due to the following error:\n{str(e)}")
 
     if client is None and not WAITING_FOR_CLIENT:
-        raise ClientCreationError("Could not initialize a client")
+        raise ClientCreationError("Could not initialize a client. It usually means that no token or credential files could be found.\n\n\
+        The easiest way to have the client created is to define the token in an environment variable 'YDATA_CREDENTIALS'.\n\n\
+        See the documentation for further help.")  # TODO: Adjust the link for the documentation
     return client
 
 

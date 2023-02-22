@@ -1,4 +1,5 @@
 from contextlib import suppress
+from os import environ
 from typing import Optional, Union
 
 from httpx import Client as httpClient
@@ -8,6 +9,7 @@ from typeguard import typechecked
 
 from ydata.sdk.common.client.parser import LinkExtractor
 from ydata.sdk.common.client.singleton import SingletonClient
+from ydata.sdk.common.config import DEFAULT_URL
 from ydata.sdk.common.exceptions import ClientHandshakeError, ResponseError
 from ydata.sdk.common.types import Project
 
@@ -29,8 +31,7 @@ class Client(metaclass=SingletonClient):
     codes = codes
 
     def __init__(self, credentials: Optional[Union[str, dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
-        # TODO: get from env variable / credentials / whatever
-        self._base_url = "fabric.dev.aws.ydata.ai"
+        self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL)
         self._scheme = 'https'
         self._headers = {'Authorization': credentials}
         self._http_client = httpClient(
