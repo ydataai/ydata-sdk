@@ -16,18 +16,6 @@ on:
 
 
 jobs:
-  cancel_previous:
-    name: 'Cancel Previous Runs'
-    runs-on: ubuntu-22.04
-    timeout-minutes: 3
-
-    steps:
-    - uses: ydataai/cancel-workflow-action@0.7.0
-      with:
-        ignore_sha: true
-        access_token: ${{ secrets.ACCESS_TOKEN }}
-
-
   validate:
     name: Validate
     runs-on: ubuntu-22.04
