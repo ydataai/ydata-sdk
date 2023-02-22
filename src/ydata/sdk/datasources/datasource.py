@@ -7,12 +7,13 @@ from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
-from ydata.sdk.connectors.connector import Connector
-from ydata.sdk.datasources.__models.datasource import DataSource as mDataSource
-from ydata.sdk.datasources.__models.datasource_list import DataSourceList
-from ydata.sdk.datasources.__models.datatype import DataSourceType
-from ydata.sdk.datasources.__models.metadata.metadata import Metadata
-from ydata.sdk.datasources.__models.status import Status, ValidationState
+from ydata.sdk.connectors.connector import Connector, ConnectorType
+from ydata.sdk.datasources._models.connector_to_datasource import CONN_TO_DS
+from ydata.sdk.datasources._models.datasource import DataSource as mDataSource
+from ydata.sdk.datasources._models.datasource_list import DataSourceList
+from ydata.sdk.datasources._models.datatype import DataSourceType
+from ydata.sdk.datasources._models.metadata.metadata import Metadata
+from ydata.sdk.datasources._models.status import Status, ValidationState
 from ydata.sdk.utils.model_mixin import ModelMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
@@ -37,7 +38,6 @@ class DataSource(ModelMixin):
     """
 
     def __init__(self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config):
-        from ydata.sdk.datasources.__models.connector_to_datasource import CONN_TO_DS
         datasource_type = CONN_TO_DS.get(connector.type)
         self._init_common(client=client)
         self._model: Optional[mDataSource] = self._create_model(
@@ -62,7 +62,7 @@ class DataSource(ModelMixin):
     @property
     def status(self) -> Status:
         try:
-            self = self.get(self._model.uid, self._client)
+            self._model = self.get(self._model.uid, self._client)._model
             return self._model.status
         except Exception:  # noqa: PIE786
             return Status.UNKNOWN
@@ -70,6 +70,10 @@ class DataSource(ModelMixin):
     @property
     def metadata(self) -> Metadata:
         return self._model.metadata
+
+    @staticmethod
+    def _create_payload(*_) -> dict:
+        return {}
 
     @staticmethod
     @init_client
@@ -110,13 +114,8 @@ class DataSource(ModelMixin):
         """
         response = client.get(f'/datasource/{uid}')
         data: list = response.json()
-
-        # TODO: Move to pydantic model directly
-        data['datatype'] = data.pop('dataType')
-        data['state'] = data['status']
-        data['status'] = DataSource._resolve_api_status(data['status'])
-        data = filter_dict(mDataSource, data)
-        model = mDataSource(**data)
+        datasource_type = CONN_TO_DS.get(ConnectorType(data['connector']['type']))
+        model = DataSource._model_from_api(data, datasource_type)
         datasource = ModelMixin._init_from_model_data(DataSource, model)
         return datasource
 
@@ -135,7 +134,6 @@ class DataSource(ModelMixin):
         Returns:
             DataSource
         """
-        from ydata.sdk.datasources.__models.connector_to_datasource import CONN_TO_DS
         datasource_type = CONN_TO_DS.get(connector.type)
         return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
 
@@ -146,7 +144,7 @@ class DataSource(ModelMixin):
         datasource = ModelMixin._init_from_model_data(DataSource, model)
 
         if wait_for_metadata:
-            datasource = DataSource._wait_for_metadata(datasource)
+            datasource._model = DataSource._wait_for_metadata(datasource)._model
 
         return datasource
 
@@ -163,6 +161,8 @@ class DataSource(ModelMixin):
             },
             "dataType": datatype.value
         }
+        if connector.type != ConnectorType.FILE:
+            _config = datasource_type(**config).to_payload()
         payload.update(_config)
         response = client.post('/datasource/', json=payload)
         data: list = response.json()
@@ -170,8 +170,7 @@ class DataSource(ModelMixin):
 
     @staticmethod
     def _wait_for_metadata(datasource):
-        # TODO: Other "finished" status such as FAILED
-        while datasource.status not in [Status.AVAILABLE, Status.FAILED]:
+        while datasource.status not in [Status.AVAILABLE, Status.FAILED, Status.UNAVAILABLE]:
             print(f'Calculating metadata [{datasource.status}]')
             datasource = DataSource.get(uid=datasource.uid, client=datasource._client)
             sleep(BACKOFF)

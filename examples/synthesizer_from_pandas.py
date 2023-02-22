@@ -1,12 +1,15 @@
-import numpy as np
+from pathlib import Path
+
 import pandas as pd
 
 from ydata.sdk.synthesizers import RegularSynthesizer
 
+# Do not forget to add your token as env variables
+
 
 def main():
-    # Let's create a small random dataset
-    X = pd.DataFrame(np.random.randint(0, 100, size=(100, 4)), columns=list('ABCD'))
+    # Let's load a small random dataset
+    X = pd.read_csv(Path(__file__).parent / 'data/dummy.csv')
 
     # We initialize a regular synthesizer
     # As long as the synthesizer does not call `fit`, it exists only locally

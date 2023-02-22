@@ -9,10 +9,10 @@ from ydata.sdk.common.config import LOG_LEVEL
 from ydata.sdk.common.exceptions import CredentialTypeError, InvalidConnectorError
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
-from ydata.sdk.connectors.__models.connector import Connector as mConnector
-from ydata.sdk.connectors.__models.connector_list import ConnectorsList
-from ydata.sdk.connectors.__models.connector_type import ConnectorType
-from ydata.sdk.connectors.__models.credentials.credentials import Credentials
+from ydata.sdk.connectors._models.connector import Connector as mConnector
+from ydata.sdk.connectors._models.connector_list import ConnectorsList
+from ydata.sdk.connectors._models.connector_type import ConnectorType
+from ydata.sdk.connectors._models.credentials.credentials import Credentials
 from ydata.sdk.utils.model_mixin import ModelMixin
 
 
@@ -90,10 +90,11 @@ class Connector(ModelMixin):
             try:
                 _credentials = json_loads(credentials.open().read())
             except Exception:
-                pass  # TODO: Catch and re-raise
+                raise CredentialTypeError(
+                    'Could not read the credentials. Please, check your path or credentials structure.')
 
         try:
-            from ydata.sdk.connectors.__models.connector_map import TYPE_TO_CLASS
+            from ydata.sdk.connectors._models.connector_map import TYPE_TO_CLASS
             credential_cls = TYPE_TO_CLASS.get(connector_type.value)
             _credentials = credential_cls(**_credentials)
         except Exception:
@@ -118,7 +119,7 @@ class Connector(ModelMixin):
         model = Connector._create_model(
             connector_type=connector_type, credentials=credentials, name=name, client=client)
         connector = ModelMixin._init_from_model_data(
-            Connector, model)  # TODO: Return specific class
+            Connector, model)
         return connector
 
     @classmethod

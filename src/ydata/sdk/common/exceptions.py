@@ -84,6 +84,15 @@ class AlreadyFittedError(SynthesizerException):
         super().__init__(message)
 
 
+class DataTypeMissingError(SynthesizerException):
+    """Raise when the DataType is missing and cannot be deduced from the
+    context."""
+
+
+class DataSourceAttrsError(SynthesizerException):
+    """Raise when the DataSourceAttrs is missing or invalid."""
+
+
 class FittingError(SynthesizerException):
     """Raised when a Synthesizer fails during training."""
 

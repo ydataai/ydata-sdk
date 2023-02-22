@@ -4,11 +4,9 @@ from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
-from ydata.sdk.datasources.__models.attributes import DataSourceAttrs
-from ydata.sdk.datasources.__models.datatype import DataSourceType
+from ydata.sdk.datasources._models.attributes import DataSourceAttrs
+from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
-
-Metadata = dict  # TODO
 
 
 class RegularSynthesizer(BaseSynthesizer):
