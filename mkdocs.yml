@@ -38,3 +38,9 @@ nav:
       - GAN: 'reference/api/synthesizers/gan.md'
       - Regular:
         - CGAN: 'reference/api/synthesizers/cgan.md'
+
+
+extra:
+  version:
+    provider: mike
+  generator: false
