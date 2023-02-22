@@ -41,3 +41,9 @@ class RegularSynthesizer(BaseSynthesizer):
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TABULAR,
                             dataset_attrs=dataset_attrs, target=target, name=name)
+
+    def __repr__(self):
+        if self._model is not None:
+            return self._model.__repr__()
+        else:
+            return "RegularSynthesizer(Not Initialized)"

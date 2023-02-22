@@ -44,3 +44,9 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES,
                             dataset_attrs=dataset_attrs, target=target, name=name)
+
+    def __repr__(self):
+        if self._model is not None:
+            return self._model.__repr__()
+        else:
+            return "TimeSeriesSynthesizer(Not Initialized)"

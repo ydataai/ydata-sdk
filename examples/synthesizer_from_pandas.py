@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -5,9 +6,15 @@ import pandas as pd
 from ydata.sdk.synthesizers import RegularSynthesizer
 
 # Do not forget to add your token as env variables
+os.environ["YDATA_CREDENTIALS"] = '<TOKEN>'  # Remove if already defined
 
 
 def main():
+    """In this example, we demonstrate how to train a synthesizer from a pandas
+    DataFrame.
+
+    After training a Regular Synthesizer, we request a sample.
+    """
     # Let's load a small random dataset
     X = pd.read_csv(Path(__file__).parent / 'data/dummy.csv')
 

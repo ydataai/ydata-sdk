@@ -77,16 +77,16 @@ class BaseSynthesizer(ABC, ModelMixin):
             raise AlreadyFittedError()
 
         _datatype = DataSourceType(datatype) if isinstance(
-            X, pdDataFrame) else X.datatype
+            X, pdDataFrame) else DataSourceType(X.datatype)
         if isinstance(dataset_attrs, dict):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
-        self._validate_datasource_attributes(X, dataset_attrs, _datatype)
+        self._validate_datasource_attributes(X, dataset_attrs, _datatype, target)
 
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
             _X = LocalDataSource(source=X, datatype=_datatype, client=self._client)
         else:
-            if _datatype is not None:
+            if datatype is not None:
                 warn("When the training data is a DataSource, the argument `datatype` is ignored.",
                      DataSourceTypeWarning)
             _X = X
@@ -102,7 +102,7 @@ class BaseSynthesizer(ABC, ModelMixin):
             X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
 
     @staticmethod
-    def _validate_datasource_attributes(X: Union[DataSource, pdDataFrame], dataset_attrs: DataSourceAttrs, datatype: DataSourceType):
+    def _validate_datasource_attributes(X: Union[DataSource, pdDataFrame], dataset_attrs: DataSourceAttrs, datatype: DataSourceType, target: Optional[str]):
         columns = []
         if isinstance(X, pdDataFrame):
             columns = X.columns
@@ -113,13 +113,17 @@ class BaseSynthesizer(ABC, ModelMixin):
         else:
             columns = [c.name for c in X.metadata.columns]
 
+        if target is not None and target not in columns:
+            raise DataSourceAttrsError(
+                "Invalid target: column '{target}' does not exist")
+
         if datatype == DataSourceType.TIMESERIES:
             if dataset_attrs is None:
                 raise DataSourceAttrsError(
                     "The argument `dataset_attrs` is mandatory for timeseries datasource. The attributes must define at least one column in `sortbykey` attribute.")
 
         invalid_fields = {}
-        for field, v in dataset_attrs.dict():
+        for field, v in dataset_attrs.dict().items():
             not_in_cols = [c for c in v if c not in columns]
             if len(not_in_cols) > 0:
                 invalid_fields[field] = not_in_cols
