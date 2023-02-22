@@ -31,6 +31,11 @@ dev = [
     "flit==3.8.0",
     "pylint==2.15.10",
 ]
+doc = [
+    "mkdocs>=1.4.2,<2.0.0",
+    "mkdocs-material>=9.0.12,<10.0.0",
+    "mike>=1.1.2,<2.0.0",
+]
 test = [
     "pytest==6.2.5",
     "pytest-bdd==4.0.*",

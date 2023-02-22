@@ -16,7 +16,7 @@ endif
 venv3: ### Creates a virtual environment for this project
 	test -d $(VENV) || $(PYTHON) -m venv $(VENV) && source $(VENV)/bin/activate
 	$(PIP) install --upgrade pip
-	$(PIP) install -e ".[dev,test]"
+	install-all
 
 clean: clean-build clean-pyc ### Cleans artifacts
 
@@ -38,14 +38,20 @@ install: ### Installs regular dependencies
 install-dev: ### Installs regular and dev dependencies
 	$(PIP) install -e ".[dev]"
 
+install-doc: ### Installs regular and doc dependencies
+	$(PIP) install -e ".[doc]"
+
 install-test: ### Installs regular and test dependencies
 	$(PIP) install -e ".[dev]"
 
-install-all: ### Installs regular, dev and test dependencies
-	$(PIP) install -e ".[dev,test]"
+install-all: ### Installs regular, dev, doc, and test dependencies
+	$(PIP) install -e ".[dev,doc,test]"
 
 package:
 	rm -rf build dist
 	echo "$(version)" > VERSION
 	flit build
 	twine check dist/*
+
+publish-docs:
+	mike deploy --push --update-aliases $(version) latest
