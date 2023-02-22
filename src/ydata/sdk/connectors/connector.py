@@ -33,9 +33,9 @@ class Connector(ModelMixin):
     """
 
     def __init__(self, connector_type: Union[ConnectorType, str] = None, credentials: dict = None,  name: Optional[str] = None, client: Optional[Client] = None):
-        self._init_common(client)
+        self._init_common(client=client)
         self._model: Optional[mConnector] = self._create_model(
-            connector_type, credentials, name, client)
+            connector_type, credentials, name, client=client)
 
     @init_client
     def _init_common(self, client: Optional[Client] = None):
