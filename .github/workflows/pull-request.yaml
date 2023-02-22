@@ -7,8 +7,8 @@ on:
     paths:
     - docs/**
     - mkdocs.yml
-  #   branches:
-  #   - renovate/**
+    branches:
+    - renovate/**
   # pull_request:
   #   branches:
   #   - main
