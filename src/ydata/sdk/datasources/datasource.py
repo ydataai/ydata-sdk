@@ -193,3 +193,6 @@ class DataSource(ModelMixin):
         data = filter_dict(datasource_type, data)
         model = datasource_type(**data)
         return model
+
+    def __repr__(self):
+        return self._model.__repr__()
