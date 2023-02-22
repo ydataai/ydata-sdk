@@ -78,9 +78,6 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
                 if now - start > CLIENT_INIT_TIMEOUT:
                     WAITING_FOR_CLIENT = False
                     break
-    except Exception as e:
-        raise ClientCreationError(
-            f"Could not initialize a client due to the following error:\n{str(e)}")
 
     if client is None and not WAITING_FOR_CLIENT:
         raise ClientCreationError("Could not initialize a client. It usually means that no token or credential files could be found.\n\n\

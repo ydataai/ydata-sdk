@@ -5,7 +5,6 @@ from pandas import DataFrame as pdDataFrame
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.datasources._models.attributes import DataSourceAttrs
-from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 
@@ -39,7 +38,7 @@ class RegularSynthesizer(BaseSynthesizer):
             target (Optional[str]): (optional) Metadata associated to the datasource
             name (Optional[str]): (optional) Synthesizer instance name
         """
-        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TABULAR,
+        BaseSynthesizer.fit(self, X=X, datatype=None,
                             dataset_attrs=dataset_attrs, target=target, name=name)
 
     def __repr__(self):
