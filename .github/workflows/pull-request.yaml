@@ -4,6 +4,9 @@ name: Pull Request
 
 on:
   push:
+    paths:
+    - docs/**
+    - mkdocs.yml
     branches:
     - renovate/**
   pull_request:
