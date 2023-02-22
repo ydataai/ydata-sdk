@@ -9,9 +9,9 @@ on:
     - mkdocs.yml
     branches:
     - renovate/**
-  pull_request:
-    branches:
-    - main
+  # pull_request:
+  #   branches:
+  #   - main
 
 
 
