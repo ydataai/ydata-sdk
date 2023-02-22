@@ -78,8 +78,11 @@ class BaseSynthesizer(ABC, ModelMixin):
 
         _datatype = DataSourceType(datatype) if isinstance(
             X, pdDataFrame) else DataSourceType(X.datatype)
+
+        dataset_attrs = dataset_attrs if dataset_attrs is not None else {}
         if isinstance(dataset_attrs, dict):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
+
         self._validate_datasource_attributes(X, dataset_attrs, _datatype, target)
 
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
