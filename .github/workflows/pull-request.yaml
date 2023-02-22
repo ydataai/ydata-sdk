@@ -4,11 +4,14 @@ name: Pull Request
 
 on:
   push:
-    branches:
-    - renovate/**
-  pull_request:
-    branches:
-    - main
+    paths:
+    - docs/**
+    - mkdocs.yml
+  #   branches:
+  #   - renovate/**
+  # pull_request:
+  #   branches:
+  #   - main
 
 
 
