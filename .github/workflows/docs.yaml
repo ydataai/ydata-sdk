@@ -4,8 +4,14 @@ name: Publish Documentation
 
 on:
   push:
+    paths:
+    - docs/**
+    - mkdocs.yml
     branches:
     - main
+  release:
+    types:
+    - released
 
 
 
