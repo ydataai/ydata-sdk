@@ -44,5 +44,3 @@ extra:
   version:
     provider: mike
   generator: false
-
-#
