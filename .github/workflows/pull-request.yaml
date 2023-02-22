@@ -9,6 +9,7 @@ on:
     - mkdocs.yml
     branches:
     - renovate/**
+    - docs/**
   # pull_request:
   #   branches:
   #   - main
