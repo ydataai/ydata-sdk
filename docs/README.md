@@ -1,16 +1,16 @@
 # YData SDK Documentation
 
-Installing the documentation dependencies (one-time step):
-```bash
-pip install -e ".[doc]"
+Installing the documentation dependencies (one time step):
+```
+pip install -r requirements-docs.txt
 ```
 
 Build the doc for deployment:
-```bash
+```
 mkdocs build
 ```
 
 To build and serve locally:
-```bash
+```
 mkdocs serve
 ```
