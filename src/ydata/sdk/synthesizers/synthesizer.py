@@ -194,7 +194,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         data: list = response.json()
         self._model, _ = self._model_from_api(X.datatype, data)
         while self.status not in [Status.READY, Status.FAILED]:
-            print('Training the synthesizer...')
+            self._logger.info('Training the synthesizer...')
             sleep(BACKOFF)
 
         if self.status == Status.FAILED:
@@ -228,7 +228,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         sample_uid = data.get('uid')
         sample_status = None
         while sample_status not in ['finished', 'failed']:
-            print('Sampling from the synthesizer...')
+            self._logger.info('Sampling from the synthesizer...')
             response = self._client.get(f'/synthesizer/{self.uid}/history')
             history: dict = response.json()
             sample_data = next((s for s in history if s.get('uid') == sample_uid), None)

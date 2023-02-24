@@ -63,12 +63,6 @@ repos:
       - id: pycln
         args: [--all]
         name: Remove unused imports (pycln)
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.5.0
-    hooks:
-      - id: docformatter
-        args: [--in-place]
-        name: Documentation checker (docformatter)
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: v1.7.0
     hooks:

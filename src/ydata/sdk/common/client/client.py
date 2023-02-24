@@ -50,7 +50,7 @@ class Client(metaclass=SingletonClient):
 
         Args:
             endpoint (str): POST endpoint
-            data (Optional[Project]): (optional) multipart form data
+            data (Optional[dict]): (optional) multipart form data
             json (Optional[dict]): (optional) json data
             files (Optional[dict]): (optional) files to be sent
             raise_for_status (bool): raise an exception on error
