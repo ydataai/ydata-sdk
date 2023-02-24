@@ -10,9 +10,10 @@
 <p align="center"><img width="500" src="https://assets.ydata.ai/YData_logo_colored_black.svg" alt="YData Logo"></p>
 
 !!! note "YData SDK for improved data quality everywhere!"
-    Add here some note on what is YData synthetic about
 
-    [Try YData SDK today](https://ydata.ai){ .md-button .md-button--primary }
+    *ydata-sdk* is coming soon. If you want to know more reach out to us!
+
+    [I want to know more](https://ydata.ai/contact-us){ .md-button .md-button--primary }
 
 ## Overview
 
@@ -26,35 +27,11 @@ Under the YData-SDK hood, you can find a set of algorithms and metrics based on 
 
 YData SDK is currently composed by the following main modules:
 
-* **Datasources:**
+* **Datasources**
 
-* **Synthesizers:**
+* **Synthesizers**
 
-* **Synthetic data quality report:**
+* **Synthetic data quality report**
 
-* **Profiling:** (coming soon???)
-
-
-## Supported data formats
-
-=== "Tabular"
-    ![Tabular data synthesiszer](https://dummyimage.com/600x400/eee/aaa){ align=right }
-    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
-
-    
-    [Subscribe to our newsletter](#){ .md-button .md-button--primary}
-
-=== "Time-Series"
-    ![Time-series synthesizer](https://dummyimage.com/600x400/eee/aaa){ align=right }
-    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
-
-    
-    [Subscribe to our newsletter](#){ .md-button .md-button--primary}
-
-=== "Transactional"
-    ![Transactional data synthesizer](https://dummyimage.com/600x400/eee/aaa){ align=right }
-    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
-
-    
-    [Subscribe to our newsletter](#){ .md-button .md-button--primary}
+* **Profiling**
 
