@@ -12,10 +12,8 @@ class ValidationState(StringEnum):
 
 
 class Status(StringEnum):
-    """Represent the status of a.
+    """Represent the status of a [`DataSource`][ydata.sdk.datasources.datasource.DataSource]."""
 
-    [`DataSource`][ydata.sdk.datasources.datasource.DataSource].
-    """
     AVAILABLE = 'available'
     """The [`DataSource`][ydata.sdk.datasources.datasource.DataSource] is available and ready to be used.
     """

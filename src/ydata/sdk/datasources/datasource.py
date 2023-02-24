@@ -8,7 +8,7 @@ from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
 from ydata.sdk.connectors.connector import Connector, ConnectorType
-from ydata.sdk.datasources._models.connector_to_datasource import CONN_TO_DS
+from ydata.sdk.datasources._models.connector_to_datasource import CONNECTOR_TO_DADASOURCE
 from ydata.sdk.datasources._models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources._models.datasource_list import DataSourceList
 from ydata.sdk.datasources._models.datatype import DataSourceType
@@ -38,7 +38,7 @@ class DataSource(ModelMixin):
     """
 
     def __init__(self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config):
-        datasource_type = CONN_TO_DS.get(connector.type)
+        datasource_type = CONNECTOR_TO_DADASOURCE.get(connector.type)
         self._init_common(client=client)
         self._model: Optional[mDataSource] = self._create_model(
             connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, client=self._client)
@@ -114,7 +114,8 @@ class DataSource(ModelMixin):
         """
         response = client.get(f'/datasource/{uid}')
         data: list = response.json()
-        datasource_type = CONN_TO_DS.get(ConnectorType(data['connector']['type']))
+        datasource_type = CONNECTOR_TO_DADASOURCE.get(
+            ConnectorType(data['connector']['type']))
         model = DataSource._model_from_api(data, datasource_type)
         datasource = ModelMixin._init_from_model_data(DataSource, model)
         return datasource
@@ -134,7 +135,7 @@ class DataSource(ModelMixin):
         Returns:
             DataSource
         """
-        datasource_type = CONN_TO_DS.get(connector.type)
+        datasource_type = CONNECTOR_TO_DADASOURCE.get(connector.type)
         return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
 
     @classmethod
@@ -170,8 +171,9 @@ class DataSource(ModelMixin):
 
     @staticmethod
     def _wait_for_metadata(datasource):
+        logger = create_logger(__name__, level=LOG_LEVEL)
         while datasource.status not in [Status.AVAILABLE, Status.FAILED, Status.UNAVAILABLE]:
-            print(f'Calculating metadata [{datasource.status}]')
+            logger.info(f'Calculating metadata [{datasource.status}]')
             datasource = DataSource.get(uid=datasource.uid, client=datasource._client)
             sleep(BACKOFF)
         return datasource

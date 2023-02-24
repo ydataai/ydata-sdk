@@ -11,9 +11,7 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 class RegularSynthesizer(BaseSynthesizer):
 
     def sample(self, n_samples: int = 1) -> pdDataFrame:
-        """Sample from a.
-
-        [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer]
+        """Sample from a [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer]
         instance.
 
         Arguments:
@@ -35,7 +33,7 @@ class RegularSynthesizer(BaseSynthesizer):
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
             dataset_attrs (Optional[Union[DataSourceAttrs, dict]]): (optional) Dataset attributes
-            target (Optional[str]): (optional) Metadata associated to the datasource
+            target (Optional[str]): (optional) Target column
             name (Optional[str]): (optional) Synthesizer instance name
         """
         BaseSynthesizer.fit(self, X=X, datatype=None,
