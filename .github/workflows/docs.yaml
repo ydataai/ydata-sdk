@@ -51,6 +51,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: Configurating Git
+      run: |
+        git config user.email "azory@ydata.ai"
+        git config user.name "Azory YData Bot"
+        git config core.autocrlf false
 
     - name: Setup Python
       uses: actions/setup-python@v4
