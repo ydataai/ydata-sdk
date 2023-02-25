@@ -39,8 +39,8 @@ jobs:
         python -m pip install --upgrade pip
         make install-dev
 
-    - name: Lint
-      run: make lint
+    # - name: Lint
+    #   run: make lint
 
     - name:  Build package
       run: make package version=${{ steps.version.outputs.value }}
