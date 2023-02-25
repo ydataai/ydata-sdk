@@ -35,6 +35,7 @@ doc = [
     "mkdocs>=1.4.2,<2.0.0",
     "mkdocs-material>=9.0.12,<10.0.0",
     "mike>=1.1.2,<2.0.0",
+    "mkdocstrings >= 0.20.0, <1.0.0"
 ]
 test = [
     "pytest==6.2.5",
