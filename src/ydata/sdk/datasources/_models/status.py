@@ -4,11 +4,27 @@ from ydata.core.enum import StringEnum
 
 
 class ValidationState(StringEnum):
-    PREPARING = 'preparing'
-    VALIDATING = 'validating'
-    AVAILABLE = 'available'
-    FAILED = 'failed'
     UNKNOWN = 'unknown'
+    VALIDATE = 'validate'
+    VALIDATING = 'validating'
+    FAILED = 'failed'
+    AVAILABLE = 'available'
+
+
+class MetadataState(StringEnum):
+    UNKNOWN = 'unknown'
+    GENERATE = 'generate'
+    GENERATING = 'generating'
+    FAILED = 'failed'
+    AVAILABLE = 'available'
+
+
+class ProfilingState(StringEnum):
+    UNKNOWN = 'unknown'
+    GENERATE = 'generate'
+    GENERATING = 'generating'
+    FAILED = 'failed'
+    AVAILABLE = 'available'
 
 
 class Status(StringEnum):
@@ -34,12 +50,16 @@ class Status(StringEnum):
     """The [`DataSource`][ydata.sdk.datasources.datasource.DataSource] is unavailable at the moment.
     """
 
+    DELETED = 'deleted'
+    """The [`DataSource`][ydata.sdk.datasources.datasource.DataSource] is to be deleted or has been deleted.
+    """
+
     UNKNOWN = 'unknown'
     """The [`DataSource`][ydata.sdk.datasources.datasource.DataSource] status could not be retrieved.
     """
 
 
 class State(BaseModel):
-    validation: str
-    metadata: str
-    profiling: str
+    validation: ValidationState
+    metadata: MetadataState
+    profiling: ProfilingState
