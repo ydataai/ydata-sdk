@@ -24,9 +24,9 @@ class DataSource():  # BaseModel):
 
         if self.state is not None:
             data = {
-                'validation': self.state['state'],
-                'metadata': self.state['state'],
-                'profiling': self.state['state']
+                'validation': self.state.get('validation', {}).get('state', 'unknown'),
+                'metadata': self.state.get('metadata', {}).get('state', 'unknown'),
+                'profiling': self.state.get('profiling', {}).get('state', 'unknown')
             }
             self.state = State.parse_obj(data)
 
