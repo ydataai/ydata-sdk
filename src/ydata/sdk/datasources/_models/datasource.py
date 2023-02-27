@@ -8,7 +8,7 @@ from ydata.sdk.datasources._models.status import State, Status
 
 
 @dataclass
-class DataSource():  # BaseModel):
+class DataSource:
 
     uid: Optional[UID] = None
     author: Optional[str] = None
