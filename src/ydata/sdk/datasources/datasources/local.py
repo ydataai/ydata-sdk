@@ -11,7 +11,7 @@ from ydata.sdk.connectors.connector import Connector
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.filetype import FileType
 from ydata.sdk.datasources.datasource import DataSource
-from ydata.sdk.utils.model_mixin import ModelMixin
+from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 
 
 class LocalDataSource(DataSource):
@@ -39,7 +39,7 @@ class LocalDataSource(DataSource):
         response = client.post('/connector/', data=data, files=files)
         data: list = response.json()
         model = mConnector(**data)
-        connector = ModelMixin._init_from_model_data(Connector, model)
+        connector = ModelFactoryMixin._init_from_model_data(Connector, model)
 
         config = {
             "fileType": FileType(filetype).value,

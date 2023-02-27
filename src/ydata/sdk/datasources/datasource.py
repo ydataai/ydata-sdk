@@ -14,11 +14,11 @@ from ydata.sdk.datasources._models.datasource_list import DataSourceList
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status, ValidationState
-from ydata.sdk.utils.model_mixin import ModelMixin
+from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
 
-class DataSource(ModelMixin):
+class DataSource(ModelFactoryMixin):
     """A [`DataSource`][ydata.sdk.datasources.DataSource] represents a dataset
     to be used by a Synthesizer as training data.
 
@@ -117,7 +117,7 @@ class DataSource(ModelMixin):
         datasource_type = CONNECTOR_TO_DADASOURCE.get(
             ConnectorType(data['connector']['type']))
         model = DataSource._model_from_api(data, datasource_type)
-        datasource = ModelMixin._init_from_model_data(DataSource, model)
+        datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
         return datasource
 
     @classmethod
@@ -142,7 +142,7 @@ class DataSource(ModelMixin):
     def _create(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
         model = DataSource._create_model(
             connector, datasource_type, datatype, config, name, client)
-        datasource = ModelMixin._init_from_model_data(DataSource, model)
+        datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
 
         if wait_for_metadata:
             datasource._model = DataSource._wait_for_metadata(datasource)._model

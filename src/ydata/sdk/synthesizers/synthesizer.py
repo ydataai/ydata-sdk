@@ -26,12 +26,12 @@ from ydata.sdk.synthesizers._models.status import PrepareState, Status
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
-from ydata.sdk.utils.model_mixin import ModelMixin
+from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
 
 @typechecked
-class BaseSynthesizer(ABC, ModelMixin):
+class BaseSynthesizer(ABC, ModelFactoryMixin):
     """Main synthesizer class.
 
     This class cannot be directly instanciated because of the specificities between [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer] and [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] `sample` methods.
@@ -284,7 +284,7 @@ class BaseSynthesizer(ABC, ModelMixin):
         data: list = response.json()
         model, synth_cls = BaseSynthesizer._model_from_api(
             data['dataSource']['dataType'], data)
-        return ModelMixin._init_from_model_data(synth_cls, model)
+        return ModelFactoryMixin._init_from_model_data(synth_cls, model)
 
     @staticmethod
     @init_client
