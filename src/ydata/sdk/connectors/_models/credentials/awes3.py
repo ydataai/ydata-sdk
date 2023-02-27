@@ -4,12 +4,6 @@ from ydata.sdk.connectors._models.credentials.credentials import Credentials
 
 
 class AWSS3Credentials(Credentials):
-    access_key_id: str
-    secret_access_key: str
+    access_key_id: str = Field(alias='keyID')
+    secret_access_key: str = Field(alias='keySecret')
     region: str = Field(default='eu-central-1')
-
-    def as_payload(self) -> dict:
-        return {
-            'keyID': self.access_key_id,
-            'keySecret': self.secret_access_key
-        }
