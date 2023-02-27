@@ -90,6 +90,9 @@ exclude = [
 [tool.pytest.ini_options]
 mccabe-complexity = 10
 
+[tool.pytest]
+norecursedirs = "tests/helpers"
+
 [tool.pylint]
 max-locals = 15
 max-returns = 6
@@ -107,3 +110,8 @@ disable = [
     "C0330", # bad-continuation
     "R0903", # too-few-public-methods
 ]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["*/examples/*", "*setup.py", "*/build/*"]
