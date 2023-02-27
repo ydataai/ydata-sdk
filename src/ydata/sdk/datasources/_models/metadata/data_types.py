@@ -5,7 +5,6 @@ class DataType(StringEnum):
     NUMERICAL = "numerical"
     CATEGORICAL = "categorical"
     DATE = "date"
-    ID = "id"
     LONGTEXT = "longtext"
 
 
