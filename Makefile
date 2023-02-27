@@ -21,7 +21,7 @@ venv3: ### Creates a virtual environment for this project
 test:
 	python -m pytest src/
 
-test_cov:
+test-cov:
 	python -m pytest --cov=. src/
 
 clean: clean-build clean-pyc ### Cleans artifacts

@@ -40,6 +40,10 @@ jobs:
     # - name: Validate code formatting
     #   run: make lint
 
-    # - name: Unit Tests
-    #   run: |
-    #     make test
+    - name: Unit Tests
+      run: |
+        make test
+
+    - name: Coverage Tests
+      run: |
+        make test-cov
