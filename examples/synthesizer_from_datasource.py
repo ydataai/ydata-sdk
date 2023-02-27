@@ -5,7 +5,7 @@ from ydata.sdk.datasources import DataSource
 from ydata.sdk.synthesizers import RegularSynthesizer
 
 # Do not forget to add your token as env variables
-os.environ["YDATA_CREDENTIALS"] = '<TOKEN>'
+os.environ["YDATA_TOKEN"] = '<TOKEN>'
 
 
 def main():

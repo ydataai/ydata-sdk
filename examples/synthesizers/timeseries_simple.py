@@ -6,11 +6,10 @@ import pandas as pd
 from ydata.sdk.synthesizers import TimeSeriesSynthesizer
 
 # Do not forget to add your token as env variables
-os.environ["YDATA_CREDENTIALS"] = '<TOKEN>'  # Remove if already defined
+os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
 
 
 def main():
-    """"""
     # A dummy dataset with few columns including "Index"
     X = pd.read_csv(Path(__file__).parent / 'data/dummy.csv')
 

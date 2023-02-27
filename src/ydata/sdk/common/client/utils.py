@@ -81,12 +81,12 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
 
     if client is None and not WAITING_FOR_CLIENT:
         raise ClientCreationError("Could not initialize a client. It usually means that no token or credential files could be found.\n\n\
-        The easiest way to have the client created is to define the token in an environment variable 'YDATA_CREDENTIALS'.\n\n\
+        The easiest way to have the client created is to define the token in an environment variable 'YDATA_TOKEN'.\n\n\
         See the documentation for further help.")  # TODO: Adjust the link for the documentation
     return client
 
 
-def _client_from_env(env_var: str = 'YDATA_CREDENTIALS', wait_for_auth: bool = True) -> Optional[Client]:
+def _client_from_env(env_var: str = 'YDATA_TOKEN', wait_for_auth: bool = True) -> Optional[Client]:
     """Deduce how to initialize a client from environment variable.
 
     If the environment variable is not defined, the return is None. It
