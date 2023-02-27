@@ -7,11 +7,27 @@ name = "ydata-sdk"
 authors = [
     {name = "YData", email = "opensource@ydata.ai"},
 ]
-description = "Python package developer's cheat sheet (using pyproject.toml)."
+description = "YData SDK"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "License :: OSI Approved :: MIT License",
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education',
+    'Intended Audience :: End Users/Desktop',
+    'Intended Audience :: Financial and Insurance Industry',
+    'Intended Audience :: Healthcare Industry',
+    'Intended Audience :: Science/Research',
+    'Intended Audience :: Telecommunications Industry',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS',
+    'Operating System :: Microsoft :: Windows',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: Implementation',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Software Development',
+    'Topic :: Software Development :: Libraries :: Python Modules'
 ]
 dynamic = [
     "version",
