@@ -56,7 +56,7 @@ install-all: ### Installs regular, dev, doc, and test dependencies
 package:
 	rm -rf build dist
 	echo "$(version)" > VERSION
-	flit build
+	flit build --format wheel
 	twine check dist/*
 
 publish-docs:

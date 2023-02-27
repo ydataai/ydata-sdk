@@ -49,7 +49,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: built-artifacts
-        path: dist/*.whl
+        path: dist/
 
 
   upload-assets:
@@ -62,11 +62,11 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: built-artifacts
-        path: dist/*.whl
+        path: dist/
 
     - uses: AButler/upload-release-assets@v2.0
       with:
-        files: dist/*.whl
+        files: "dist/*"
         repo-token: ${{ secrets.ACCESS_TOKEN }}
         release-tag: ${{ needs.package.outputs.version }}
 
@@ -81,7 +81,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: built-artifacts
-        path: dist/*.whl
+        path: dist/
 
     - uses: pypa/gh-action-pypi-publish@v1.6.4
       with:
