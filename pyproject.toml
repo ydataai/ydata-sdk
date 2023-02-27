@@ -62,13 +62,14 @@ doc = [
     "mkdocs-material>=9.0.12,<10.0.0",
     "mkdocs-material-extensions>=1.1.1,<2.0.0",
     "mike>=1.1.2,<2.0.0",
-    "mkdocstrings >= 0.20.0, <1.0.0"
+    "mkdocstrings>=0.20.0,<1.0.0"
 ]
 test = [
     "pytest==6.2.5",
     "pytest-bdd==4.0.*",
     "pytest-cov==2.11.*",
     "pytest-xdist==2.2.*",
+    "pytest-mccabe>=2.0.0,<3.0.0",
 ]
 
 [tool.flit.module]
