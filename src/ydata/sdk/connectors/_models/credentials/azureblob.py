@@ -1,13 +1,9 @@
 
+from pydantic import Field
+
 from ydata.sdk.connectors._models.credentials.credentials import Credentials
 
 
 class AzureBlobCredentials(Credentials):
-    access_key_id: str
-    account_key: str
-
-    def as_payload(self) -> dict:
-        return {
-            'accountKey': self.access_key_id,
-            'accountName': self.account_key
-        }
+    access_key_id: str = Field(alias='accountName')
+    account_key: str = Field(alias='accoaccountKeyuntName')

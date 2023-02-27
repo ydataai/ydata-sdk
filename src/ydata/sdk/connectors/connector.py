@@ -130,7 +130,7 @@ class Connector(ModelFactoryMixin):
         _credentials = Connector._init_credentials(_connector_type, credentials)
         payload = {
             "type": _connector_type.value,
-            "credentials": _credentials.as_payload(),
+            "credentials": _credentials.dict(by_alias=True),
             "name": _name
         }
         response = client.post('/connector/', json=payload)
