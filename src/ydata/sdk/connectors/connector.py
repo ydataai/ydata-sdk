@@ -32,7 +32,7 @@ class Connector(ModelFactoryMixin):
         type (ConnectorType): Type of the connector
     """
 
-    def __init__(self, connector_type: Union[ConnectorType, str] = None, credentials: dict = None,  name: Optional[str] = None, client: Optional[Client] = None):
+    def __init__(self, connector_type: Union[ConnectorType, str] = None, credentials: Optional[dict] = None,  name: Optional[str] = None, client: Optional[Client] = None):
         self._init_common(client=client)
         self._model: Optional[mConnector] = self._create_model(
             connector_type, credentials, name, client=client)
