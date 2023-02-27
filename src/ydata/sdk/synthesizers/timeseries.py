@@ -25,7 +25,7 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
             synthetic data
         """
         if n_entities is not None and n_entities < 1:
-            raise InputError("Parameter 'n_samples' must be greater than 0")
+            raise InputError("Parameter 'n_entities' must be greater than 0")
 
         return self._sample(payload={"numberOfRecords": n_entities})
 
