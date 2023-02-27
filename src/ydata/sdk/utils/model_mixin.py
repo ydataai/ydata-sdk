@@ -4,7 +4,9 @@ from ydata.sdk.common.client.client import Client
 from ydata.sdk.common.model import BaseModel
 
 
-class ModelMixin:
+class ModelFactoryMixin:
+    """Mixin for class that implements an interface for an internal model.
+    """
 
     @staticmethod
     def _init_from_model_data(cls: Type, model: BaseModel, client: Optional[Client] = None) -> Any:

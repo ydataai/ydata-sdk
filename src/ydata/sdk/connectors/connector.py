@@ -13,10 +13,10 @@ from ydata.sdk.connectors._models.connector import Connector as mConnector
 from ydata.sdk.connectors._models.connector_list import ConnectorsList
 from ydata.sdk.connectors._models.connector_type import ConnectorType
 from ydata.sdk.connectors._models.credentials.credentials import Credentials
-from ydata.sdk.utils.model_mixin import ModelMixin
+from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 
 
-class Connector(ModelMixin):
+class Connector(ModelFactoryMixin):
     """A [`Connector`][ydata.sdk.connectors.Connector] allows to connect and
     access data stored in various places. The list of available connectors can
     be found [here][ydata.sdk.connectors.ConnectorType].
@@ -65,7 +65,7 @@ class Connector(ModelMixin):
         connectors: ConnectorsList = Connector.list(client=client)
         data = connectors.get_by_uid(uid)
         model = mConnector(**data)
-        connector = ModelMixin._init_from_model_data(Connector, model)
+        connector = ModelFactoryMixin._init_from_model_data(Connector, model)
         return connector
 
     @staticmethod
@@ -118,7 +118,7 @@ class Connector(ModelMixin):
         """
         model = Connector._create_model(
             connector_type=connector_type, credentials=credentials, name=name, client=client)
-        connector = ModelMixin._init_from_model_data(
+        connector = ModelFactoryMixin._init_from_model_data(
             Connector, model)
         return connector
 
