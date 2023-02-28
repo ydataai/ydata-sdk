@@ -7,7 +7,7 @@ from time import sleep, time
 from typing import Optional, Union
 
 from ydata.sdk.common.client.client import Client
-from ydata.sdk.common.config import BACKOFF
+from ydata.sdk.common.config import BACKOFF, TOKEN_VAR
 from ydata.sdk.common.exceptions import ClientCreationError, ClientHandshakeError
 
 CLIENT_INIT_TIMEOUT = 5 * 60  # 5 min
@@ -46,6 +46,7 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
             return client_or_creds
 
         # Explicit credentials
+        ''' # For the first version, we deactivate explicit credentials via string or file for env var only
         if isinstance(client_or_creds, (dict, str, Path)):
             if isinstance(client_or_creds, str):  # noqa: SIM102
                 if Path(client_or_creds).is_file():
@@ -55,7 +56,7 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
                 client_or_creds = json.loads(client_or_creds.open().read())
 
             return Client(credentials=client_or_creds)
-
+        '''
         # Last try with environment variables
         if client_or_creds is None:
             client = _client_from_env(wait_for_auth=wait_for_auth)
@@ -84,7 +85,7 @@ def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None,
     return client
 
 
-def _client_from_env(env_var: str = 'YDATA_TOKEN', wait_for_auth: bool = True) -> Optional[Client]:
+def _client_from_env(env_var: str = TOKEN_VAR, wait_for_auth: bool = True) -> Optional[Client]:
     """Deduce how to initialize a client from environment variable.
 
     If the environment variable is not defined, the return is None. It

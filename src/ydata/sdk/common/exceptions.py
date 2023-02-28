@@ -33,7 +33,7 @@ class ClientCreationError(ClientException):
     def __init__(self, message=None):
         from ydata.sdk.common.client.client import HELP_TEXT
         if message is None:
-            message = f"Could not initialize a client. It usually means that no token could be found.\n{HELP_TEXT}"
+            message = f"Could not initialize a client. It usually means that no token could be found or the token needs to be refreshed.\n{HELP_TEXT}"
 
         super().__init__(message)
 
