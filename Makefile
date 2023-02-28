@@ -1,6 +1,7 @@
 VENV := $(PWD)/env
 PYTHON := python
 PIP := $(PYTHON) -m pip
+PYV=$(shell $(PYTHON) -c "import sys;t='{v[0]}{v[1]}'.format(v=list(sys.version_info[:2]));sys.stdout.write(t)")
 
 .PHONY: help venv3 clean
 
@@ -58,6 +59,12 @@ package:  ### Builds the package in wheel format
 	echo "$(version)" > VERSION
 	$(PYTHON) -m build --wheel
 	twine check dist/*
+
+wheel:  ### Compiles the wheel
+	test -d wheels || mkdir -p wheels
+	cp dist/ydata_sdk-$(version)-py3-none-any.whl wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
+	$(PYTHON) -m pyc_wheel wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
+	twine check wheels/*
 
 publish-docs: ### Publishes the documentation
 	mike deploy --push --update-aliases $(version) latest
