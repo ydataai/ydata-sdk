@@ -124,7 +124,6 @@ watch:
 plugins:
   - search:
         lang: en
-        foo: bar
   - autorefs
   - mkdocstrings:
       custom_templates: templates
