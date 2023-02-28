@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Dict, Optional
 
 from ydata.core.error import FabricError
 
@@ -13,7 +13,7 @@ class ResponseError(FabricError):
 
     def __init__(
             self,
-            context: Optional[dict[str, str]] = None,
+            context: Optional[Dict[str, str]] = None,
             httpCode: Optional[int] = None,
             name: Optional[str] = None,
             description: Optional[str] = None,
