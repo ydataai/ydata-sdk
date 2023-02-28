@@ -30,6 +30,13 @@ class ClientException(SDKError):
 class ClientCreationError(ClientException):
     """Raised when a Client could not be created."""
 
+    def __init__(self, message=None):
+        from ydata.sdk.common.client.client import HELP_TEXT
+        if message is None:
+            message = f"Could not initialize a client. It usually means that no token could be found.\n{HELP_TEXT}"
+
+        super().__init__(message)
+
 
 class ClientHandshakeError(ClientException):
     """Raised when handshake could not be performed - likely a token issue"""
