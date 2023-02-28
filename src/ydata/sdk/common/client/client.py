@@ -9,7 +9,7 @@ from typeguard import typechecked
 
 from ydata.sdk.common.client.parser import LinkExtractor
 from ydata.sdk.common.client.singleton import SingletonClient
-from ydata.sdk.common.config import DEFAULT_URL
+from ydata.sdk.common.config import DEFAULT_URL, TOKEN_VAR
 from ydata.sdk.common.exceptions import ClientHandshakeError, ResponseError
 from ydata.sdk.common.types import Project
 
@@ -22,11 +22,11 @@ In case you do not have a account, please, create one at https://{environ.get("Y
 To obtain the token, please, login to https://{environ.get("YDATA_BASE_URL", DEFAULT_URL)}.
 The token is available at https://{environ.get("YDATA_BASE_URL", DEFAULT_URL)}/account.
 
-The easiest way to have the client created is to define the token in an environment variable 'YDATA_TOKEN' as follows.\n\n\
+The easiest way to have the client created is to define the token in an environment variable '{TOKEN_VAR}' as follows.\n\n\
 
     ```
     import os
-    os.environ["YDATA_TOKEN"] = <your_token>
+    os.environ["{TOKEN_VAR}"] = <your_token>
     ```
 
 See the documentation for further help: https://ydata-sdk.ydata.ai/0.0/getting-started/installation/.
