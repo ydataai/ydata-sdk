@@ -4,7 +4,7 @@ from functools import wraps
 from os import environ
 from pathlib import Path
 from time import sleep, time
-from typing import Optional, Union
+from typing import Dict, Optional, Union
 
 from ydata.sdk.common.client.client import Client
 from ydata.sdk.common.config import BACKOFF, TOKEN_VAR
@@ -14,7 +14,7 @@ CLIENT_INIT_TIMEOUT = 5 * 60  # 5 min
 WAITING_FOR_CLIENT = False
 
 
-def get_client(client_or_creds: Optional[Union[Client, dict, str, Path]] = None, set_as_global: bool = False, wait_for_auth: bool = True) -> Client:
+def get_client(client_or_creds: Optional[Union[Client, Dict, str, Path]] = None, set_as_global: bool = False, wait_for_auth: bool = True) -> Client:
     """Deduce how to initialize or retrieve the client.
 
     This is meant to be a zero configuration for the user.

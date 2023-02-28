@@ -1,6 +1,6 @@
 
 from dataclasses import dataclass, field
-from typing import Any, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from prettytable import PrettyTable
 from typeguard import typechecked
@@ -48,10 +48,10 @@ class ConnectorsList(list):
 
         return t.get_string()
 
-    def get_by_name(self, name: str, default: Optional[Any] = 'raise') -> Union[dict, Any]:
+    def get_by_name(self, name: str, default: Optional[Any] = 'raise') -> Union[Dict, Any]:
         args = [(c for c in self if c['name'] == name), default]
         return next(*args[:1 if default == 'raise' else 2])
 
-    def get_by_uid(self, uid: str, default: Optional[Any] = 'raise') -> Union[dict, Any]:
+    def get_by_uid(self, uid: str, default: Optional[Any] = 'raise') -> Union[Dict, Any]:
         args = [(c for c in self if c['uid'] == uid), default]
         return next(*args[:1 if default == 'raise' else 2])

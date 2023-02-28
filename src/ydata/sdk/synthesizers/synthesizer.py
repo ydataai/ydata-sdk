@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from io import StringIO
 from time import sleep
-from typing import Optional, Tuple, Type, Union
+from typing import Dict, Optional, Tuple, Type, Union
 from uuid import uuid4
 from warnings import warn
 
@@ -58,7 +58,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
-    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DataSourceAttrs, dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def fit(self, X: Union[DataSource, pdDataFrame], datatype: Optional[Union[DataSourceType, str]] = None, dataset_attrs: Optional[Union[DataSourceAttrs, Dict]] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
@@ -201,7 +201,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             raise FittingError('Could not train the synthesizer')
 
     @staticmethod
-    def _model_from_api(datatype: str, data: dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
+    def _model_from_api(datatype: str, data: Dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
         from ydata.sdk.synthesizers._models.synthesizer_map import TYPE_TO_CLASS
         synth_cls = TYPE_TO_CLASS.get(SynthesizerType(datatype).value)
         data['status'] = synth_cls._resolve_api_status(data['status'])
@@ -212,7 +212,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def sample(self) -> pdDataFrame:
         """Abstract method to sample from a synthesizer."""
 
-    def _sample(self, payload: dict) -> pdDataFrame:
+    def _sample(self, payload: Dict) -> pdDataFrame:
         """Sample from a synthesizer.
 
         Arguments:
@@ -224,13 +224,13 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         response = self._client.post(
             f"/synthesizer/{self.uid}/sample", json=payload)
 
-        data: dict = response.json()
+        data: Dict = response.json()
         sample_uid = data.get('uid')
         sample_status = None
         while sample_status not in ['finished', 'failed']:
             self._logger.info('Sampling from the synthesizer...')
             response = self._client.get(f'/synthesizer/{self.uid}/history')
-            history: dict = response.json()
+            history: Dict = response.json()
             sample_data = next((s for s in history if s.get('uid') == sample_uid), None)
             sample_status = sample_data['state']
             sleep(BACKOFF)
@@ -319,7 +319,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         return self._model is not None
 
     @staticmethod
-    def _resolve_api_status(api_status: dict) -> Status:
+    def _resolve_api_status(api_status: Dict) -> Status:
         """Determine the status of the Synthesizer.
 
         The status of the synthesizer instance is determined by the state of
