@@ -5,6 +5,7 @@ name: Publish Documentation
 on:
   push:
     paths:
+    - .github/workflows/docs.yaml
     - docs/**
     - mkdocs.yml
     - pyproject.toml
@@ -34,7 +35,7 @@ jobs:
       uses: oprypin/find-latest-tag@v1.1.1
       with:
         repository: ${{ github.repository }}
-        regex: '^\d+\.\d+\.\d+'
+        regex: '^\d+\.\d+\.\d+$'
         releases-only: true
 
     - name: Extract major and minor version
