@@ -1,6 +1,6 @@
 from contextlib import suppress
 from os import environ
-from typing import Optional, Union
+from typing import Dict, Optional, Union
 
 from httpx import Client as httpClient
 from httpx import HTTPStatusError, Response, Timeout
@@ -47,7 +47,7 @@ class Client(metaclass=SingletonClient):
 
     codes = codes
 
-    def __init__(self, credentials: Optional[Union[str, dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
+    def __init__(self, credentials: Optional[Union[str, Dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
         self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL)
         self._scheme = 'https'
         self._headers = {'Authorization': credentials}
@@ -62,7 +62,7 @@ class Client(metaclass=SingletonClient):
         if set_as_global:
             self.__set_global()
 
-    def post(self, endpoint: str, data: Optional[dict] = None, json: Optional[dict] = None, files: Optional[dict] = None, raise_for_status: bool = True) -> Response:
+    def post(self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None, files: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
         """POST request to the backend.
 
         Args:
@@ -83,7 +83,7 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get(self, endpoint: str, params: Optional[dict] = None, cookies: Optional[dict] = None, raise_for_status: bool = True) -> Response:
+    def get(self, endpoint: str, params: Optional[Dict] = None, cookies: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
         """GET request to the backend.
 
         Args:
@@ -135,10 +135,10 @@ class Client(metaclass=SingletonClient):
 
     def _get_default_project(self, token: str):
         response = self.get('/profiles/me', params={}, cookies={'access_token': token})
-        data: dict = response.json()
+        data: Dict = response.json()
         return data['myWorkspace']
 
-    def __build_url(self, endpoint: str, params: Optional[dict] = None, data: Optional[dict] = None, json: Optional[dict] = None, files: Optional[dict] = None, cookies: Optional[dict] = None) -> dict:
+    def __build_url(self, endpoint: str, params: Optional[Dict] = None, data: Optional[Dict] = None, json: Optional[Dict] = None, files: Optional[Dict] = None, cookies: Optional[Dict] = None) -> Dict:
         """Build a request for the backend.
 
         Args:

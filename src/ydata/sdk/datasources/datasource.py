@@ -1,5 +1,5 @@
 from time import sleep
-from typing import Optional, Type, Union
+from typing import Dict, Optional, Type, Union
 from uuid import uuid4
 
 from ydata.sdk.common.client import Client
@@ -72,10 +72,6 @@ class DataSource(ModelFactoryMixin):
         return self._model.metadata
 
     @staticmethod
-    def _create_payload(*_) -> dict:
-        return {}
-
-    @staticmethod
     @init_client
     def list(client: Optional[Client] = None) -> DataSourceList:
         """List the  [`DataSource`][ydata.sdk.datasources.DataSource]
@@ -139,7 +135,7 @@ class DataSource(ModelFactoryMixin):
         return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
 
     @classmethod
-    def _create(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
+    def _create(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[Dict] = None, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
         model = DataSource._create_model(
             connector, datasource_type, datatype, config, name, client)
         datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
@@ -151,7 +147,7 @@ class DataSource(ModelFactoryMixin):
 
     @classmethod
     @init_client
-    def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[dict] = None, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
+    def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[Dict] = None, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
         _name = name if name is not None else str(uuid4())
         _config = config if config is not None else {}
         payload = {
@@ -179,7 +175,7 @@ class DataSource(ModelFactoryMixin):
         return datasource
 
     @staticmethod
-    def _resolve_api_status(api_status: dict) -> Status:
+    def _resolve_api_status(api_status: Dict) -> Status:
         status = Status(api_status.get('state', Status.UNKNOWN.name))
         validation = ValidationState(api_status.get('validation', {}).get(
             'state', ValidationState.UNKNOWN.name))
@@ -188,7 +184,7 @@ class DataSource(ModelFactoryMixin):
         return status
 
     @staticmethod
-    def _model_from_api(data: dict, datasource_type: Type[mDataSource]) -> mDataSource:
+    def _model_from_api(data: Dict, datasource_type: Type[mDataSource]) -> mDataSource:
         data['datatype'] = data.pop('dataType')
         data['state'] = data['status']
         data['status'] = DataSource._resolve_api_status(data['status'])
