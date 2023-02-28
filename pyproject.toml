@@ -1,6 +1,10 @@
 [build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.8.0,<4"]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=67.4.0,<68.0.0",
+    "setuptools-scm>=7.1.0,<8.0.0",
+    "wheel>=0.38.4,<1.0.0",
+]
 
 [project]
 name = "ydata-sdk"
@@ -9,7 +13,7 @@ authors = [
 ]
 description = "YData SDK allows to use the *Data-Centric* tools from the YData ecosystem to accelerate AI development"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.8,<3.11"
 classifiers = [
     "License :: OSI Approved :: MIT License",
     'Development Status :: 5 - Production/Stable',
@@ -50,7 +54,7 @@ Home = "https://github.com/ydataai/ydata-sdk"
 [project.optional-dependencies]
 dev = [
     "twine",
-    "flit==3.8.0",
+    "build",
     "pylint==2.15.10",
     "black==22.8.0",
     "flake8==6.0.0",
@@ -72,22 +76,8 @@ test = [
     "pytest-mccabe>=2.0.0,<3.0.0",
 ]
 
-[tool.flit.module]
-name = "ydata.sdk"
-
-[tool.flit.sdist]
-exclude = [
-    ".github/*",
-    "docs/*",
-    "examples/*",
-    "tests/*",
-    ".editorconfig",
-    ".python-version",
-    ".gitignore",
-    ".releaserc.json",
-    "CODE_OF_CONDUCT.md",
-    "Makefile",
-]
+[tool.setuptools.dynamic]
+version = { attr = "ydata.sdk.__version__" }
 
 [tool.pytest.ini_options]
 mccabe-complexity = 10
