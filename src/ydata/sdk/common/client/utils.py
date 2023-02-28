@@ -1,4 +1,5 @@
 import json
+import sys
 from contextlib import suppress
 from functools import wraps
 from os import environ
@@ -56,10 +57,11 @@ def get_client(client_or_creds: Optional[Union[Client, Dict, str, Path]] = None,
                 client_or_creds = json.loads(client_or_creds.open().read())
 
             return Client(credentials=client_or_creds)
-        '''
+
         # Last try with environment variables
-        if client_or_creds is None:
-            client = _client_from_env(wait_for_auth=wait_for_auth)
+        #if client_or_creds is None:
+        '''
+        client = _client_from_env(wait_for_auth=wait_for_auth)
 
     except ClientHandshakeError as e:
         wait_for_auth = False  # For now deactivate wait_for_auth until the backend is ready
@@ -81,6 +83,7 @@ def get_client(client_or_creds: Optional[Union[Client, Dict, str, Path]] = None,
                     break
 
     if client is None and not WAITING_FOR_CLIENT:
+        sys.tracebacklimit = None
         raise ClientCreationError
     return client
 

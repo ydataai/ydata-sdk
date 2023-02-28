@@ -20,16 +20,16 @@ YData SDK requires an account with a valid token.
 
 In case you do not have a account, please, create one at https://{environ.get("YDATA_BASE_URL", DEFAULT_URL)}.
 To obtain the token, please, login to https://{environ.get("YDATA_BASE_URL", DEFAULT_URL)}.
-The token is available at https://{environ.get("YDATA_BASE_URL", DEFAULT_URL)}/account.
+The token is available on the homepage once you are connected.
 
-The easiest way to have the client created is to define the token in an environment variable '{TOKEN_VAR}' as follows.\n\n\
+The easiest way to have the client created is to define the token in an environment variable '{TOKEN_VAR}' as follows:\n\n\
 
     ```
     import os
     os.environ["{TOKEN_VAR}"] = <your_token>
     ```
 
-See the documentation for further help: https://ydata-sdk.ydata.ai/0.0/getting-started/installation/.
+See the documentation for further help: https://ydata-sdk.ydata.ai/latest/getting-started/installation/.
 """
 
 
