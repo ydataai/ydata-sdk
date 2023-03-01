@@ -29,7 +29,7 @@ The easiest way to have the client created is to define the token in an environm
     os.environ["{TOKEN_VAR}"] = <your_token>
     ```
 
-See the documentation for further help: https://ydata-sdk.ydata.ai/latest/getting-started/installation/.
+See the documentation for further help: https://docs.sdk.ydata.ai/latest/getting-started/installation/
 """
 
 
