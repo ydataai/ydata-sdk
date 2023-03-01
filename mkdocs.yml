@@ -1,4 +1,4 @@
-site_name: YData SDK
+site_name: "YData SDK"
 repo_url: https://github.com/ydataai/ydata-sdk
 repo_name: ydataai/ydata-sdk
 edit_uri: ""
@@ -10,33 +10,34 @@ nav:
     - Overview: 'index.md'
     - Installation: 'getting-started/installation.md'
     - Quickstart: 'getting-started/quickstart.md'
-    - Examples: 'getting-started/get_started_synthetic.md'
-  - Support:
-    - Help & Troubleshooting: 'support/help-troubleshooting.md'
-    - Contribution Guidelines: 'support/help-troubleshooting.md'
+  - Examples:
+      - Generate Tabular Data: "examples/synthesize_tabular_data.md"
+      - Generate Time-series stock data
+  - Components:
+      - Connectors:
+        - "modules/connectors.md"
+      - Synthetic data:
+          - "modules/synthetic_data.md"
   - Reference:
     - Changelog: 'reference/changelog.md'
     - API:
       - GAN: 'reference/api/synthesizers/gan.md'
       - Regular:
         - CGAN: 'reference/api/synthesizers/cgan.md'
+  - Support:
+      - Help & Troubleshooting: 'support/help-troubleshooting.md'
+      - Contribution Guidelines: 'support/help-troubleshooting.md'
 theme:
   name: material
   language: en
+  font: 'Roboto'
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: ydata
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: "Switch to dark mode"
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      toggle:
-        icon: material/toggle-switch
-        name: "Switch to light mode"
   logo: 'https://assets.ydata.ai/logo_notext_nbg.png'
   features:
     - content.code.annotate
+    - content.code.copy
     - content.tabs.link
     - navigation.instant
     - navigation.tracking
@@ -47,7 +48,6 @@ theme:
     - navigation.sections
     - navigation.indexes
     - toc.follow
-    - toc.integrate
     - toc.integrate
   icon:
     admonition:
