@@ -19,6 +19,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Configurating Git
+      run: |
+        git config user.email "azory@ydata.ai"
+        git config user.name "Azory YData Bot"
+        git config core.autocrlf false
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -37,14 +45,35 @@ jobs:
         python -m pip install --upgrade pip
         make install-all
 
-    # - name: Validate code formatting
-    #   run: make lint
+    - name: Validate code formatting
+      run: make lint
+
+    - name: Commit code formatting changes
+      if: always()
+      id: commit
+      run: |
+        if [[ `git status --porcelain --untracked-files=no` ]]; then
+          echo "CHANGES=true" >> $GITHUB_OUTPUT
+          git add -u
+          git commit -m "[skip ci] Code formatting" -a
+        else
+          echo "CHANGES=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      if: always() && steps.commit.outputs.CHANGES == 'true'
+      with:
+        branch: ${{ github.head_ref }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Unit Tests
+      if: always()
       run: |
         make test
 
     - name: Coverage Tests
+      if: always()
       run: |
         make test-cov
 
