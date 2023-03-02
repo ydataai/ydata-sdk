@@ -37,8 +37,8 @@ jobs:
         python -m pip install --upgrade pip
         make install-all
 
-    # - name: Validate code formatting
-    #   run: make lint
+    - name: Validate code formatting
+      run: make lint
 
     - name: Unit Tests
       run: |
