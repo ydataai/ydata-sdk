@@ -19,6 +19,9 @@ venv3: ### Creates a virtual environment for this project
 	$(PIP) install --upgrade pip
 	make install-all
 
+lint:
+	pre-commit run --all-files
+
 test:
 	python -m pytest src/
 
@@ -49,7 +52,7 @@ install-doc: ### Installs regular and doc dependencies
 	$(PIP) install -e ".[doc]"
 
 install-test: ### Installs regular and test dependencies
-	$(PIP) install -e ".[dev]"
+	$(PIP) install -e ".[dev,test]"
 
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install -e ".[dev,doc,test]"

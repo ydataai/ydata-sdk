@@ -1,7 +1,5 @@
 minimum_pre_commit_version: 2.20.0
 default_stages: [commit, push, manual]
-default_language_version:
-  python: python3.8
 
 ci:
   autofix_prs: false
@@ -23,8 +21,6 @@ repos:
         name: Check JSON syntax
       - id: check-toml
         name: Check TOML syntax
-      - id: check-yaml
-        name: Check YAML syntax
       - id: pretty-format-json
         args: [--autofix, --no-ensure-ascii, --no-sort-keys]
         name: Pretty format JSON files
@@ -52,11 +48,6 @@ repos:
         name: Enforce type annotations instead of comments
       - id: python-check-blanket-noqa
         name: Enforce specifc code for noqua annotation
-  - repo: https://github.com/pre-commit/pre-commit
-    rev: v2.20.0
-    hooks:
-      - id: validate_manifest
-        name: Validate manifest
   - repo: https://github.com/hadialqattan/pycln
     rev: v2.1.1
     hooks:
@@ -75,7 +66,7 @@ repos:
         args: ["--max-line-length=88", "--extend-ignore=N803,N806,E501,Q000,W605"]
         name: Code checker (flake8)
   - repo: https://github.com/pycqa/isort
-    rev: 5.10.1
+    rev: 5.12.0
     hooks:
       - id: isort
         args: [--filter-files]

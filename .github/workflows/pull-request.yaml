@@ -14,11 +14,20 @@ on:
 
 jobs:
   validate:
+    if: github.actor != 'renovate[bot]'
     name: Validate
     runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Configurating Git
+      run: |
+        git config user.email "azory@ydata.ai"
+        git config user.name "Azory YData Bot"
+        git config core.autocrlf false
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -37,16 +46,27 @@ jobs:
         python -m pip install --upgrade pip
         make install-all
 
-    # - name: Validate code formatting
-    #   run: make lint
+    - name: Validate code formatting
+      run: make lint
 
-    - name: Unit Tests
+    - name: Commit code formatting changes
+      if: always()
+      id: commit
       run: |
-        make test
+        if [[ `git status --porcelain --untracked-files=no` ]]; then
+          echo "CHANGES=true" >> $GITHUB_OUTPUT
+          git add -u
+          git commit -m "[skip ci] Code formatting" -a
+        else
+          echo "CHANGES=false" >> $GITHUB_OUTPUT
+        fi
 
-    - name: Coverage Tests
-      run: |
-        make test-cov
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      if: always() && steps.commit.outputs.CHANGES == 'true'
+      with:
+        branch: ${{ github.head_ref }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
 
   validate-docs:
     name: Validate Docs
@@ -75,3 +95,35 @@ jobs:
     - name: Build docs
       run: |
         mkdocs build
+
+  test:
+    name: Test
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Cache pip dependencies
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        make install-test
+
+    - name: Unit Tests
+      run: |
+        make test
+
+    - name: Coverage Tests
+      run: |
+        make test-cov
