@@ -68,10 +68,12 @@ jobs:
         github_token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Unit Tests
+      if: always()
       run: |
         make test
 
     - name: Coverage Tests
+      if: always()
       run: |
         make test-cov
 
