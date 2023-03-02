@@ -80,6 +80,9 @@ test = [
 [tool.setuptools.dynamic]
 version = { attr = "ydata.sdk.__version__" }
 
+[tool.setuptools.package-data]
+"*" = ["VERSION"]
+
 [tool.pytest.ini_options]
 mccabe-complexity = 10
 
