@@ -19,9 +19,9 @@
 
 The *YData SDK* is an ecosystem of methods that allows users to, through a python interface, adopt a *Data-Centric* approach towards the AI development. The solution includes a set of integrated components for data ingestion, standardized data quality evaluation and data improvement, such as *synthetic data generation*, allowing an iterative improvement of the datasets used in high-impact business applications.
 
-**Synthetic data** can be used as Machine Learning performance enhancer, to augment or mitigate the presence of bias in real data. Furthermore, it can be used as a Privacy Enhancing Technology, to enable data-sharing initiatives or even to fuel testing environments. 
+**Synthetic data** can be used as Machine Learning performance enhancer, to augment or mitigate the presence of bias in real data. Furthermore, it can be used as a Privacy Enhancing Technology, to enable data-sharing initiatives or even to fuel testing environments.
 
-Under the YData-SDK hood, you can find a set of algorithms and metrics based on statistics and deep learning based techniques, that will help you to accelerate your data preparation. 
+Under the YData-SDK hood, you can find a set of algorithms and metrics based on statistics and deep learning based techniques, that will help you to accelerate your data preparation.
 
 ## Current functionality
 
@@ -34,4 +34,3 @@ YData SDK is currently composed by the following main modules:
 * **Synthetic data quality report**
 
 * **Profiling**
-
