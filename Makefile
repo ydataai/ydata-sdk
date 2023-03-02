@@ -56,7 +56,7 @@ install-all: ### Installs regular, dev, doc, and test dependencies
 
 package:  ### Builds the package in wheel format
 	rm -rf build dist
-	echo "$(version)" > VERSION
+	echo "$(version)" > src/ydata/sdk/VERSION
 	$(PYTHON) -m build --wheel
 	twine check dist/*
 
