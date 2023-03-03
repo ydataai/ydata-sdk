@@ -1,8 +1,6 @@
 import os
-from pathlib import Path
 
-import pandas as pd
-
+from ydata.sdk.dataset import get_dataset
 from ydata.sdk.synthesizers import RegularSynthesizer
 
 # Do not forget to add your token as env variables
@@ -15,8 +13,7 @@ def main():
 
     After training a Regular Synthesizer, we request a sample.
     """
-    # Let's load a small random dataset
-    X = pd.read_csv(Path(__file__).parent / 'data/dummy.csv')
+    X = get_dataset('census')
 
     # We initialize a regular synthesizer
     # As long as the synthesizer does not call `fit`, it exists only locally
