@@ -47,10 +47,20 @@ def get_titanic() -> pdDataFrame:
     return read_csv(file_name)
 
 
+def get_airquality() -> pdDataFrame:
+    file_name = cache_file(
+        "pollution_us_2000_2016.csv",
+        "https://query.data.world/s/mz5ot3l4zrgvldncfgxu34nda45kvb",
+    )
+
+    return read_csv(file_name, index_col=[0])
+
+
 def get_dataset(name: str):
     DATASETS = {
         'census': get_census,
-        'titanic': get_titanic
+        'titanic': get_titanic,
+        'airquality': get_airquality
     }
 
     if name not in DATASETS:
