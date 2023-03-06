@@ -9,12 +9,12 @@ The list of available connectors can be found here [add a link].
 
 === "From pandas dataframe"
     ```python
-        # Example for a Google Cloud Storage Connector 
+        # Example for a Google Cloud Storage Connector
         credentials = "{insert-credentials-file-path}"
-    
+
         # We create a new connector for Google Cloud Storage
         connector = Connector(connector_type='gcs', credentials=credentials)
-    
+
         # Create a Datasource from the connector
         # Note that a connector can be re-used for several datasources
         X = DataSource(connector=connector, path='gs://<my_bucket>.csv')
@@ -26,7 +26,7 @@ The list of available connectors can be found here [add a link].
 
         # Init a synthesizer
         synth = RegularSynthesizer()
-    
+
         # Train the synthesizer with the pandas Dataframe as input
         # The data is then sent to the cluster for processing
         synth.fit(X)
@@ -51,22 +51,21 @@ The code snippet below shows how easy can be to start generating new synthetic d
 
 ```python
     from ydata.sdk.dataset import get_dataset
-    
+
     #read the example data
     X = get_dataset('census')
-    
+
     # Init a synthesizer
     synth = RegularSynthesizer()
 
     # Fit the synthesizer to the input data
     synth.fit(X)
-    
+
     # Sample new synthetic data. The below request ask for new 1000 synthetic rows
     synth.sample(n_samples=1000)
 ```
 
 !!! note "Do I need to prepare my data before synthesis?"
     The sdk ensures that the original behaviour is replicated. For that reason, there is no need to preprocess outlier observations or missing data.
-    
-    By default all the missing data is replicated as NaN.
 
+    By default all the missing data is replicated as NaN.
