@@ -13,7 +13,7 @@ def main():
     # We define additional attributes for the datasource that will be used
     # by the synthesizer learning and sampling process.
     dataset_attrs = {
-        'sortbykey': 'Index',  # sortbykey can also be a list of columns
+        'sortbykey': 'Date Local',  # sortbykey can also be a list of columns
         # We can exclude columns from the learning and sampling process
         'exclude_cols': ['Address']
     }
