@@ -1,8 +1,6 @@
 import os
-from pathlib import Path
 
-import pandas as pd
-
+from ydata.sdk.dataset import get_dataset
 from ydata.sdk.synthesizers import TimeSeriesSynthesizer
 
 # Do not forget to add your token as env variables
@@ -10,15 +8,14 @@ os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
 
 
 def main():
-    # A dummy dataset with few columns including "Index"
-    X = pd.read_csv(Path(__file__).parent / 'data/dummy.csv')
+    X = get_dataset('airquality')
 
     # We define additional attributes for the datasource that will be used
     # by the synthesizer learning and sampling process.
     dataset_attrs = {
-        'sortbykey': 'Index',  # sortbykey can also be a list of columns
+        'sortbykey': 'Date Local',  # sortbykey can also be a list of columns
         # We can exclude columns from the learning and sampling process
-        'exclude_cols': ['A']
+        'exclude_cols': ['Address']
     }
 
     # We initialize a regular synthesizer
