@@ -10,7 +10,7 @@
 
 ---
 🎊 YData SDK for improved data quality everywhere!
-    
+
 *ydata-sdk* v0.1.0 is here! Create a [YData account](https://ydata.ai/ydata-fabric-free-trial) so you can start using today!
 
 ---
@@ -28,18 +28,18 @@ The YData SDK is an ecosystem of methods that allows users to, through a python 
 
 Synthetic data can be used as Machine Learning performance enhancer, to augment or mitigate the presence of bias in real data. Furthermore, it can be used as a Privacy Enhancing Technology, to enable data-sharing initiatives or even to fuel testing environments.
 
-Under the YData SDK hood, you can find a set of algorithms and metrics based on statistics and deep learning based techniques, that will help you to accelerate your data preparation. 
+Under the YData SDK hood, you can find a set of algorithms and metrics based on statistics and deep learning based techniques, that will help you to accelerate your data preparation.
 
 ### What you can expect:
 
 YData SDK is composed by the following main modules:
 
 - **Datasources**
-  - YData’s SDK includes several connectors for easy integration with existing data sources. It supports several storage types, like filesystems and RDBMS. Check the list of connectors. 
+  - YData’s SDK includes several connectors for easy integration with existing data sources. It supports several storage types, like filesystems and RDBMS. Check the list of connectors.
   - SDK’s Datasources run on top of Dask, which allows it to deal with not only small workloads but also larger volumes of data.
 
-- **Synthesizers** 
-  - Simplified interface to train a generative model and learn in a data-driven manner the behavior, the patterns and original data distribution. Optimize your model for privacy or utility use-cases. 
+- **Synthesizers**
+  - Simplified interface to train a generative model and learn in a data-driven manner the behavior, the patterns and original data distribution. Optimize your model for privacy or utility use-cases.
   - From a trained synthesizer, you can generate synthetic samples as needed and parametrise the number of records needed.
 
 - **Synthetic data quality report** *Coming soon*
@@ -53,4 +53,4 @@ YData SDK is composed by the following main modules:
 - **Tabular**
 The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-independent with high quality results.
 - **Time-Series**
-The **TimeSeriesSynthesizer** is perfect to synthesize both regularly and not evenly spaced time-series, from smart-sensors to stock. 
+The **TimeSeriesSynthesizer** is perfect to synthesize both regularly and not evenly spaced time-series, from smart-sensors to stock.
