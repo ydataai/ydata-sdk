@@ -7,23 +7,15 @@ YData SDK is available for the general public through a token-based authenticati
 YData SDK supports python versions bigger than python 3.8, and can be installed in Windows, Linux or MacOS operating systems. 
 
 Prior to the package installation, it is recommended the creation of a virtual or conda environment:
+
 === "pyenv"
     ``` commandline
-    import tensorflow as tf
-    ```
-
-=== "conda env" 
-    ``` commandline
-    conda create --name ydata
+    pyenv virtualenv 3.10 ydatasdk
     ```
 
 And install `ydata-sdk`
 
 === "pypi"
-    ``` commandline
-    pip install ydata-sdk
-    ```
-=== "conda-forge"
     ``` commandline
     pip install ydata-sdk
     ```
@@ -43,11 +35,9 @@ With your account toke copied, you can set a new environment variable `YDATA_TOK
 ``` python
     import os
     
-    os.setenv['YDTA_TOKEN'] = '{add-your-token}'
+    os.setenv['YDATA_TOKEN'] = '{add-your-token}'
 ```
 
 Once you have set your token, you are good to go to start exploring the incredible world of data-centric AI and smart synthetic data generation! 
 
-[Add here a quick gif]
-
-Check out our [quickstart](https://ydata-sdk.ydata.ai/0.0/getting-started/quickstart/) guide!
+Check out our [quickstart](https://ydata-sdk.ydata.ai/getting-started/quickstart/) guide!
