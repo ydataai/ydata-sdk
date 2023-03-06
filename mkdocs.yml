@@ -2,7 +2,7 @@ site_name: "YData SDK"
 repo_url: https://github.com/ydataai/ydata-sdk
 repo_name: ydataai/ydata-sdk
 edit_uri: ""
-dev_addr: 0.0.0.0:1234
+dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
   - Getting started:
