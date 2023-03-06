@@ -12,21 +12,24 @@ nav:
     - Quickstart: 'getting-started/quickstart.md'
   - Examples:
       - Generate Tabular Data: "examples/synthesize_tabular_data.md"
-      - Generate Time-series stock data
   - Components:
       - Connectors:
         - "modules/connectors.md"
-      - Synthetic data:
-          - "modules/synthetic_data.md"
   - Reference:
     - Changelog: 'reference/changelog.md'
     - API:
-      - GAN: 'reference/api/synthesizers/gan.md'
-      - Regular:
-        - CGAN: 'reference/api/synthesizers/cgan.md'
-  - Support:
-      - Help & Troubleshooting: 'support/help-troubleshooting.md'
-      - Contribution Guidelines: 'support/help-troubleshooting.md'
+        - Client: 'reference/api/common/client.md'
+        - Connectors:
+            - 'Connector': 'reference/api/connectors/connector.md'
+        - DataSources:
+            - 'DataSource': 'reference/api/datasources/datasource.md'
+            - 'DataSourceAttrs': 'reference/api/datasources/attributes.md'
+            - 'Metadata': 'reference/api/datasources/metadata.md'
+        - Synthesizers:
+            - Synthesizer: 'reference/api/synthesizers/base.md'
+            - Regular: 'reference/api/synthesizers/regular.md'
+            - TimeSeries: 'reference/api/synthesizers/timeseries.md'
+        - Types: 'reference/api/common/types.md'
 theme:
   name: material
   language: en
@@ -111,8 +114,24 @@ extra:
   social:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/ydataai
+watch:
+  - src
 plugins:
-  - mkdocstrings
   - search:
         lang: en
-        foo: bar
+  - autorefs
+  - mkdocstrings:
+      custom_templates: templates
+      default_handler: python
+      handlers:
+        python:
+          selection:
+            filters: ["!^_", "!^__"]
+          import:
+          - https://docs.python.org/3/objects.inv
+          - http://pandas.pydata.org/pandas-docs/stable/objects.inv
+          setup_commands:
+            - import sys
+            - sys.path.append('../src')
+          merge_init_into_class: yes
+          show_submodules: no

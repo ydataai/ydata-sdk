@@ -48,13 +48,12 @@ stateDiagram-v2
 ```
 
 The code snippet below shows how easy can be to start generating new synthetic data. The package includes a set of examples datasets for a quickstart.
-You can check here the list[add here a link] of available toy datasets.
 
 ```python
-    from ydata.sdk.examples import cardio
+    from ydata.sdk.dataset import get_dataset
     
     #read the example data
-    df = cardio.read()
+    X = get_dataset('census')
     
     # Init a synthesizer
     synth = RegularSynthesizer()
@@ -62,7 +61,7 @@ You can check here the list[add here a link] of available toy datasets.
     # Fit the synthesizer to the input data
     synth.fit(X)
     
-    # Sample new synthetic data
+    # Sample new synthetic data. The below request ask for new 1000 synthetic rows
     synth.sample(n_samples=1000)
 ```
 

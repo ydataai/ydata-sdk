@@ -17,4 +17,4 @@ Below the list of available connectors:
 | Google BigQuery      	| Data warehouse        	| Not applicable           	  | https://cloud.google.com/bigquery                                     	|                                                                                                  	|
 | Azure Data Lake      	| Data lake             	| CSV, Parquet         	      | https://azure.microsoft.com/en-us/services/storage/data-lake-storage/ 	|                                                                                                  	|
 
-More details can be found at Connectors APi Reference Docs.
+More details can be found at [**Connectors APi Reference Docs**](../reference/api/connectors/connector.md).
