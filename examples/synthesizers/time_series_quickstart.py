@@ -8,7 +8,7 @@ os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
 
 
 def main():
-    X  = get_dataset('airquality')
+    X = get_dataset('airquality')
 
     # We define additional attributes for the datasource that will be used
     # by the synthesizer learning and sampling process.
