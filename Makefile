@@ -1,6 +1,7 @@
 VENV := $(PWD)/env
 PYTHON := python
 PIP := $(PYTHON) -m pip
+PYV=$(shell $(PYTHON) -c "import sys;t='{v[0]}{v[1]}'.format(v=list(sys.version_info[:2]));sys.stdout.write(t)")
 
 .PHONY: help venv3 clean
 
@@ -16,9 +17,18 @@ endif
 venv3: ### Creates a virtual environment for this project
 	test -d $(VENV) || $(PYTHON) -m venv $(VENV) && source $(VENV)/bin/activate
 	$(PIP) install --upgrade pip
-	install-all
+	make install-all
 
-clean: clean-build clean-pyc ### Cleans artifacts
+lint:
+	pre-commit run --all-files
+
+test:
+	python -m pytest src/
+
+test-cov:
+	python -m pytest --cov=. src/
+
+clean: clean-build clean-pyc clean-env ### Cleans artifacts
 
 clean-build: ### Removes builds
 	find . -type d -iname "build" ! -path "./.venv/*" -exec rm -rf {} +
@@ -42,16 +52,22 @@ install-doc: ### Installs regular and doc dependencies
 	$(PIP) install -e ".[doc]"
 
 install-test: ### Installs regular and test dependencies
-	$(PIP) install -e ".[dev]"
+	$(PIP) install -e ".[dev,test]"
 
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install -e ".[dev,doc,test]"
 
-package:
+package:  ### Builds the package in wheel format
 	rm -rf build dist
-	echo "$(version)" > VERSION
-	flit build
+	echo "$(version)" > src/ydata/sdk/VERSION
+	$(PYTHON) -m build --wheel
 	twine check dist/*
 
-publish-docs:
+wheel:  ### Compiles the wheel
+	test -d wheels || mkdir -p wheels
+	cp dist/ydata_sdk-$(version)-py3-none-any.whl wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
+	$(PYTHON) -m pyc_wheel wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
+	twine check wheels/*
+
+publish-docs: ### Publishes the documentation
 	mike deploy --push --update-aliases $(version) latest

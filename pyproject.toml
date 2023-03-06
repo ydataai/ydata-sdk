@@ -1,22 +1,48 @@
 [build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.8.0,<4"]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=67.4.0,<68.0.0",
+    "setuptools-scm>=7.1.0,<8.0.0",
+    "wheel>=0.38.4,<1.0.0",
+]
 
 [project]
 name = "ydata-sdk"
 authors = [
     {name = "YData", email = "opensource@ydata.ai"},
 ]
-description = "Python package developer's cheat sheet (using pyproject.toml)."
+description = "YData SDK allows to use the *Data-Centric* tools from the YData ecosystem to accelerate AI development"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.8,<3.11"
 classifiers = [
     "License :: OSI Approved :: MIT License",
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education',
+    'Intended Audience :: End Users/Desktop',
+    'Intended Audience :: Financial and Insurance Industry',
+    'Intended Audience :: Healthcare Industry',
+    'Intended Audience :: Science/Research',
+    'Intended Audience :: Telecommunications Industry',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS',
+    'Operating System :: Microsoft :: Windows',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: Implementation',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Software Development',
+    'Topic :: Software Development :: Libraries :: Python Modules'
 ]
 dynamic = [
     "version",
 ]
 dependencies = [
+    "httpx==0.23.3",
+    "ydata-core>=0.2.0",
+    "pandas>=1.5.0",
+    "prettytable==3.6.0",
+    "pydantic==1.10.5",
+    "typeguard==2.13.3"
 ]
 
 [project.license]
@@ -28,41 +54,40 @@ Home = "https://github.com/ydataai/ydata-sdk"
 [project.optional-dependencies]
 dev = [
     "twine",
-    "flit==3.8.0",
+    "build",
     "pylint==2.15.10",
+    "black==22.8.0",
+    "flake8==6.0.0",
+    "isort==5.11.3",
+    "pre-commit==2.20.0",
+    "pyc_wheel==1.2.7",
 ]
 doc = [
     "mkdocs>=1.4.2,<2.0.0",
     "mkdocs-material>=9.0.12,<10.0.0",
+    "mkdocs-material-extensions>=1.1.1,<2.0.0",
     "mike>=1.1.2,<2.0.0",
-    "mkdocstrings >= 0.20.0, <1.0.0"
+    "mkdocstrings[python]>=0.20.0,<1.0.0",
 ]
 test = [
     "pytest==6.2.5",
     "pytest-bdd==4.0.*",
     "pytest-cov==2.11.*",
     "pytest-xdist==2.2.*",
+    "pytest-mccabe>=2.0.0,<3.0.0",
 ]
 
-[tool.flit.module]
-name = "ydata-sdk"
+[tool.setuptools.dynamic]
+version = { attr = "ydata.sdk.__version__" }
 
-[tool.flit.sdist]
-exclude = [
-    ".github/*",
-    "docs/*",
-    "examples/*",
-    "tests/*",
-    ".editorconfig",
-    ".python-version",
-    ".gitignore",
-    ".releaserc.json",
-    "CODE_OF_CONDUCT.md",
-    "Makefile",
-]
+[tool.setuptools.package-data]
+"*" = ["VERSION"]
 
 [tool.pytest.ini_options]
 mccabe-complexity = 10
+
+[tool.pytest]
+norecursedirs = "tests/helpers"
 
 [tool.pylint]
 max-locals = 15
@@ -81,3 +106,8 @@ disable = [
     "C0330", # bad-continuation
     "R0903", # too-few-public-methods
 ]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["*/examples/*", "*setup.py", "*/build/*"]
