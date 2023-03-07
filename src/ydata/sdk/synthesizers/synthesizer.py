@@ -232,7 +232,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             response = self._client.get(f'/synthesizer/{self.uid}/history')
             history: dict = response.json()
             sample_data = next((s for s in history if s.get('uid') == sample_uid), None)
-            sample_status = sample_data['state']
+            sample_status = sample_data.get('state')
             sleep(BACKOFF)
 
         response = self._client.get_static_file(
