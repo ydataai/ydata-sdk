@@ -43,19 +43,19 @@ clean-pyc: ### Removes python compiled bytecode files
 	find . -type d -iname "__pycache__" ! -path "./.venv/*" -exec rm -rf {} +
 
 install: ### Installs regular dependencies
-	$(PIP) install -e .
+	$(PIP) install .
 
 install-dev: ### Installs regular and dev dependencies
-	$(PIP) install -e ".[dev]"
+	$(PIP) install ".[dev]"
 
 install-doc: ### Installs regular and doc dependencies
-	$(PIP) install -e ".[doc]"
+	$(PIP) install ".[doc]"
 
 install-test: ### Installs regular and test dependencies
-	$(PIP) install -e ".[dev,test]"
+	$(PIP) install".[dev,test]"
 
 install-all: ### Installs regular, dev, doc, and test dependencies
-	$(PIP) install -e ".[dev,doc,test]"
+	$(PIP) install ".[dev,doc,test]"
 
 package:  ### Builds the package in wheel format
 	rm -rf build dist
