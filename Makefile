@@ -66,7 +66,7 @@ package:  ### Builds the package in wheel format
 wheel:  ### Compiles the wheel
 	test -d wheels || mkdir -p wheels
 	cp dist/ydata_sdk-$(version)-py3-none-any.whl wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
-	$(PYTHON) -m pyc_wheel wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
+	$(PYTHON) -m pyc_wheel --exclude="(__init__|dataset).py" wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
 	twine check wheels/*
 
 publish-docs: ### Publishes the documentation
