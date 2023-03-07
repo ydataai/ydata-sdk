@@ -60,8 +60,11 @@ def get_client(client_or_creds: Optional[Union[Client, Dict, str, Path]] = None,
 
         # Last try with environment variables
         #if client_or_creds is None:
-        '''
         client = _client_from_env(wait_for_auth=wait_for_auth)
+        '''
+        credentials = environ.get(TOKEN_VAR)
+        if credentials is not None:
+            client = Client(credentials=credentials)
 
     except ClientHandshakeError as e:
         wait_for_auth = False  # For now deactivate wait_for_auth until the backend is ready

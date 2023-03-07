@@ -7,7 +7,7 @@ def get_project_root() -> Path:
     Returns:
         The path to the project root folder.
     """
-    return Path(__file__).parent.parent.parent.parent.parent
+    return Path(__file__).parent.parent.parent.parent
 
 
 def get_data_path() -> Path:
@@ -15,7 +15,7 @@ def get_data_path() -> Path:
     Returns:
         The path to the dataset cache
     """
-    return get_project_root() / "examples" / "data"
+    return get_project_root() / "data"
 
 
 def cache_file(file_name: str, url: str) -> Path:
