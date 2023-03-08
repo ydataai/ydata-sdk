@@ -8,7 +8,7 @@ os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
 
 
 def main():
-    """In this example, we demonstrate how modify the datatype of a column
+    """In this example, we demonstrate how to modify the datatype of a column
     during the synthesization.
 
     Changing the datatype might be needed in case the type inference is not as
