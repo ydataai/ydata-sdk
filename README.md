@@ -18,7 +18,7 @@
 <p align="center">
   <a href="https://docs.sdk.ydata.ai">Documentation</a>
   |
-  <a href="ydata.ai/">More on YData</a>
+  <a href="https://ydata.ai">More on YData</a>
 </p>
 
 

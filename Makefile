@@ -52,7 +52,7 @@ install-doc: ### Installs regular and doc dependencies
 	$(PIP) install ".[doc]"
 
 install-test: ### Installs regular and test dependencies
-	$(PIP) install".[dev,test]"
+	$(PIP) install ".[dev,test]"
 
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install ".[dev,doc,test]"
