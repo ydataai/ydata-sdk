@@ -19,7 +19,7 @@ def main():
     # As long as the synthesizer does not call `fit`, it exists only locally
     synth = RegularSynthesizer()
 
-    # We train the synthesizer on our dummy dataset
+    # We train the synthesizer on our dataset
     synth.fit(X)
 
     # We request a synthetic dataset with 50 rows

@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
 
+from ydata.sdk.common.model import BaseModel
 from ydata.sdk.datasources._models.metadata.data_types import DataType, VariableType
 
 

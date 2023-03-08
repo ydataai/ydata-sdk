@@ -22,7 +22,7 @@ def main():
     # As long as the synthesizer does not call `fit`, it exists only locally
     synth = TimeSeriesSynthesizer()
 
-    # We train the synthesizer on our dummy dataset
+    # We train the synthesizer on our dataset
     synth.fit(X, dataset_attrs=dataset_attrs)
 
     # We request a synthetic dataset with the same length as the original data

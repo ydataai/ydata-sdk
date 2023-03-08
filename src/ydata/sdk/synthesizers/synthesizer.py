@@ -127,15 +127,21 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         invalid_fields = {}
         for field, v in dataset_attrs.dict().items():
-            not_in_cols = [c for c in v if c not in columns]
-            if len(not_in_cols) > 0:
-                invalid_fields[field] = not_in_cols
+            print(field, v)
+            if field != 'columns_types':
+                not_in_cols = [c for c in v if c not in columns]
+                if len(not_in_cols) > 0:
+                    invalid_fields[field] = not_in_cols
+            else:
+                not_in_cols = [c.get('name') for c in v if c.get('name') not in columns]
+                if len(not_in_cols) > 0:
+                    invalid_fields[field] = not_in_cols
 
         if len(invalid_fields) > 0:
             error_msgs = ["\t- Field '{}': columns {} do not exist".format(
                 f, ''.join(v)) for f, v in invalid_fields.items()]
             raise DataSourceAttrsError(
-                "The dataset attributes are invalid: {}".format('\n'.join(error_msgs)))
+                "The dataset attributes are invalid:\n {}".format('\n'.join(error_msgs)))
 
     @staticmethod
     def _metadata_to_payload(datatype: DataSourceType, ds_metadata: Metadata, dataset_attrs: Optional[DataSourceAttrs] = None) -> list:
@@ -172,6 +178,11 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
             for c in dataset_attrs.exclude_cols:
                 columns[c]['generation'] = False
+
+        # Update metadata based on the datatypes and vartypes provided by the user
+        for c in dataset_attrs.columns_types:
+            if c.name in columns and columns[c.name]['generation']:
+                columns[c.name].update(c.dict(by_alias=True, exclude_none=True))
 
         return list(columns.values())
 

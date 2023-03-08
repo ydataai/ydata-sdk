@@ -1,8 +1,9 @@
-from typing import List, Union
+from typing import List, Optional, Union
 
 from pydantic import Field
 
 from ydata.sdk.common.model import BaseModel
+from ydata.sdk.datasources._models.metadata.data_types import DataType, VariableType
 
 
 class DataSourceAttrs(BaseModel):
@@ -22,10 +23,22 @@ class DataSourceAttrs(BaseModel):
         generate_cols (List[str]): (optional) columns that should be synthesized
         exclude_cols (List[str]): (optional) columns that should not be synthesized
     """
+
+    class PartialColumn(BaseModel):
+        """Internal object to type the update of vartype and datatype.
+        """
+        name: str
+        datatype: Optional[DataType] = Field(alias='dataType', default=None)
+        vartype: Optional[VariableType] = Field(alias='varType', default=None)
+
+        class Config:
+            use_enum_values = True
+
     sortbykey: Union[str, List[str]] = Field(default_factory=list)
     entity_id_cols: Union[str, List[str]] = Field(default_factory=list)
     generate_cols: List[str] = Field(default_factory=list)
     exclude_cols: List[str] = Field(default_factory=list)
+    columns_types: List[PartialColumn]
 
     def __init__(self, **fields):
         sortbykey = fields.get("sortbykey")
