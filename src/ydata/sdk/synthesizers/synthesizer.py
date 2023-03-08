@@ -127,7 +127,6 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         invalid_fields = {}
         for field, v in dataset_attrs.dict().items():
-            print(field, v)
             if field != 'columns_types':
                 not_in_cols = [c for c in v if c not in columns]
                 if len(not_in_cols) > 0:
