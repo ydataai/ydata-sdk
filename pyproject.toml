@@ -81,7 +81,10 @@ test = [
 version = { attr = "ydata.sdk.__version__" }
 
 [tool.setuptools.package-data]
-"*" = ["VERSION"]
+"*" = [
+    "VERSION",
+    "*.pyi",
+]
 
 [tool.pytest.ini_options]
 mccabe-complexity = 10

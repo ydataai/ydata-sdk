@@ -28,7 +28,7 @@ test:
 test-cov:
 	python -m pytest --cov=. src/
 
-clean: clean-build clean-pyc clean-env ### Cleans artifacts
+clean: clean-build clean-pyc clean-pyi clean-env ### Cleans artifacts
 
 clean-build: ### Removes builds
 	find . -type d -iname "build" ! -path "./.venv/*" -exec rm -rf {} +
@@ -41,6 +41,9 @@ clean-env: ### Removes environment directory
 clean-pyc: ### Removes python compiled bytecode files
 	find . -iname "*.pyc" ! -path "./.venv/*" -delete
 	find . -type d -iname "__pycache__" ! -path "./.venv/*" -exec rm -rf {} +
+
+clean-pyi: ### Removes python stub files
+	find . -iname "*.pyi" ! -path "./.venv/*" -delete
 
 install: ### Installs regular dependencies
 	$(PIP) install .
@@ -57,7 +60,10 @@ install-test: ### Installs regular and test dependencies
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install ".[dev,doc,test]"
 
-package:  ### Builds the package in wheel format
+stubgen: ### Generates stubs for the project
+	stubgen src/ydata/sdk -o src
+
+package: stubgen  ### Builds the package in wheel format
 	rm -rf build dist
 	echo "$(version)" > src/ydata/sdk/VERSION
 	$(PYTHON) -m build --wheel
@@ -66,7 +72,7 @@ package:  ### Builds the package in wheel format
 wheel:  ### Compiles the wheel
 	test -d wheels || mkdir -p wheels
 	cp dist/ydata_sdk-$(version)-py3-none-any.whl wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
-	$(PYTHON) -m pyc_wheel --exclude="(__init__|dataset).py" wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
+	$(PYTHON) -m pyc_wheel wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
 	twine check wheels/*
 
 publish-docs: ### Publishes the documentation
