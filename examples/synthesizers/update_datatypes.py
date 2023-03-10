@@ -17,13 +17,8 @@ def main():
     """
     X = get_dataset('census')
 
-    dataset_attrs = {
-        'columns_types': [
-            {
-                'name': 'education-num',
-                'datatype': 'categorical'  # Originally deduced as numerical
-            }
-        ]
+    dtypes = {
+        'education-num': 'categorical'  # Originally deduced as numerical
     }
 
     # We initialize a regular synthesizer
@@ -31,7 +26,7 @@ def main():
     synth = RegularSynthesizer()
 
     # We train the synthesizer on our dataset
-    synth.fit(X, dataset_attrs=dataset_attrs)
+    synth.fit(X, dtypes=dtypes)
 
     # We request a synthetic dataset with 50 rows
     sample = synth.sample(n_samples=50)
