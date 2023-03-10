@@ -60,12 +60,10 @@ install-test: ### Installs regular and test dependencies
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install ".[dev,doc,test]"
 
-stubgen: ### Generates stubs for the project
-	stubgen src/ydata/sdk -o src
-
-package: stubgen  ### Builds the package in wheel format
-	rm -rf build dist
+package:  ### Builds the package in wheel format
+	find src/ydata/sdk/ -name "*.pyi" -delete && rm -rf build dist
 	echo "$(version)" > src/ydata/sdk/VERSION
+	stubgen src/ydata/sdk -o src --export-less
 	$(PYTHON) -m build --wheel
 	twine check dist/*
 
