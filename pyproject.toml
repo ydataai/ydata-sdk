@@ -83,6 +83,10 @@ version = { attr = "ydata.sdk.__version__" }
 [tool.setuptools.package-data]
 "*" = ["VERSION"]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ydata.sdk*"]
+
 [tool.pytest.ini_options]
 mccabe-complexity = 10
 

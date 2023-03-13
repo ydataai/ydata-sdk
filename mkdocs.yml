@@ -23,7 +23,6 @@ nav:
             - 'Connector': 'reference/api/connectors/connector.md'
         - DataSources:
             - 'DataSource': 'reference/api/datasources/datasource.md'
-            - 'DataSourceAttrs': 'reference/api/datasources/attributes.md'
             - 'Metadata': 'reference/api/datasources/metadata.md'
         - Synthesizers:
             - Synthesizer: 'reference/api/synthesizers/base.md'

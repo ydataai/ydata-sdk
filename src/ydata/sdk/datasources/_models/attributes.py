@@ -1,8 +1,9 @@
-from typing import List, Union
+from typing import Dict, List, Union
 
 from pydantic import Field
 
 from ydata.sdk.common.model import BaseModel
+from ydata.sdk.datasources._models.metadata.data_types import DataType
 
 
 class DataSourceAttrs(BaseModel):
@@ -21,11 +22,14 @@ class DataSourceAttrs(BaseModel):
         entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
         generate_cols (List[str]): (optional) columns that should be synthesized
         exclude_cols (List[str]): (optional) columns that should not be synthesized
+        dtypes (Dict[str, Union[str, DataType]]): (optional) datatype mapping that will overwrite the datasource metadata column datatypes
     """
+
     sortbykey: Union[str, List[str]] = Field(default_factory=list)
     entity_id_cols: Union[str, List[str]] = Field(default_factory=list)
     generate_cols: List[str] = Field(default_factory=list)
     exclude_cols: List[str] = Field(default_factory=list)
+    dtypes: Dict[str, Union[str, DataType]] = Field(default_factory=dict)
 
     def __init__(self, **fields):
         sortbykey = fields.get("sortbykey")
@@ -35,5 +39,9 @@ class DataSourceAttrs(BaseModel):
         entity_id_cols = fields.get("entity_id_cols")
         if entity_id_cols is not None and isinstance(entity_id_cols, str):
             fields['entity_id_cols'] = [entity_id_cols]
+
+        dtypes = fields.get("dtypes")
+        if dtypes is not None:
+            fields['dtypes'] = {k: DataType(v) for k, v in dtypes.items()}
 
         super().__init__(**fields)

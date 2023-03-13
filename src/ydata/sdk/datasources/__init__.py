@@ -1,4 +1,3 @@
-from ydata.sdk.datasources._models.attributes import DataSourceAttrs
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status
@@ -12,4 +11,4 @@ from ydata.sdk.datasources.datasources.local import LocalDataSource
 from ydata.sdk.datasources.datasources.mysql import MySQLDataSource
 
 __all__ = ["DataSource", "GCSDataSource", "LocalDataSource", "AWSS3DataSource",
-           "AzureBlobDataSource", "AzureSQLDataSource", "BigQueryDataSource", "MySQLDataSource", "DataSourceAttrs", "Metadata", "DataSourceType", "Status"]
+           "AzureBlobDataSource", "AzureSQLDataSource", "BigQueryDataSource", "MySQLDataSource", "Metadata", "DataSourceType", "Status"]

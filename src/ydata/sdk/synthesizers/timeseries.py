@@ -1,11 +1,11 @@
-from typing import Optional, Union
+from typing import Dict, List, Optional, Union
 
 from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
-from ydata.sdk.datasources._models.attributes import DataSourceAttrs
 from ydata.sdk.datasources._models.datatype import DataSourceType
+from ydata.sdk.datasources._models.metadata.data_types import DataType
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 
@@ -29,21 +29,30 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
 
         return self._sample(payload={"numberOfRecords": n_entities})
 
-    def fit(self, X: Union[DataSource, pdDataFrame], dataset_attrs: DataSourceAttrs, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def fit(self, X: Union[DataSource, pdDataFrame],
+            sortbykey: Optional[Union[str, List[str]]],
+            entity_id_cols: Optional[Union[str, List[str]]] = None,
+            generate_cols: Optional[List[str]] = None,
+            exclude_cols: Optional[List[str]] = None,
+            dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
+            target: Optional[str] = None,
+            name: Optional[str] = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
 
-        Similarly, `dataset_attrs` is mandatory for [`TimeSeries`][ydata.sdk.datasources.DataSourceType.TIMESERIES] dataset to specify the `sortbykey` columns.
-
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
-            dataset_attrs (Union[DataSourceAttrs, dict]): Dataset attributes
+            sortbykey (Union[str, List[str]]): column(s) to use to sort timeseries datasets
+            entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
+            generate_cols (List[str]): (optional) columns that should be synthesized
+            exclude_cols (List[str]): (optional) columns that should not be synthesized
+            dtypes (Dict[str, Union[str, DataType]]): (optional) datatype mapping that will overwrite the datasource metadata column datatypes
             target (Optional[str]): (optional) Metadata associated to the datasource
             name (Optional[str]): (optional) Synthesizer instance name
         """
-        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES,
-                            dataset_attrs=dataset_attrs, target=target, name=name)
+        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey, entity_id_cols=entity_id_cols,
+                            generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,  target=target, name=name)
 
     def __repr__(self):
         if self._model is not None:
