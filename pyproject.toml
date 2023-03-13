@@ -61,6 +61,7 @@ dev = [
     "isort==5.11.3",
     "pre-commit==2.20.0",
     "pyc_wheel==1.2.7",
+    "mypy==1.1.1",
 ]
 doc = [
     "mkdocs>=1.4.2,<2.0.0",
@@ -81,7 +82,10 @@ test = [
 version = { attr = "ydata.sdk.__version__" }
 
 [tool.setuptools.package-data]
-"*" = ["VERSION"]
+"*" = [
+    "VERSION",
+    "*.pyi",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
