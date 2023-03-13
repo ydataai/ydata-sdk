@@ -1,2 +1,0 @@
-
-::: ydata.sdk.datasources.DataSourceAttrs
