@@ -36,7 +36,8 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
             exclude_cols: Optional[List[str]] = None,
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
             target: Optional[str] = None,
-            name: Optional[str] = None) -> None:
+            name: Optional[str] = None,
+            anonymize: Optional[dict] = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
@@ -50,9 +51,11 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
             dtypes (Dict[str, Union[str, DataType]]): (optional) datatype mapping that will overwrite the datasource metadata column datatypes
             target (Optional[str]): (optional) Metadata associated to the datasource
             name (Optional[str]): (optional) Synthesizer instance name
+            anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey, entity_id_cols=entity_id_cols,
-                            generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,  target=target, name=name)
+                            generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,  target=target,
+                            name=name, anonymize=anonymize)
 
     def __repr__(self):
         if self._model is not None:

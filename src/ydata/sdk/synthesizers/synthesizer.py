@@ -67,7 +67,8 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             exclude_cols: Optional[List[str]] = None,
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
             target: Optional[str] = None,
-            name: Optional[str] = None) -> None:
+            name: Optional[str] = None,
+            anonymize: Optional[dict] = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
@@ -88,6 +89,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dtypes (Dict[str, Union[str, DataType]]): (optional) datatype mapping that will overwrite the datasource metadata column datatypes
             target (Optional[str]): (optional) Target for the dataset
             name (Optional[str]): (optional) Synthesizer instance name
+            anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
         """
         if self._is_initialized():
             raise AlreadyFittedError()
@@ -116,7 +118,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
 
         self._fit_from_datasource(
-            X=_X, dataset_attrs=dataset_attrs, target=target, name=name)
+            X=_X, dataset_attrs=dataset_attrs, target=target, name=name, anonymize=anonymize)
 
     @staticmethod
     def _init_datasource_attributes(
@@ -211,7 +213,14 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         return list(columns.values())
 
-    def _fit_from_datasource(self, X: DataSource, dataset_attrs: Optional[DataSourceAttrs] = None, target: Optional[str] = None, name: Optional[str] = None) -> None:
+    def _fit_from_datasource(
+        self,
+        X: DataSource,
+        dataset_attrs: Optional[DataSourceAttrs] = None,
+        target: Optional[str] = None,
+        name: Optional[str] = None,
+        anonymize: Optional[dict] = None
+    ) -> None:
         _name = name if name is not None else str(uuid4())
         columns = self._metadata_to_payload(
             DataSourceType(X.datatype), X.metadata, dataset_attrs)
@@ -223,6 +232,8 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 "columns": columns,
             },
         }
+        if anonymize is not None:
+            payload["extraData"] = {"anonymize": anonymize}
         if target is not None:
             payload['metadata']['target'] = target
 
