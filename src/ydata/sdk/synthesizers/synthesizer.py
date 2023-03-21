@@ -186,7 +186,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             columns[c.name] = {
                 'name': c.name,
                 'generation': True,
-                'dataType': c.datatype,
+                'dataType': c.datatype if c.datatype != DataType.STR.value else DataType.CATEGORICAL,
                 'varType': c.vartype,
                 'entity': False,
             }

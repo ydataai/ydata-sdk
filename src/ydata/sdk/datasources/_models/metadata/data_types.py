@@ -6,6 +6,7 @@ class DataType(StringEnum):
     CATEGORICAL = "categorical"
     DATE = "date"
     LONGTEXT = "longtext"
+    STR = "string"
 
 
 class VariableType(StringEnum):
