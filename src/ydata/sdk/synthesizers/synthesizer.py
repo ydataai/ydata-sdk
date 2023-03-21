@@ -185,7 +185,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         for c in ds_metadata.columns:
             columns[c.name] = {
                 'name': c.name,
-                'generation': True,
+                'generation': True if c.datatype != DataType.STR.value else False,
                 'dataType': c.datatype,
                 'varType': c.vartype,
                 'entity': False,

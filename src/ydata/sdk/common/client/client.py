@@ -18,7 +18,7 @@ codes = http_codes
 HELP_TEXT = f"""
 YData SDK requires an account with a valid token.
 
-In case you do not have a account, please, create one at https://ydata.ai/ydata-fabric-free-trial.
+In case you do not have an account, please, create one at https://ydata.ai/ydata-fabric-free-trial.
 To obtain the token, please, login to https://{environ.get("YDATA_BASE_URL", DEFAULT_URL)}.
 The token is available on the homepage once you are connected.
 
