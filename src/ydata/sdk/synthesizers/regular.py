@@ -6,6 +6,7 @@ from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.data_types import DataType
+from ydata.sdk.synthesizers._models.privacy import PrivacyLevel
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 
@@ -27,6 +28,7 @@ class RegularSynthesizer(BaseSynthesizer):
         return self._sample(payload={"numberOfRecords": n_samples})
 
     def fit(self, X: Union[DataSource, pdDataFrame],
+            privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
             entity_id_cols: Optional[Union[str, List[str]]] = None,
             generate_cols: Optional[List[str]] = None,
             exclude_cols: Optional[List[str]] = None,
@@ -40,6 +42,7 @@ class RegularSynthesizer(BaseSynthesizer):
 
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
+            privacy_level (PrivacyLevel): Synthesizer privacy level (defaults to high fidelity)
             entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
             generate_cols (List[str]): (optional) columns that should be synthesized
             exclude_cols (List[str]): (optional) columns that should not be synthesized
@@ -50,7 +53,7 @@ class RegularSynthesizer(BaseSynthesizer):
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TABULAR, entity_id_cols=entity_id_cols,
                             generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,
-                            target=target, name=name, anonymize=anonymize)
+                            target=target, name=name, anonymize=anonymize, privacy_level=privacy_level)
 
     def __repr__(self):
         if self._model is not None:

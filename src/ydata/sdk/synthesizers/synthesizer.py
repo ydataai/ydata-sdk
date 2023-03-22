@@ -27,6 +27,7 @@ from ydata.sdk.synthesizers._models.status import PrepareState, Status
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
+from ydata.sdk.synthesizers._models.privacy import PrivacyLevel
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
@@ -60,6 +61,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     def fit(self, X: Union[DataSource, pdDataFrame],
+            privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
             datatype: Optional[Union[DataSourceType, str]] = None,
             sortbykey: Optional[Union[str, List[str]]] = None,
             entity_id_cols: Optional[Union[str, List[str]]] = None,
@@ -81,6 +83,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
+            privacy_level (PrivacyLevel): Synthesizer privacy level (defaults to high fidelity)
             datatype (Optional[Union[DataSourceType, str]]): (optional) Dataset datatype - required if `X` is a [`pandas.DataFrame`][pandas.DataFrame]
             sortbykey (Union[str, List[str]]): (optional) column(s) to use to sort timeseries datasets
             entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
@@ -118,7 +121,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
 
         self._fit_from_datasource(
-            X=_X, dataset_attrs=dataset_attrs, target=target, name=name, anonymize=anonymize)
+            X=_X, dataset_attrs=dataset_attrs, target=target, name=name, anonymize=anonymize, privacy_level=privacy_level)
 
     @staticmethod
     def _init_datasource_attributes(
@@ -216,6 +219,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def _fit_from_datasource(
         self,
         X: DataSource,
+        privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
         dataset_attrs: Optional[DataSourceAttrs] = None,
         target: Optional[str] = None,
         name: Optional[str] = None,
@@ -231,6 +235,9 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 'dataType': X.datatype,
                 "columns": columns,
             },
+            'extraData': {
+                'privacy_level': privacy_level 
+            }
         }
         if anonymize is not None:
             payload["extraData"] = {"anonymize": anonymize}
