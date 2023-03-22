@@ -236,7 +236,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 "columns": columns,
             },
             'extraData': {
-                'privacy_level': privacy_level 
+                'privacy_level': privacy_level.value 
             }
         }
         if anonymize is not None:
