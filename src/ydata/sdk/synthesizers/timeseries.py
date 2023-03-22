@@ -56,8 +56,8 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
             name (Optional[str]): (optional) Synthesizer instance name
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
         """
-        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey, 
-                            entity_id_cols=entity_id_cols, generate_cols=generate_cols, exclude_cols=exclude_cols, 
+        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey,
+                            entity_id_cols=entity_id_cols, generate_cols=generate_cols, exclude_cols=exclude_cols,
                             dtypes=dtypes, target=target, name=name, anonymize=anonymize, privacy_level=privacy_level)
 
     def __repr__(self):

@@ -23,11 +23,11 @@ from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.data_types import DataType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status as dsStatus
+from ydata.sdk.synthesizers._models.privacy import PrivacyLevel
 from ydata.sdk.synthesizers._models.status import PrepareState, Status
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
-from ydata.sdk.synthesizers._models.privacy import PrivacyLevel
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
@@ -236,7 +236,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 "columns": columns,
             },
             'extraData': {
-                'privacy_level': privacy_level.value 
+                'privacy_level': privacy_level.value
             }
         }
         if anonymize is not None:
