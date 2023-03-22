@@ -240,7 +240,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             }
         }
         if anonymize is not None:
-            payload["extraData"] = {"anonymize": anonymize}
+            payload["extraData"]["anonymize"] = anonymize
         if target is not None:
             payload['metadata']['target'] = target
 
