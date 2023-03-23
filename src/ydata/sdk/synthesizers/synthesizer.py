@@ -23,7 +23,6 @@ from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.data_types import DataType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status as dsStatus
-from ydata.sdk.synthesizers._models.privacy import PrivacyLevel
 from ydata.sdk.synthesizers._models.status import PrepareState, Status
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
