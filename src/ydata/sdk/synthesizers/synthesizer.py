@@ -28,6 +28,7 @@ from ydata.sdk.synthesizers._models.status import PrepareState, Status
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
+from ydata.core.enum import PrivacyLevel
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
