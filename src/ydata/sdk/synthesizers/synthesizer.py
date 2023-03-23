@@ -9,6 +9,7 @@ from pandas import DataFrame as pdDataFrame
 from pandas import read_csv
 from typeguard import typechecked
 
+from ydata.core.enum import PrivacyLevel
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
@@ -27,7 +28,6 @@ from ydata.sdk.synthesizers._models.status import PrepareState, Status
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
-from ydata.core.enum import PrivacyLevel
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
