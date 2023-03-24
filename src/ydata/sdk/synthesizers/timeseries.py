@@ -2,7 +2,7 @@ from typing import Dict, List, Optional, Union
 
 from pandas import DataFrame as pdDataFrame
 
-from ydata.core.enum import PrivacyLevel
+from ydata.core.synthesizers import PrivacyLevel
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.datasources._models.datatype import DataSourceType
@@ -13,8 +13,7 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 class TimeSeriesSynthesizer(BaseSynthesizer):
 
     def sample(self, n_entities: Optional[int] = None) -> pdDataFrame:
-        """Sample from a [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeS
-        eriesSynthesizer] instance.
+        """Sample from a [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] instance.
 
         If a training dataset was not using any `entity` column, the Synthesizer assumes a single entity.
         A [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] always sample the full trajectory of its entities.
