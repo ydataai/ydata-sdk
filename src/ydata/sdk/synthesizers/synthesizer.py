@@ -9,7 +9,7 @@ from pandas import DataFrame as pdDataFrame
 from pandas import read_csv
 from typeguard import typechecked
 
-from ydata.core.synthesizers import PrivacyLevel
+from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
