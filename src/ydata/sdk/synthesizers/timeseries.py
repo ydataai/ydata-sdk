@@ -2,6 +2,7 @@ from typing import Dict, List, Optional, Union
 
 from pandas import DataFrame as pdDataFrame
 
+from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.datasources._models.datatype import DataSourceType
@@ -12,8 +13,7 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 class TimeSeriesSynthesizer(BaseSynthesizer):
 
     def sample(self, n_entities: Optional[int] = None) -> pdDataFrame:
-        """Sample from a [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeS
-        eriesSynthesizer] instance.
+        """Sample from a [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] instance.
 
         If a training dataset was not using any `entity` column, the Synthesizer assumes a single entity.
         A [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] always sample the full trajectory of its entities.
@@ -31,6 +31,7 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
 
     def fit(self, X: Union[DataSource, pdDataFrame],
             sortbykey: Optional[Union[str, List[str]]],
+            privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
             entity_id_cols: Optional[Union[str, List[str]]] = None,
             generate_cols: Optional[List[str]] = None,
             exclude_cols: Optional[List[str]] = None,
@@ -45,6 +46,7 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
             sortbykey (Union[str, List[str]]): column(s) to use to sort timeseries datasets
+            privacy_level (PrivacyLevel): Synthesizer privacy level (defaults to high fidelity)
             entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
             generate_cols (List[str]): (optional) columns that should be synthesized
             exclude_cols (List[str]): (optional) columns that should not be synthesized
@@ -53,9 +55,9 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
             name (Optional[str]): (optional) Synthesizer instance name
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
         """
-        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey, entity_id_cols=entity_id_cols,
-                            generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,  target=target,
-                            name=name, anonymize=anonymize)
+        BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey,
+                            entity_id_cols=entity_id_cols, generate_cols=generate_cols, exclude_cols=exclude_cols,
+                            dtypes=dtypes, target=target, name=name, anonymize=anonymize, privacy_level=privacy_level)
 
     def __repr__(self):
         if self._model is not None:

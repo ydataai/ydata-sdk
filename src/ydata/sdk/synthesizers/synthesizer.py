@@ -9,6 +9,7 @@ from pandas import DataFrame as pdDataFrame
 from pandas import read_csv
 from typeguard import typechecked
 
+from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
@@ -60,6 +61,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
     def fit(self, X: Union[DataSource, pdDataFrame],
+            privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
             datatype: Optional[Union[DataSourceType, str]] = None,
             sortbykey: Optional[Union[str, List[str]]] = None,
             entity_id_cols: Optional[Union[str, List[str]]] = None,
@@ -81,6 +83,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         Arguments:
             X (Union[DataSource, pandas.DataFrame]): Training dataset
+            privacy_level (PrivacyLevel): Synthesizer privacy level (defaults to high fidelity)
             datatype (Optional[Union[DataSourceType, str]]): (optional) Dataset datatype - required if `X` is a [`pandas.DataFrame`][pandas.DataFrame]
             sortbykey (Union[str, List[str]]): (optional) column(s) to use to sort timeseries datasets
             entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
@@ -118,7 +121,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
 
         self._fit_from_datasource(
-            X=_X, dataset_attrs=dataset_attrs, target=target, name=name, anonymize=anonymize)
+            X=_X, dataset_attrs=dataset_attrs, target=target, name=name, anonymize=anonymize, privacy_level=privacy_level)
 
     @staticmethod
     def _init_datasource_attributes(
@@ -216,6 +219,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def _fit_from_datasource(
         self,
         X: DataSource,
+        privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
         dataset_attrs: Optional[DataSourceAttrs] = None,
         target: Optional[str] = None,
         name: Optional[str] = None,
@@ -231,9 +235,12 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 'dataType': X.datatype,
                 "columns": columns,
             },
+            'extraData': {
+                'privacy_level': privacy_level.value
+            }
         }
         if anonymize is not None:
-            payload["extraData"] = {"anonymize": anonymize}
+            payload["extraData"]["anonymize"] = anonymize
         if target is not None:
             payload['metadata']['target'] = target
 
