@@ -6,6 +6,14 @@ from ydata.core.error import FabricError
 class SDKError(Exception):
     """Base Exception for all SDK errors."""
 
+    def __init__(self, *args: object) -> None:
+        if len(args) == 1 and isinstance(args[0], str):
+            msg = [a for a in args][0]
+            msg += "\nFor support please contact YData at: support@ydata.ai"
+            super().__init__(msg)
+        else:
+            super().__init__(*args)
+
 
 class ResponseError(FabricError):
     """Wrapper around Fabric Exception to capture error response from the
@@ -43,6 +51,7 @@ class ClientHandshakeError(ClientException):
 
     def __init__(self, auth_link: str):
         self.auth_link = auth_link
+        super().__init__("")
 
 
 class ConnectorError(SDKError):
