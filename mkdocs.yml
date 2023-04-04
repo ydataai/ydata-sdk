@@ -12,6 +12,7 @@ nav:
     - Quickstart: 'getting-started/quickstart.md'
   - Examples:
       - Generate Tabular Data: "examples/synthesize_tabular_data.md"
+      - Generate Time-Series Data: "examples/synthesize_timeseries_data.md"
   - Components:
       - Connectors:
         - "modules/connectors.md"
