@@ -9,6 +9,8 @@ from ydata.sdk.datasources.datasources.bigquery import BigQueryDataSource
 from ydata.sdk.datasources.datasources.gcs import GCSDataSource
 from ydata.sdk.datasources.datasources.local import LocalDataSource
 from ydata.sdk.datasources.datasources.mysql import MySQLDataSource
+from ydata.sdk.datasources.datasources.postgresql import PostgreSQLDataSource
 
 __all__ = ["DataSource", "GCSDataSource", "LocalDataSource", "AWSS3DataSource",
-           "AzureBlobDataSource", "AzureSQLDataSource", "BigQueryDataSource", "MySQLDataSource", "Metadata", "DataSourceType", "Status"]
+           "AzureBlobDataSource", "AzureSQLDataSource", "BigQueryDataSource", "MySQLDataSource",
+           "PostgreSQLDataSource", "Metadata", "DataSourceType", "Status"]

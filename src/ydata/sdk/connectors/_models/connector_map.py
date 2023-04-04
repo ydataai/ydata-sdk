@@ -5,6 +5,7 @@ from ydata.sdk.connectors._models.credentials.azuresql import AzureSQLCredential
 from ydata.sdk.connectors._models.credentials.bigquery import BigQueryCredentials
 from ydata.sdk.connectors._models.credentials.googlecloudstorage import GCSCredentials
 from ydata.sdk.connectors._models.credentials.mysql import MySQLCredentials
+from ydata.sdk.connectors._models.credentials.postgresql import PostgreSQLCredentials
 from ydata.sdk.connectors._models.credentials.snowflake import SnowflakeCredentials
 
 TYPE_TO_CLASS = {
@@ -14,5 +15,6 @@ TYPE_TO_CLASS = {
     ConnectorType.MYSQL.value: MySQLCredentials,
     ConnectorType.AZURE_SQL.value: AzureSQLCredentials,
     ConnectorType.BIGQUERY.value: BigQueryCredentials,
-    ConnectorType.SNOWFLAKE.value: SnowflakeCredentials
+    ConnectorType.SNOWFLAKE.value: SnowflakeCredentials,
+    ConnectorType.POSTGRESQL.value: PostgreSQLCredentials,
 }

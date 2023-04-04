@@ -19,3 +19,5 @@ class ConnectorType(Enum):
     """BigQuery connector"""
     SNOWFLAKE = "snowflake"
     """Snowflake connector"""
+    POSTGRESQL = "postgresql"
+    """PostgreSQL connector"""
