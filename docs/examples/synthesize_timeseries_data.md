@@ -2,7 +2,7 @@
 
 **Use YData's *TimeSeriesSynthesizer* to generate time-series synthetic data**
 
-Tabular data is the most common type of data we encounter in data problems. 
+Tabular data is the most common type of data we encounter in data problems.
 
 When thinking about tabular data, we assume independence between different records, but this does not happen in reality. Suppose we check events from our day-to-day life, such as room temperature changes, bank account transactions, stock price fluctuations, and air quality measurements in our neighborhood. In that case, we might end up with datasets where measures and records evolve and are related through time. This type of data is known to be sequential or time-series data.
 
@@ -14,7 +14,7 @@ Dissecting any time-series dataset, we see differences in variables' behavior th
 - Variables that refer to entities (single or multiple entities)
 - Variables that are attributes (those that don't depend on time but rather on the entity)
 
-Below find an example: 
+Below find an example:
 
 ```python
 --8<-- "examples/synthesizers/time_series_quickstart.py"
