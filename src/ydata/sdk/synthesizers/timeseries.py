@@ -12,14 +12,14 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 class TimeSeriesSynthesizer(BaseSynthesizer):
 
-    def sample(self, n_entities: Optional[int] = None) -> pdDataFrame:
+    def sample(self, n_entities: int) -> pdDataFrame:
         """Sample from a [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] instance.
 
         If a training dataset was not using any `entity` column, the Synthesizer assumes a single entity.
         A [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] always sample the full trajectory of its entities.
 
         Arguments:
-            n_entities (int): (optional) number of entities to sample. If `None`, uses the same number of entities as in the original dataset.
+            n_entities (int): number of entities to sample.
 
         Returns:
             synthetic data
