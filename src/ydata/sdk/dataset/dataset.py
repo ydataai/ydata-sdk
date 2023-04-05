@@ -1,6 +1,6 @@
+from numpy import int64
 from pandas import DataFrame as pdDataFrame
 from pandas import read_csv, to_datetime
-from numpy import int64
 
 from ydata.sdk.utils.cache import cache_file
 
@@ -64,7 +64,8 @@ def get_occupancy() -> pdDataFrame:
     )
 
     df = read_csv(file_name)
-    df["date"] = to_datetime(df["date"], format="%m/%d/%Y %H:%M").values.astype(int64) // 10 ** 9
+    df["date"] = to_datetime(
+        df["date"], format="%m/%d/%Y %H:%M").values.astype(int64) // 10 ** 9
     return df
 
 
