@@ -1,5 +1,6 @@
+from numpy import int64
 from pandas import DataFrame as pdDataFrame
-from pandas import read_csv
+from pandas import read_csv, to_datetime
 
 from ydata.sdk.utils.cache import cache_file
 
@@ -56,11 +57,24 @@ def get_airquality() -> pdDataFrame:
     return read_csv(file_name, index_col=[0])
 
 
+def get_occupancy() -> pdDataFrame:
+    file_name = cache_file(
+        "occupancy.csv",
+        "https://code.datasciencedojo.com/datasciencedojo/datasets/raw/master/Occupancy%20Detection/datatraining.csv",
+    )
+
+    df = read_csv(file_name)
+    df["date"] = to_datetime(
+        df["date"], format="%m/%d/%Y %H:%M").values.astype(int64) // 10 ** 9
+    return df
+
+
 def get_dataset(name: str):
     DATASETS = {
         'census': get_census,
         'titanic': get_titanic,
-        'airquality': get_airquality
+        'airquality': get_airquality,
+        'occupancy': get_occupancy
     }
 
     if name not in DATASETS:
