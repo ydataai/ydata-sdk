@@ -24,6 +24,7 @@ class TrainingState(StringEnum):
     RUNNING = 'running'
     FINISHED = 'finished'
     FAILED = 'failed'
+    UNKNOWN = 'unknown'
 
 
 class ReportState(StringEnum):
