@@ -14,7 +14,7 @@ from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceAttrsError, DataSourceNotAvailableError,
-                                         DataTypeMissingError, FittingError)
+                                         DataTypeMissingError, EmptyDataError, FittingError)
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
 from ydata.sdk.common.warnings import DataSourceTypeWarning
@@ -106,6 +106,8 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
+            if X.empty:
+                raise EmptyDataError("The DataFrame is empty")
             _X = LocalDataSource(source=X, datatype=_datatype, client=self._client)
         else:
             if datatype != _datatype:
