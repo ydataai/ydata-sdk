@@ -24,7 +24,7 @@ from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.data_types import DataType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status as dsStatus
-from ydata.sdk.synthesizers._models.status import PrepareState, Status
+from ydata.sdk.synthesizers._models.status import PrepareState, ReportState, Status, TrainingState
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
@@ -386,8 +386,16 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             Synthesizer Status
         """
         status = Status(api_status.get('state', Status.UNKNOWN.name))
-        prepare = PrepareState(api_status.get('prepare', {}).get(
-            'state', PrepareState.UNKNOWN.name))
-        if prepare == PrepareState.FAILED:
-            status = Status.FAILED
+        if status == Status.PREPARE:
+            if PrepareState(api_status.get('prepare', {}).get(
+                    'state', PrepareState.UNKNOWN.name)) == PrepareState.FAILED:
+                return Status.FAILED
+        elif status == Status.TRAIN:
+            if TrainingState(api_status.get('training', {}).get(
+                    'state', TrainingState.UNKNOWN.name)) == TrainingState.FAILED:
+                return Status.FAILED
+        elif status == Status.REPORT:
+            if ReportState(api_status.get('report', {}).get(
+                    'state', ReportState.UNKNOWN.name)) == ReportState.FAILED:
+                return Status.FAILED
         return status
