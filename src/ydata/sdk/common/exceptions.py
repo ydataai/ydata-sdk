@@ -1,5 +1,7 @@
 from typing import Dict, Optional
 
+from pandas.errors import EmptyDataError as pdEmptyDataError
+
 from ydata.core.error import FabricError
 
 
@@ -64,6 +66,10 @@ class InvalidConnectorError(ConnectorError):
 
 class CredentialTypeError(ConnectorError):
     """Raised when credentials are not formed properly."""
+
+
+class EmptyDataError(pdEmptyDataError, SDKError):
+    """Raised when no data is available."""
 
 
 class DataSourceError(SDKError):
