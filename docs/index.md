@@ -8,7 +8,7 @@
 
 !!! note "YData SDK for improved data quality everywhere!"
 
-    *ydata-sdk* v0.1.0 is here! Create a YData account so you can start using today!
+    *ydata-sdk* is here! Create a YData account so you can start using today!
 
     [Create account](https://ydata.ai/ydata-fabric-free-trial){ .md-button .md-button--ydata .md-button--stretch}
 
