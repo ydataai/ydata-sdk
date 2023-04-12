@@ -22,5 +22,5 @@ The parameter expect a [`PrivacyLevel`](../reference/api/synthesizers/base/#priv
 The example below demonstrates how to train a synthesizer configured for high privacy:
 
 ```python
---8<-- "examples/synthesizers/privacy_examples_.py"
+--8<-- "examples/synthesizers/privacy_example.py"
 ```
