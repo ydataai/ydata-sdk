@@ -1013,7 +1013,7 @@ The anonymization rules are defined as a dictionary with the following format:</
 <p><code>{column_name: anonymization_rule}</code></p>
 <p>While here are some predefined anonymization rules such as <code>name</code>, <code>email</code>, <code>company</code>, it is also possible to create a rule using a regular expression.
 The anonymization rules have to be passed to a synthesizer in its <code>fit</code> method using the parameter <a href="../reference/api/synthesizers/timeseries/#ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer.fit"><code>anonymize</code></a>.</p>
-<div class="admonition note">
+<div class="admonition question">
 <p class="admonition-title">What is the difference between anonymization and privacy?</p>
 <p><strong>Anonymization</strong> makes sure sensitive information are hidden from the data.
 <strong>Privacy</strong> makes sure it is not possible to infer the original data points from the synthetic data points via statistical attacks.</p>
