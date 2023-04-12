@@ -29,8 +29,9 @@ YData SDK is currently composed by the following main modules:
      - SDK’s Datasources run on top of Dask, which allows it to deal with not only small workloads but also larger volumes of data.
 
 * **Synthesizers**
-     - Simplified interface to train a generative model and learn in a data-driven manner the behavior, the patterns and original data distribution. Optimize your model for privacy or utility use-cases.
+     - Simplified interface to train a generative model and learn in a data-driven manner the behavior, the patterns and original data distribution. Optimize your model for [privacy or utility](examples/synthesize_with_privacy_control.md) use-cases.
      - From a trained synthesizer, you can generate synthetic samples as needed and parametrise the number of records needed.
+     - [Anonymization](examples/synthesize_with_anonymization.md) and [privacy](examples/synthesize_with_privacy_control.md) preserving capabilities to ensure that synthetic datasets does not contain Personal Identifiable Information (PII) and can safely be shared!
 
 * **Synthetic data quality report**
     <span style="color:grey">*Coming soon*</span>

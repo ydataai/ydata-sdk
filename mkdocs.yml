@@ -13,6 +13,8 @@ nav:
   - Examples:
       - Generate Tabular Data: "examples/synthesize_tabular_data.md"
       - Generate Time-Series Data: "examples/synthesize_timeseries_data.md"
+      - Anonymization: "examples/synthesize_with_anonymization.md"
+      - Privacy Level: "examples/synthesize_with_privacy_control.md"
   - Components:
       - Connectors:
         - "modules/connectors.md"
