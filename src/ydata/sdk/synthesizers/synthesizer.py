@@ -64,7 +64,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
             datatype: Optional[Union[DataSourceType, str]] = None,
             sortbykey: Optional[Union[str, List[str]]] = None,
-            entity_id_cols: Optional[Union[str, List[str]]] = None,
+            entities: Optional[Union[str, List[str]]] = None,
             generate_cols: Optional[List[str]] = None,
             exclude_cols: Optional[List[str]] = None,
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
@@ -87,7 +87,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             privacy_level (PrivacyLevel): Synthesizer privacy level (defaults to high fidelity)
             datatype (Optional[Union[DataSourceType, str]]): (optional) Dataset datatype - required if `X` is a [`pandas.DataFrame`][pandas.DataFrame]
             sortbykey (Union[str, List[str]]): (optional) column(s) to use to sort timeseries datasets
-            entity_id_cols (Union[str, List[str]]): (optional) columns representing entities ID
+            entities (Union[str, List[str]]): (optional) columns representing entities ID
             generate_cols (List[str]): (optional) columns that should be synthesized
             exclude_cols (List[str]): (optional) columns that should not be synthesized
             dtypes (Dict[str, Union[str, DataType]]): (optional) datatype mapping that will overwrite the datasource metadata column datatypes
@@ -103,7 +103,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             X, pdDataFrame) else DataSourceType(X.datatype)
 
         dataset_attrs = self._init_datasource_attributes(
-            sortbykey, entity_id_cols, generate_cols, exclude_cols, dtypes)
+            sortbykey, entities, generate_cols, exclude_cols, dtypes)
         self._validate_datasource_attributes(X, dataset_attrs, _datatype, target)
 
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
@@ -131,13 +131,13 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     @staticmethod
     def _init_datasource_attributes(
             sortbykey: Optional[Union[str, List[str]]],
-            entity_id_cols: Optional[Union[str, List[str]]],
+            entities: Optional[Union[str, List[str]]],
             generate_cols: Optional[List[str]],
             exclude_cols: Optional[List[str]],
             dtypes: Optional[Dict[str, Union[str, DataType]]]) -> DataSourceAttrs:
         dataset_attrs = {
             'sortbykey': sortbykey if sortbykey is not None else [],
-            'entity_id_cols': entity_id_cols if entity_id_cols is not None else [],
+            'entities': entities if entities is not None else [],
             'generate_cols': generate_cols if generate_cols is not None else [],
             'exclude_cols': exclude_cols if exclude_cols is not None else [],
             'dtypes': {k: DataType(v) for k, v in dtypes.items()} if dtypes is not None else {}
@@ -205,7 +205,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 for c in ds_metadata.columns:
                     columns[c.name]['sortBy'] = c.name in dataset_attrs.sortbykey
 
-                for c in dataset_attrs.entity_id_cols:
+                for c in dataset_attrs.entities:
                     columns[c]['entity'] = True
 
             for c in dataset_attrs.generate_cols:
