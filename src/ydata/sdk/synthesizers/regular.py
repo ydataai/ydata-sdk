@@ -12,12 +12,13 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 class RegularSynthesizer(BaseSynthesizer):
 
-    def sample(self, n_samples: int = 1) -> pdDataFrame:
+    def sample(self, n_samples: int = 1, condition_on: Optional[dict] = None) -> pdDataFrame:
         """Sample from a [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer]
         instance.
 
         Arguments:
             n_samples (int): number of rows in the sample
+            condition_on: (dict): (optional) conditional sampling parameters
 
         Returns:
             synthetic data
@@ -25,7 +26,12 @@ class RegularSynthesizer(BaseSynthesizer):
         if n_samples < 1:
             raise InputError("Parameter 'n_samples' must be greater than 0")
 
-        return self._sample(payload={"numberOfRecords": n_samples})
+        payload = {"numberOfRecords": n_samples}
+        if condition_on is not None:
+            payload["extraData"] = {
+                "condition_on": condition_on
+            }
+        return self._sample(payload=payload)
 
     def fit(self, X: Union[DataSource, pdDataFrame],
             privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
@@ -35,7 +41,8 @@ class RegularSynthesizer(BaseSynthesizer):
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
             target: Optional[str] = None,
             name: Optional[str] = None,
-            anonymize: Optional[dict] = None) -> None:
+            anonymize: Optional[dict] = None,
+            condition_on: Optional[List[str]] = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset either a pandas [`DataFrame`][pandas.DataFrame] directly or a YData [`DataSource`][ydata.sdk.datasources.DataSource].
@@ -50,10 +57,12 @@ class RegularSynthesizer(BaseSynthesizer):
             target (Optional[str]): (optional) Target column
             name (Optional[str]): (optional) Synthesizer instance name
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
+            condition_on: (List[str]): (optional) list of features to condition upon
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TABULAR, entity_id_cols=entity_id_cols,
                             generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,
-                            target=target, name=name, anonymize=anonymize, privacy_level=privacy_level)
+                            target=target, name=name, anonymize=anonymize, privacy_level=privacy_level,
+                            condition_on=condition_on)
 
     def __repr__(self):
         if self._model is not None:

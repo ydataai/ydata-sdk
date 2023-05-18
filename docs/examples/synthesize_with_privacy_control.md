@@ -12,7 +12,7 @@ The parameter expect a [`PrivacyLevel`](../reference/api/synthesizers/base/#priv
 
 !!! question "What is the difference between anonymization and privacy?"
 
-    **Anonymization** makes sure sensitive information are hidden from the data.    
+    **Anonymization** makes sure sensitive information are hidden from the data.
     **Privacy** makes sure it is not possible to infer the original data points from the synthetic data points via statistical attacks.
 
     Therefore, for data sharing **anonymization** and **privacy** controls are complementary.
