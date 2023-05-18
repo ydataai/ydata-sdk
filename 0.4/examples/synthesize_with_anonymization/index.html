@@ -15,7 +15,7 @@
         <link rel="next" href="../synthesize_with_privacy_control/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.85bb2934.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a6bdf11c.min.css">
       
       
   
@@ -104,7 +104,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="ydata" data-md-color-primary="" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="ydata" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     
@@ -159,13 +159,17 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
+      
+        <form class="md-header__option" data-md-component="palette">
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ydata" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ydata" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+            
           
-        
-      </form>
+        </form>
+      
     
     
     
@@ -1008,14 +1012,14 @@
 <p class="admonition-title">Does the model retain the original values?</p>
 <p>No! The anonymization is performed before the model training such that it never sees the original values.</p>
 </div>
-<p>The anonymization is performed by specifying which columns need to be anonymized and how to performed the anonymization.  <br />
+<p>The anonymization is performed by specifying which columns need to be anonymized and how to performed the anonymization.
 The anonymization rules are defined as a dictionary with the following format:</p>
 <p><code>{column_name: anonymization_rule}</code></p>
-<p>While here are some predefined anonymization rules such as <code>name</code>, <code>email</code>, <code>company</code>, it is also possible to create a rule using a regular expression.  <br />
+<p>While here are some predefined anonymization rules such as <code>name</code>, <code>email</code>, <code>company</code>, it is also possible to create a rule using a regular expression.
 The anonymization rules have to be passed to a synthesizer in its <code>fit</code> method using the parameter <a href="../reference/api/synthesizers/timeseries/#ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer.fit"><code>anonymize</code></a>.</p>
 <div class="admonition question">
 <p class="admonition-title">What is the difference between anonymization and privacy?</p>
-<p><strong>Anonymization</strong> makes sure sensitive information are hidden from the data.  <br />
+<p><strong>Anonymization</strong> makes sure sensitive information are hidden from the data.
 <strong>Privacy</strong> makes sure it is not possible to infer the original data points from the synthetic data points via statistical attacks.</p>
 <p>Therefore, for data sharing <strong>anonymization</strong> and <strong>privacy</strong> controls are complementary.</p>
 </div>
@@ -1161,7 +1165,7 @@ The anonymization rules have to be passed to a synthesizer in its <code>fit</cod
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       
