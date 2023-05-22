@@ -32,6 +32,7 @@ YData SDK is currently composed by the following main modules:
      - Simplified interface to train a generative model and learn in a data-driven manner the behavior, the patterns and original data distribution. Optimize your model for [privacy or utility](examples/synthesize_with_privacy_control.md) use-cases.
      - From a trained synthesizer, you can generate synthetic samples as needed and parametrise the number of records needed.
      - [Anonymization](examples/synthesize_with_anonymization.md) and [privacy](examples/synthesize_with_privacy_control.md) preserving capabilities to ensure that synthetic datasets does not contain Personal Identifiable Information (PII) and can safely be shared!
+     - [Conditional sampling](examples/synthesize_with_conditional_sampling.md) can be used to restrict the domain and values of specific features in the sampled data.
 
 * **Synthetic data quality report**
     <span style="color:grey">*Coming soon*</span>
