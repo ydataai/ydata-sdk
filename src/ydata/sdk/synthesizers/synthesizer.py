@@ -94,7 +94,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             target (Optional[str]): (optional) Target for the dataset
             name (Optional[str]): (optional) Synthesizer instance name
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
-            condition_on: (List[str]): (optional) list of features to condition upon
+            condition_on: (Optional[List[str]]): (optional) list of features to condition upon
         """
         if self._is_initialized():
             raise AlreadyFittedError()

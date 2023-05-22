@@ -20,7 +20,7 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
 
         Arguments:
             n_entities (int): number of entities to sample
-            condition_on: (dict): (optional) conditional sampling parameters
+            condition_on: (Optional[dict]): (optional) conditional sampling parameters
 
         Returns:
             synthetic data
@@ -61,7 +61,7 @@ class TimeSeriesSynthesizer(BaseSynthesizer):
             target (Optional[str]): (optional) Metadata associated to the datasource
             name (Optional[str]): (optional) Synthesizer instance name
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
-            condition_on: (List[str]): (optional) list of features to condition upon
+            condition_on: (Optional[List[str]]): (optional) list of features to condition upon
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TIMESERIES, sortbykey=sortbykey,
                             entity_id_cols=entity_id_cols, generate_cols=generate_cols, exclude_cols=exclude_cols,

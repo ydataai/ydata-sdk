@@ -18,7 +18,7 @@ class RegularSynthesizer(BaseSynthesizer):
 
         Arguments:
             n_samples (int): number of rows in the sample
-            condition_on: (dict): (optional) conditional sampling parameters
+            condition_on: (Optional[dict]): (optional) conditional sampling parameters
 
         Returns:
             synthetic data
@@ -57,7 +57,7 @@ class RegularSynthesizer(BaseSynthesizer):
             target (Optional[str]): (optional) Target column
             name (Optional[str]): (optional) Synthesizer instance name
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
-            condition_on: (List[str]): (optional) list of features to condition upon
+            condition_on: (Optional[List[str]]): (optional) list of features to condition upon
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TABULAR, entity_id_cols=entity_id_cols,
                             generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,
