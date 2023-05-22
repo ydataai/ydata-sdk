@@ -15,7 +15,7 @@
         <link rel="next" href="../regular/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
     
     
       
@@ -475,6 +475,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -539,6 +541,20 @@
     <li class="md-nav__item">
       <a href="../../../../examples/synthesize_with_privacy_control/" class="md-nav__link">
         Privacy Level
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../examples/synthesize_with_conditional_sampling/" class="md-nav__link">
+        Conditional Sampling
       </a>
     </li>
   
@@ -1618,7 +1634,7 @@
 <a id="__codelineno-0-94" name="__codelineno-0-94"></a><span class="sd">            target (Optional[str]): (optional) Target for the dataset</span>
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a><span class="sd">            name (Optional[str]): (optional) Synthesizer instance name</span>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a><span class="sd">            anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy</span>
-<a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">            condition_on: (List[str]): (optional) list of features to condition upon</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">            condition_on: (Optional[List[str]]): (optional) list of features to condition upon</span>
 <a id="__codelineno-0-98" name="__codelineno-0-98"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-99" name="__codelineno-0-99"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_initialized</span><span class="p">():</span>
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a>            <span class="k">raise</span> <span class="n">AlreadyFittedError</span><span class="p">()</span>
@@ -2169,7 +2185,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]]</code>
           </td>
-          <td><p>(List[str]): (optional) list of features to condition upon</p></td>
+          <td><p>(Optional[List[str]]): (optional) list of features to condition upon</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -2279,7 +2295,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 <a id="__codelineno-0-94" name="__codelineno-0-94"></a><span class="sd">        target (Optional[str]): (optional) Target for the dataset</span>
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a><span class="sd">        name (Optional[str]): (optional) Synthesizer instance name</span>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a><span class="sd">        anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy</span>
-<a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">        condition_on: (List[str]): (optional) list of features to condition upon</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="sd">        condition_on: (Optional[List[str]]): (optional) list of features to condition upon</span>
 <a id="__codelineno-0-98" name="__codelineno-0-98"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_initialized</span><span class="p">():</span>
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a>        <span class="k">raise</span> <span class="n">AlreadyFittedError</span><span class="p">()</span>
@@ -2613,8 +2629,8 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 <code class="highlight language-python"><span class="n">BALANCED_PRIVACY_FIDELITY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h2>
@@ -2635,8 +2651,8 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 <code class="highlight language-python"><span class="n">HIGH_FIDELITY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h2>
@@ -2657,8 +2673,8 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 <code class="highlight language-python"><span class="n">HIGH_PRIVACY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h2>

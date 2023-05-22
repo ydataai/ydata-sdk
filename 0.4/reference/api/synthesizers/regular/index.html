@@ -15,7 +15,7 @@
         <link rel="next" href="../timeseries/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
     
     
       
@@ -475,6 +475,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -539,6 +541,20 @@
     <li class="md-nav__item">
       <a href="../../../../examples/synthesize_with_privacy_control/" class="md-nav__link">
         Privacy Level
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../examples/synthesize_with_conditional_sampling/" class="md-nav__link">
+        Conditional Sampling
       </a>
     </li>
   
@@ -1170,7 +1186,7 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a>
 <a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">        Arguments:</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">            n_samples (int): number of rows in the sample</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">            condition_on: (dict): (optional) conditional sampling parameters</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">            condition_on: (Optional[dict]): (optional) conditional sampling parameters</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22"></a>
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">        Returns:</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="sd">            synthetic data</span>
@@ -1209,7 +1225,7 @@
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">            target (Optional[str]): (optional) Target column</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">            name (Optional[str]): (optional) Synthesizer instance name</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">            anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">            condition_on: (List[str]): (optional) list of features to condition upon</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">            condition_on: (Optional[List[str]]): (optional) list of features to condition upon</span>
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="n">BaseSynthesizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">DataSourceType</span><span class="o">.</span><span class="n">TABULAR</span><span class="p">,</span> <span class="n">entity_id_cols</span><span class="o">=</span><span class="n">entity_id_cols</span><span class="p">,</span>
 <a id="__codelineno-0-63" name="__codelineno-0-63"></a>                            <span class="n">generate_cols</span><span class="o">=</span><span class="n">generate_cols</span><span class="p">,</span> <span class="n">exclude_cols</span><span class="o">=</span><span class="n">exclude_cols</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">=</span><span class="n">dtypes</span><span class="p">,</span>
@@ -1357,7 +1373,7 @@
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" title="typing.List" href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]]</code>
           </td>
-          <td><p>(List[str]): (optional) list of features to condition upon</p></td>
+          <td><p>(Optional[List[str]]): (optional) list of features to condition upon</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -1420,7 +1436,7 @@
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">        target (Optional[str]): (optional) Target column</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">        name (Optional[str]): (optional) Synthesizer instance name</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">        anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">        condition_on: (List[str]): (optional) list of features to condition upon</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">        condition_on: (Optional[List[str]]): (optional) list of features to condition upon</span>
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="n">BaseSynthesizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">DataSourceType</span><span class="o">.</span><span class="n">TABULAR</span><span class="p">,</span> <span class="n">entity_id_cols</span><span class="o">=</span><span class="n">entity_id_cols</span><span class="p">,</span>
 <a id="__codelineno-0-63" name="__codelineno-0-63"></a>                        <span class="n">generate_cols</span><span class="o">=</span><span class="n">generate_cols</span><span class="p">,</span> <span class="n">exclude_cols</span><span class="o">=</span><span class="n">exclude_cols</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">=</span><span class="n">dtypes</span><span class="p">,</span>
@@ -1473,7 +1489,7 @@ instance.</p>
           <td>
                 <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a>]</code>
           </td>
-          <td><p>(dict): (optional) conditional sampling parameters</p></td>
+          <td><p>(Optional[dict]): (optional) conditional sampling parameters</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -1526,7 +1542,7 @@ instance.</p>
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a>
 <a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">    Arguments:</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">        n_samples (int): number of rows in the sample</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">        condition_on: (dict): (optional) conditional sampling parameters</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">        condition_on: (Optional[dict]): (optional) conditional sampling parameters</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22"></a>
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">    Returns:</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="sd">        synthetic data</span>
@@ -1586,8 +1602,8 @@ instance.</p>
 <code class="highlight language-python"><span class="n">BALANCED_PRIVACY_FIDELITY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h2>
@@ -1608,8 +1624,8 @@ instance.</p>
 <code class="highlight language-python"><span class="n">HIGH_FIDELITY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h2>
@@ -1630,8 +1646,8 @@ instance.</p>
 <code class="highlight language-python"><span class="n">HIGH_PRIVACY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h2>
