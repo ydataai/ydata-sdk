@@ -7,7 +7,7 @@ from ydata.sdk.datasources._models.datasources.bigquery import BigQueryDataSourc
 from ydata.sdk.datasources._models.datasources.googlecloudstorage import GCSDataSource
 from ydata.sdk.datasources._models.datasources.mysql import MySQLDataSource
 
-CONNECTOR_TO_DADASOURCE = {
+CONNECTOR_TO_DATASOURCE = {
     ConnectorType.GCS: GCSDataSource,
     ConnectorType.AWS_S3: AWSS3DataSource,
     ConnectorType.AZURE_BLOB: AzureBlobDataSource,
