@@ -8,7 +8,7 @@ from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID
 from ydata.sdk.connectors.connector import Connector, ConnectorType
-from ydata.sdk.datasources._models.connector_to_datasource import CONNECTOR_TO_DADASOURCE
+from ydata.sdk.datasources._models.connector_to_datasource import CONNECTOR_TO_DATASOURCE
 from ydata.sdk.datasources._models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources._models.datasource_list import DataSourceList
 from ydata.sdk.datasources._models.datatype import DataSourceType
@@ -38,7 +38,7 @@ class DataSource(ModelFactoryMixin):
     """
 
     def __init__(self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config):
-        datasource_type = CONNECTOR_TO_DADASOURCE.get(connector.type)
+        datasource_type = CONNECTOR_TO_DATASOURCE.get(connector.type)
         self._init_common(client=client)
         self._model: Optional[mDataSource] = self._create_model(
             connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, client=self._client)
@@ -110,7 +110,7 @@ class DataSource(ModelFactoryMixin):
         """
         response = client.get(f'/datasource/{uid}')
         data: list = response.json()
-        datasource_type = CONNECTOR_TO_DADASOURCE.get(
+        datasource_type = CONNECTOR_TO_DATASOURCE.get(
             ConnectorType(data['connector']['type']))
         model = DataSource._model_from_api(data, datasource_type)
         datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
@@ -131,7 +131,7 @@ class DataSource(ModelFactoryMixin):
         Returns:
             DataSource
         """
-        datasource_type = CONNECTOR_TO_DADASOURCE.get(connector.type)
+        datasource_type = CONNECTOR_TO_DATASOURCE.get(connector.type)
         return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
 
     @classmethod
