@@ -60,6 +60,9 @@ install-test: ### Installs regular and test dependencies
 install-all: ### Installs regular, dev, doc, and test dependencies
 	$(PIP) install ".[dev,doc,test]"
 
+install-all-editable: ### Installs regular, dev, doc, and test dependencies
+	$(PIP) install -e ".[dev,doc,test]"
+
 package:  ### Builds the package in wheel format
 	find src/ydata/sdk/ -name "*.pyi" -delete && rm -rf build dist
 	echo "$(version)" > src/ydata/sdk/VERSION
