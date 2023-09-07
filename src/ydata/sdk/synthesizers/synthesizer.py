@@ -199,7 +199,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         columns = [
             {
                 'name': c.name,
-                'generation': c.name in dataset_attrs.sortbykey or (c.name in dataset_attrs.generate_cols and c.name not in dataset_attrs.exclude_cols),
+                'generation': True and c.name not in dataset_attrs.exclude_cols,
                 'dataType': DataType(dataset_attrs.dtypes[c.name]).value if c.name in dataset_attrs.dtypes else c.datatype,
                 'varType': c.vartype,
             }
