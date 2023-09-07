@@ -15,7 +15,7 @@
         <link rel="next" href="../../common/types/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -990,7 +990,7 @@
       
         <li class="md-nav__item">
   <a href="#ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer" class="md-nav__link">
-    ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer
+    TimeSeriesSynthesizer
   </a>
   
 </li>
@@ -1019,27 +1019,27 @@
         
           <li class="md-nav__item">
   <a href="#ydata.sdk.synthesizers.PrivacyLevel" class="md-nav__link">
-    ydata.sdk.synthesizers.PrivacyLevel
+    PrivacyLevel
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.datascience.common.privacy.PrivacyLevel.BALANCED_PRIVACY_FIDELITY" class="md-nav__link">
+  <a href="#ydata.sdk.synthesizers.PrivacyLevel.BALANCED_PRIVACY_FIDELITY" class="md-nav__link">
     BALANCED_PRIVACY_FIDELITY
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.datascience.common.privacy.PrivacyLevel.HIGH_FIDELITY" class="md-nav__link">
+  <a href="#ydata.sdk.synthesizers.PrivacyLevel.HIGH_FIDELITY" class="md-nav__link">
     HIGH_FIDELITY
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.datascience.common.privacy.PrivacyLevel.HIGH_PRIVACY" class="md-nav__link">
+  <a href="#ydata.sdk.synthesizers.PrivacyLevel.HIGH_PRIVACY" class="md-nav__link">
     HIGH_PRIVACY
   </a>
   
@@ -1111,16 +1111,16 @@
 <div class="doc doc-object doc-class">
 
 
+
 <a id="ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer"></a>
   <div class="doc doc-contents first">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="ydata.sdk.synthesizers.synthesizer.BaseSynthesizer" href="../base/#ydata.sdk.synthesizers.synthesizer.BaseSynthesizer">BaseSynthesizer</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="ydata.sdk.synthesizers.synthesizer.BaseSynthesizer" href="../base/#ydata.sdk.synthesizers.synthesizer.BaseSynthesizer">BaseSynthesizer</a></code></p>
 
 
-
-        <details class="quote">
-          <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/synthesizers/timeseries.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-13">13</a></span>
+            <details class="quote">
+              <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/synthesizers/timeseries.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-13">13</a></span>
 <span class="normal"><a href="#__codelineno-0-14">14</a></span>
 <span class="normal"><a href="#__codelineno-0-15">15</a></span>
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
@@ -1246,7 +1246,7 @@
 <a id="__codelineno-0-74" name="__codelineno-0-74"></a>        <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-0-75" name="__codelineno-0-75"></a>            <span class="k">return</span> <span class="s2">&quot;TimeSeriesSynthesizer(Not Initialized)&quot;</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -1260,12 +1260,14 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
 
+
 <h2 id="ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer.fit" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">sortbykey</span><span class="p">,</span> <span class="n">privacy_level</span><span class="o">=</span><span class="n">PrivacyLevel</span><span class="o">.</span><span class="n">HIGH_FIDELITY</span><span class="p">,</span> <span class="n">entities</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">generate_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">anonymize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">condition_on</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">sortbykey</span><span class="p">,</span> <span class="n">privacy_level</span><span class="o">=</span><span class="n">PrivacyLevel</span><span class="o">.</span><span class="n">HIGH_FIDELITY</span><span class="p">,</span> <span class="n">entities</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">generate_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">anonymize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">condition_on</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h2>
 
@@ -1274,6 +1276,8 @@
   
       <p>Fit the synthesizer.</p>
 <p>The synthesizer accepts as training dataset either a pandas <a class="autorefs autorefs-external" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>DataFrame</code></a> directly or a YData <a class="autorefs autorefs-internal" href="../../datasources/datasource/#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1289,7 +1293,7 @@
         <tr>
           <td><code>X</code></td>
           <td>
-                <code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-internal" title="ydata.sdk.datasources.DataSource" href="../../datasources/datasource/#ydata.sdk.datasources.datasource.DataSource">DataSource</a>, <a class="autorefs autorefs-external" href="http://pandas.pydata.org/pandas-docs/stable/index.html#module-pandas">pandas</a>.<a class="autorefs autorefs-external" title="pandas.DataFrame" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame">DataFrame</a>]</code>
+                <code><a class="autorefs autorefs-external" title="typing.Union" href="https://docs.python.org/3/library/typing.html#typing.Union">Union</a>[<a class="autorefs autorefs-internal" title="ydata.sdk.datasources.DataSource" href="../../datasources/datasource/#ydata.sdk.datasources.datasource.DataSource">DataSource</a>, <a class="autorefs autorefs-external" title="pandas.DataFrame" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame">DataFrame</a>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1325,7 +1329,7 @@
             </div>
           </td>
           <td>
-                <code>PrivacyLevel.HIGH_FIDELITY</code>
+                <code><a class="autorefs autorefs-internal" title="ydata.datascience.common.PrivacyLevel.HIGH_FIDELITY" href="#ydata.sdk.synthesizers.PrivacyLevel.HIGH_FIDELITY">HIGH_FIDELITY</a></code>
           </td>
         </tr>
         <tr>
@@ -1443,9 +1447,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/synthesizers/timeseries.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-38">38</a></span>
+          <details class="quote">
+            <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/synthesizers/timeseries.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-38">38</a></span>
 <span class="normal"><a href="#__codelineno-0-39">39</a></span>
 <span class="normal"><a href="#__codelineno-0-40">40</a></span>
 <span class="normal"><a href="#__codelineno-0-41">41</a></span>
@@ -1509,17 +1513,19 @@
 <a id="__codelineno-0-68" name="__codelineno-0-68"></a>                        <span class="n">dtypes</span><span class="o">=</span><span class="n">dtypes</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">anonymize</span><span class="o">=</span><span class="n">anonymize</span><span class="p">,</span> <span class="n">privacy_level</span><span class="o">=</span><span class="n">privacy_level</span><span class="p">,</span>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>                        <span class="n">condition_on</span><span class="o">=</span><span class="n">condition_on</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
+
 <h2 id="ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer.sample" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">n_entities</span><span class="p">,</span> <span class="n">condition_on</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">n_entities</span><span class="p">,</span> <span class="n">condition_on</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h2>
 
@@ -1529,6 +1535,8 @@
       <p>Sample from a <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer"><code>TimeSeriesSynthesizer</code></a> instance.</p>
 <p>If a training dataset was not using any <code>entity</code> column, the Synthesizer assumes a single entity.
 A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer"><code>TimeSeriesSynthesizer</code></a> always sample the full trajectory of its entities.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1572,6 +1580,8 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1583,7 +1593,7 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-external" title="pandas.DataFrame" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame">pdDataFrame</a></code>
+                <code><a class="autorefs autorefs-external" title="pandas.DataFrame" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame">DataFrame</a></code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1594,9 +1604,9 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/synthesizers/timeseries.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
+          <details class="quote">
+            <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/synthesizers/timeseries.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-15">15</a></span>
 <span class="normal"><a href="#__codelineno-0-16">16</a></span>
 <span class="normal"><a href="#__codelineno-0-17">17</a></span>
 <span class="normal"><a href="#__codelineno-0-18">18</a></span>
@@ -1640,7 +1650,7 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
 <a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="p">}</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1657,14 +1667,14 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
 <div class="doc doc-object doc-class">
 
 
+
 <a id="ydata.sdk.synthesizers.PrivacyLevel"></a>
   <div class="doc doc-contents first">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-external" title="enum.Enum" href="https://docs.python.org/3/library/enum.html#enum.Enum">Enum</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="ydata.core.enum.StringEnum">StringEnum</span></code></p>
 
   
       <p>Privacy level exposed to the end-user.</p>
-
 
 
   
@@ -1681,8 +1691,9 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
 
 
 
-<h2 id="ydata.datascience.common.privacy.PrivacyLevel.BALANCED_PRIVACY_FIDELITY" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">BALANCED_PRIVACY_FIDELITY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
+
+<h2 id="ydata.sdk.synthesizers.PrivacyLevel.BALANCED_PRIVACY_FIDELITY" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">BALANCED_PRIVACY_FIDELITY</span> <span class="o">=</span> <span class="s1">&#39;BALANCED_PRIVACY_FIDELITY&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -1703,8 +1714,9 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
 
 
 
-<h2 id="ydata.datascience.common.privacy.PrivacyLevel.HIGH_FIDELITY" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">HIGH_FIDELITY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
+
+<h2 id="ydata.sdk.synthesizers.PrivacyLevel.HIGH_FIDELITY" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">HIGH_FIDELITY</span> <span class="o">=</span> <span class="s1">&#39;HIGH_FIDELITY&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -1725,8 +1737,9 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
 
 
 
-<h2 id="ydata.datascience.common.privacy.PrivacyLevel.HIGH_PRIVACY" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">HIGH_PRIVACY</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></code>
+
+<h2 id="ydata.sdk.synthesizers.PrivacyLevel.HIGH_PRIVACY" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">HIGH_PRIVACY</span> <span class="o">=</span> <span class="s1">&#39;HIGH_PRIVACY&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -1844,10 +1857,10 @@ A <a class="autorefs autorefs-internal" href="#ydata.sdk.synthesizers.timeseries
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>

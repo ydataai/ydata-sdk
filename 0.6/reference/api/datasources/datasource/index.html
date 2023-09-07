@@ -15,7 +15,7 @@
         <link rel="next" href="../metadata/">
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.eebd395e.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ecc896b0.min.css">
@@ -892,7 +892,7 @@
       
         <li class="md-nav__item">
   <a href="#ydata.sdk.datasources.datasource.DataSource" class="md-nav__link">
-    ydata.sdk.datasources.datasource.DataSource
+    DataSource
   </a>
   
 </li>
@@ -928,55 +928,55 @@
         
           <li class="md-nav__item">
   <a href="#ydata.sdk.datasources.Status" class="md-nav__link">
-    ydata.sdk.datasources.Status
+    Status
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.AVAILABLE" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.AVAILABLE" class="md-nav__link">
     AVAILABLE
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.DELETED" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.DELETED" class="md-nav__link">
     DELETED
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.FAILED" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.FAILED" class="md-nav__link">
     FAILED
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.PREPARING" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.PREPARING" class="md-nav__link">
     PREPARING
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.UNAVAILABLE" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.UNAVAILABLE" class="md-nav__link">
     UNAVAILABLE
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.UNKNOWN" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.UNKNOWN" class="md-nav__link">
     UNKNOWN
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.status.Status.VALIDATING" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.Status.VALIDATING" class="md-nav__link">
     VALIDATING
   </a>
   
@@ -997,20 +997,20 @@
         
           <li class="md-nav__item">
   <a href="#ydata.sdk.datasources.DataSourceType" class="md-nav__link">
-    ydata.sdk.datasources.DataSourceType
+    DataSourceType
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.datatype.DataSourceType.TABULAR" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.DataSourceType.TABULAR" class="md-nav__link">
     TABULAR
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ydata.sdk.datasources._models.datatype.DataSourceType.TIMESERIES" class="md-nav__link">
+  <a href="#ydata.sdk.datasources.DataSourceType.TIMESERIES" class="md-nav__link">
     TIMESERIES
   </a>
   
@@ -1180,14 +1180,17 @@
 <div class="doc doc-object doc-class">
 
 
+
 <a id="ydata.sdk.datasources.datasource.DataSource"></a>
   <div class="doc doc-contents first">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="ydata.sdk.utils.model_mixin.ModelFactoryMixin">ModelFactoryMixin</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="ydata.sdk.utils.model_mixin.ModelFactoryMixin">ModelFactoryMixin</span></code></p>
 
   
       <p>A <a class="autorefs autorefs-internal" href="#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a> represents a dataset
 to be used by a Synthesizer as training data.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1225,7 +1228,7 @@ to be used by a Synthesizer as training data.</p>
             </div>
           </td>
           <td>
-                <code>DataSourceType.TABULAR</code>
+                <code><a class="autorefs autorefs-internal" title="ydata.sdk.datasources._models.datatype.DataSourceType.TABULAR" href="#ydata.sdk.datasources.DataSourceType.TABULAR">TABULAR</a></code>
           </td>
         </tr>
         <tr>
@@ -1286,6 +1289,8 @@ to be used by a Synthesizer as training data.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Attributes:</strong></p>
   <table>
     <thead>
@@ -1343,10 +1348,9 @@ to be used by a Synthesizer as training data.</p>
     </tbody>
   </table>
 
-
-        <details class="quote">
-          <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-21"> 21</a></span>
+            <details class="quote">
+              <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-21"> 21</a></span>
 <span class="normal"><a href="#__codelineno-0-22"> 22</a></span>
 <span class="normal"><a href="#__codelineno-0-23"> 23</a></span>
 <span class="normal"><a href="#__codelineno-0-24"> 24</a></span>
@@ -1698,7 +1702,7 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-195" name="__codelineno-0-195"></a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-0-196" name="__codelineno-0-196"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -1712,12 +1716,14 @@ to be used by a Synthesizer as training data.</p>
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
 
+
 <h2 id="ydata.sdk.datasources.datasource.DataSource.create" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">create</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">DataSourceType</span><span class="o">.</span><span class="n">TABULAR</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait_for_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">create</span><span class="p">(</span><span class="n">connector</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">DataSourceType</span><span class="o">.</span><span class="n">TABULAR</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wait_for_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
@@ -1729,6 +1735,8 @@ to be used by a Synthesizer as training data.</p>
   <div class="doc doc-contents ">
   
       <p>Create a new <a class="autorefs autorefs-internal" href="#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1766,7 +1774,7 @@ to be used by a Synthesizer as training data.</p>
             </div>
           </td>
           <td>
-                <code>DataSourceType.TABULAR</code>
+                <code><a class="autorefs autorefs-internal" title="ydata.sdk.datasources._models.datatype.DataSourceType.TABULAR" href="#ydata.sdk.datasources.DataSourceType.TABULAR">TABULAR</a></code>
           </td>
         </tr>
         <tr>
@@ -1827,6 +1835,8 @@ to be used by a Synthesizer as training data.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1849,9 +1859,9 @@ to be used by a Synthesizer as training data.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-119">119</a></span>
+          <details class="quote">
+            <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-119">119</a></span>
 <span class="normal"><a href="#__codelineno-0-120">120</a></span>
 <span class="normal"><a href="#__codelineno-0-121">121</a></span>
 <span class="normal"><a href="#__codelineno-0-122">122</a></span>
@@ -1885,17 +1895,19 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-134" name="__codelineno-0-134"></a>    <span class="n">datasource_type</span> <span class="o">=</span> <span class="n">CONNECTOR_TO_DATASOURCE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">connector</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
 <a id="__codelineno-0-135" name="__codelineno-0-135"></a>    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_create</span><span class="p">(</span><span class="n">connector</span><span class="o">=</span><span class="n">connector</span><span class="p">,</span> <span class="n">datasource_type</span><span class="o">=</span><span class="n">datasource_type</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="n">datatype</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">wait_for_metadata</span><span class="o">=</span><span class="n">wait_for_metadata</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
+
 <h2 id="ydata.sdk.datasources.datasource.DataSource.get" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
@@ -1907,6 +1919,8 @@ to be used by a Synthesizer as training data.</p>
   <div class="doc doc-contents ">
   
       <p>Get an existing <a class="autorefs autorefs-internal" href="#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1950,6 +1964,8 @@ to be used by a Synthesizer as training data.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1972,9 +1988,9 @@ to be used by a Synthesizer as training data.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
+          <details class="quote">
+            <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
 <span class="normal"><a href="#__codelineno-0-100">100</a></span>
 <span class="normal"><a href="#__codelineno-0-101">101</a></span>
 <span class="normal"><a href="#__codelineno-0-102">102</a></span>
@@ -2012,17 +2028,19 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-116" name="__codelineno-0-116"></a>    <span class="n">datasource</span> <span class="o">=</span> <span class="n">ModelFactoryMixin</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">DataSource</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
 <a id="__codelineno-0-117" name="__codelineno-0-117"></a>    <span class="k">return</span> <span class="n">datasource</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
+
 <h2 id="ydata.sdk.datasources.datasource.DataSource.list" class="doc doc-heading">
-<code class="highlight language-python"><span class="nb">list</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="nb">list</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
@@ -2035,6 +2053,8 @@ to be used by a Synthesizer as training data.</p>
   
       <p>List the  <a class="autorefs autorefs-internal" href="#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a>
 instances.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2064,6 +2084,8 @@ instances.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2086,9 +2108,9 @@ instances.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-74">74</a></span>
+          <details class="quote">
+            <summary>Source code in <code>/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/ydata/sdk/datasources/datasource.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-74">74</a></span>
 <span class="normal"><a href="#__codelineno-0-75">75</a></span>
 <span class="normal"><a href="#__codelineno-0-76">76</a></span>
 <span class="normal"><a href="#__codelineno-0-77">77</a></span>
@@ -2136,7 +2158,7 @@ instances.</p>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="k">return</span> <span class="n">DataSourceList</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2153,14 +2175,14 @@ instances.</p>
 <div class="doc doc-object doc-class">
 
 
+
 <a id="ydata.sdk.datasources.Status"></a>
   <div class="doc doc-contents first">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="ydata.core.enum.StringEnum">StringEnum</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="ydata.core.enum.StringEnum">StringEnum</span></code></p>
 
   
       <p>Represent the status of a <a class="autorefs autorefs-internal" href="#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a>.</p>
-
 
 
   
@@ -2177,8 +2199,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.AVAILABLE" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">AVAILABLE</span> <span class="o">=</span> <span class="s1">&#39;available&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.AVAILABLE" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">AVAILABLE</span> <span class="o">=</span> <span class="s1">&#39;available&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2199,8 +2222,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.DELETED" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">DELETED</span> <span class="o">=</span> <span class="s1">&#39;deleted&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.DELETED" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">DELETED</span> <span class="o">=</span> <span class="s1">&#39;deleted&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2221,8 +2245,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.FAILED" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">FAILED</span> <span class="o">=</span> <span class="s1">&#39;failed&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.FAILED" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">FAILED</span> <span class="o">=</span> <span class="s1">&#39;failed&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2243,8 +2268,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.PREPARING" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">PREPARING</span> <span class="o">=</span> <span class="s1">&#39;preparing&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.PREPARING" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">PREPARING</span> <span class="o">=</span> <span class="s1">&#39;preparing&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2265,8 +2291,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.UNAVAILABLE" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">UNAVAILABLE</span> <span class="o">=</span> <span class="s1">&#39;unavailable&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.UNAVAILABLE" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">UNAVAILABLE</span> <span class="o">=</span> <span class="s1">&#39;unavailable&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2287,8 +2314,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.UNKNOWN" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.UNKNOWN" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2309,8 +2337,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.status.Status.VALIDATING" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">VALIDATING</span> <span class="o">=</span> <span class="s1">&#39;validating&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.Status.VALIDATING" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">VALIDATING</span> <span class="o">=</span> <span class="s1">&#39;validating&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2341,11 +2370,11 @@ instances.</p>
 <div class="doc doc-object doc-class">
 
 
+
 <a id="ydata.sdk.datasources.DataSourceType"></a>
   <div class="doc doc-contents first">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="ydata.core.enum.StringEnum">StringEnum</span></code></p>
-
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="ydata.core.enum.StringEnum">StringEnum</span></code></p>
 
 
 
@@ -2363,8 +2392,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.datatype.DataSourceType.TABULAR" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">TABULAR</span> <span class="o">=</span> <span class="s1">&#39;tabular&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.DataSourceType.TABULAR" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">TABULAR</span> <span class="o">=</span> <span class="s1">&#39;tabular&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2385,8 +2415,9 @@ instances.</p>
 
 
 
-<h2 id="ydata.sdk.datasources._models.datatype.DataSourceType.TIMESERIES" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">TIMESERIES</span> <span class="o">=</span> <span class="s1">&#39;timeseries&#39;</span></code>
+
+<h2 id="ydata.sdk.datasources.DataSourceType.TIMESERIES" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">TIMESERIES</span> <span class="o">=</span> <span class="s1">&#39;timeseries&#39;</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -2504,10 +2535,10 @@ instances.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
