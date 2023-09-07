@@ -179,7 +179,10 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 "The dataset attributes are invalid:\n {}".format('\n'.join(error_msgs)))
 
     @staticmethod
-    def _metadata_to_payload(datatype: DataSourceType, ds_metadata: Metadata, dataset_attrs: Optional[DataSourceAttrs] = None) -> list:
+    def _metadata_to_payload(
+        datatype: DataSourceType, ds_metadata: Metadata,
+        dataset_attrs: Optional[DataSourceAttrs] = None, target: str | None = None
+    ) -> dict:
         """Transform a the metadata and dataset attributes into a valid
         payload.
 
@@ -187,39 +190,32 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             datatype (DataSourceType): datasource type
             ds_metadata (Metadata): datasource metadata object
             dataset_attrs ( Optional[DataSourceAttrs] ): (optional) Dataset attributes
+            target (Optional[str]): (optional) target column name
 
         Returns:
-            payload dictionary
+            metadata payload dictionary
         """
-        columns = {}
-        for c in ds_metadata.columns:
-            columns[c.name] = {
+
+        columns = [
+            {
                 'name': c.name,
-                'generation': True,
-                'dataType': c.datatype if c.datatype != DataType.STR.value else DataType.CATEGORICAL.value,
+                'generation': c.name in dataset_attrs.sortbykey or (c.name in dataset_attrs.generate_cols and c.name not in dataset_attrs.exclude_cols),
+                'dataType': DataType(dataset_attrs.dtypes[c.name]).value if c.name in dataset_attrs.dtypes else c.datatype,
                 'varType': c.vartype,
-                'entity': False,
             }
+        for c in ds_metadata.columns ]
+
+        metadata = {
+            'columns': columns,
+            'target': target
+        }
+
         if dataset_attrs is not None:
             if datatype == DataSourceType.TIMESERIES:
-                for c in ds_metadata.columns:
-                    columns[c.name]['sortBy'] = c.name in dataset_attrs.sortbykey
+                metadata['sortBy'] = [c for c in dataset_attrs.sortbykey]
+                metadata['entity'] = [c for c in dataset_attrs.entities]
 
-                for c in dataset_attrs.entities:
-                    columns[c]['entity'] = True
-
-            for c in dataset_attrs.generate_cols:
-                columns[c]['generation'] = True
-
-            for c in dataset_attrs.exclude_cols:
-                columns[c]['generation'] = False
-
-        # Update metadata based on the datatypes and vartypes provided by the user
-        for k, v in dataset_attrs.dtypes.items():
-            if k in columns and columns[k]['generation']:
-                columns[k]['dataType'] = v.value
-
-        return list(columns.values())
+        return metadata
 
     def _fit_from_datasource(
         self,
@@ -232,25 +228,19 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         condition_on: Optional[List[str]] = None
     ) -> None:
         _name = name if name is not None else str(uuid4())
-        columns = self._metadata_to_payload(
-            DataSourceType(X.datatype), X.metadata, dataset_attrs)
+        metadata = self._metadata_to_payload(
+            DataSourceType(X.datatype), X.metadata, dataset_attrs, target)
         payload = {
             'name': _name,
             'dataSourceUID': X.uid,
-            'metadata': {
-                'dataType': X.datatype,
-                "columns": columns,
-            },
-            'extraData': {
-                'privacy_level': privacy_level.value
-            }
+            'metadata': metadata,
+            'extraData': {},
+            'privacyLevel': privacy_level.value
         }
         if anonymize is not None:
             payload["extraData"]["anonymize"] = anonymize
         if condition_on is not None:
             payload["extraData"]["condition_on"] = condition_on
-        if target is not None:
-            payload['metadata']['target'] = target
 
         response = self._client.post('/synthesizer/', json=payload)
         data: list = response.json()
