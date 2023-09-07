@@ -203,7 +203,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                 'dataType': DataType(dataset_attrs.dtypes[c.name]).value if c.name in dataset_attrs.dtypes else c.datatype,
                 'varType': c.vartype,
             }
-        for c in ds_metadata.columns ]
+            for c in ds_metadata.columns]
 
         metadata = {
             'columns': columns,
