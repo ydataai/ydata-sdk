@@ -26,4 +26,3 @@ Fabric includes a set of integrated components for data ingestion, data profilin
 
 
     ![Fabric Data-Centric Flow](../assets/overview/fabric_data_centric_flow.png){: style="height:398px;width:1042px;align:center"}
-
