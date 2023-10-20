@@ -1,6 +1,6 @@
 # Fabric's Data Catalog
 
-Fabric’s Catalog is a project-based data repository that enables data scientists to discover, understand, and access relevant datasets. It provides a **comprehensive inventory of available Connectors and Data Sources**, along with **descriptive metadata** that allows data scientists to swiftly and efficiently locate and evaluate existing data sources, assess their quality, and gain insights into the data's structure and content. 
+Fabric’s Catalog is a project-based data repository that enables data scientists to discover, understand, and access relevant datasets. It provides a **comprehensive inventory of available Connectors and Data Sources**, along with **descriptive metadata** that allows data scientists to swiftly and efficiently locate and evaluate existing data sources, assess their quality, and gain insights into the data's structure and content.
 
 <p align="center"><iframe width="600" height="400" src="https://www.youtube.com/embed/3JyuJlQLM4Q" title="Data profiling in a single click" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 
