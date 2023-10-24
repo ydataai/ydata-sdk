@@ -1,11 +1,10 @@
+Fabric is a Data-Centric AI workbench that **accelerates AI development by helping data scientists achieve production-quality data**. It is an end-to-end data development solution that can be hosted on cloud environments (e.g., Azure, AWS, and GCP, among others) or on-prem.
 
 !!! note "Ready to achieve high-quality data to train you machine learning models?"
 
     *Fabric Community Version* is free! Create a YData account so you can start using today!
 
     [Create account](https://ydata.ai/ydata-fabric-free-trial){ .md-button .md-button--ydata .md-button--stretch}
-
-Fabric is a Data-Centric AI workbench that accelerates AI development by helping data scientists achieve production-quality data. It is an end-to-end data development solution that can be hosted on cloud environments (e.g., Azure, AWS, and GCP, among others) or on-prem.
 
 With Fabric data scientists can explore **automated quality profiling** for a deeper understanding of their data assets, and leverage **smart synthetic data** to unlock data-sharing initiatives, improve data through augmentation or rebalancing, and mitigate bias in their datasets.
 
@@ -19,7 +18,7 @@ Fabric includes a set of integrated components for data ingestion, data profilin
 - **Pipelines:** General-purpose job orchestrator with built-in scalability, modularity, reporting, and experiment-tracking capabilities, useful for iterative experimentation at scale.
 
 
-???+ tip "Fabric's Data-Centric AI Flow"
+??? tip "Fabric's Data-Centric AI Flow"
     While each module provides value by itself, **when used together they enable a compelling data-centric narrative arc** that goes from data exploration to data improvement while abstracting away shared core needs like infrastructure, data access, and workspace management:
 
 
