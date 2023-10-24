@@ -15,4 +15,3 @@ The Synthetic Data module includes the following functionalities:
 
 !!! question "Should I buy or build a synthetic data generation solution?"
     If you’re looking to fully unlock your assets for data sharing or secure development initiatives for your organization, open-source solutions will not be able to cope with your specific business needs, data flow’s complexity, and scale. Fabric’s interfaces (GUI and code) enable different profiles within an organization to leverage the benefits of synthetic data, from data stewards and quality assurance engineers all the way to data analysts and data scientists. Learn more about Fabric's main features and benefits [by downloading this whitepaper](https://ydata.ai/whitepaper-sdv-vs-fabric).
-
