@@ -45,19 +45,19 @@ YData SDK is currently composed by the following main modules:
 ## Supported data formats
 
 === "Tabular"
-    ![Tabular data synthesizer](assets/500x330/single_table.png){ align=right }
+    ![Tabular data synthesizer](../assets/500x330/single_table.png){ align=right }
     The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
 
     [Know more](#){ .md-button .md-button--ydata}
 
 === "Time-Series"
-    ![Timeseries Synthesizer](assets/500x330/time_series.png){ align=left }
+    ![Timeseries Synthesizer](../assets/500x330/time_series.png){ align=left }
     The **TimeSeriesSynthesizer** is perfect to synthesize both regularly and not evenly spaced time-series, from smart-sensors to stock.
 
     [Know more](#){ .md-button .md-button--ydata}
 
 === "Transactional"
-    ![Transactional data synthesizer](assets/500x330/time_series.png){ align=right }
+    ![Transactional data synthesizer](../assets/500x330/time_series.png){ align=right }
     The **TimeSeriesSynthesizer** supports transactional data, known to have highly irregular time intervals between records and directional relations between entities.
 
     <span style="color:grey">*Coming soon*</span>
@@ -65,7 +65,7 @@ YData SDK is currently composed by the following main modules:
     [Know more](#){ .md-button .md-button--ydata}
 
 === "Relational databases"
-    ![Relational databases synthesizer](assets/500x330/multi_table.png){ align=left }
+    ![Relational databases synthesizer](../assets/500x330/multi_table.png){ align=left }
     The **MultiTableSynthesizer** is perfect to learn how to replicate the data within a relational database schema.
 
     <span style="color:grey">*Coming soon*</span>
