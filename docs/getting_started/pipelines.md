@@ -1,6 +1,6 @@
 # Pipelines
 
-Pipelines allow data scientists to treat code snippets as building blocks, enabling them to **build scalable and complex workflows** while leveraging Jupyter Notebooks or Python scripts. From data transformations to data synthesis, model training, or inference, **pipelines enable the orchestration of any job**, allowing data teams to explore and compare the effects of different data preparation decisions. 
+Pipelines allow data scientists to treat code snippets as building blocks, enabling them to **build scalable and complex workflows** while leveraging Jupyter Notebooks or Python scripts. From data transformations to data synthesis, model training, or inference, **pipelines enable the orchestration of any job**, allowing data teams to explore and compare the effects of different data preparation decisions.
 
 <p align="center"><iframe width="600" height="400" src="https://www.youtube.com/embed/feNoXv34waM" title="How to build data quality pipelines with YData Fabric" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 
