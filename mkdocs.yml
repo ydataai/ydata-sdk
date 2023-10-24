@@ -9,6 +9,7 @@ nav:
     - 'index.md'
     - What is Fabric?: 'index.md'
     - Data Catalog: 'getting_started/data_catalog.md'
+    - Synthetic Data: 'getting_started/synthetic_data.md'
   - SDK:
     - 'sdk/index.md'
     - Overview: 'sdk/index.md'
