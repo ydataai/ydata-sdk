@@ -6,12 +6,12 @@ dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
   - Getting Started:
-    - 'index.md'
     - What is Fabric?: 'index.md'
     - Data Catalog: 'getting_started/data_catalog.md'
     - Synthetic Data: 'getting_started/synthetic_data.md'
     - Labs: 'getting_started/labs.md'
     - Pipelines: 'getting_started/pipelines.md'
+    - SDK: 'getting_started/sdk.md'
   - SDK:
     - 'sdk/index.md'
     - Overview: 'sdk/index.md'
