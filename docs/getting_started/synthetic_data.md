@@ -1,4 +1,4 @@
-# Fabric's Synthetic Data
+# Synthetic Data
 
 Fabric’s Synthetic Data allows data scientists to leverage advanced Machine Learning models to **create high-quality synthetic data** that mimics the characteristics and behavior of real data while maintaining data privacy. This technology unlocks **privacy-enhanced data sharing**, fosters data quality through **data augmentation**, and boosts the fairness and generalization ability of AI models by **increasing the diversity of training datasets** through the tailored generation of underrepresented concepts in real data.
 
