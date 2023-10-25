@@ -12,6 +12,7 @@ nav:
     - Labs: 'getting_started/labs.md'
     - Pipelines: 'getting_started/pipelines.md'
     - SDK: 'getting_started/sdk.md'
+    - Quickstart: 'getting_started/quickstart.md'
   - SDK:
     - 'sdk/index.md'
     - Overview: 'sdk/index.md'
