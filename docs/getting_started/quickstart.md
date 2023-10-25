@@ -56,7 +56,7 @@ Finally, you can give your Synthesizer a descriptive name and set specific confi
 
 <figure markdown>
 ![Synthesizer Configuration](../assets/quickstart/config_synthesizer.png){: style="height:400px;width:1000px"}
-</figure>  
+</figure>
 
 Your Synthesizer will be created and trained and will appear in the **"Synthetic Data"** tab.
 
