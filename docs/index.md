@@ -65,7 +65,7 @@ The Synthetic Data module includes the following functionalities:
 
 ## Labs
 
-Laboratories (referred to as **Labs**) are on-demand, cloud-based data development environments with automatically provisioned hardware. Labs enable a full platform integration via the YData Python SDK, allowing users to easily access Data Sources, Synthesizers, and the workspace’s shared files. 
+Laboratories (referred to as **Labs**) are on-demand, cloud-based data development environments with automatically provisioned hardware. Labs enable a full platform integration via the YData Python SDK, allowing users to easily access Data Sources, Synthesizers, and the workspace’s shared files.
 
 <p align="center"><iframe width="600" height="400" src="https://www.youtube.com/embed/ccF0RaxVLrk?t=44" title="Fabric - The data development platform for improved AI performance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 
