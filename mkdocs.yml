@@ -1,15 +1,18 @@
-site_name: "YData SDK"
+site_name: "YData Fabric"
 repo_url: https://github.com/ydataai/ydata-sdk
 repo_name: ydataai/ydata-sdk
 edit_uri: ""
 dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
-  - Getting started:
+  - Getting Started:
     - 'index.md'
-    - Overview: 'index.md'
-    - Installation: 'getting-started/installation.md'
-    - Quickstart: 'getting-started/quickstart.md'
+    - What is Fabric?: 'index.md'
+  - SDK:
+    - 'sdk/index.md'
+    - Overview: 'sdk/index.md'
+    - Installation: 'sdk/installation.md'
+    - Quickstart: 'sdk/quickstart.md'
   - Examples:
       - Generate Tabular Data: "examples/synthesize_tabular_data.md"
       - Generate Time-Series Data: "examples/synthesize_timeseries_data.md"
