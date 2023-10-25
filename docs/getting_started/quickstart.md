@@ -2,13 +2,13 @@
 
 
 ## How to load your first dataset?
-To load your first dataset into the Data Catalog, you can start by clicking on **"Add Dataset"** from the **Home** section. 
+To load your first dataset into the Data Catalog, you can start by clicking on **"Add Dataset"** from the **Home** section.
 
 <figure markdown>
 ![Data Catalog Add Dataset](../assets/quickstart/data_catalog_add_dataset.png){: style="height:550px;width:1000px"}
-</figure>   
+</figure>
 
-Since each dataset is associated with a Connector, you'll need to create one by clicking on **"Create Connector"**. 
+Since each dataset is associated with a Connector, you'll need to create one by clicking on **"Create Connector"**.
 
 <figure markdown>
 ![Data Catalog Choose Connector](../assets/quickstart/data_catalog_connectors.png){: style="height:500px;width:550px"}
