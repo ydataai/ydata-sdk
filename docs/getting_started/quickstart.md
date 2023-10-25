@@ -104,7 +104,7 @@ Your Lab will be created and added the the **"Labs"** tab, where you'll be able 
 ![Lab List](../assets/quickstart/labs_list.png){: style="height:600px;width:1500px"}
 </figure>
 
-From here, you can use the **"Generic Pipeline Editor"** to start building your first Pipeline. 
+From here, you can use the **"Generic Pipeline Editor"** to start building your first Pipeline.
 
 <figure markdown>
 ![Pipeline Editor](../assets/quickstart/create_pipeline.png){: style="height:600px;width:1500px"}
@@ -119,6 +119,3 @@ The built Pipeline can be directly ran from the editor and it will then be autom
 <figure markdown>
 ![Pipeline Editor](../assets/quickstart/first_pipeline.png){: style="height:600px;width:1300px"}
 </figure>
-
-
-
