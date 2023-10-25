@@ -61,24 +61,24 @@ Finally, you can give your Synthesizer a descriptive name and set specific confi
 Your Synthesizer will be created and trained and will appear in the **"Synthetic Data"** tab.
 
 <figure markdown>
-![Synthesizer Configuration](../assets/quickstart/synthesizer_list.png){: style="height:600px;width:1200px"}
+![Synthesizer List](../assets/quickstart/synthesizer_list.png){: style="height:600px;width:1200px"}
 </figure>
 
 Once the Synthesizer has finished training, you're ready to start generating your first synthetic dataset. From the list of available Synthesizers, you can click on the one you've just created to open its details. You'll be able to check several properties of your Synthesizer and even download a PDF report with a comphreensive overview of your Synthetic Data Quality Metrics. To generate a new synthetic data sample, you'll just need to access the **"Go to Generation" or "Generation"** tabs.
 
 <figure markdown>
-![Synthesizer Configuration](../assets/quickstart/go_generation.png){: style="height:600px;width:1200px"}
+![Sample Generation Tab](../assets/quickstart/go_generation.png){: style="height:600px;width:1200px"}
 </figure>
 
 You can then define the number of new synthetic records to generate, and your sample history will be shown below. You'll be able to **"Compare"** your synthetic data against the original data, and add the synthetic data to the Data Catalog.
 
 <figure markdown>
-![Synthesizer Configuration](../assets/quickstart/generate_samples.png){: style="height:600px;width:1200px"}
+![Generate New Samples](../assets/quickstart/generate_samples.png){: style="height:600px;width:1200px"}
 </figure>
 
 <span style="color:grey">*Note:*</span>
 If you have a previously created Synthesizer already, you can directly generate new samples from the **Home** section, by accessing the **"Generate"** tab and choosing your desired Synthesizer. The widget will directly lead you to the generation section shown above.
 
 <figure markdown>
-![Synthesizer Configuration](../assets/quickstart/generate_from_home.png){: style="height:600px;width:1200px"}
+![Home Generate Widget](../assets/quickstart/generate_from_home.png){: style="height:600px;width:1200px"}
 </figure>
