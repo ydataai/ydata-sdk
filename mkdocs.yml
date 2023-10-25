@@ -8,6 +8,7 @@ nav:
   - Getting Started:
     - 'index.md'
     - What is Fabric?: 'index.md'
+    - Quickstart: 'getting_started/quickstart.md'
   - SDK:
     - 'sdk/index.md'
     - Overview: 'sdk/index.md'
