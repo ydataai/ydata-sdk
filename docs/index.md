@@ -24,7 +24,7 @@ Fabric includes a set of integrated components for data ingestion, data profilin
     While each module provides value by itself, **when used together they enable a compelling data-centric narrative arc** that goes from data exploration to data improvement while abstracting away shared core needs like infrastructure, data access, and workspace management:
 
 
-    ![Fabric Data-Centric Flow](../assets/overview/fabric_data_centric_flow.png){: style="height:398px;width:1042px;align:center"}
+    ![Fabric Data-Centric Flow](assets/overview/fabric_data_centric_flow.png){: style="height:398px;width:1042px;align:center"}
 
 
 ## Data Catalog
@@ -101,4 +101,4 @@ The YData Python SDK acts as a Python interface to the functionalities available
 - **Data Profiling** <span style="color:grey">*Coming soon*</span>
 
 ???+ example "Starting out with YData SDK?"
-    For full details and installation and quickstart instructions, check the [SDK dedicated section.](../sdk/index.md)
+    For full details and installation and quickstart instructions, check the [SDK dedicated section.](sdk/index.md)
