@@ -1,4 +1,4 @@
-Recognizing the modern enterprise data stack comprises a vast array of services and tools, **Fabric is augmented by a growing ecosystem of partners and integrations**, acting both upstream and downstream in the lifecycle of an AI project. 
+Recognizing the modern enterprise data stack comprises a vast array of services and tools, **Fabric is augmented by a growing ecosystem of partners and integrations**, acting both upstream and downstream in the lifecycle of an AI project.
 
 The list below is a non-exhaustive compilation of *MLOps*, *DataOps* and *Cloud Providers* which plug nicely into Fabric:
 

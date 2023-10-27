@@ -1,7 +1,7 @@
 The first technical step in any data science project is to examine the data and understand its quality, value and fitness for purpose. For this reason,  Fabric’s Data Catalog includes an **Overview and Warnings** module  for a better understanding of the available datasets.
 
 ## Overview
-When clicking on a **Dataset** available from the **Data Catalog**, it will show its details page, revealing an **Overview and Warnings** section. 
+When clicking on a **Dataset** available from the **Data Catalog**, it will show its details page, revealing an **Overview and Warnings** section.
 
 <figure markdown>
 ![Dataset Overview](../assets/data_catalog/dataset_overview.png){: style="height:550px;width:1200px"}
@@ -20,7 +20,7 @@ In the **Overview**, you’ll get a an overall perspective of your dataset’s c
 
 
 ## Data Quality Warnings
-To enable data-centric development, Fabric **automatically detects and signals potential data quality warnings**. Warnings highlight certain peculiarities of data that might require further investigation prior to model development and deployment. However, *the validity of each issued warning and whether follow-up mitigation work is needed will depend on the specific use case and on domain knowledge*. 
+To enable data-centric development, Fabric **automatically detects and signals potential data quality warnings**. Warnings highlight certain peculiarities of data that might require further investigation prior to model development and deployment. However, *the validity of each issued warning and whether follow-up mitigation work is needed will depend on the specific use case and on domain knowledge*.
 
 <figure markdown>
 ![Dataset Warnings](../assets/data_catalog/data_warnings.png){: style="height:300px;width:1000px"}
@@ -47,4 +47,3 @@ Fabric further enables the **interactive exploration of warnings**, filtering ov
 <figure markdown>
 ![Explore Warnings](../assets/data_catalog/explore_warnings.png){: style="height:630px;width:700px"}
 </figure>
-

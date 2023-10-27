@@ -1,4 +1,4 @@
-To overcome the concerns around data privacy and enable secure data sharing, Fabric incorporates an **automated Personal Identifiable Information (PII) identification engine** to help detect and handle potential PII. 
+To overcome the concerns around data privacy and enable secure data sharing, Fabric incorporates an **automated Personal Identifiable Information (PII) identification engine** to help detect and handle potential PII.
 
 ???+ abstract "What can be considered Personal Identifiable Information (PII)?"
     PII is information that, when used alone or with other relevant data, can uniquely identify an individual. PII may contain **direct indentifiers** (e.g., ID, VAT, Credit Card Number) and/or **quasi-identifiers** (e.g., age, gender, race, occupation). Correctly classifying these is crucial to reduce the risk of re-identification. Learn more about how [Fabric mitigates the risk of re-identification using synthetic data](https://ydata.ai/resources/identity-disclosure-risk-in-a-fully-synthetic-dataset).

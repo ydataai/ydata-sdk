@@ -17,7 +17,7 @@ The data profiling essentially enables the following analysis:
 
 The data profiling highlights a set of **statistical properties**, such as:
 
-- **Variables Properties**: 
+- **Variables Properties**:
 	- Descriptive statistics
 	- Quantile statistics
 	- Histogram, Common Values, and Extreme Values

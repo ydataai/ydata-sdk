@@ -19,7 +19,7 @@ The Connectors offer:
 ## What are Datasets?
 Using a **Connector**, it is possible to connect to specific **Datasets**, yielding a **Data Catalog**. Currently, Fabric supports **tabular**, **time series (including transactional data)** in a variety of file formats and in **multi-table RDBMS** settings.
 
-**Datasets** are a reference to data existing in different sources (filesystems, RDBMS, etc.). They hold the metadata information (such as variable types) as well as an extensive and comprehensive data quality profiling for a general understanding of the data. 
+**Datasets** are a reference to data existing in different sources (filesystems, RDBMS, etc.). They hold the metadata information (such as variable types) as well as an extensive and comprehensive data quality profiling for a general understanding of the data.
 
 The list of available **Datasets and Connectors** is accessible via the **Data Catalog**, on the sidebar. The status of the connection to the data is periodically checked and clicking on a Dataset will open its details page.
 
