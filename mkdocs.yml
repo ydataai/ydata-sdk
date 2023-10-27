@@ -9,6 +9,12 @@ nav:
     - 'index.md'
     - What is Fabric?: 'index.md'
     - Quickstart: 'getting_started/quickstart.md'
+  - Data Catalog:
+    - Connectors and Datasets: 'data_catalog/connectors_and_datasets.md'
+    - Overview and Warnings: 'data_catalog/overview_warnings.md'
+    - Data Profiling: 'data_catalog/data_profiling.md'
+    - PII Classification and Management: 'data_catalog/pii.md'
+    - Supported Integrations: 'data_catalog/supported_integrations.md'
   - SDK:
     - 'sdk/index.md'
     - Overview: 'sdk/index.md'
