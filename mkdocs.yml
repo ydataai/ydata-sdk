@@ -5,9 +5,7 @@ edit_uri: ""
 dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
-  - Getting Started:
-    - 'index.md'
-    - What is Fabric?: 'index.md'
+  - Welcome: 'index.md'
   - SDK:
     - 'sdk/index.md'
     - Overview: 'sdk/index.md'
@@ -39,7 +37,6 @@ nav:
 theme:
   name: material
   language: en
-  font: 'Roboto'
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: ydata
