@@ -7,6 +7,17 @@ site_dir: "static/docs"
 nav:
   - Welcome: 'index.md'
   - Get started with Fabric: "get-started/fabric_community.md"
+  - Synthetic Data:
+      - "synthetic_data/index.md"
+      - Single Table:
+          "synthetic_data/single_table/index.md"
+      - Time-Series:
+          "synthetic_data/timeseries/index.md"
+      - Relational databases:
+          "synthetic_data/relational_database/index.md"
+      - Synthetic data evaluation:
+        - Profiling compare: "synthetic_data/synthetic_data_quality/compare_profiling.md"
+        - PDF report: "synthetic_data/synthetic_data_quality/report_pdf.md"
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
