@@ -4,7 +4,7 @@
 AI development by helping data practitioners achieve production-quality data.
 
 Much like for software engineering the quality of code is a must for the success of software development, Fabric
-accounts for the data quality requirements for data-driven applications. It introduces standards, processes, and 
+accounts for the data quality requirements for data-driven applications. It introduces standards, processes, and
 acceleration to empower data science, analytics, and data engineering teams.
 
 **(Add here the image from the website - I've already created the img folder to centralize all the doc images)**
@@ -17,7 +17,7 @@ acceleration to empower data science, analytics, and data engineering teams.
 With Fabric, you can standardize the understanding of your data, quickly identify data quality issues, streamline and
 version your data preparation workflows and finally leverage synthetic data for privacy-compliance or as a tool to boost ML
 performance. Fabric is a development environment that supports a faster and easier process of preparing data for AI development.
-Data practitioners are using Fabric to: 
+Data practitioners are using Fabric to:
 
 - Establish a centralized and collaborative repository for data projects.
 - Create and share comprehensive documentation of data, encompassing data schema, structure, and personally identifiable information (PII)
