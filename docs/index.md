@@ -1,73 +1,85 @@
-<p></p>
-<p align="center"><img width="500" src="https://assets.ydata.ai/sdk/logo_SDK_col_red_black.png" alt="YData Logo"></p>
-<p></p>
+# Welcome
 
-[![pypi](https://img.shields.io/pypi/v/ydata-sdk)](https://pypi.org/project/ydata-sdk)
-![Pythonversion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)
-[![downloads](https://pepy.tech/badge/ydata-sdk/month)](https://pepy.tech/project/ydata-sdk)
+<a href="https://ydata.ai/products/fabric"><u>YData Fabric</u></a> is a **Data-Centric AI** development platform that accelerates AI development by helping data practitioners achieve production-quality data.
 
-!!! note "YData SDK for improved data quality everywhere!"
 
-    *ydata-sdk* is here! Create a YData account so you can start using today!
+Much like for software engineering the quality of code is a must for the success of software development, Fabric
+accounts for the data quality requirements for data-driven applications. It introduces standards, processes, and
+acceleration to empower data science, analytics, and data engineering teams.
 
-    [Create account](https://ydata.ai/ydata-fabric-free-trial){ .md-button .md-button--ydata .md-button--stretch}
+<p align="center"><img src="assets/overview/data_centric_approach.png" alt="Data-Centric AI Approach" width="900"></p>
 
-## Overview
 
-The *YData SDK* is an ecosystem of methods that allows users to, through a python interface, adopt a *Data-Centric* approach towards the AI development. The solution includes a set of integrated components for data ingestion, standardized data quality evaluation and data improvement, such as *synthetic data generation*, allowing an iterative improvement of the datasets used in high-impact business applications.
+### Try Fabric
+- <a href="get-started/fabric_community/"><u>Get started with Fabric Community</u></a>
 
-**Synthetic data** can be used as Machine Learning performance enhancer, to augment or mitigate the presence of bias in real data. Furthermore, it can be used as a Privacy Enhancing Technology, to enable data-sharing initiatives or even to fuel testing environments.
 
-Under the YData-SDK hood, you can find a set of algorithms and metrics based on statistics and deep learning based techniques, that will help you to accelerate your data preparation.
+## Why adopt YData Fabric?
 
-## Current functionality
+With Fabric, you can standardize the understanding of your data, quickly identify data quality issues, streamline and
+version your data preparation workflows and finally leverage synthetic data for privacy-compliance or as a tool to boost ML
+performance. Fabric is a development environment that supports a faster and easier process of preparing data for AI development.
+Data practitioners are using Fabric to:
 
-YData SDK is currently composed by the following main modules:
+- Establish a centralized and collaborative repository for data projects.
+- Create and share comprehensive documentation of data, encompassing data schema, structure, and personally identifiable information (PII).
+- Prevent data quality issues with standardized data quality profiling, providing visual understanding and warnings on potential issues.
+- Accelerate data preparation with customizable recipes.
+- Improve machine learning performance with optimal data preparation through solutions such as synthetic data.
+- Shorten access to data with privacy-compliant synthetic data generatio.
+- Build and streamline data preparation workflows effortlessly through a user-friendly drag-and-drop interface.
+- Efficiently manage business rules, conduct comparisons, and implement version control for data workflows using pipelines.
 
-* **Datasources**
-     - YData’s SDK includes several connectors for easy integration with existing data sources. It supports several storage types, like filesystems and RDBMS. Check the list of connectors.
-     - SDK’s Datasources run on top of Dask, which allows it to deal with not only small workloads but also larger volumes of data.
+## 📝 Key features
 
-* **Synthesizers**
-     - Simplified interface to train a generative model and learn in a data-driven manner the behavior, the patterns and original data distribution. Optimize your model for [privacy or utility](examples/synthesize_with_privacy_control.md) use-cases.
-     - From a trained synthesizer, you can generate synthetic samples as needed and parametrise the number of records needed.
-     - [Anonymization](examples/synthesize_with_anonymization.md) and [privacy](examples/synthesize_with_privacy_control.md) preserving capabilities to ensure that synthetic datasets does not contain Personal Identifiable Information (PII) and can safely be shared!
-     - [Conditional sampling](examples/synthesize_with_conditional_sampling.md) can be used to restrict the domain and values of specific features in the sampled data.
+### Data Catalog
+Fabric Data Catalog provides a centralized perspective on datasets within a project-basis, optimizing data management
+through seamless integration with the organization's existing data architectures via scalable connectors (e.g., MySQL, Google Cloud Storage, AWS S3).
+It standardizes data quality profiling, streamlining the processes of efficient data cleaning and preparation,
+while also automating the identification of Personally Identifiable Information (PII) to facilitate compliance with privacy regulations.
 
-* **Synthetic data quality report**
-    <span style="color:grey">*Coming soon*</span>
-     - An extensive synthetic data quality report that measures 3 dimensions: privacy, utility and fidelity of the generated data. The report can be downloaded in PDF format for ease of sharing and compliance purposes or as a JSON to enable the integration in data flows.
+Explore how a Data Catalog through a <a href="https://www.youtube.com/watch?v=3JyuJlQLM4Q"><u>centralized repository of your datasets, schema validation, and automated data profiling</u></a>.
 
-* **Profiling**
-    <span style="color:grey">*Coming soon*</span>
-    - A set of metrics and algorithms summarizes datasets quality in three main dimensions: warnings, univariate analysis and a multivariate perspective.
 
-## Supported data formats
+### Labs
+Fabric's Labs environments provide collaborative, scalable, and secure workspaces layered on a flexible infrastructure, enabling users to
+seamlessly switch between CPUs and GPUs based on their computational needs. Labs are familiar environments that empower data developers with
+powerful IDEs (Jupyter Notebooks, Visual Code or H2O flow) and a seamless experience with the tools they already love combined with YData's
+cutting-edge SDK for data preparation.
 
-=== "Tabular"
-    ![Tabular data synthesizer](assets/500x330/single_table.png){ align=right }
-    The **RegularSynthesizer** is perfect to synthesize high-dimensional data, that is time-indepentent with high quality results.
+Learn how to use the Labs to <a href="https://www.youtube.com/watch?v=UJ1JcpLnj3s"><u>generate synthetic data in a familiar Python interface</u></a>.
 
-    [Know more](#){ .md-button .md-button--ydata}
+### Synthetic data
+Synthetic data, enabled by YData Fabric, provides data developers with a user-friendly interfaces (UI and code) for
+generating artificial datasets, offering a versatile solution across formats like tabular, time-series and multi-table datasets.
+The generated synthetic data holds the same value of the original and aligns intricately with specific business rules, contributing
+to machine learning models enhancement, mitigation of privacy concerns and more robustness for data developments.
+Fabric offers synthetic data that is ease to adapt and configure, allows customization in what concerns privacy-utility trade-offs.
 
-=== "Time-Series"
-    ![Timeseries Synthesizer](assets/500x330/time_series.png){ align=left }
-    The **TimeSeriesSynthesizer** is perfect to synthesize both regularly and not evenly spaced time-series, from smart-sensors to stock.
+Learn how you to <a href="https://www.youtube.com/watch?v=GsfggG9PhgE"><u>create high-quality synthetic data</u></a> within a user-friendly UI using Fabric’s data synthesis flow.
 
-    [Know more](#){ .md-button .md-button--ydata}
+### Pipelines
+Fabric Pipelines streamlines data preparation workflows by automating, orchestrating, and optimizing data pipelines,
+providing benefits such as flexibility, scalability, monitoring, and reproducibility for efficient and reliable data processing.
+The intuitive drag-and-drop interface, leveraging Jupyter notebooks or Python scripts, expedites the pipeline setup process,
+providing data developers with a quick and user-friendly experience.
 
-=== "Transactional"
-    ![Transactional data synthesizer](assets/500x330/time_series.png){ align=right }
-    The **TimeSeriesSynthesizer** supports transactional data, known to have highly irregular time intervals between records and directional relations between entities.
+Explore how you can leverage Fabric Pipelines to build versionable and reproducible <a href="https://www.youtube.com/watch?v=feNoXv34waM"><u>data preparation workflows for ML development</u></a>.
 
-    <span style="color:grey">*Coming soon*</span>
+### Tutorials
+To understand how to best apply Fabric to your use cases, start by exploring the following tutorials:
 
-    [Know more](#){ .md-button .md-button--ydata}
+- <a href="https://github.com/ydataai/academy/tree/master/4%20-%20Use%20Cases/credit-card-fraud-detection"><u><b>Handling Imbalanced Data for Improved Fraud Detection</b></u></a><br>Learn how to implement high-performant fraud detection models by incorporating synthetic data to balance your datasets.
 
-=== "Relational databases"
-    ![Relational databases synthesizer](assets/500x330/multi_table.png){ align=left }
-    The **MultiTableSynthesizer** is perfect to learn how to replicate the data within a relational database schema.
+- <a href="https://github.com/ydataai/academy/tree/master/4%20-%20Use%20Cases/prediction-with-quality-inspection"><u><b>Prediction with Quality Inspection</b></u></a><br> Learn how to develop data preparation workflows with automated data quality checks and Pipelines.
 
-    <span style="color:grey">*Coming soon*</span>
+- <a href="https://github.com/ydataai/academy/tree/master/4%20-%20Use%20Cases/transactional-data-synthesization-berka"><u><b>Generating Synthetic Data for Financial Transactions</b></u></a><br>Learn how to use synthetic data generation to replicate your existing relational databases while ensuring referential integrity.
 
-    [Know more](#){ .md-button .md-button--ydata}
+
+You can find additional examples and use cases at <a href="https://github.com/ydataai/academy/tree/master"><u>YData Academy GitHub Repository</u></a>.
+
+## 🙋 Support
+Facing an issue? We’re committed to providing all the support you need to ensure a smooth experience using Fabric:
+
+- <a href="https://fabric.ydata.ai/support"><u>Create a support ticket</u></a>: our team will help you move forward!
+- <a href="https://ydata.ai/contact-us"><u>Contact a Fabric specialist</u></a>: for personalized guidance or full access to the platform
