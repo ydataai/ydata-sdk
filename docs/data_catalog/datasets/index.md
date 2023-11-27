@@ -1,3 +1,4 @@
+# Overview
 
 To enable a full understanding of the available data assets, Fabric further incorporates a module for **Data Profiling**, which allows you to further investigate the characteristics of your dataset more deeply, zooming in on the behavior and relationships between particular columns.
 

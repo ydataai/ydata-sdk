@@ -7,6 +7,23 @@ site_dir: "static/docs"
 nav:
   - Welcome: 'index.md'
   - Get started with Fabric: "get-started/fabric_community.md"
+  - Data Catalog:
+      - "data_catalog/index.md"
+      - Connectors:
+        - "data_catalog/connectors/index.md"
+        - Supported connections:
+          - "data_catalog/connectors/supported_connections.md"
+          - File formats: "data_catalog/connectors/file_formats.md"
+        - Use in Labs: "data_catalog/connectors/use_in_labs.md"
+      - Datasets:
+        - "data_catalog/datasets/index.md"
+        - Dataset overview:
+          - "data_catalog/datasets/dataset_overview.md"
+          - Warnings: "data_catalog/datasets/warnings.md"
+        - Dataset Profiling: "data_catalog/datasets/profiling.md"
+        - Dataset Metadata: "data_catalog/datasets/metadata.md"
+        - Automated PII identification: "data_catalog/datasets/pii.md"
+        - Explore in Labs: "data_catalog/datasets/explore_in_labs.md"
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
@@ -22,17 +39,17 @@ nav:
       - Reference:
           - Changelog: 'sdk/reference/changelog.md'
           - API:
-              - Client: 'sdk/reference/api/common/client.md'
+              - Client: 'reference/api/common/client.md'
               - Connectors:
-                  - 'Connector': 'sdk/reference/api/connectors/connector.md'
+                  - 'Connector': 'reference/api/connectors/connector.md'
               - DataSources:
-                  - 'DataSource': 'sdk/reference/api/datasources/datasource.md'
-                  - 'Metadata': 'sdk/reference/api/datasources/metadata.md'
+                  - 'DataSource': 'reference/api/datasources/datasource.md'
+                  - 'Metadata': 'reference/api/datasources/metadata.md'
               - Synthesizers:
-                  - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
-                  - Regular: 'sdk/reference/api/synthesizers/regular.md'
-                  - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
-              - Types: 'sdk/reference/api/common/types.md'
+                  - Synthesizer: 'reference/api/synthesizers/base.md'
+                  - Regular: 'reference/api/synthesizers/regular.md'
+                  - TimeSeries: 'reference/api/synthesizers/timeseries.md'
+              - Types: 'reference/api/common/types.md'
 
 theme:
   name: material
