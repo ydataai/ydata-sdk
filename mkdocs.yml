@@ -32,7 +32,7 @@ nav:
                   - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
                   - Regular: 'sdk/reference/api/synthesizers/regular.md'
                   - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
-              - Types: 'sdk/reference/api/common/types.md
+              - Types: 'sdk/reference/api/common/types.md'
 
 theme:
   name: material
