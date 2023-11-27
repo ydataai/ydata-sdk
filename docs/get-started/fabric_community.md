@@ -20,4 +20,3 @@ To register for Fabric Community:
 Once you login, you'll access the Home page and get started with your data preparation!
 
 ![Welcome Screen](../assets/overview/fabric_welcome.png)
-
