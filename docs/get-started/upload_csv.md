@@ -1,31 +1,71 @@
 # How to create your first Dataset from a CSV file
 
-To load your first dataset into the Data Catalog, you can start by clicking on **"Add Dataset"** from the **Home** section.
+:fontawesome-brands-youtube:{ .youtube } 
+Check this quickstart video on <a href="upload_csv"><u>how to create your first Dataset from a CSV file</u></a>.
 
-<figure markdown>
-![Data Catalog Add Dataset](../assets/quickstart/data_catalog_add_dataset.png){: style="height:550px;width:1000px"}
-</figure>
+To create your first dataset in the **Data Catalog**, you can start by clicking on **"Add Dataset"** from the Home section.
+Or click to **Data Catalog** (on the left side menu) and click **“Add Dataset”**.
 
-Since each dataset is associated with a Connector, you'll need to create one by clicking on **"Create Connector"**.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/welcome_add_dataset.png" alt="Add dataset from Home" style="width: 75%;">
+</div>
 
-<figure markdown>
-![Data Catalog Choose Connector](../assets/quickstart/data_catalog_connectors.png){: style="height:500px;width:550px"}
-</figure>
+After that the below modal will be shown. You will need to select a connector. To upload a CSV file, we need to select **“Upload CSV”**.
 
-After choosing the desired connector, you'll need to provide the necessary details. The information required depends on the type of connector.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/data_catalog_connectors.png" alt="Select connectors to storage" style="width: 45%;">
+</div>
 
-<figure markdown>
-![Data Catalog Create Connector](../assets/quickstart/data_catalog_create_connetors.png){: style="height:500px;width:1500px"}
-</figure>
+Once you've selected the **“Upload CSV”** connector, a new screen will appear, enabling you to upload your file and designate a name for your connector. 
+This file upload connector will subsequently empower you to create one or more datasets from the same file at a later stage.
 
-After the Connector is configured, you'll be able to add a dataset and specify its properties such as *name*, and *file* and *data types*. You can also enable the **automatic detection of potential Personal Identifiable Information (PII)** and give your dataset an insightful *description* and general *tags* that you'd like to associate with the data.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/loading_area.png" alt="Upload file area" style="width: 45%;">
+    <img src="/assets/quickstart/upload_csv/load_csv_file.png" alt="Upload CSV file" style="width: 45%;">
+</div>
 
-<figure markdown>
-![Data Catalog Configure Dataset](../assets/quickstart/data_catalog_dataset_config.png){: style="height:700px;width:900px"}
-</figure>
+With the *Connector* created, you'll be able to add a dataset and specify its properties:
 
-Your recently created Connector and Dataset will be added to the Data Catalog, where you can see all your available connectors and datasets.
+- **Name:** The name of your dataset;
+- **Separator:** This is an important parameter to make sure that we can parse your CSV correctly. The default value is “,”.
+- **Data Type:** Whether your dataset contains tabular or time-series (i.e., containing temporal dependency) data. 
 
-<figure markdown>
-![Data Catalog List Datasets](../assets/quickstart/data_catalog_list.png){: style="height:550px;width:1000px"}
-</figure>
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/add_dataset_details.png" alt="Upload file area" style="width: 45%;">
+</div>
+
+Your created Connector *(“Census File”)* and Dataset *(“Census”)* will be added to the Data Catalog. 
+As soon as the status is green, you can navigate your Dataset. Click in **Open Dataset** as per the image below. 
+
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/open_dataset.png" alt="Upload file area" style="width: 75%;">
+</div>
+
+Within the **Dataset** details, you can gain valuable insights through our automated data quality profiling.
+This includes comprehensive metadata and an overview of your data, encompassing details like row count, identification
+of duplicates, and insights into the overall quality of your dataset.
+
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/dataset_overview.png" alt="Upload file area" style="width: 75%;">
+</div>
+
+Or perhaps, you want to further explore through visualization, the profile of your data with both univariate
+and multivariate of your data. 
+
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/upload_csv/dataset_profiling.png" alt="Upload file area" style="width: 75%;">
+</div>
+
+**Congrats!** 🚀 You have now successfully created your first **Connector** and **Dataset** in Fabric’s Data Catalog.
+Get ready for your journey of improved quality data for AI.
+
+
+
+
+
+
+
+
+
+
+
