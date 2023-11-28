@@ -1,7 +1,7 @@
 # How to create your first Dataset from a CSV file
 
 :fontawesome-brands-youtube:{ .youtube } 
-Check this quickstart video on <a href="upload_csv"><u>how to create your first Dataset from a CSV file</u></a>.
+Check this quickstart video on <a href="https://youtu.be/1zYreRKsNGE"><u>how to create your first Dataset from a CSV file</u></a>.
 
 To create your first dataset in the **Data Catalog**, you can start by clicking on **"Add Dataset"** from the Home section.
 Or click to **Data Catalog** (on the left side menu) and click **“Add Dataset”**.
