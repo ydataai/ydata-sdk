@@ -1,50 +1,68 @@
 # How to create your first Synthetic Data generator
 
-To generate your first synthetic data, you need to start by creating a Synthesizer by accessing the **"Synthetic Data"** section on the **Home** section and clicking on **"Create Synthetic Data"**.
+:fontawesome-brands-youtube:{ .youtube } 
+Check this quickstart video on <a href="https://youtu.be/GsfggG9PhgE?si=ixlCaesd3cLFOCZm"><u>how to create your first Synthetic Data generator</u></a>.
 
-<figure markdown>
-![Create Synthetic Data](../assets/quickstart/create_synthetic_data.png){: style="height:550px;width:1000px"}
-</figure>
+To generate your first synthetic data, you need to have a Dataset already available in your Data Catalog. 
+Check this tutorial to see how you can <a href="upload_csv"><u>add your first dataset to Fabric’s Data Catalog</u></a>.
 
-You'll be asked to select the dataset you wish to generate synthetic data from and verify the columns you'd like to include in the synthesis process, validating their variable and data types.
+With your first dataset created, you are now able to start the creation of your Synthetic Data generator. You can either 
+select **"Synthetic Data"** from your left side menu, or you can select **"Create Synthetic Data"** in your project Home
+as shown in the image below. 
 
-<figure markdown>
-![Verify Metadata](../assets/quickstart/synthetic_metadata.png){: style="height:550px;width:1000px"}
-</figure>
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/create_synthetic_data.webp" alt="Create Synthetic Data" style="width: 75%;">
+</div>
 
-If you wish to anonymize some columns in the data, you can do so in the **"Anonymize Columns"** section. The features that may correspond to potential PII will be identified and a suitable masking method is automatically suggested for each. However, you'll be able to select the most appropriate method by browsing the available strategies in the drop-down list.
+You'll be asked to select the dataset you wish to generate synthetic data from and verify the columns you'd like to
+include in the synthesis process, validating their *Variable* and *Data Types*.
 
-<figure markdown>
-![Anonymization](../assets/quickstart/masking_options.png){: style="height:550px;width:1000px"}
-</figure>
+!!! Tip "Data types are relevant for synthetic data quality"
+    Data Types are important to be revisited and aligned with the objectives for the synthetic data as they can highly impact the quality
+    of the generated data. For example, let's say we have a column that is a "Name", while is some situations it would make sense
+    to consider it a String, under the light of a dataset where "Name" refers to the name of the product purchases, it might be more 
+    beneficial to set it as a Category.
 
-Finally, you can give your Synthesizer a descriptive name and set specific configurations such as the **Target** (in case your dataset is used for supervised tasks), **Privacy Level** (which defines the trade-off between fidelity and privacy), and whether to enable **Conditional Sampling**, in case you wish to control the generation of new synthetic samples according to specific conditions (useful for data augmentation and de-bias purposes).
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/synthetic_data_columns_sel.webp" alt="Configure Metadata" style="width: 75%;">
+</div>
 
-<figure markdown>
-![Synthesizer Configuration](../assets/quickstart/config_synthesizer.png){: style="height:400px;width:1000px"}
-</figure>
+Finally, as the last step of our process it comes the **Synthetic Data** specific configurations, for this particular case we
+only need to define a *Display Name,* and we can finish the process by clicking in the **"Save"** button as per the image below. 
 
-Your Synthesizer will be created and trained and will appear in the **"Synthetic Data"** tab.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/synthetic_data_configuration.webp" alt="Save Synthetic Data configurations" style="width: 75%;">
+</div>
 
-<figure markdown>
-![Synthesizer List](../assets/quickstart/synthesizer_list.png){: style="height:600px;width:1200px"}
-</figure>
+Your **Synthetic Data** generator is now training and listed under **"Synthetic Data"**. While the model is being trained, the *Status* will be
+🟡, as soon as the training is completed successfully it will transition to 🟢 as per the image below.
 
-Once the Synthesizer has finished training, you're ready to start generating your first synthetic dataset. From the list of available Synthesizers, you can click on the one you've just created to open its details. You'll be able to check several properties of your Synthesizer and even download a PDF report with a comphreensive overview of your Synthetic Data Quality Metrics. To generate a new synthetic data sample, you'll just need to access the **"Go to Generation" or "Generation"** tabs.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/trained_synthetic_data.webp" alt="Synthetic data generator trained successfully" style="width: 75%;">
+</div>
 
-<figure markdown>
-![Sample Generation Tab](../assets/quickstart/go_generation.png){: style="height:600px;width:1200px"}
-</figure>
+Once the Synthetic Data generator has finished training, you're ready to start generating your first synthetic dataset.
+You can start by exploring an overview of the model configurations and even download a PDF report with a comprehensive overview of your
+Synthetic Data Quality Metrics. Next, you can generate synthetic data samples by accessing the *Generation* tab or click on *"Go to Generation"*.
 
-You can then define the number of new synthetic records to generate, and your sample history will be shown below. You'll be able to **"Compare"** your synthetic data against the original data, and add the synthetic data to the Data Catalog.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/synthetic_data_overview.webp" alt="Synthetic data generator overview" style="width: 75%;">
+</div>
 
-<figure markdown>
-![Generate New Samples](../assets/quickstart/generate_samples.png){: style="height:600px;width:1200px"}
-</figure>
+In this section, you are able to generate as many synthetic samples as you want. 
+For that you need to define the number rows to generate and click *"Generate"*, as depicted in the image below.
 
-<span style="color:grey">*Note:*</span>
-If you have a previously created Synthesizer already, you can directly generate new samples from the **Home** section, by accessing the **"Generate"** tab and choosing your desired Synthesizer. The widget will directly lead you to the generation section shown above.
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/set_generation.webp" alt="Generate synthetic data records" style="width: 75%;">
+</div>
 
-<figure markdown>
-![Home Generate Widget](../assets/quickstart/generate_from_home.png){: style="height:600px;width:1200px"}
-</figure>
+A new line in your *"Sample History"* will be shown and as soon as the sample generation is completed you will be able to 
+*"Compare"* your synthetic data with the original data, add as a Dataset with *"Add to Data Catalog"* and last but not the least 
+download it as a file with *"Download csv"*.
+
+<div style="display: flex; justify-content: center;align-items: center;">
+    <img src="/assets/quickstart/synthetic_data/generated_synthetic_sample.webp" alt="Synthetic data generator trained" style="width: 75%;">
+</div>
+
+**Congrats!** 🚀 You have now successfully created your first **Synthetic Data** generator with Fabric.
+Get ready for your journey of improved quality data for AI.
