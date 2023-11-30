@@ -6,7 +6,14 @@ dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
   - Welcome: 'index.md'
-  - Get started with Fabric: "get-started/fabric_community.md"
+  - Get started with Fabric:
+      - "get-started/index.md"
+      - Quickstart:
+          - How to create your first Dataset from a CSV file: "get-started/upload_csv.md"
+          - How to create your first Synthetic Data generator: "get-started/create_syntheticdata_generator.md"
+          - How to create your first Lab: "get-started/create_lab.md"
+          - How to create your first Pipeline: "get-started/create_pipeline.md"
+      - Fabric Community: "get-started/fabric_community.md"
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
