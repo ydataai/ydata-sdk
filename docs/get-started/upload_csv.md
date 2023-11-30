@@ -6,6 +6,9 @@ Check this quickstart video on <a href="https://youtu.be/1zYreRKsNGE"><u>how to 
 To create your first dataset in the **Data Catalog**, you can start by clicking on **"Add Dataset"** from the Home section.
 Or click to **Data Catalog** (on the left side menu) and click **“Add Dataset”**.
 
+![Registration Process](../assets/quickstart/upload_csv/welcome_add_dataset.png)
+
+
 <div style="display: flex; justify-content: center;align-items: center;">
     <img src="../assets/quickstart/upload_csv/welcome_add_dataset.png" alt="Add dataset from Home" style="width: 75%;">
 </div>
