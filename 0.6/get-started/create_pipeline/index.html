@@ -1141,86 +1141,80 @@ is and should be implemented as a component that is expected to manage a single 
 or even publishing a model to production environments.</p>
 <p>In this tutorial we will build a simple and generic pipeline that use a <strong>Dataset</strong> from Fabric's <strong>Data Catalog</strong> and profile to check it's quality.
 We have the notebooks template already available. For that you need to access the <em>"Academy"</em> folder as per the image below.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/academy_folder.webp" alt="Academy folder" style="width: 75%;">
-</div>
-
+<p><img alt="Academy folder" src="../../assets/quickstart/create_pipeline/academy_folder.webp" style="width:75%" /></p>
 <p>Make sure to copy all the files in the folder "3 - Pipelines/quickstart" to the root folder of your lab, as per the image below.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/copy_files.webp" alt="Select your pipeline editor" style="width: 75%;">
-</div>
-
+<p><img alt="Select your pipeline editor" src="../../assets/quickstart/create_pipeline/copy_files.webp" style="width:75%" /></p>
 <p>Now that we have our notebooks we need to make a small change in the notebook "1. Read dataset". Go back to your <strong>Data Catalog</strong>, from one of the datasets
 in your Catalog list, select the three vertical dots and click in <strong>"Explore in Labs"</strong> as shown in the image below.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/explore_in_labs.webp" alt="Explore the dataset in the labs" style="width: 70%;">
-</div>
-
+<p><img alt="Explore the dataset in the labs" src="../../assets/quickstart/create_pipeline/explore_in_labs.webp" style="width:75%" /></p>
 <p>The following screen will be shown. Click in copy.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/code_snippet.webp" alt="Dataset code snippet" style="width: 35%;">
-</div>
-
+<p><img alt="Dataset code snippet" src="../../assets/quickstart/create_pipeline/code_snippet.webp" style="width:35%" /></p>
 <p>Now that we have copied the code, let's get back to our <strong>"1. Read data.ipynb"</strong> notebook, and replace the first code cell by with the new code. This will allow us to use a
 dataset from the Data Catalog in our pipeline.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/og_code.webp" alt="Dataset code snippet" style="width: 50%;">
-    <img src="/assets/quickstart/create_pipeline/replaced_code.webp" alt="Dataset code snippet" style="width: 50%;">
-</div>
-
+<table>
+<thead>
+<tr>
+<th>Placeholder code</th>
+<th>Replaced with code snippet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Select an IDE" src="../../assets/quickstart/create_pipeline/og_code.webp" /></td>
+<td><img alt="Python or R" src="../../assets/quickstart/create_pipeline/replaced_code.webp" /></td>
+</tr>
+</tbody>
+</table>
 <p>With our notebooks ready, we can now configure our <strong>Pipeline</strong>.
 For this quickstart we will be leveraging an already existing pipeline - double-click the file <em>my_first_pipeline.pipeline</em>. You should see a pipeline
 as depicted in the images below.
 To create a new Pipeline, you can open the lab launcher tab and select <strong>"Pipeline Editor"</strong>.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/open_pipeline.webp" alt="Open pipeline" style="width: 40%;">
-    <img src="/assets/quickstart/create_pipeline/my_first_pipeline.webp" alt="My first pipeline" style="width: 60%;">
-</div>
-
+<table>
+<thead>
+<tr>
+<th>Open Pipeline</th>
+<th>My first pipeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Open pipeline" src="../../assets/quickstart/create_pipeline/open_pipeline.webp" /></td>
+<td><img alt="Python or R" src="../../assets/quickstart/create_pipeline/my_first_pipeline.webp" /></td>
+</tr>
+</tbody>
+</table>
 <p>Before running the pipeline, we need to check each component/step properties and configurations. Right-click each one of the steps, select <em>"Open Properties"</em>, and a
 menu will be depicted in your right side. Make sure that you have <em>"YData - CPU"</em> selected as the <strong>Runtime Image</strong> as show below.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/open_properties.webp" alt="Open pipeline" style="width: 50%;">
-    <img src="/assets/quickstart/create_pipeline/runtime_image.webp" alt="My first pipeline" style="width: 50%;">
-</div>
-
+<table>
+<thead>
+<tr>
+<th>Open properties</th>
+<th>Runtime image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Open pipeline" src="../../assets/quickstart/create_pipeline/open_properties.webp" /></td>
+<td><img alt="Python or R" src="../../assets/quickstart/create_pipeline/runtime_image.webp" /></td>
+</tr>
+</tbody>
+</table>
 <p>We are now ready to create and run our first pipeline. In the top left corner of the pipeline editor, the run button
 will be available for you to click.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/run_pipeline.webp" alt="Select your pipeline editor" style="width: 75%;">
-</div>
-
+<p><img alt="Select your pipeline editor" src="../../assets/quickstart/create_pipeline/run_pipeline.webp" style="width:75%" /></p>
 <p>Accept the default values shown in the run dialog and start the run</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/pipeline_default_dialog.webp" alt="Pipeline configuration confirm dialog" style="width: 30%;">
-</div>
-
+<p><img alt="Pipeline configuration confirm dialog" src="../../assets/quickstart/create_pipeline/pipeline_default_dialog.webp" style="width:35%" /></p>
 <p>If the following message is shown, it means that you have create a run of your first pipeline.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/pipeline_creation_success.webp" alt="Select your pipeline editor" style="width: 60%;">
-</div>
-
+<p><img alt="Select your pipeline editor" src="../../assets/quickstart/create_pipeline/pipeline_creation_success.webp" style="width:60%" /></p>
 <p>Now that you have created your first pipeline, you can select the <strong>Pipeline</strong> from Fabric's left side menu.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/pipelines_menu.webp" alt="Select Fabric Pipelines" style="width: 70%;">
-</div>
-
+<p><img alt="Select Fabric Pipelines" src="../../assets/quickstart/create_pipeline/pipelines_menu.webp" style="width:75%" /></p>
 <p>Your most recent pipeline will be listed, as shown in below image.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/my_pipeline_record.webp" alt="My first pipeline listed" style="width: 70%;">
-</div>
-
+<p><img alt="My first pipeline listed" src="../../assets/quickstart/create_pipeline/my_pipeline_record.webp" style="width:75%" /></p>
 <p>To check the run of your pipeline, jump into the <strong>"Run"</strong> tab. You will be able to see your first pipeline running!</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/my_first_pipeline_run.webp" alt="My first pipeline listed" style="width: 70%;">
-</div>
-
+<p><img alt="Run pipeline" src="../../assets/quickstart/create_pipeline/my_first_pipeline_run.webp" style="width:75%" /></p>
 <p>By clicking on top of the record you will be able to see the progress of the run step-by-step, and visualize the outputs of each and every
 step by clicking on each step and selecting the <strong>Visualizations</strong> tab.</p>
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="/assets/quickstart/create_pipeline/pipeline_progress.webp" alt="My first pipeline listed" style="width: 70%;">
-</div>
-
+<p><img alt="Run pipeline" src="../../assets/quickstart/create_pipeline/pipeline_progress.webp" style="width:70%" /></p>
 <p><strong>Congrats!</strong> 🚀 You have now successfully created your first <strong>Pipeline</strong> a code environment, so you can benefit from Fabric's
 orchestration engine to crate scalable, versionable and comparable data workflows.
 Get ready for your journey of improved quality data for AI.</p>
