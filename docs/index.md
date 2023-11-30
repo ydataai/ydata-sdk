@@ -9,10 +9,8 @@ acceleration to empower data science, analytics, and data engineering teams.
 
 <p align="center"><img src="assets/overview/data_centric_approach.png" alt="Data-Centric AI Approach" width="900"></p>
 
-
 ### Try Fabric
 - <a href="get-started/fabric_community/"><u>Get started with Fabric Community</u></a>
-
 
 ## Why adopt YData Fabric?
 
