@@ -5,6 +5,8 @@ combined with already loved tools such as scikit-learn, numpy and pandas.
 To create your first **Lab**, you can use the **“Create Lab”** from Fabric’s home, or you can access it from the Labs
 module by selecting it on the left side menu, and clicking the **“Create Lab”** button.
 
+![Create dataset with upload csv](../assets/quickstart/create_lab/create_lab.webp){: style="width:75%"}
+
 <div style="display: flex; justify-content: center;align-items: center;">
     <p>
         <img src="/assets/quickstart/create_lab/create_lab.webp" alt="Select create a lab from Home" style="width: 75%;">
