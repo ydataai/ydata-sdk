@@ -6,12 +6,7 @@ Check this quickstart video on <a href="https://youtu.be/1zYreRKsNGE"><u>how to 
 To create your first dataset in the **Data Catalog**, you can start by clicking on **"Add Dataset"** from the Home section.
 Or click to **Data Catalog** (on the left side menu) and click **“Add Dataset”**.
 
-![Registration Process](../assets/quickstart/upload_csv/welcome_add_dataset.png)
-
-
-<div style="display: flex; justify-content: center;align-items: center;">
-    <img src="../assets/quickstart/upload_csv/welcome_add_dataset.png" alt="Add dataset from Home" style="width: 75%;">
-</div>
+![Create dataset](../assets/quickstart/upload_csv/welcome_add_dataset.png)
 
 After that the below modal will be shown. You will need to select a connector. To upload a CSV file, we need to select **“Upload CSV”**.
 
@@ -47,8 +42,6 @@ As soon as the status is green, you can navigate your Dataset. Click in **Open D
 Within the **Dataset** details, you can gain valuable insights through our automated data quality profiling.
 This includes comprehensive metadata and an overview of your data, encompassing details like row count, identification
 of duplicates, and insights into the overall quality of your dataset.
-
-<p align="center"><img src="assets/overview/data_centric_approach.png" alt="Data-Centric AI Approach" width="900"></p>
 
 <div style="display: flex; justify-content: center;align-items: center;">
     <img src="../assets/quickstart/upload_csv/dataset_overview.png" alt="Upload file area" style="width: 75%;">
