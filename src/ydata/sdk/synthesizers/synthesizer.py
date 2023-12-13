@@ -51,9 +51,9 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         client (Client): (optional) Client to connect to the backend
     """
 
-    def __init__(self, client: Optional[Client] = None):
+    def __init__(self, name: str | None = None, client: Client | None = None):
         self._init_common(client=client)
-        self._model: Optional[mSynthesizer] = None
+        self._model = mSynthesizer(name=name or str(uuid4()))
 
     @init_client
     def _init_common(self, client: Optional[Client] = None):
@@ -69,7 +69,6 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             exclude_cols: Optional[List[str]] = None,
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
             target: Optional[str] = None,
-            name: Optional[str] = None,
             anonymize: Optional[dict] = None,
             condition_on: Optional[List[str]] = None) -> None:
         """Fit the synthesizer.
@@ -125,7 +124,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
 
         self._fit_from_datasource(
-            X=_X, dataset_attrs=dataset_attrs, target=target, name=name,
+            X=_X, dataset_attrs=dataset_attrs, target=target,
             anonymize=anonymize, privacy_level=privacy_level, condition_on=condition_on)
 
     @staticmethod
@@ -223,15 +222,13 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
         dataset_attrs: Optional[DataSourceAttrs] = None,
         target: Optional[str] = None,
-        name: Optional[str] = None,
         anonymize: Optional[dict] = None,
         condition_on: Optional[List[str]] = None
     ) -> None:
-        _name = name if name is not None else str(uuid4())
         metadata = self._metadata_to_payload(
             DataSourceType(X.datatype), X.metadata, dataset_attrs, target)
         payload = {
-            'name': _name,
+            'name': self._model.name,
             'dataSourceUID': X.uid,
             'metadata': metadata,
             'extraData': {},
