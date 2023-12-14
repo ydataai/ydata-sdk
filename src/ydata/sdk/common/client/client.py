@@ -56,13 +56,12 @@ class Client(metaclass=SingletonClient):
 
         self._handshake()
 
-        self._project = project if project is not None else self._get_default_project(
-            credentials)
-        self.project = project
+        self._default_project = project or self._get_default_project(credentials)
         if set_as_global:
             self.__set_global()
 
-    def post(self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None, files: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
+    def post(self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None,
+             project: Project | None = None, files: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
         """POST request to the backend.
 
         Args:
@@ -75,7 +74,8 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint, data=data, json=json, files=files)
+        url_data = self.__build_url(
+            endpoint, data=data, json=json, files=files, project=project)
         response = self._http_client.post(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -83,7 +83,8 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get(self, endpoint: str, params: Optional[Dict] = None, cookies: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
+    def get(self, endpoint: str, params: Optional[Dict] = None,
+            project: Project | None = None, cookies: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
         """GET request to the backend.
 
         Args:
@@ -94,7 +95,8 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint, params=params, cookies=cookies)
+        url_data = self.__build_url(endpoint, params=params,
+                                    cookies=cookies, project=project)
         response = self._http_client.get(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -102,7 +104,7 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get_static_file(self, endpoint: str, raise_for_status: bool = True) -> Response:
+    def get_static_file(self, endpoint: str, project: Project | None = None, raise_for_status: bool = True) -> Response:
         """Retrieve a static file from the backend.
 
         Args:
@@ -112,7 +114,7 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint)
+        url_data = self.__build_url(endpoint, project=project)
         url_data['url'] = f'{self._scheme}://{self._base_url}/static-content{endpoint}'
         response = self._http_client.get(**url_data)
 
@@ -138,7 +140,9 @@ class Client(metaclass=SingletonClient):
         data: Dict = response.json()
         return data['myWorkspace']
 
-    def __build_url(self, endpoint: str, params: Optional[Dict] = None, data: Optional[Dict] = None, json: Optional[Dict] = None, files: Optional[Dict] = None, cookies: Optional[Dict] = None) -> Dict:
+    def __build_url(self, endpoint: str, params: Optional[Dict] = None, data: Optional[Dict] = None,
+                    json: Optional[Dict] = None, project: Project | None = None, files: Optional[Dict] = None,
+                    cookies: Optional[Dict] = None) -> Dict:
         """Build a request for the backend.
 
         Args:
@@ -153,7 +157,7 @@ class Client(metaclass=SingletonClient):
             dictionary containing the information to perform a request
         """
         _params = params if params is not None else {
-            'ns': self._project
+            'ns': project or self._default_project
         }
 
         url_data = {
