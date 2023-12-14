@@ -14,9 +14,9 @@ from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceAttrsError, DataSourceNotAvailableError,
-                                         DataTypeMissingError, EmptyDataError, FittingError)
+                                         DataTypeMissingError, EmptyDataError, FittingError, InputError)
 from ydata.sdk.common.logger import create_logger
-from ydata.sdk.common.types import UID
+from ydata.sdk.common.types import UID, Project
 from ydata.sdk.common.warnings import DataSourceTypeWarning
 from ydata.sdk.datasources import DataSource, LocalDataSource
 from ydata.sdk.datasources._models.attributes import DataSourceAttrs
@@ -51,9 +51,11 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         client (Client): (optional) Client to connect to the backend
     """
 
-    def __init__(self, name: str | None = None, client: Client | None = None):
+    def __init__(self, uid: UID | None = None, name: str | None = None, project: Project | None = None, client: Client | None = None):
         self._init_common(client=client)
-        self._model = mSynthesizer(name=name or str(uuid4()))
+        self._model = mSynthesizer(uid=uid, name=name or str(
+            uuid4())) if uid or project else None
+        self.__project = project
 
     @init_client
     def _init_common(self, client: Optional[Client] = None):
@@ -239,7 +241,8 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         if condition_on is not None:
             payload["extraData"]["condition_on"] = condition_on
 
-        response = self._client.post('/synthesizer/', json=payload)
+        response = self._client.post(
+            '/synthesizer/', json=payload, project=self.__project)
         data: list = response.json()
         self._model, _ = self._model_from_api(X.datatype, data)
         while self.status not in [Status.READY, Status.FAILED]:
@@ -271,21 +274,22 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             pandas `DataFrame`
         """
         response = self._client.post(
-            f"/synthesizer/{self.uid}/sample", json=payload)
+            f"/synthesizer/{self.uid}/sample", json=payload, project=self.__project)
 
         data: Dict = response.json()
         sample_uid = data.get('uid')
         sample_status = None
         while sample_status not in ['finished', 'failed']:
             self._logger.info('Sampling from the synthesizer...')
-            response = self._client.get(f'/synthesizer/{self.uid}/history')
+            response = self._client.get(
+                f'/synthesizer/{self.uid}/history', project=self.__project)
             history: Dict = response.json()
             sample_data = next((s for s in history if s.get('uid') == sample_uid), None)
             sample_status = sample_data.get('status', {}).get('state')
             sleep(BACKOFF)
 
         response = self._client.get_static_file(
-            f'/synthesizer/{self.uid}/sample/{sample_uid}/sample.csv')
+            f'/synthesizer/{self.uid}/sample/{sample_uid}/sample.csv', project=self.__project)
         data = StringIO(response.content.decode())
         return read_csv(data)
 
@@ -317,23 +321,15 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         except Exception:  # noqa: PIE786
             return Status.UNKNOWN
 
-    @staticmethod
-    @init_client
-    def get(uid: str, client: Optional[Client] = None) -> "BaseSynthesizer":
-        """List the synthesizer instances.
+    def get(self):
+        assert self._is_initialized() and self._model.uid, InputError(
+            "Please provide the synthesizer `uid`")
 
-        Arguments:
-            uid (str): synthesizer instance uid
-            client (Client): (optional) Client to connect to the backend
+        response = self._client.get(f'/synthesizer/{self.uid}', project=self.__project)
+        data = filter_dict(mSynthesizer, response.json())
+        self._model = mSynthesizer(**data)
 
-        Returns:
-            Synthesizer instance
-        """
-        response = client.get(f'/synthesizer/{uid}')
-        data: list = response.json()
-        model, synth_cls = BaseSynthesizer._model_from_api(
-            data['dataSource']['dataType'], data)
-        return ModelFactoryMixin._init_from_model_data(synth_cls, model)
+        return self
 
     @staticmethod
     @init_client
