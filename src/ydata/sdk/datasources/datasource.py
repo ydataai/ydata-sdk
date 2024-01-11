@@ -13,7 +13,7 @@ from ydata.sdk.datasources._models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources._models.datasource_list import DataSourceList
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
-from ydata.sdk.datasources._models.status import Status, ValidationState
+from ydata.sdk.datasources._models.status import Status
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 

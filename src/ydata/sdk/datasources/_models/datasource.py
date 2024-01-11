@@ -4,7 +4,7 @@ from typing import Optional
 from ydata.sdk.common.types import UID
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
-from ydata.sdk.datasources._models.status import State, Status
+from ydata.sdk.datasources._models.status import Status
 
 
 @dataclass

@@ -2,10 +2,11 @@ from time import sleep
 
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.config import BACKOFF
-from ydata.sdk.common.types import UID, Project
 from ydata.sdk.common.exceptions import InputError
+from ydata.sdk.common.types import UID, Project
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
+
 
 class MultiTableSynthesizer(BaseSynthesizer):
 
@@ -38,8 +39,10 @@ class MultiTableSynthesizer(BaseSynthesizer):
             frac (int | float): fraction of the sample to be returned
         """
 
-        assert frac >= 0.1, InputError("It is not possible to generate an empty synthetic data schema. Please validate the input provided. ")
-        assert frac <= 5, InputError("It is not possible to generate a database that is 5x bigger than the original dataset. Please validate the input provided.")
+        assert frac >= 0.1, InputError(
+            "It is not possible to generate an empty synthetic data schema. Please validate the input provided. ")
+        assert frac <= 5, InputError(
+            "It is not possible to generate a database that is 5x bigger than the original dataset. Please validate the input provided.")
 
         payload = {
             'fraction': frac,
@@ -63,7 +66,8 @@ class MultiTableSynthesizer(BaseSynthesizer):
             sample_status = sample_data.get('status', {}).get('state')
             sleep(BACKOFF)
 
-        print(f"Sample created and saved into connector with ID {self.__write_connector or write_connector}")
+        print(
+            f"Sample created and saved into connector with ID {self.__write_connector or write_connector}")
 
     def _create_payload(self) -> dict:
         payload = super()._create_payload()

@@ -26,10 +26,8 @@ from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status as dsStatus
 from ydata.sdk.synthesizers._models.status import PrepareState, Status, TrainingState
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
-from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
-from ydata.sdk.utils.model_utils import filter_dict
 
 
 @typechecked
@@ -228,7 +226,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     ) -> None:
         payload = self._create_payload()
 
-        payload['dataSourceUID'] =  X.uid
+        payload['dataSourceUID'] = X.uid
 
         if privacy_level:
             payload['privacy_level'] = privacy_level.value
