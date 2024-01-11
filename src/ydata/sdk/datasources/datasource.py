@@ -174,20 +174,20 @@ class DataSource(ModelFactoryMixin):
             sleep(BACKOFF)
         return datasource
 
-    @staticmethod
-    def _resolve_api_status(api_status: Dict) -> Status:
-        status = Status(api_status.get('state', Status.UNKNOWN.name))
-        validation = ValidationState(api_status.get('validation', {}).get(
-            'state', ValidationState.UNKNOWN.name))
-        if validation == ValidationState.FAILED:
-            status = Status.FAILED
-        return status
+    # @staticmethod
+    # def _resolve_api_status(api_status: Dict) -> Status:
+    #     status = Status(api_status.get('state', Status.UNKNOWN.name))
+    #     validation = ValidationState(api_status.get('validation', {}).get(
+    #         'state', ValidationState.UNKNOWN.name))
+    #     if validation == ValidationState.FAILED:
+    #         status = .FAILED
+    #     return status
 
     @staticmethod
     def _model_from_api(data: Dict, datasource_type: Type[mDataSource]) -> mDataSource:
-        data['datatype'] = data.pop('dataType')
-        data['state'] = data['status']
-        data['status'] = DataSource._resolve_api_status(data['status'])
+        data['datatype'] = data.pop('dataType', None)
+        # data['state'] = data['status']
+        # data['status'] = DataSource._resolve_api_status(data['status'])
         data = filter_dict(datasource_type, data)
         model = datasource_type(**data)
         return model

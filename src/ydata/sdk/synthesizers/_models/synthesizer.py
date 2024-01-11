@@ -1,11 +1,10 @@
-from dataclasses import dataclass, field
-from typing import Dict, Optional
+from pydantic import BaseModel, Field
+
+from .status import Status
 
 
-@dataclass
-class Synthesizer:
-
-    uid: Optional[str] = None
-    author: Optional[str] = None
-    name: Optional[str] = None
-    status: Optional[Dict] = field(default_factory=dict)
+class Synthesizer(BaseModel):
+    uid: str | None = None
+    author: str | None = None
+    name: str | None = None
+    status: Status | None = Field(None)

@@ -16,22 +16,21 @@ class DataSource:
     datatype: Optional[DataSourceType] = None
     metadata: Optional[Metadata] = None
     status: Optional[Status] = None
-    state: Optional[State] = None
 
     def __post_init__(self):
         if self.metadata is not None:
             self.metadata = Metadata(**self.metadata)
 
-        if self.state is not None:
-            data = {
-                'validation': self.state.get('validation', {}).get('state', 'unknown'),
-                'metadata': self.state.get('metadata', {}).get('state', 'unknown'),
-                'profiling': self.state.get('profiling', {}).get('state', 'unknown')
-            }
-            self.state = State.parse_obj(data)
+    #     if self.state is not None:
+    #         data = {
+    #             'validation': self.state.get('validation', {}).get('state', 'unknown'),
+    #             'metadata': self.state.get('metadata', {}).get('state', 'unknown'),
+    #             'profiling': self.state.get('profiling', {}).get('state', 'unknown')
+    #         }
+    #         self.state = State.parse_obj(data)
 
-        if self.status is not None:
-            self.status = Status(self.status)
+    #     if self.status is not None:
+    #         self.status = Status(self.status)
 
     def to_payload(self):
         return {}

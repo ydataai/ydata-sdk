@@ -68,13 +68,16 @@ package:  ### Builds the package in wheel format
 	echo "$(version)" > src/ydata/sdk/VERSION
 	stubgen src/ydata/sdk -o src --export-less
 	$(PYTHON) -m build --wheel
-	twine check dist/*
+	$(PYTHON) -m twine check dist/*
 
 wheel:  ### Compiles the wheel
 	test -d wheels || mkdir -p wheels
 	cp dist/ydata_sdk-$(version)-py3-none-any.whl wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
 	$(PYTHON) -m pyc_wheel wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
-	twine check wheels/*
+	$(PYTHON) -m twine check wheels/*
+
+upload:
+	$(PYTHON) -m twine upload -r ydata wheels/ydata_sdk-$(version)-py310-none-any.whl
 
 publish-docs: ### Publishes the documentation
 	mike deploy --push --update-aliases $(version) latest
