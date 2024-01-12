@@ -34,10 +34,10 @@ class MultiTableSynthesizer(BaseSynthesizer):
             self, write_connector: Connector | UID, uid: UID | None = None, name: str | None = None,
             project: Project | None = None, client: Client | None = None):
 
+        super().__init__(uid, name, project, client)
+
         connector = self._check_or_fetch_connector(write_connector)
         self.__write_connector = connector.uid
-
-        super().__init__(uid, name, project, client)
 
     def fit(self, X: DataSource,
             privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
