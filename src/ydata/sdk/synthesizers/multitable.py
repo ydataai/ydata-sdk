@@ -3,7 +3,7 @@ from time import sleep
 from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.config import BACKOFF
-from ydata.sdk.common.exceptions import InputError, ConnectorError
+from ydata.sdk.common.exceptions import ConnectorError, InputError
 from ydata.sdk.common.types import UID, Project
 from ydata.sdk.connectors.connector import Connector, ConnectorType
 from ydata.sdk.datasources import DataSource
@@ -119,6 +119,7 @@ class MultiTableSynthesizer(BaseSynthesizer):
             raise InputError("Invalid connector provided as input for write")
 
         if write_connector.type not in [ConnectorType.AZURE_SQL, ConnectorType.MYSQL, ConnectorType.SNOWFLAKE]:
-            raise ConnectorError(f"Invalid type `{write_connector.type}` for the provided connector")
+            raise ConnectorError(
+                f"Invalid type `{write_connector.type}` for the provided connector")
 
         return write_connector
