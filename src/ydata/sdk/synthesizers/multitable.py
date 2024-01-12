@@ -1,10 +1,13 @@
 from time import sleep
 
+from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.config import BACKOFF
 from ydata.sdk.common.exceptions import InputError
 from ydata.sdk.common.types import UID, Project
 from ydata.sdk.datasources import DataSource
+from ydata.sdk.datasources._models.datatype import DataSourceType
+from ydata.sdk.datasources._models.metadata.data_types import DataType
 from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 
@@ -34,10 +37,21 @@ class MultiTableSynthesizer(BaseSynthesizer):
 
         super().__init__(uid, name, project, client)
 
-    def fit(self, X: DataSource) -> None:
+    def fit(self, X: DataSource,
+            privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
+            datatype: DataSourceType | str | None = None,
+            sortbykey: str | list[str] | None = None,
+            entities: str | list[str] | None = None,
+            generate_cols: list[str] | None = None,
+            exclude_cols: list[str] | None = None,
+            dtypes: dict[str, str | DataType] | None = None,
+            target: str | None = None,
+            anonymize: dict | None = None,
+            condition_on: list[str] | None = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset a YData [`DataSource`][ydata.sdk.datasources.DataSource].
+        Except X, all the other arguments are for now ignored until they are supported.
 
         Arguments:
             X (DataSource): DataSource to Train
