@@ -9,6 +9,22 @@ from ydata.sdk.synthesizers.synthesizer import BaseSynthesizer
 
 
 class MultiTableSynthesizer(BaseSynthesizer):
+    """MultiTable synthesizer class.
+
+    Methods
+    -------
+    - `fit`: train a synthesizer instance.
+    - `sample`: request synthetic data.
+    - `status`: current status of the synthesizer instance.
+
+    Note:
+            The synthesizer instance is created in the backend only when the `fit` method is called.
+
+    Arguments:
+        write_connector (UID): Connector of type RDBMS to be used to write the samples
+        name (str): (optional) Name to be used when creating the synthesizer. Calculated internally if not provided
+        client (Client): (optional) Client to connect to the backend
+    """
 
     def __init__(
             self, write_connector: UID, uid: UID | None = None, name: str | None = None,

@@ -34,7 +34,7 @@ from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 class BaseSynthesizer(ABC, ModelFactoryMixin):
     """Main synthesizer class.
 
-    This class cannot be directly instanciated because of the specificities between [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer] and [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] `sample` methods.
+    This class cannot be directly instanciated because of the specificities between [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer], [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] or [`MultiTableSynthesizer`][ydata.sdk.synthesizers.MultiTableSynthesizer] `sample` methods.
 
     Methods
     -------
