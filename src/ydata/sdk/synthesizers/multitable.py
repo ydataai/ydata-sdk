@@ -3,8 +3,9 @@ from time import sleep
 from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.config import BACKOFF
-from ydata.sdk.common.exceptions import InputError
+from ydata.sdk.common.exceptions import InputError, ConnectorError
 from ydata.sdk.common.types import UID, Project
+from ydata.sdk.connectors.connector import Connector, ConnectorType
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.data_types import DataType
@@ -30,10 +31,11 @@ class MultiTableSynthesizer(BaseSynthesizer):
     """
 
     def __init__(
-            self, write_connector: UID, uid: UID | None = None, name: str | None = None,
+            self, write_connector: Connector | UID, uid: UID | None = None, name: str | None = None,
             project: Project | None = None, client: Client | None = None):
 
-        self.__write_connector = write_connector
+        connector = self._check_or_fetch_connector(write_connector)
+        self.__write_connector = connector.uid
 
         super().__init__(uid, name, project, client)
 
@@ -59,7 +61,7 @@ class MultiTableSynthesizer(BaseSynthesizer):
 
         self._fit_from_datasource(X)
 
-    def sample(self, frac: int | float = 1, write_connector: UID | None = None) -> None:
+    def sample(self, frac: int | float = 1, write_connector: Connector | UID | None = None) -> None:
         """Sample from a [`MultiTableSynthesizer`][ydata.sdk.synthesizers.MultiTableSynthesizer]
         instance.
         The sample is saved in the connector that was provided in the synthesizer initialization
@@ -79,7 +81,8 @@ class MultiTableSynthesizer(BaseSynthesizer):
         }
 
         if write_connector is not None:
-            payload['writeConnector'] = write_connector
+            connector = self._check_or_fetch_connector(write_connector)
+            payload['writeConnector'] = connector.uid
 
         response = self._client.post(
             f"/synthesizer/{self.uid}/sample", json=payload, project=self._project)
@@ -104,3 +107,18 @@ class MultiTableSynthesizer(BaseSynthesizer):
         payload['writeConnector'] = self.__write_connector
 
         return payload
+
+    def _check_or_fetch_connector(self, write_connector: Connector | UID) -> Connector:
+        self._logger.debug(f'Write connector is {write_connector}')
+        if isinstance(write_connector, str):
+            self._logger.debug(f'Write connector is of type `UID` {write_connector}')
+            write_connector = Connector.get(write_connector)
+            self._logger.debug(f'Using fetched connector {write_connector}')
+
+        if write_connector.uid is None:
+            raise InputError("Invalid connector provided as input for write")
+
+        if write_connector.type not in [ConnectorType.AZURE_SQL, ConnectorType.MYSQL, ConnectorType.SNOWFLAKE]:
+            raise ConnectorError(f"Invalid type `{write_connector.type}` for the provided connector")
+
+        return write_connector
