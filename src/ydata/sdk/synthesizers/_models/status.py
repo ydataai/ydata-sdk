@@ -1,4 +1,4 @@
-from typing import Generic, TypeVar
+from typing import Generic, Optional, TypeVar
 
 from pydantic import BaseModel, Field
 
@@ -8,7 +8,7 @@ T = TypeVar("T")
 
 
 class GenericStateErrorStatus(BaseModel, Generic[T]):
-    state: T | None = Field(None)
+    state: Optional[T] = Field(None)
 
     class Config:
         use_enum_values = True
@@ -50,10 +50,10 @@ class Status(BaseModel):
         REPORT = "report"
         READY = "ready"
 
-    state: State | None = Field(None)
-    prepare: PrepareStatus | None = Field(None)
-    training: TrainingStatus | None = Field(None)
-    report: ReportStatus | None = Field(None)
+    state: Optional[State] = Field(None)
+    prepare: Optional[PrepareStatus] = Field(None)
+    training: Optional[TrainingStatus] = Field(None)
+    report: Optional[ReportStatus] = Field(None)
 
     @staticmethod
     def not_initialized() -> "Status":

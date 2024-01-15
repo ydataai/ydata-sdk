@@ -1,10 +1,12 @@
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 from .status import Status
 
 
 class Synthesizer(BaseModel):
-    uid: str | None = None
-    author: str | None = None
-    name: str | None = None
-    status: Status | None = Field(None)
+    uid: Optional[str] = Field(None)
+    author: Optional[str] = Field(None)
+    name: Optional[str] = Field(None)
+    status: Optional[Status] = Field(None)

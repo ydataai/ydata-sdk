@@ -60,8 +60,10 @@ class Client(metaclass=SingletonClient):
         if set_as_global:
             self.__set_global()
 
-    def post(self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None,
-             project: Project | None = None, files: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
+    def post(
+        self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None,
+        project: Optional[Project] = None, files: Optional[Dict] = None, raise_for_status: bool = True
+    ) -> Response:
         """POST request to the backend.
 
         Args:
@@ -83,8 +85,10 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get(self, endpoint: str, params: Optional[Dict] = None,
-            project: Project | None = None, cookies: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
+    def get(
+        self, endpoint: str, params: Optional[Dict] = None, project: Optional[Project] = None,
+        cookies: Optional[Dict] = None, raise_for_status: bool = True
+    ) -> Response:
         """GET request to the backend.
 
         Args:
@@ -104,7 +108,9 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get_static_file(self, endpoint: str, project: Project | None = None, raise_for_status: bool = True) -> Response:
+    def get_static_file(
+        self, endpoint: str, project: Optional[Project] = None, raise_for_status: bool = True
+    ) -> Response:
         """Retrieve a static file from the backend.
 
         Args:
@@ -141,7 +147,7 @@ class Client(metaclass=SingletonClient):
         return data['myWorkspace']
 
     def __build_url(self, endpoint: str, params: Optional[Dict] = None, data: Optional[Dict] = None,
-                    json: Optional[Dict] = None, project: Project | None = None, files: Optional[Dict] = None,
+                    json: Optional[Dict] = None, project: Optional[Project] = None, files: Optional[Dict] = None,
                     cookies: Optional[Dict] = None) -> Dict:
         """Build a request for the backend.
 

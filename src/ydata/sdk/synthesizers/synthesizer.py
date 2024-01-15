@@ -49,7 +49,9 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         client (Client): (optional) Client to connect to the backend
     """
 
-    def __init__(self, uid: UID | None = None, name: str | None = None, project: Project | None = None, client: Client | None = None):
+    def __init__(
+            self, uid: Optional[UID] = None, name: Optional[str] = None,
+            project: Optional[Project] = None, client: Optional[Client] = None):
         self._init_common(client=client)
         self._model = mSynthesizer(uid=uid, name=name or str(uuid4()))
         self._project = project
@@ -179,7 +181,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     @staticmethod
     def _metadata_to_payload(
         datatype: DataSourceType, ds_metadata: Metadata,
-        dataset_attrs: Optional[DataSourceAttrs] = None, target: str | None = None
+        dataset_attrs: Optional[DataSourceAttrs] = None, target: Optional[str] = None
     ) -> dict:
         """Transform a the metadata and dataset attributes into a valid
         payload.
@@ -218,11 +220,11 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def _fit_from_datasource(
         self,
         X: DataSource,
-        privacy_level: PrivacyLevel | None = None,
-        dataset_attrs: DataSourceAttrs | None = None,
-        target: str | None = None,
-        anonymize: dict | None = None,
-        condition_on: list[str] | None = None
+        privacy_level: Optional[PrivacyLevel] = None,
+        dataset_attrs: Optional[DataSourceAttrs] = None,
+        target: Optional[str] = None,
+        anonymize: Optional[dict] = None,
+        condition_on: Optional[List[str]] = None
     ) -> None:
         payload = self._create_payload()
 

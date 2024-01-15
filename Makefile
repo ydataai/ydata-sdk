@@ -77,7 +77,7 @@ wheel:  ### Compiles the wheel
 	$(PYTHON) -m twine check wheels/*
 
 upload:
-	$(PYTHON) -m twine upload -r ydata wheels/ydata_sdk-$(version)-py310-none-any.whl
+	$(PYTHON) -m twine upload -r ydata wheels/ydata_sdk-$(version)-py$(PYV)-none-any.whl
 
 publish-docs: ### Publishes the documentation
 	mike deploy --push --update-aliases $(version) latest

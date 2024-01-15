@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 from time import sleep
+from typing import Dict, List, Optional, Union
 
 from ydata.datascience.common import PrivacyLevel
 from ydata.sdk.common.client import Client
@@ -31,8 +34,8 @@ class MultiTableSynthesizer(BaseSynthesizer):
     """
 
     def __init__(
-            self, write_connector: Connector | UID, uid: UID | None = None, name: str | None = None,
-            project: Project | None = None, client: Client | None = None):
+            self, write_connector: Union[Connector, UID], uid: Optional[UID] = None, name: Optional[str] = None,
+            project: Optional[Project] = None, client: Optional[Client] = None):
 
         super().__init__(uid, name, project, client)
 
@@ -41,15 +44,15 @@ class MultiTableSynthesizer(BaseSynthesizer):
 
     def fit(self, X: DataSource,
             privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
-            datatype: DataSourceType | str | None = None,
-            sortbykey: str | list[str] | None = None,
-            entities: str | list[str] | None = None,
-            generate_cols: list[str] | None = None,
-            exclude_cols: list[str] | None = None,
-            dtypes: dict[str, str | DataType] | None = None,
-            target: str | None = None,
-            anonymize: dict | None = None,
-            condition_on: list[str] | None = None) -> None:
+            datatype: Optional[Union[DataSourceType, str]] = None,
+            sortbykey: Optional[Union[str, List[str]]] = None,
+            entities: Optional[Union[str, List[str]]] = None,
+            generate_cols: Optional[List[str]] = None,
+            exclude_cols: Optional[List[str]] = None,
+            dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
+            target: Optional[str] = None,
+            anonymize: Optional[dict] = None,
+            condition_on: Optional[List[str]] = None) -> None:
         """Fit the synthesizer.
 
         The synthesizer accepts as training dataset a YData [`DataSource`][ydata.sdk.datasources.DataSource].
@@ -61,7 +64,7 @@ class MultiTableSynthesizer(BaseSynthesizer):
 
         self._fit_from_datasource(X)
 
-    def sample(self, frac: int | float = 1, write_connector: Connector | UID | None = None) -> None:
+    def sample(self, frac: Union[int, float] = 1, write_connector: Optional[Union[Connector, UID]] = None) -> None:
         """Sample from a [`MultiTableSynthesizer`][ydata.sdk.synthesizers.MultiTableSynthesizer]
         instance.
         The sample is saved in the connector that was provided in the synthesizer initialization
@@ -108,7 +111,7 @@ class MultiTableSynthesizer(BaseSynthesizer):
 
         return payload
 
-    def _check_or_fetch_connector(self, write_connector: Connector | UID) -> Connector:
+    def _check_or_fetch_connector(self, write_connector: Union[Connector, UID]) -> Connector:
         self._logger.debug(f'Write connector is {write_connector}')
         if isinstance(write_connector, str):
             self._logger.debug(f'Write connector is of type `UID` {write_connector}')
