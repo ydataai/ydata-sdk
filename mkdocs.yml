@@ -10,6 +10,7 @@ nav:
       - "get-started/index.md"
       - Quickstart:
           - How to create your first Dataset from a CSV file: "get-started/upload_csv.md"
+          - How to create your first Relational database in Fabric's Catalog: "get-started/create_multitable_dataset.md"
           - How to create your first Synthetic Data generator: "get-started/create_syntheticdata_generator.md"
           - How to create your first Lab: "get-started/create_lab.md"
           - How to create your first Pipeline: "get-started/create_pipeline.md"
