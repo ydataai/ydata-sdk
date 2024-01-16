@@ -47,7 +47,7 @@ class Connector(ModelFactoryMixin):
         return self._model.uid
 
     @property
-    def type(self) -> str:
+    def type(self) -> ConnectorType:
         return self._model.type
 
     @staticmethod

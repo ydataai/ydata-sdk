@@ -27,7 +27,7 @@ class ProfilingState(StringEnum):
     AVAILABLE = 'available'
 
 
-class Status(StringEnum):
+class State(StringEnum):
     """Represent the status of a [`DataSource`][ydata.sdk.datasources.datasource.DataSource]."""
 
     AVAILABLE = 'available'
@@ -59,7 +59,8 @@ class Status(StringEnum):
     """
 
 
-class State(BaseModel):
+class Status(BaseModel):
+    state: State
     validation: ValidationState
     metadata: MetadataState
     profiling: ProfilingState
