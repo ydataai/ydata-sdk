@@ -18,9 +18,9 @@ The solution includes a set of integrated components for data ingestion, standar
 Fabric SDK interface enables the ability to integrate data quality tooling with other platforms offering several beneficts in the realm of
 data science development and data management:
 
-- **Interoperability:** seamless integration with other data platform and systems like Databricks, Snowflake, etc. This ensures that all your software will work cohesively with all the elements from your data architecture. 
+- **Interoperability:** seamless integration with other data platform and systems like Databricks, Snowflake, etc. This ensures that all your software will work cohesively with all the elements from your data architecture.
 - **Collaboration:** ease of integration with a multitude of tools and services, reducing the need to reinvent the wheel and fostering a collaborative environment for all developers (data scientists, data engineers, software developers, etc.)
-- **Improved usage experience:** Fabric SDK enables a well-integrated software solution, which allows a seamless transition between different tools or platforms without facing compatibility issues. 
+- **Improved usage experience:** Fabric SDK enables a well-integrated software solution, which allows a seamless transition between different tools or platforms without facing compatibility issues.
 
 ## Current functionality
 
@@ -35,7 +35,7 @@ Fabric SDK is currently composed by the following main modules:
      - From a trained synthetic data generator, you can generate synthetic samples as needed and parametrise the number of records needed.
      - [Anonymization](sdk/examples/synthesize_with_anonymization.md) and [privacy](sdk/examples/synthesize_with_privacy_control.md) preserving capabilities to ensure that synthetic datasets does not contain Personal Identifiable Information (PII) and can safely be shared!
      - [Conditional sampling](sdk/examples/synthesize_with_conditional_sampling.md) can be used to restrict the domain and values of specific features in the sampled data.
-     
+
 * **Synthetic data quality report**
     <span style="color:grey">*Coming soon*</span>
      - An extensive synthetic data quality report that measures 3 dimensions: privacy, utility and fidelity of the generated data. The report can be downloaded in PDF format for ease of sharing and compliance purposes or as a JSON to enable the integration in data flows.
@@ -43,7 +43,7 @@ Fabric SDK is currently composed by the following main modules:
 * **Profiling**
     <span style="color:grey">*Coming soon*</span>
     - A set of metrics and algorithms summarizes datasets quality in three main dimensions: warnings, univariate analysis and a multivariate perspective.
-  
+
 ## Supported data formats
 
 === "Tabular"
