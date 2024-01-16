@@ -28,7 +28,7 @@ YData SDK offers a free-trial and an enterprise version. To access your free-tri
 
 The token will be available [**here**](https://fabric.ydata.ai), after login:
 
-![SDK Token](../assets/fabric_sdk_token.png){: style="height:450px;width:750px;align:center"}
+![SDK Token](../assets/sdk/fabric_sdk_token.png){: style="height:450px;width:750px;align:center"}
 
 With your account toke copied, you can set a new environment variable `YDATA_TOKEN` in the beginning of your development session.
 
