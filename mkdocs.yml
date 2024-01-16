@@ -23,6 +23,7 @@ nav:
       - Examples:
         - Generate Tabular Data: "examples/synthesize_tabular_data.md"
         - Generate Time-Series Data: "examples/synthesize_timeseries_data.md"
+        - Generate MultiTable Data: "examples/synthesizer_multitable.md"
         - Anonymization: "examples/synthesize_with_anonymization.md"
         - Privacy Level: "examples/synthesize_with_privacy_control.md"
         - Conditional Sampling: "examples/synthesize_with_conditional_sampling.md"
@@ -39,6 +40,7 @@ nav:
                   - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
                   - Regular: 'sdk/reference/api/synthesizers/regular.md'
                   - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
+                  - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
               - Types: 'sdk/reference/api/common/types.md'
 
 theme:
