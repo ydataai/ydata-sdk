@@ -6,7 +6,7 @@ from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.logger import create_logger
-from ydata.sdk.common.types import UID
+from ydata.sdk.common.types import UID, Project
 from ydata.sdk.connectors.connector import Connector, ConnectorType
 from ydata.sdk.datasources._models.connector_to_datasource import CONNECTOR_TO_DATASOURCE
 from ydata.sdk.datasources._models.datasource import DataSource as mDataSource
@@ -26,6 +26,7 @@ class DataSource(ModelFactoryMixin):
         connector (Connector): Connector from which the datasource is created
         datatype (Optional[Union[DataSourceType, str]]): (optional) DataSource type
         name (Optional[str]): (optional) DataSource name
+        project (Optional[Project]): (optional) Project name for this datasource
         wait_for_metadata (bool): If `True`, wait until the metadata is fully calculated
         client (Client): (optional) Client to connect to the backend
         **config: Datasource specific configuration
@@ -37,14 +38,21 @@ class DataSource(ModelFactoryMixin):
         metadata (Metadata): Metadata associated to the datasource
     """
 
-    def __init__(self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config):
+    def __init__(
+        self, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR,
+        name: Optional[str] = None, project: Optional[Project] = None, wait_for_metadata: bool = True,
+        client: Optional[Client] = None, **config
+    ):
         datasource_type = CONNECTOR_TO_DATASOURCE.get(connector.type)
         self._init_common(client=client)
         self._model: Optional[mDataSource] = self._create_model(
-            connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, client=self._client)
+            connector=connector, datasource_type=datasource_type, datatype=datatype,
+            config=config, name=name, client=self._client)
 
         if wait_for_metadata:
             self._model = DataSource._wait_for_metadata(self)._model
+
+        self._project = project
 
     @init_client
     def _init_common(self, client: Optional[Client] = None):
@@ -73,11 +81,12 @@ class DataSource(ModelFactoryMixin):
 
     @staticmethod
     @init_client
-    def list(client: Optional[Client] = None) -> DataSourceList:
+    def list(project: Optional[Project] = None, client: Optional[Client] = None) -> DataSourceList:
         """List the  [`DataSource`][ydata.sdk.datasources.DataSource]
         instances.
 
         Arguments:
+            project (Optional[Project]): (optional) Project name from where to list the datasources
             client (Client): (optional) Client to connect to the backend
 
         Returns:
@@ -90,7 +99,7 @@ class DataSource(ModelFactoryMixin):
                     e.pop(k, None)
             return data
 
-        response = client.get('/datasource')
+        response = client.get('/datasource', project=project)
         data: list = response.json()
         data = __process_data(data)
 
@@ -98,32 +107,39 @@ class DataSource(ModelFactoryMixin):
 
     @staticmethod
     @init_client
-    def get(uid: UID, client: Optional[Client] = None) -> "DataSource":
+    def get(uid: UID, project: Optional[Project] = None, client: Optional[Client] = None) -> "DataSource":
         """Get an existing [`DataSource`][ydata.sdk.datasources.DataSource].
 
         Arguments:
             uid (UID): DataSource identifier
+            project (Optional[Project]): (optional) Project name from where to get the connector
             client (Client): (optional) Client to connect to the backend
 
         Returns:
             DataSource
         """
-        response = client.get(f'/datasource/{uid}')
+        response = client.get(f'/datasource/{uid}', project=project)
         data: list = response.json()
         datasource_type = CONNECTOR_TO_DATASOURCE.get(
             ConnectorType(data['connector']['type']))
         model = DataSource._model_from_api(data, datasource_type)
         datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
+        datasource._project = project
         return datasource
 
     @classmethod
-    def create(cls, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None, **config) -> "DataSource":
+    def create(
+        cls, connector: Connector, datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR,
+        name: Optional[str] = None, project: Optional[Project] = None, wait_for_metadata: bool = True,
+        client: Optional[Client] = None, **config
+    ) -> "DataSource":
         """Create a new [`DataSource`][ydata.sdk.datasources.DataSource].
 
         Arguments:
             connector (Connector): Connector from which the datasource is created
             datatype (Optional[Union[DataSourceType, str]]): (optional) DataSource type
             name (Optional[str]): (optional) DataSource name
+            project (Optional[Project]): (optional) Project name for this datasource
             wait_for_metadata (bool): If `True`, wait until the metadata is fully calculated
             client (Client): (optional) Client to connect to the backend
             **config: Datasource specific configuration
@@ -132,22 +148,35 @@ class DataSource(ModelFactoryMixin):
             DataSource
         """
         datasource_type = CONNECTOR_TO_DATASOURCE.get(connector.type)
-        return cls._create(connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name, wait_for_metadata=wait_for_metadata, client=client)
+        return cls._create(
+            connector=connector, datasource_type=datasource_type, datatype=datatype, config=config, name=name,
+            project=project, wait_for_metadata=wait_for_metadata, client=client)
 
     @classmethod
-    def _create(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[Dict] = None, name: Optional[str] = None, wait_for_metadata: bool = True, client: Optional[Client] = None) -> "DataSource":
+    def _create(
+        cls, connector: Connector, datasource_type: Type[mDataSource],
+        datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[Dict] = None,
+        name: Optional[str] = None, project: Optional[Project] = None, wait_for_metadata: bool = True,
+        client: Optional[Client] = None
+    ) -> "DataSource":
         model = DataSource._create_model(
-            connector, datasource_type, datatype, config, name, client)
+            connector, datasource_type, datatype, config, name, project, client)
         datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
 
         if wait_for_metadata:
             datasource._model = DataSource._wait_for_metadata(datasource)._model
 
+        datasource._project = project
+
         return datasource
 
     @classmethod
     @init_client
-    def _create_model(cls, connector: Connector, datasource_type: Type[mDataSource], datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[Dict] = None, name: Optional[str] = None, client: Optional[Client] = None) -> mDataSource:
+    def _create_model(
+        cls, connector: Connector, datasource_type: Type[mDataSource],
+        datatype: Optional[Union[DataSourceType, str]] = DataSourceType.TABULAR, config: Optional[Dict] = None,
+        name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None
+    ) -> mDataSource:
         _name = name if name is not None else str(uuid4())
         _config = config if config is not None else {}
         payload = {
@@ -161,7 +190,7 @@ class DataSource(ModelFactoryMixin):
         if connector.type != ConnectorType.FILE:
             _config = datasource_type(**config).to_payload()
         payload.update(_config)
-        response = client.post('/datasource/', json=payload)
+        response = client.post('/datasource/', project=project, json=payload)
         data: list = response.json()
         return DataSource._model_from_api(data, datasource_type)
 
