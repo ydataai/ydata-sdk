@@ -3,23 +3,24 @@ import os
 from ydata.sdk.datasources import DataSource
 from ydata.sdk.synthesizers import MultiTableSynthesizer
 
-# Do not forget to add your token as env variables
+# Authenticate to Fabric to leverage the SDK - https://docs.sdk.ydata.ai/latest/sdk/installation/
+# Make sure to add your token as env variable.
 os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
 
-# In this example, we demonstrate how to train a synthesizer from an existing multi table RDBMS datasource.
-# After training a Multi Table Synthesizer, we request a sample.
-# In this case, we don't return the Dataset for the sample, it will be saved in the database
-# that the connector refers to.
-
+# In this example, we demonstrate how to train a synthesizer from an existing RDBMS Dataset.
+# Make sure to follow the step-by-step guide to create a Dataset in Fabric's catalog: https://docs.sdk.ydata.ai/latest/get-started/create_multitable_dataset/
 X = DataSource.get('<DATASOURCE_UID>')
 
-# Initialize a multi table synthesizer with the connector to write to
-# As long as the synthesizer does not call `fit`, it exists only locally
-# write_connector can be an UID or a Connector instance
+# Init a multi-table synthesizer. Provide a connector so that the process of data synthesis write the
+# synthetic data into the destination database
+# Provide a connector ID as the write_connector argument. See in this tutorial how to get a connector ID
 synth = MultiTableSynthesizer(write_connector='<CONNECTOR_UID')
 
-# The synthesizer training is requested
+# Start the training of your synthetic data generator
 synth.fit(X)
 
-# We request a synthetic dataset with a fracion of 1.5
-synth.sample(frac=1.5)
+# As soon as the training process is completed you are able to sample a synthetic database
+# The input expected is a percentage of the original database size
+# In this case it was requested a synthetic database with the same size as the original
+# Your synthetic sample was written to the database provided in the write_connector
+synth.sample(frac=1.)
