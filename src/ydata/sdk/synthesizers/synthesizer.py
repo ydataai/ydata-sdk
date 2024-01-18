@@ -61,6 +61,10 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
 
+    @property
+    def project(self) -> Project:
+        return self._project or self._client.project
+
     def fit(self, X: Union[DataSource, pdDataFrame],
             privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
             datatype: Optional[Union[DataSourceType, str]] = None,
