@@ -28,7 +28,8 @@ class MultiTableSynthesizer(BaseSynthesizer):
             The synthesizer instance is created in the backend only when the `fit` method is called.
 
     Arguments:
-        write_connector (UID): Connector of type RDBMS to be used to write the samples
+        write_connector (UID | Connector): Connector of type RDBMS to be used to write the samples
+        uid (UID): (optional) UID to identify this synthesizer
         name (str): (optional) Name to be used when creating the synthesizer. Calculated internally if not provided
         client (Client): (optional) Client to connect to the backend
     """

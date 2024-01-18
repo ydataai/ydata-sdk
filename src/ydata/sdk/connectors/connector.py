@@ -55,6 +55,10 @@ class Connector(ModelFactoryMixin):
     def type(self) -> ConnectorType:
         return self._model.type
 
+    @property
+    def project(self) -> Project:
+        return self._project or self._client.project
+
     @staticmethod
     @init_client
     def get(uid: UID, project: Optional[Project] = None, client: Optional[Client] = None) -> "Connector":

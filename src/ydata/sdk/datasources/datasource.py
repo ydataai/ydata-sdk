@@ -68,6 +68,10 @@ class DataSource(ModelFactoryMixin):
         return self._model.datatype
 
     @property
+    def project(self) -> Project:
+        return self._project or self._client.project
+
+    @property
     def status(self) -> Status:
         try:
             self._model = self.get(self._model.uid, self._client)._model

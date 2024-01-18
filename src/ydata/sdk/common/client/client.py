@@ -47,6 +47,8 @@ class Client(metaclass=SingletonClient):
 
     codes = codes
 
+    DEFAULT_PROJECT: Optional[Project] = environ.get("DEFAULT_PROJECT", None)
+
     def __init__(self, credentials: Optional[Union[str, Dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
         self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL)
         self._scheme = 'https'
@@ -56,9 +58,18 @@ class Client(metaclass=SingletonClient):
 
         self._handshake()
 
-        self._default_project = project or self._get_default_project(credentials)
+        self._default_project = project or Client.DEFAULT_PROJECT or self._get_default_project(
+            credentials)
         if set_as_global:
             self.__set_global()
+
+    @property
+    def project(self) -> Project:
+        return Client.DEFAULT_PROJECT or self._default_project
+
+    @project.setter
+    def project(self, value: Project):
+        self._default_project = value
 
     def post(
         self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None,
