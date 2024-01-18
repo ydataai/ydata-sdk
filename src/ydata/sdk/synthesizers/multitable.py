@@ -127,4 +127,3 @@ class MultiTableSynthesizer(BaseSynthesizer):
                 f"Invalid type `{write_connector.type}` for the provided connector")
 
         return write_connector
-

@@ -58,7 +58,8 @@ class Client(metaclass=SingletonClient):
 
         self._handshake()
 
-        self._default_project = project or Client.DEFAULT_PROJECT or self._get_default_project(credentials)
+        self._default_project = project or Client.DEFAULT_PROJECT or self._get_default_project(
+            credentials)
         if set_as_global:
             self.__set_global()
 
