@@ -1,8 +1,9 @@
 from typing import Generic, Optional, TypeVar
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 
 from ydata.core.enum import StringEnum
+from ydata.sdk.common.model import BaseModel
 
 T = TypeVar("T")
 

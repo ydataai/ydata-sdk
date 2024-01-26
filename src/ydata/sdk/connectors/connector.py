@@ -6,13 +6,15 @@ from uuid import uuid4
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import LOG_LEVEL
-from ydata.sdk.common.exceptions import CredentialTypeError, InvalidConnectorError
+from ydata.sdk.common.exceptions import CredentialTypeError
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID, Project
 from ydata.sdk.connectors._models.connector import Connector as mConnector
+from ydata.sdk.connectors._models.rdbms_connector import RDBMSConnector as mRDBMSConnector
 from ydata.sdk.connectors._models.connector_list import ConnectorsList
 from ydata.sdk.connectors._models.connector_type import ConnectorType
 from ydata.sdk.connectors._models.credentials.credentials import Credentials
+from ydata.sdk.connectors._models.schema import Schema
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 
 
@@ -33,11 +35,15 @@ class Connector(ModelFactoryMixin):
         type (ConnectorType): Type of the connector
     """
 
+    _MODEL_CLASS = mConnector
+
+    _model: Optional[mConnector]
+
     def __init__(
-            self, connector_type: Union[ConnectorType, str] = None, credentials: Optional[Dict] = None,
+            self, connector_type: Union[ConnectorType, str, None] = None, credentials: Optional[Dict] = None,
             name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None):
         self._init_common(client=client)
-        self._model: Optional[mConnector] = self._create_model(
+        self._model = _connector_type_to_model(ConnectorType._init_connector_type(connector_type))._create_model(
             connector_type, credentials, name, client=client)
 
         self._project = project
@@ -61,7 +67,9 @@ class Connector(ModelFactoryMixin):
 
     @staticmethod
     @init_client
-    def get(uid: UID, project: Optional[Project] = None, client: Optional[Client] = None) -> "Connector":
+    def get(
+        uid: UID, project: Optional[Project] = None, client: Optional[Client] = None
+    ) -> Union["Connector", "RDBMSConnector"]:
         """Get an existing connector.
 
         Arguments:
@@ -74,24 +82,17 @@ class Connector(ModelFactoryMixin):
         """
         response = client.get(f'/connector/{uid}', project=project)
         data = response.json()
-        connector = Connector._init_from_model_data(Connector, mConnector(**data))
+        data_type = data["type"]
+        connector_class = _connector_type_to_model(ConnectorType._init_connector_type(data_type))
+        connector = connector_class._init_from_model_data(connector_class._MODEL_CLASS(**data))
         connector._project = project
 
         return connector
 
     @staticmethod
-    def _init_connector_type(connector_type: Union[ConnectorType, str]) -> ConnectorType:
-        if isinstance(connector_type, str):
-            try:
-                connector_type = ConnectorType(connector_type)
-            except Exception:
-                c_list = ", ".join([c.value for c in ConnectorType])
-                raise InvalidConnectorError(
-                    f"ConnectorType '{connector_type}' does not exist.\nValid connector types are: {c_list}.")
-        return connector_type
-
-    @staticmethod
-    def _init_credentials(connector_type: ConnectorType, credentials: Union[str, Path, Dict, Credentials]) -> Credentials:
+    def _init_credentials(
+        connector_type: ConnectorType, credentials: Union[str, Path, Dict, Credentials]
+    ) -> Credentials:
         _credentials = None
 
         if isinstance(credentials, str):
@@ -118,7 +119,7 @@ class Connector(ModelFactoryMixin):
     def create(
         connector_type: Union[ConnectorType, str], credentials: Union[str, Path, Dict, Credentials],
         name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None
-    ) -> "Connector":
+    ) -> Union["Connector", "RDBMSConnector"]:
         """Create a new connector.
 
         Arguments:
@@ -131,20 +132,22 @@ class Connector(ModelFactoryMixin):
         Returns:
             New connector
         """
-        model = Connector._create_model(
+        connector_type = ConnectorType._init_connector_type(connector_type)
+        connector_class = _connector_type_to_model(connector_type)
+        model = connector_class._create_model(
             connector_type=connector_type, credentials=credentials, name=name, project=project, client=client)
-        connector = ModelFactoryMixin._init_from_model_data(
-            Connector, model)
+        connector = connector_class._init_from_model_data(model)
         connector._project = project
         return connector
 
     @classmethod
     @init_client
     def _create_model(
-            cls, connector_type: Union[ConnectorType, str], credentials: Union[str, Path, Dict, Credentials],
-            name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None) -> mConnector:
+        cls, connector_type: Union[ConnectorType, str], credentials: Union[str, Path, Dict, Credentials],
+        name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None
+    ) -> Union[mConnector, mRDBMSConnector]:
         _name = name if name is not None else str(uuid4())
-        _connector_type = Connector._init_connector_type(connector_type)
+        _connector_type = ConnectorType._init_connector_type(connector_type)
         _credentials = Connector._init_credentials(_connector_type, credentials)
         payload = {
             "type": _connector_type.value,
@@ -154,7 +157,7 @@ class Connector(ModelFactoryMixin):
         response = client.post('/connector/', project=project, json=payload)
         data: list = response.json()
 
-        return mConnector(**data)
+        return cls._MODEL_CLASS(**data)
 
     @staticmethod
     @init_client
@@ -174,3 +177,17 @@ class Connector(ModelFactoryMixin):
 
     def __repr__(self):
         return self._model.__repr__()
+
+
+class RDBMSConnector(Connector):
+
+    _MODEL_CLASS = mRDBMSConnector
+    _model: Optional[mRDBMSConnector]
+
+    @property
+    def schema(self) -> Optional[Schema]:
+        return self._model.db_schema
+
+
+def _connector_type_to_model(type: ConnectorType) -> Union[Connector, RDBMSConnector]:
+    return RDBMSConnector if type.is_rdbms else Connector

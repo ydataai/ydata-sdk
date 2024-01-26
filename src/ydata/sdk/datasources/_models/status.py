@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from ydata.sdk.common.model import BaseModel
 
 from ydata.core.enum import StringEnum
 
