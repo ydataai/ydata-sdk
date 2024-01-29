@@ -1,7 +1,7 @@
 """Alias generators for converting between different capitalization conventions."""
 import re
 
-__all__ = ('to_pascal', 'to_camel', 'to_snake')
+__all__ = ('to_pascal', 'to_camel')
 
 
 def to_pascal(snake: str) -> str:

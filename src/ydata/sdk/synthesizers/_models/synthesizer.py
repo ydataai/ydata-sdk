@@ -1,6 +1,7 @@
 from typing import Optional
 
 from pydantic import Field
+
 from ydata.sdk.common.model import BaseModel
 
 from .status import Status

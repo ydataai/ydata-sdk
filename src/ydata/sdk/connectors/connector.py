@@ -10,10 +10,10 @@ from ydata.sdk.common.exceptions import CredentialTypeError
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID, Project
 from ydata.sdk.connectors._models.connector import Connector as mConnector
-from ydata.sdk.connectors._models.rdbms_connector import RDBMSConnector as mRDBMSConnector
 from ydata.sdk.connectors._models.connector_list import ConnectorsList
 from ydata.sdk.connectors._models.connector_type import ConnectorType
 from ydata.sdk.connectors._models.credentials.credentials import Credentials
+from ydata.sdk.connectors._models.rdbms_connector import RDBMSConnector as mRDBMSConnector
 from ydata.sdk.connectors._models.schema import Schema
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 
@@ -83,8 +83,10 @@ class Connector(ModelFactoryMixin):
         response = client.get(f'/connector/{uid}', project=project)
         data = response.json()
         data_type = data["type"]
-        connector_class = _connector_type_to_model(ConnectorType._init_connector_type(data_type))
-        connector = connector_class._init_from_model_data(connector_class._MODEL_CLASS(**data))
+        connector_class = _connector_type_to_model(
+            ConnectorType._init_connector_type(data_type))
+        connector = connector_class._init_from_model_data(
+            connector_class._MODEL_CLASS(**data))
         connector._project = project
 
         return connector

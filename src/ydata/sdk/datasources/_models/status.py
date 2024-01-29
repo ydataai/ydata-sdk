@@ -1,6 +1,5 @@
-from ydata.sdk.common.model import BaseModel
-
 from ydata.core.enum import StringEnum
+from ydata.sdk.common.model import BaseModel
 
 
 class ValidationState(StringEnum):

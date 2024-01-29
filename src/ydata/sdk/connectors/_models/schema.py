@@ -1,10 +1,9 @@
 from typing import List, Optional
 
 from pydantic import Field
-from pydantic.dataclasses import dataclass
 
-from ydata.sdk.common.pydantic_utils import to_camel
 from ydata.sdk.common.model import BaseModel
+from ydata.sdk.common.pydantic_utils import to_camel
 
 
 class BaseConfig(BaseModel.Config):
