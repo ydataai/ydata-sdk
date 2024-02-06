@@ -1730,7 +1730,17 @@
 <span class="normal"><a href="#__codelineno-0-407">407</a></span>
 <span class="normal"><a href="#__codelineno-0-408">408</a></span>
 <span class="normal"><a href="#__codelineno-0-409">409</a></span>
-<span class="normal"><a href="#__codelineno-0-410">410</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="nd">@typechecked</span>
+<span class="normal"><a href="#__codelineno-0-410">410</a></span>
+<span class="normal"><a href="#__codelineno-0-411">411</a></span>
+<span class="normal"><a href="#__codelineno-0-412">412</a></span>
+<span class="normal"><a href="#__codelineno-0-413">413</a></span>
+<span class="normal"><a href="#__codelineno-0-414">414</a></span>
+<span class="normal"><a href="#__codelineno-0-415">415</a></span>
+<span class="normal"><a href="#__codelineno-0-416">416</a></span>
+<span class="normal"><a href="#__codelineno-0-417">417</a></span>
+<span class="normal"><a href="#__codelineno-0-418">418</a></span>
+<span class="normal"><a href="#__codelineno-0-419">419</a></span>
+<span class="normal"><a href="#__codelineno-0-420">420</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="nd">@typechecked</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="k">class</span> <span class="nc">BaseSynthesizer</span><span class="p">(</span><span class="n">ABC</span><span class="p">,</span> <span class="n">ModelFactoryMixin</span><span class="p">):</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Main synthesizer class.</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36"></a>
@@ -1800,7 +1810,7 @@
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a><span class="sd">            anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy</span>
 <a id="__codelineno-0-101" name="__codelineno-0-101"></a><span class="sd">            condition_on: (Optional[List[str]]): (optional) list of features to condition upon</span>
 <a id="__codelineno-0-102" name="__codelineno-0-102"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-103" name="__codelineno-0-103"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_initialized</span><span class="p">():</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_already_fitted</span><span class="p">():</span>
 <a id="__codelineno-0-104" name="__codelineno-0-104"></a>            <span class="k">raise</span> <span class="n">AlreadyFittedError</span><span class="p">()</span>
 <a id="__codelineno-0-105" name="__codelineno-0-105"></a>
 <a id="__codelineno-0-106" name="__codelineno-0-106"></a>        <span class="n">_datatype</span> <span class="o">=</span> <span class="n">DataSourceType</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
@@ -2083,31 +2093,41 @@
 <a id="__codelineno-0-383" name="__codelineno-0-383"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-384" name="__codelineno-0-384"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 <a id="__codelineno-0-385" name="__codelineno-0-385"></a>
-<a id="__codelineno-0-386" name="__codelineno-0-386"></a>    <span class="nd">@staticmethod</span>
-<a id="__codelineno-0-387" name="__codelineno-0-387"></a>    <span class="k">def</span> <span class="nf">_resolve_api_status</span><span class="p">(</span><span class="n">api_status</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
-<a id="__codelineno-0-388" name="__codelineno-0-388"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the status of the Synthesizer.</span>
-<a id="__codelineno-0-389" name="__codelineno-0-389"></a>
-<a id="__codelineno-0-390" name="__codelineno-0-390"></a><span class="sd">        The status of the synthesizer instance is determined by the state of</span>
-<a id="__codelineno-0-391" name="__codelineno-0-391"></a><span class="sd">        its different components.</span>
+<a id="__codelineno-0-386" name="__codelineno-0-386"></a>    <span class="k">def</span> <span class="nf">_already_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-0-387" name="__codelineno-0-387"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine if a synthesizer is already fitted.</span>
+<a id="__codelineno-0-388" name="__codelineno-0-388"></a>
+<a id="__codelineno-0-389" name="__codelineno-0-389"></a><span class="sd">        Returns:</span>
+<a id="__codelineno-0-390" name="__codelineno-0-390"></a><span class="sd">            True if the synthesizer is instanciated</span>
+<a id="__codelineno-0-391" name="__codelineno-0-391"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-392" name="__codelineno-0-392"></a>
-<a id="__codelineno-0-393" name="__codelineno-0-393"></a><span class="sd">        Arguments:</span>
-<a id="__codelineno-0-394" name="__codelineno-0-394"></a><span class="sd">            api_status (dict): json from the endpoint GET /synthesizer</span>
+<a id="__codelineno-0-393" name="__codelineno-0-393"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_initialized</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">status</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">training</span> <span class="ow">and</span>
+<a id="__codelineno-0-394" name="__codelineno-0-394"></a>                                           <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">training</span><span class="o">.</span><span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="p">[</span><span class="n">TrainingState</span><span class="o">.</span><span class="n">PREPARING</span><span class="p">])</span>
 <a id="__codelineno-0-395" name="__codelineno-0-395"></a>
-<a id="__codelineno-0-396" name="__codelineno-0-396"></a><span class="sd">        Returns:</span>
-<a id="__codelineno-0-397" name="__codelineno-0-397"></a><span class="sd">            Synthesizer Status</span>
-<a id="__codelineno-0-398" name="__codelineno-0-398"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-399" name="__codelineno-0-399"></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="n">api_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">Status</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-<a id="__codelineno-0-400" name="__codelineno-0-400"></a>        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="n">PREPARE</span><span class="p">:</span>
-<a id="__codelineno-0-401" name="__codelineno-0-401"></a>            <span class="k">if</span> <span class="n">PrepareState</span><span class="p">(</span><span class="n">api_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;prepare&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-<a id="__codelineno-0-402" name="__codelineno-0-402"></a>                    <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">PrepareState</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="n">PrepareState</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
-<a id="__codelineno-0-403" name="__codelineno-0-403"></a>                <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
-<a id="__codelineno-0-404" name="__codelineno-0-404"></a>        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
-<a id="__codelineno-0-405" name="__codelineno-0-405"></a>            <span class="k">if</span> <span class="n">TrainingState</span><span class="p">(</span><span class="n">api_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;training&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-<a id="__codelineno-0-406" name="__codelineno-0-406"></a>                    <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">TrainingState</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="n">TrainingState</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
-<a id="__codelineno-0-407" name="__codelineno-0-407"></a>                <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
-<a id="__codelineno-0-408" name="__codelineno-0-408"></a>        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="n">REPORT</span><span class="p">:</span>
-<a id="__codelineno-0-409" name="__codelineno-0-409"></a>            <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">READY</span>
-<a id="__codelineno-0-410" name="__codelineno-0-410"></a>        <span class="k">return</span> <span class="n">status</span>
+<a id="__codelineno-0-396" name="__codelineno-0-396"></a>    <span class="nd">@staticmethod</span>
+<a id="__codelineno-0-397" name="__codelineno-0-397"></a>    <span class="k">def</span> <span class="nf">_resolve_api_status</span><span class="p">(</span><span class="n">api_status</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
+<a id="__codelineno-0-398" name="__codelineno-0-398"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the status of the Synthesizer.</span>
+<a id="__codelineno-0-399" name="__codelineno-0-399"></a>
+<a id="__codelineno-0-400" name="__codelineno-0-400"></a><span class="sd">        The status of the synthesizer instance is determined by the state of</span>
+<a id="__codelineno-0-401" name="__codelineno-0-401"></a><span class="sd">        its different components.</span>
+<a id="__codelineno-0-402" name="__codelineno-0-402"></a>
+<a id="__codelineno-0-403" name="__codelineno-0-403"></a><span class="sd">        Arguments:</span>
+<a id="__codelineno-0-404" name="__codelineno-0-404"></a><span class="sd">            api_status (dict): json from the endpoint GET /synthesizer</span>
+<a id="__codelineno-0-405" name="__codelineno-0-405"></a>
+<a id="__codelineno-0-406" name="__codelineno-0-406"></a><span class="sd">        Returns:</span>
+<a id="__codelineno-0-407" name="__codelineno-0-407"></a><span class="sd">            Synthesizer Status</span>
+<a id="__codelineno-0-408" name="__codelineno-0-408"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-409" name="__codelineno-0-409"></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span><span class="n">api_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">Status</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+<a id="__codelineno-0-410" name="__codelineno-0-410"></a>        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="n">PREPARE</span><span class="p">:</span>
+<a id="__codelineno-0-411" name="__codelineno-0-411"></a>            <span class="k">if</span> <span class="n">PrepareState</span><span class="p">(</span><span class="n">api_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;prepare&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<a id="__codelineno-0-412" name="__codelineno-0-412"></a>                    <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">PrepareState</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="n">PrepareState</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
+<a id="__codelineno-0-413" name="__codelineno-0-413"></a>                <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
+<a id="__codelineno-0-414" name="__codelineno-0-414"></a>        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="n">TRAIN</span><span class="p">:</span>
+<a id="__codelineno-0-415" name="__codelineno-0-415"></a>            <span class="k">if</span> <span class="n">TrainingState</span><span class="p">(</span><span class="n">api_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;training&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<a id="__codelineno-0-416" name="__codelineno-0-416"></a>                    <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">TrainingState</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="n">TrainingState</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
+<a id="__codelineno-0-417" name="__codelineno-0-417"></a>                <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
+<a id="__codelineno-0-418" name="__codelineno-0-418"></a>        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="n">Status</span><span class="o">.</span><span class="n">REPORT</span><span class="p">:</span>
+<a id="__codelineno-0-419" name="__codelineno-0-419"></a>            <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">READY</span>
+<a id="__codelineno-0-420" name="__codelineno-0-420"></a>        <span class="k">return</span> <span class="n">status</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -2519,7 +2539,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a><span class="sd">        anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy</span>
 <a id="__codelineno-0-101" name="__codelineno-0-101"></a><span class="sd">        condition_on: (Optional[List[str]]): (optional) list of features to condition upon</span>
 <a id="__codelineno-0-102" name="__codelineno-0-102"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_initialized</span><span class="p">():</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_already_fitted</span><span class="p">():</span>
 <a id="__codelineno-0-104" name="__codelineno-0-104"></a>        <span class="k">raise</span> <span class="n">AlreadyFittedError</span><span class="p">()</span>
 <a id="__codelineno-0-105" name="__codelineno-0-105"></a>
 <a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="n">_datatype</span> <span class="o">=</span> <span class="n">DataSourceType</span><span class="p">(</span><span class="n">datatype</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
