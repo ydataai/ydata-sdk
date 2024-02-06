@@ -100,7 +100,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
             condition_on: (Optional[List[str]]): (optional) list of features to condition upon
         """
-        if self._is_initialized():
+        if self._already_fitted():
             raise AlreadyFittedError()
 
         _datatype = DataSourceType(datatype) if isinstance(
@@ -382,6 +382,16 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             True if the synthesizer is instanciated
         """
         return self._model is not None
+
+    def _already_fitted(self) -> bool:
+        """Determine if a synthesizer is already fitted.
+
+        Returns:
+            True if the synthesizer is instanciated
+        """
+
+        return self._is_initialized() and (self._model.status and self._model.status.training and
+                                           self._model.status.training.state is not [TrainingState.PREPARING])
 
     @staticmethod
     def _resolve_api_status(api_status: Dict) -> Status:
