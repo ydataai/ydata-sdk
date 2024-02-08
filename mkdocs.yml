@@ -6,24 +6,15 @@ dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
   - Welcome: 'index.md'
-  - Get started with Fabric: "get-started/fabric_community.md"
-  - Data Catalog:
-      - "data_catalog/index.md"
-      - Connectors:
-        - "data_catalog/connectors/index.md"
-        - Supported connections:
-          - "data_catalog/connectors/supported_connections.md"
-          - File formats: "data_catalog/connectors/file_formats.md"
-        - Use in Labs: "data_catalog/connectors/use_in_labs.md"
-      - Datasets:
-        - "data_catalog/datasets/index.md"
-        - Dataset overview:
-          - "data_catalog/datasets/dataset_overview.md"
-          - Warnings: "data_catalog/datasets/warnings.md"
-        - Dataset Profiling: "data_catalog/datasets/profiling.md"
-        - Dataset Metadata: "data_catalog/datasets/metadata.md"
-        - Automated PII identification: "data_catalog/datasets/pii.md"
-        - Explore in Labs: "data_catalog/datasets/explore_in_labs.md"
+  - Get started with Fabric:
+      - "get-started/index.md"
+      - Quickstart:
+          - How to create your first Dataset from a CSV file: "get-started/upload_csv.md"
+          - How to create your first Relational database in Fabric's Catalog: "get-started/create_multitable_dataset.md"
+          - How to create your first Synthetic Data generator: "get-started/create_syntheticdata_generator.md"
+          - How to create your first Lab: "get-started/create_lab.md"
+          - How to create your first Pipeline: "get-started/create_pipeline.md"
+      - Fabric Community: "get-started/fabric_community.md"
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
@@ -31,25 +22,27 @@ nav:
       - Components:
           - "sdk/modules/connectors.md"
       - Examples:
-        - Generate Tabular Data: "examples/synthesize_tabular_data.md"
-        - Generate Time-Series Data: "examples/synthesize_timeseries_data.md"
-        - Anonymization: "examples/synthesize_with_anonymization.md"
-        - Privacy Level: "examples/synthesize_with_privacy_control.md"
-        - Conditional Sampling: "examples/synthesize_with_conditional_sampling.md"
+        - Generate Tabular Data: "sdk/examples/synthesize_tabular_data.md"
+        - Generate Time-Series Data: "sdk/examples/synthesize_timeseries_data.md"
+        - Generate MultiTable Data: "sdk/examples/synthesizer_multitable.md"
+        - Anonymization: "sdk/examples/synthesize_with_anonymization.md"
+        - Privacy Level: "sdk/examples/synthesize_with_privacy_control.md"
+        - Conditional Sampling: "sdk/examples/synthesize_with_conditional_sampling.md"
       - Reference:
           - Changelog: 'sdk/reference/changelog.md'
           - API:
-              - Client: 'reference/api/common/client.md'
+              - Client: 'sdk/reference/api/common/client.md'
               - Connectors:
-                  - 'Connector': 'reference/api/connectors/connector.md'
+                  - 'Connector': 'sdk/reference/api/connectors/connector.md'
               - DataSources:
-                  - 'DataSource': 'reference/api/datasources/datasource.md'
-                  - 'Metadata': 'reference/api/datasources/metadata.md'
+                  - 'DataSource': 'sdk/reference/api/datasources/datasource.md'
+                  - 'Metadata': 'sdk/reference/api/datasources/metadata.md'
               - Synthesizers:
-                  - Synthesizer: 'reference/api/synthesizers/base.md'
-                  - Regular: 'reference/api/synthesizers/regular.md'
-                  - TimeSeries: 'reference/api/synthesizers/timeseries.md'
-              - Types: 'reference/api/common/types.md'
+                  - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
+                  - Regular: 'sdk/reference/api/synthesizers/regular.md'
+                  - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
+                  - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
+              - Types: 'sdk/reference/api/common/types.md'
 
 theme:
   name: material

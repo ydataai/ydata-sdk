@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from io import StringIO
 from time import sleep
-from typing import Dict, List, Optional, Tuple, Type, Union
+from typing import Dict, List, Optional, Union
 from uuid import uuid4
 from warnings import warn
 
@@ -14,9 +14,9 @@ from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
 from ydata.sdk.common.config import BACKOFF, LOG_LEVEL
 from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceAttrsError, DataSourceNotAvailableError,
-                                         DataTypeMissingError, EmptyDataError, FittingError)
+                                         DataTypeMissingError, EmptyDataError, FittingError, InputError)
 from ydata.sdk.common.logger import create_logger
-from ydata.sdk.common.types import UID
+from ydata.sdk.common.types import UID, Project
 from ydata.sdk.common.warnings import DataSourceTypeWarning
 from ydata.sdk.datasources import DataSource, LocalDataSource
 from ydata.sdk.datasources._models.attributes import DataSourceAttrs
@@ -26,17 +26,15 @@ from ydata.sdk.datasources._models.metadata.metadata import Metadata
 from ydata.sdk.datasources._models.status import Status as dsStatus
 from ydata.sdk.synthesizers._models.status import PrepareState, Status, TrainingState
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
-from ydata.sdk.synthesizers._models.synthesizer_type import SynthesizerType
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
-from ydata.sdk.utils.model_utils import filter_dict
 
 
 @typechecked
 class BaseSynthesizer(ABC, ModelFactoryMixin):
     """Main synthesizer class.
 
-    This class cannot be directly instanciated because of the specificities between [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer] and [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] `sample` methods.
+    This class cannot be directly instanciated because of the specificities between [`RegularSynthesizer`][ydata.sdk.synthesizers.RegularSynthesizer], [`TimeSeriesSynthesizer`][ydata.sdk.synthesizers.TimeSeriesSynthesizer] or [`MultiTableSynthesizer`][ydata.sdk.synthesizers.MultiTableSynthesizer] `sample` methods.
 
     Methods
     -------
@@ -51,14 +49,21 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         client (Client): (optional) Client to connect to the backend
     """
 
-    def __init__(self, client: Optional[Client] = None):
+    def __init__(
+            self, uid: Optional[UID] = None, name: Optional[str] = None,
+            project: Optional[Project] = None, client: Optional[Client] = None):
         self._init_common(client=client)
-        self._model: Optional[mSynthesizer] = None
+        self._model = mSynthesizer(uid=uid, name=name or str(uuid4()))
+        self._project = project
 
     @init_client
     def _init_common(self, client: Optional[Client] = None):
         self._client = client
         self._logger = create_logger(__name__, level=LOG_LEVEL)
+
+    @property
+    def project(self) -> Project:
+        return self._project or self._client.project
 
     def fit(self, X: Union[DataSource, pdDataFrame],
             privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
@@ -69,7 +74,6 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             exclude_cols: Optional[List[str]] = None,
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
             target: Optional[str] = None,
-            name: Optional[str] = None,
             anonymize: Optional[dict] = None,
             condition_on: Optional[List[str]] = None) -> None:
         """Fit the synthesizer.
@@ -96,7 +100,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             anonymize (Optional[str]): (optional) fields to anonymize and the anonymization strategy
             condition_on: (Optional[List[str]]): (optional) list of features to condition upon
         """
-        if self._is_initialized():
+        if self._already_fitted():
             raise AlreadyFittedError()
 
         _datatype = DataSourceType(datatype) if isinstance(
@@ -125,7 +129,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
 
         self._fit_from_datasource(
-            X=_X, dataset_attrs=dataset_attrs, target=target, name=name,
+            X=_X, dataset_attrs=dataset_attrs, target=target,
             anonymize=anonymize, privacy_level=privacy_level, condition_on=condition_on)
 
     @staticmethod
@@ -181,7 +185,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     @staticmethod
     def _metadata_to_payload(
         datatype: DataSourceType, ds_metadata: Metadata,
-        dataset_attrs: Optional[DataSourceAttrs] = None, target: str | None = None
+        dataset_attrs: Optional[DataSourceAttrs] = None, target: Optional[str] = None
     ) -> dict:
         """Transform a the metadata and dataset attributes into a valid
         payload.
@@ -220,45 +224,61 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def _fit_from_datasource(
         self,
         X: DataSource,
-        privacy_level: PrivacyLevel = PrivacyLevel.HIGH_FIDELITY,
+        privacy_level: Optional[PrivacyLevel] = None,
         dataset_attrs: Optional[DataSourceAttrs] = None,
         target: Optional[str] = None,
-        name: Optional[str] = None,
         anonymize: Optional[dict] = None,
         condition_on: Optional[List[str]] = None
     ) -> None:
-        _name = name if name is not None else str(uuid4())
-        metadata = self._metadata_to_payload(
-            DataSourceType(X.datatype), X.metadata, dataset_attrs, target)
-        payload = {
-            'name': _name,
-            'dataSourceUID': X.uid,
-            'metadata': metadata,
-            'extraData': {},
-            'privacyLevel': privacy_level.value
-        }
+        payload = self._create_payload()
+
+        payload['dataSourceUID'] = X.uid
+
+        if privacy_level:
+            payload['privacy_level'] = privacy_level.value
+
+        if X.metadata is not None and X.datatype is not None:
+            payload['metadata'] = self._metadata_to_payload(
+                DataSourceType(X.datatype), X.metadata, dataset_attrs, target)
+
         if anonymize is not None:
             payload["extraData"]["anonymize"] = anonymize
         if condition_on is not None:
             payload["extraData"]["condition_on"] = condition_on
 
-        response = self._client.post('/synthesizer/', json=payload)
-        data: list = response.json()
-        self._model, _ = self._model_from_api(X.datatype, data)
-        while self.status not in [Status.READY, Status.FAILED]:
+        response = self._client.post(
+            '/synthesizer/', json=payload, project=self._project)
+        data = response.json()
+        self._model = mSynthesizer(**data)
+        while self._check_fitting_not_finished(self.status):
             self._logger.info('Training the synthesizer...')
             sleep(BACKOFF)
 
-        if self.status == Status.FAILED:
+    def _create_payload(self) -> dict:
+        payload = {
+            'extraData': {}
+        }
+
+        if self._model and self._model.name:
+            payload['name'] = self._model.name
+
+        return payload
+
+    def _check_fitting_not_finished(self, status: Status) -> bool:
+        self._logger.debug(f'checking status {status}')
+
+        if status.state in [Status.State.READY, Status.State.REPORT]:
+            return False
+
+        self._logger.debug(f'status not ready yet {status.state}')
+
+        if status.prepare and PrepareState(status.prepare.state) == PrepareState.FAILED:
             raise FittingError('Could not train the synthesizer')
 
-    @staticmethod
-    def _model_from_api(datatype: str, data: Dict) -> Tuple[mSynthesizer, Type["BaseSynthesizer"]]:
-        from ydata.sdk.synthesizers._models.synthesizer_map import TYPE_TO_CLASS
-        synth_cls = TYPE_TO_CLASS.get(SynthesizerType(datatype).value)
-        data['status'] = synth_cls._resolve_api_status(data['status'])
-        data = filter_dict(mSynthesizer, data)
-        return mSynthesizer(**data), synth_cls
+        if status.training and TrainingState(status.training.state) == TrainingState.FAILED:
+            raise FittingError('Could not train the synthesizer')
+
+        return True
 
     @abstractmethod
     def sample(self) -> pdDataFrame:
@@ -274,21 +294,22 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             pandas `DataFrame`
         """
         response = self._client.post(
-            f"/synthesizer/{self.uid}/sample", json=payload)
+            f"/synthesizer/{self.uid}/sample", json=payload, project=self._project)
 
         data: Dict = response.json()
         sample_uid = data.get('uid')
         sample_status = None
         while sample_status not in ['finished', 'failed']:
             self._logger.info('Sampling from the synthesizer...')
-            response = self._client.get(f'/synthesizer/{self.uid}/history')
+            response = self._client.get(
+                f'/synthesizer/{self.uid}/history', project=self._project)
             history: Dict = response.json()
             sample_data = next((s for s in history if s.get('uid') == sample_uid), None)
             sample_status = sample_data.get('status', {}).get('state')
             sleep(BACKOFF)
 
         response = self._client.get_static_file(
-            f'/synthesizer/{self.uid}/sample/{sample_uid}/sample.csv')
+            f'/synthesizer/{self.uid}/sample/{sample_uid}/sample.csv', project=self._project)
         data = StringIO(response.content.decode())
         return read_csv(data)
 
@@ -300,7 +321,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             Synthesizer status
         """
         if not self._is_initialized():
-            return Status.NOT_INITIALIZED
+            return Status.State.NOT_INITIALIZED
 
         return self._model.uid
 
@@ -312,31 +333,23 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             Synthesizer status
         """
         if not self._is_initialized():
-            return Status.NOT_INITIALIZED
+            return Status.not_initialized()
 
         try:
-            self = self.get(self._model.uid, self._client)
+            self = self.get()
             return self._model.status
         except Exception:  # noqa: PIE786
-            return Status.UNKNOWN
+            return Status.unknown()
 
-    @staticmethod
-    @init_client
-    def get(uid: str, client: Optional[Client] = None) -> "BaseSynthesizer":
-        """List the synthesizer instances.
+    def get(self):
+        assert self._is_initialized() and self._model.uid, InputError(
+            "Please provide the synthesizer `uid`")
 
-        Arguments:
-            uid (str): synthesizer instance uid
-            client (Client): (optional) Client to connect to the backend
+        response = self._client.get(f'/synthesizer/{self.uid}', project=self._project)
+        data = response.json()
+        self._model = mSynthesizer(**data)
 
-        Returns:
-            Synthesizer instance
-        """
-        response = client.get(f'/synthesizer/{uid}')
-        data: list = response.json()
-        model, synth_cls = BaseSynthesizer._model_from_api(
-            data['dataSource']['dataType'], data)
-        return ModelFactoryMixin._init_from_model_data(synth_cls, model)
+        return self
 
     @staticmethod
     @init_client
@@ -369,6 +382,16 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             True if the synthesizer is instanciated
         """
         return self._model is not None
+
+    def _already_fitted(self) -> bool:
+        """Determine if a synthesizer is already fitted.
+
+        Returns:
+            True if the synthesizer is instanciated
+        """
+
+        return self._is_initialized() and (self._model.status and self._model.status.training and
+                                           self._model.status.training.state is not [TrainingState.PREPARING])
 
     @staticmethod
     def _resolve_api_status(api_status: Dict) -> Status:
