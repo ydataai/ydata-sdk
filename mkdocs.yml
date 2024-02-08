@@ -15,6 +15,12 @@ nav:
           - How to create your first Lab: "get-started/create_lab.md"
           - How to create your first Pipeline: "get-started/create_pipeline.md"
       - Fabric Community: "get-started/fabric_community.md"
+  - Data catalog:
+      - 'data_catalog/index.md'
+      - Connectors:
+          - 'data_catalog/connectors/index.md'
+          - How to create a connector?: 'data_catalog/connectors/create_connector.md'
+          - Supported connectors: 'data_catalog/connectors/supported_connections.md'
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
