@@ -1730,7 +1730,7 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-80" name="__codelineno-0-80"></a>            <span class="k">return</span> <span class="n">Status</span><span class="o">.</span><span class="n">UNKNOWN</span>
 <a id="__codelineno-0-81" name="__codelineno-0-81"></a>
 <a id="__codelineno-0-82" name="__codelineno-0-82"></a>    <span class="nd">@property</span>
-<a id="__codelineno-0-83" name="__codelineno-0-83"></a>    <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Metadata</span><span class="p">:</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>    <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
 <a id="__codelineno-0-84" name="__codelineno-0-84"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">metadata</span>
 <a id="__codelineno-0-85" name="__codelineno-0-85"></a>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="nd">@staticmethod</span>
@@ -1777,7 +1777,7 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>        <span class="n">datasource_type</span> <span class="o">=</span> <span class="n">CONNECTOR_TO_DATASOURCE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>            <span class="n">ConnectorType</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;connector&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]))</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_model_from_api</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datasource_type</span><span class="p">)</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="n">datasource</span> <span class="o">=</span> <span class="n">ModelFactoryMixin</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">DataSource</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="n">datasource</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="n">datasource</span><span class="o">.</span><span class="n">_project</span> <span class="o">=</span> <span class="n">project</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>        <span class="k">return</span> <span class="n">datasource</span>
 <a id="__codelineno-0-133" name="__codelineno-0-133"></a>
@@ -1815,7 +1815,7 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-165" name="__codelineno-0-165"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataSource&quot;</span><span class="p">:</span>
 <a id="__codelineno-0-166" name="__codelineno-0-166"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_create_model</span><span class="p">(</span>
 <a id="__codelineno-0-167" name="__codelineno-0-167"></a>            <span class="n">connector</span><span class="p">,</span> <span class="n">datasource_type</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
-<a id="__codelineno-0-168" name="__codelineno-0-168"></a>        <span class="n">datasource</span> <span class="o">=</span> <span class="n">ModelFactoryMixin</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">DataSource</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<a id="__codelineno-0-168" name="__codelineno-0-168"></a>        <span class="n">datasource</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 <a id="__codelineno-0-169" name="__codelineno-0-169"></a>
 <a id="__codelineno-0-170" name="__codelineno-0-170"></a>        <span class="k">if</span> <span class="n">wait_for_metadata</span><span class="p">:</span>
 <a id="__codelineno-0-171" name="__codelineno-0-171"></a>            <span class="n">datasource</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_wait_for_metadata</span><span class="p">(</span><span class="n">datasource</span><span class="p">)</span><span class="o">.</span><span class="n">_model</span>
@@ -2233,7 +2233,7 @@ to be used by a Synthesizer as training data.</p>
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="n">datasource_type</span> <span class="o">=</span> <span class="n">CONNECTOR_TO_DATASOURCE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="n">ConnectorType</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;connector&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]))</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_model_from_api</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datasource_type</span><span class="p">)</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>    <span class="n">datasource</span> <span class="o">=</span> <span class="n">ModelFactoryMixin</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">DataSource</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>    <span class="n">datasource</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">_init_from_model_data</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>    <span class="n">datasource</span><span class="o">.</span><span class="n">_project</span> <span class="o">=</span> <span class="n">project</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="k">return</span> <span class="n">datasource</span>
 </code></pre></div></td></tr></table></div>
@@ -2404,7 +2404,7 @@ instances.</p>
 <a id="ydata.sdk.datasources.Status"></a>
   <div class="doc doc-contents first">
           <p class="doc doc-class-bases">
-            Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+            Bases: <code><span title="ydata.sdk.common.model.BaseModel">BaseModel</span></code></p>
 
 
 
