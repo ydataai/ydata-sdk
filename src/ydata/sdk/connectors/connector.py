@@ -191,5 +191,5 @@ class RDBMSConnector(Connector):
         return self._model.db_schema
 
 
-def _connector_type_to_model(type: ConnectorType) -> Union[Connector, RDBMSConnector]:
-    return RDBMSConnector if type.is_rdbms else Connector
+def _connector_type_to_model(connector_type: ConnectorType) -> Union[Connector, RDBMSConnector]:
+    return RDBMSConnector if connector_type.is_rdbms else Connector

@@ -165,7 +165,7 @@ class DataSource(ModelFactoryMixin):
     ) -> "DataSource":
         model = DataSource._create_model(
             connector, datasource_type, datatype, config, name, project, client)
-        datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
+        datasource = DataSource._init_from_model_data(model)
 
         if wait_for_metadata:
             datasource._model = DataSource._wait_for_metadata(datasource)._model
