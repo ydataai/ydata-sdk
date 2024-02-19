@@ -8,5 +8,6 @@ class BaseModel(PydanticBaseModel):
     All datamodel from YData SDK inherits from this class.
     """
     class Config:
-        extra = Extra.ignore
         allow_population_by_field_name = True
+        extra = Extra.ignore
+        use_enum_values = True

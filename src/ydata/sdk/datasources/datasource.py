@@ -80,7 +80,7 @@ class DataSource(ModelFactoryMixin):
             return Status.UNKNOWN
 
     @property
-    def metadata(self) -> Metadata:
+    def metadata(self) -> Optional[Metadata]:
         return self._model.metadata
 
     @staticmethod
@@ -127,7 +127,7 @@ class DataSource(ModelFactoryMixin):
         datasource_type = CONNECTOR_TO_DATASOURCE.get(
             ConnectorType(data['connector']['type']))
         model = DataSource._model_from_api(data, datasource_type)
-        datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
+        datasource = DataSource._init_from_model_data(model)
         datasource._project = project
         return datasource
 
@@ -165,7 +165,7 @@ class DataSource(ModelFactoryMixin):
     ) -> "DataSource":
         model = DataSource._create_model(
             connector, datasource_type, datatype, config, name, project, client)
-        datasource = ModelFactoryMixin._init_from_model_data(DataSource, model)
+        datasource = DataSource._init_from_model_data(model)
 
         if wait_for_metadata:
             datasource._model = DataSource._wait_for_metadata(datasource)._model
