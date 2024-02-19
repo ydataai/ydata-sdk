@@ -4,7 +4,7 @@
 Check this quickstart video on <a href="https://youtu.be/GsfggG9PhgE?si=ixlCaesd3cLFOCZm"><u>how to create your first Synthetic Data generator</u></a>.
 
 To generate your first synthetic data, you need to have a Dataset already available in your Data Catalog.
-Check this tutorial to see how you can <a href="upload_csv"><u>add your first dataset to Fabric’s Data Catalog</u></a>.
+Check this tutorial to see how you can <a href="../upload_csv"><u>add your first dataset to Fabric’s Data Catalog</u></a>.
 
 With your first dataset created, you are now able to start the creation of your Synthetic Data generator. You can either
 select **"Synthetic Data"** from your left side menu, or you can select **"Create Synthetic Data"** in your project Home
