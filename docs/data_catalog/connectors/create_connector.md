@@ -14,7 +14,7 @@ For the purpose of this example we will be creating a connector to our AWS S3 st
 The credentials/secrets to your storage will be requested. After adding them, you can *"Test connection"* 
 to ensure that all the details are correct. 
 A confirmation message, similar to the one shown in the image below, should appear in our screen, 
-letting you know that you can now save your connector successfully!
+letting you know that you can now save your connector successfully! 
 
  ![Succesfully connection test](../../assets/data_catalog/connectors/successful_connection.png){: style="width:50%"} 
 
