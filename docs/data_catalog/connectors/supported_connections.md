@@ -1,10 +1,10 @@
 # Supported connections
 
-Fabric can read and write data from a variety of data sources. 
+Fabric can read and write data from a variety of data sources.
 
 ## Connectors
 
-Here is the list of the available connectors in Fabric. 
+Here is the list of the available connectors in Fabric.
 
 | Connector Name       |      Type      |                 Supported file types | Notes                                                                                                 |
 |:---------------------|:--------------:|-------------------------------------:|:------------------------------------------------------------------------------------------------------|
