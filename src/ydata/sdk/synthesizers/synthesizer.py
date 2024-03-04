@@ -23,7 +23,7 @@ from ydata.sdk.datasources._models.attributes import DataSourceAttrs
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.data_types import DataType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
-from ydata.sdk.datasources._models.status import Status as dsStatus
+from ydata.sdk.datasources._models.status import State as dsState
 from ydata.sdk.synthesizers._models.status import PrepareState, Status, TrainingState
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
@@ -121,9 +121,9 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
                      DataSourceTypeWarning)
             _X = X
 
-        if _X.status != dsStatus.AVAILABLE:
+        if dsState(_X.status.state) != dsState.AVAILABLE:
             raise DataSourceNotAvailableError(
-                f"The datasource '{_X.uid}' is not available (status = {_X.status.value})")
+                f"The datasource '{_X.uid}' is not available (status = {_X.status})")
 
         if isinstance(dataset_attrs, dict):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
@@ -235,7 +235,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         payload['dataSourceUID'] = X.uid
 
         if privacy_level:
-            payload['privacy_level'] = privacy_level.value
+            payload['privacyLevel'] = privacy_level.value
 
         if X.metadata is not None and X.datatype is not None:
             payload['metadata'] = self._metadata_to_payload(
@@ -267,7 +267,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def _check_fitting_not_finished(self, status: Status) -> bool:
         self._logger.debug(f'checking status {status}')
 
-        if status.state in [Status.State.READY, Status.State.REPORT]:
+        if Status.State(status.state) in [Status.State.READY, Status.State.REPORT]:
             return False
 
         self._logger.debug(f'status not ready yet {status.state}')
