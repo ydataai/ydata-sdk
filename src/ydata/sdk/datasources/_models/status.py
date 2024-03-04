@@ -1,5 +1,10 @@
+from typing import Optional
+
+from pydantic import Field
+
 from ydata.core.enum import StringEnum
 from ydata.sdk.common.model import BaseModel
+from ydata.sdk.common.status import GenericStateErrorStatus
 
 
 class ValidationState(StringEnum):
@@ -58,8 +63,17 @@ class State(StringEnum):
     """
 
 
+ValidationStatus = GenericStateErrorStatus[ValidationState]
+MetadataStatus = GenericStateErrorStatus[MetadataState]
+ProfilingStatus = GenericStateErrorStatus[ProfilingState]
+
+
 class Status(BaseModel):
-    state: State
-    validation: ValidationState
-    metadata: MetadataState
-    profiling: ProfilingState
+    state: Optional[State] = Field(None)
+    validation: Optional[ValidationStatus] = Field(None)
+    metadata: Optional[MetadataStatus] = Field(None)
+    profiling: Optional[ProfilingStatus] = Field(None)
+
+    @staticmethod
+    def unknown() -> "Status":
+        return Status(state=Status.State.UNKNOWN)
