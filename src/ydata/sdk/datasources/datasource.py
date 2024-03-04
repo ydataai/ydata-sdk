@@ -74,10 +74,11 @@ class DataSource(ModelFactoryMixin):
     @property
     def status(self) -> Status:
         try:
-            self._model = self.get(self._model.uid, self._client)._model
+            self._model = self.get(uid=self._model.uid,
+                                   project=self._project, client=self._client)._model
             return self._model.status
         except Exception:  # noqa: PIE786
-            return Status.UNKNOWN
+            return Status.unknown()
 
     @property
     def metadata(self) -> Optional[Metadata]:

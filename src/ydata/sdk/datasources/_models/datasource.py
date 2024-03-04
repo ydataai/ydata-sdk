@@ -1,5 +1,6 @@
-from dataclasses import dataclass
 from typing import Optional
+
+from pydantic.dataclasses import dataclass
 
 from ydata.sdk.common.types import UID
 from ydata.sdk.datasources._models.datatype import DataSourceType
@@ -15,6 +16,13 @@ class DataSource:
     datatype: Optional[DataSourceType] = None
     metadata: Optional[Metadata] = None
     status: Optional[Status] = None
+
+    def __post_init__(self):
+        if self.metadata is not None:
+            self.metadata = Metadata(**self.metadata)
+
+        if self.status is not None:
+            self.status = Status(**self.status)
 
     def to_payload(self):
         return {}

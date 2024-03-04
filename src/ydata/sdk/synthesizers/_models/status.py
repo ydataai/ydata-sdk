@@ -1,18 +1,10 @@
-from typing import Generic, Optional, TypeVar
+from typing import Optional
 
 from pydantic import Field
 
 from ydata.core.enum import StringEnum
 from ydata.sdk.common.model import BaseModel
-
-T = TypeVar("T")
-
-
-class GenericStateErrorStatus(BaseModel, Generic[T]):
-    state: Optional[T] = Field(None)
-
-    class Config:
-        use_enum_values = True
+from ydata.sdk.common.status import GenericStateErrorStatus
 
 
 class PrepareState(StringEnum):

@@ -390,8 +390,10 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             True if the synthesizer is instanciated
         """
 
-        return self._is_initialized() and (self._model.status and self._model.status.training and
-                                           self._model.status.training.state is not [TrainingState.PREPARING])
+        return self._is_initialized() and \
+            (self._model.status is not None
+             and self._model.status.training is not None
+             and self._model.status.training.state is not [TrainingState.PREPARING])
 
     @staticmethod
     def _resolve_api_status(api_status: Dict) -> Status:
