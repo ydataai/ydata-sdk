@@ -8,3 +8,6 @@ class DataSourceType(StringEnum):
     TIMESERIES = "timeseries"
     """The [`DataSource`][ydata.sdk.datasources.datasource.DataSource] has a temporal dimension.
     """
+    MULTITABLE = "multiTable"
+    """The [`DataSource`][ydata.sdk.datasources.datasource.DataSource] is a multi table RDBMS.
+    """
