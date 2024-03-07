@@ -7,7 +7,7 @@ from ydata.sdk.connectors._models.connector_type import ConnectorType
 
 class Connector(BaseModel):
 
-    uid: UID
+    uid: Optional[UID] = None
     type: ConnectorType
     name: Optional[str] = None
 

@@ -13,7 +13,7 @@ from ydata.sdk.datasources._models.datasource import DataSource as mDataSource
 from ydata.sdk.datasources._models.datasource_list import DataSourceList
 from ydata.sdk.datasources._models.datatype import DataSourceType
 from ydata.sdk.datasources._models.metadata.metadata import Metadata
-from ydata.sdk.datasources._models.status import Status
+from ydata.sdk.datasources._models.status import State, Status
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 from ydata.sdk.utils.model_utils import filter_dict
 
@@ -75,7 +75,7 @@ class DataSource(ModelFactoryMixin):
     def status(self) -> Status:
         try:
             self._model = self.get(uid=self._model.uid,
-                                   project=self._project, client=self._client)._model
+                                   project=self.project, client=self._client)._model
             return self._model.status
         except Exception:  # noqa: PIE786
             return Status.unknown()
@@ -188,9 +188,9 @@ class DataSource(ModelFactoryMixin):
             "name": _name,
             "connector": {
                 "uid": connector.uid,
-                "type": connector.type.value
+                "type": ConnectorType(connector.type).value
             },
-            "dataType": datatype.value
+            "dataType": DataSourceType(datatype).value
         }
         if connector.type != ConnectorType.FILE:
             _config = datasource_type(**config).to_payload()
@@ -202,7 +202,7 @@ class DataSource(ModelFactoryMixin):
     @staticmethod
     def _wait_for_metadata(datasource):
         logger = create_logger(__name__, level=LOG_LEVEL)
-        while datasource.status not in [Status.AVAILABLE, Status.FAILED, Status.UNAVAILABLE]:
+        while State(datasource.status.state) not in [State.AVAILABLE, State.FAILED, State.UNAVAILABLE]:
             logger.info(f'Calculating metadata [{datasource.status}]')
             datasource = DataSource.get(uid=datasource.uid, client=datasource._client)
             sleep(BACKOFF)

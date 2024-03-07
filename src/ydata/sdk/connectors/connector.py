@@ -1,7 +1,10 @@
+from io import BytesIO
 from json import loads as json_loads
 from pathlib import Path
-from typing import Dict, Optional, Union
+from typing import Dict, Optional, TypeVar, Union
 from uuid import uuid4
+
+from pandas import DataFrame as pdDataFrame
 
 from ydata.sdk.common.client import Client
 from ydata.sdk.common.client.utils import init_client
@@ -13,9 +16,13 @@ from ydata.sdk.connectors._models.connector import Connector as mConnector
 from ydata.sdk.connectors._models.connector_list import ConnectorsList
 from ydata.sdk.connectors._models.connector_type import ConnectorType
 from ydata.sdk.connectors._models.credentials.credentials import Credentials
+from ydata.sdk.connectors._models.local_connector import LocalConnector as mLocalConnector
 from ydata.sdk.connectors._models.rdbms_connector import RDBMSConnector as mRDBMSConnector
 from ydata.sdk.connectors._models.schema import Schema
+from ydata.sdk.connectors._models.upload import Upload
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
+
+_T = TypeVar('_T', bound='Connector')
 
 
 class Connector(ModelFactoryMixin):
@@ -58,8 +65,12 @@ class Connector(ModelFactoryMixin):
         return self._model.uid
 
     @property
+    def name(self) -> str:
+        return self._model.name
+
+    @property
     def type(self) -> ConnectorType:
-        return self._model.type
+        return ConnectorType(self._model.type)
 
     @property
     def project(self) -> Project:
@@ -69,7 +80,7 @@ class Connector(ModelFactoryMixin):
     @init_client
     def get(
         uid: UID, project: Optional[Project] = None, client: Optional[Client] = None
-    ) -> Union["Connector", "RDBMSConnector"]:
+    ) -> _T:
         """Get an existing connector.
 
         Arguments:
@@ -121,7 +132,7 @@ class Connector(ModelFactoryMixin):
     def create(
         connector_type: Union[ConnectorType, str], credentials: Union[str, Path, Dict, Credentials],
         name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None
-    ) -> Union["Connector", "RDBMSConnector"]:
+    ) -> _T:
         """Create a new connector.
 
         Arguments:
@@ -136,28 +147,27 @@ class Connector(ModelFactoryMixin):
         """
         connector_type = ConnectorType._init_connector_type(connector_type)
         connector_class = _connector_type_to_model(connector_type)
-        model = connector_class._create_model(
-            connector_type=connector_type, credentials=credentials, name=name, project=project, client=client)
+
+        payload = {
+            "type": connector_type.value,
+            "credentials": credentials.dict(by_alias=True)
+        }
+        model = connector_class._create(payload, name, project, client)
+
         connector = connector_class._init_from_model_data(model)
         connector._project = project
         return connector
 
     @classmethod
     @init_client
-    def _create_model(
-        cls, connector_type: Union[ConnectorType, str], credentials: Union[str, Path, Dict, Credentials],
-        name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None
-    ) -> Union[mConnector, mRDBMSConnector]:
+    def _create(
+        cls, payload: dict, name: Optional[str] = None, project: Optional[Project] = None,
+        client: Optional[Client] = None
+    ) -> _MODEL_CLASS:
         _name = name if name is not None else str(uuid4())
-        _connector_type = ConnectorType._init_connector_type(connector_type)
-        _credentials = Connector._init_credentials(_connector_type, credentials)
-        payload = {
-            "type": _connector_type.value,
-            "credentials": _credentials.dict(by_alias=True),
-            "name": _name
-        }
+        payload["name"] = _name
         response = client.post('/connector/', project=project, json=payload)
-        data: list = response.json()
+        data = response.json()
 
         return cls._MODEL_CLASS(**data)
 
@@ -191,5 +201,84 @@ class RDBMSConnector(Connector):
         return self._model.db_schema
 
 
-def _connector_type_to_model(connector_type: ConnectorType) -> Union[Connector, RDBMSConnector]:
-    return RDBMSConnector if connector_type.is_rdbms else Connector
+class LocalConnector(Connector):
+    _MODEL_CLASS = mLocalConnector
+    _model: Optional[mLocalConnector]
+
+    @staticmethod
+    def create(
+        source: Union[pdDataFrame, str, Path], connector_type: Union[ConnectorType, str] = ConnectorType.FILE,
+        name: Optional[str] = None, project: Optional[Project] = None, client: Optional[Client] = None
+    ) -> "LocalConnector":
+        """Create a new connector.
+
+        Arguments:
+            source (Union[pdDataFrame, str, Path]): pandas dataframe, string or path to a file
+            name (Optional[str]): (optional) Connector name
+            project (Optional[Project]): (optional) Project where to create the connector
+            client (Client): (optional) Client to connect to the backend
+
+        Returns:
+            New connector
+        """
+
+        if isinstance(source, str):
+            source = Path(source)
+
+        if isinstance(source, pdDataFrame):
+            upload = LocalConnector._upload_dataframe(source, project, client=client)
+        else:
+            upload = LocalConnector._upload_file(source, project, client=client)
+
+        model = mLocalConnector(name=name, type=connector_type, file=upload.uid)
+        model = LocalConnector._create(model.dict(
+            by_alias=True), name, project, client=client)
+
+        connector = LocalConnector._init_from_model_data(model)
+        connector._project = project
+        return connector
+
+    @staticmethod
+    def _upload_dataframe(
+        source: pdDataFrame, project: Optional[Project] = None, client: Optional[Client] = None
+    ) -> Upload:
+        buffer = BytesIO()
+        source.to_csv(buffer, index=False)
+        return LocalConnector._upload(buffer, project, client=client)
+
+    @staticmethod
+    def _upload_file(source: Path, project: Optional[Project] = None, client: Optional[Client] = None) -> Upload:
+        with source.open('rb') as f:
+            buffer = BytesIO(f.read())
+            return LocalConnector._upload(buffer, project, client=client)
+
+    @staticmethod
+    @init_client
+    def _upload(source_bytes: BytesIO, project: Optional[Project] = None, client: Optional[Client] = None) -> Upload:
+        length = source_bytes.getbuffer().nbytes
+
+        created_upload = client.post(
+            "/upload", project=project, json={"size": length}, raise_for_status=True)
+        created_upload.raise_for_status()
+        created_upload_dict = created_upload.json()
+
+        upload_id = created_upload_dict["uid"]
+        chunk_size = int(created_upload_dict["chunkSize"])
+
+        source_bytes.seek(0)
+        while True:
+            chunk_bytes = source_bytes.read(chunk_size)
+            if not chunk_bytes:
+                break
+
+            upload_response = client.patch(
+                f"/upload/{upload_id}", content=chunk_bytes, project=project, raise_for_status=True
+            )
+            data = upload_response.json()
+            upload = Upload(**data)
+
+        return upload
+
+
+def _connector_type_to_model(connector_type: ConnectorType) -> _T:
+    return RDBMSConnector if connector_type.is_rdbms else LocalConnector if connector_type is ConnectorType.FILE else Connector
