@@ -120,7 +120,7 @@ def init_client(func):
     """
     @wraps(func)
     def wrapper_func(*args, **kwargs):
-        if not any((arg for arg in args if isinstance(arg, Client))):
+        if kwargs.get('client', None) is None and not any((arg for arg in args if isinstance(arg, Client))):
             kwargs['client'] = get_client(kwargs.get('client'))
         return func(*args, **kwargs)
     return wrapper_func

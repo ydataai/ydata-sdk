@@ -18,6 +18,7 @@ from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceAttrsErro
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID, Project
 from ydata.sdk.common.warnings import DataSourceTypeWarning
+from ydata.sdk.connectors import LocalConnector
 from ydata.sdk.datasources import DataSource, LocalDataSource
 from ydata.sdk.datasources._models.attributes import DataSourceAttrs
 from ydata.sdk.datasources._models.datatype import DataSourceType
@@ -114,7 +115,14 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         if isinstance(X, pdDataFrame):
             if X.empty:
                 raise EmptyDataError("The DataFrame is empty")
-            _X = LocalDataSource(source=X, datatype=_datatype, client=self._client)
+            self._logger.info('creating local connector with pandas dataframe')
+            connector = LocalConnector.create(
+                source=X, project=self._project, client=self._client)
+            self._logger.info(
+                f'created local connector. creating datasource with {connector}')
+            _X = LocalDataSource(connector=connector, project=self._project,
+                                 datatype=_datatype, client=self._client)
+            self._logger.info(f'created datasource {_X}')
         else:
             if datatype != _datatype:
                 warn("When the training data is a DataSource, the argument `datatype` is ignored.",

@@ -76,4 +76,4 @@ class Status(BaseModel):
 
     @staticmethod
     def unknown() -> "Status":
-        return Status(state=Status.State.UNKNOWN)
+        return Status(state=State.UNKNOWN)

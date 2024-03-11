@@ -5,6 +5,7 @@ from typing import Dict, Optional, Union
 from httpx import Client as httpClient
 from httpx import HTTPStatusError, Response, Timeout
 from httpx import codes as http_codes
+from httpx._types import RequestContent
 from typeguard import typechecked
 
 from ydata.sdk.common.client.parser import LinkExtractor
@@ -50,8 +51,7 @@ class Client(metaclass=SingletonClient):
     DEFAULT_PROJECT: Optional[Project] = environ.get("DEFAULT_PROJECT", None)
 
     def __init__(self, credentials: Optional[Union[str, Dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
-        self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL)
-        self._scheme = 'https'
+        self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL).removesuffix('/')
         self._headers = {'Authorization': credentials}
         self._http_client = httpClient(
             headers=self._headers, timeout=Timeout(10, read=None))
@@ -72,13 +72,15 @@ class Client(metaclass=SingletonClient):
         self._default_project = value
 
     def post(
-        self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None,
-        project: Optional[Project] = None, files: Optional[Dict] = None, raise_for_status: bool = True
+        self, endpoint: str, content: Optional[RequestContent] = None, data: Optional[Dict] = None,
+        json: Optional[Dict] = None, project: Optional[Project] = None, files: Optional[Dict] = None,
+        raise_for_status: bool = True
     ) -> Response:
         """POST request to the backend.
 
         Args:
             endpoint (str): POST endpoint
+            content (Optional[RequestContent])
             data (Optional[dict]): (optional) multipart form data
             json (Optional[dict]): (optional) json data
             files (Optional[dict]): (optional) files to be sent
@@ -90,6 +92,33 @@ class Client(metaclass=SingletonClient):
         url_data = self.__build_url(
             endpoint, data=data, json=json, files=files, project=project)
         response = self._http_client.post(**url_data)
+
+        if response.status_code != Client.codes.OK and raise_for_status:
+            self.__raise_for_status(response)
+
+        return response
+
+    def patch(
+        self, endpoint: str, content: Optional[RequestContent] = None, data: Optional[Dict] = None,
+        json: Optional[Dict] = None, project: Optional[Project] = None, files: Optional[Dict] = None,
+        raise_for_status: bool = True
+    ) -> Response:
+        """PATCH request to the backend.
+
+        Args:
+            endpoint (str): POST endpoint
+            content (Optional[RequestContent])
+            data (Optional[dict]): (optional) multipart form data
+            json (Optional[dict]): (optional) json data
+            files (Optional[dict]): (optional) files to be sent
+            raise_for_status (bool): raise an exception on error
+
+        Returns:
+            Response object
+        """
+        url_data = self.__build_url(
+            endpoint, data=data, json=json, files=files, project=project)
+        response = self._http_client.patch(**url_data, content=content)
 
         if response.status_code != Client.codes.OK and raise_for_status:
             self.__raise_for_status(response)
@@ -132,7 +161,7 @@ class Client(metaclass=SingletonClient):
             Response object
         """
         url_data = self.__build_url(endpoint, project=project)
-        url_data['url'] = f'{self._scheme}://{self._base_url}/static-content{endpoint}'
+        url_data['url'] = f'{self._base_url}/static-content{endpoint}'
         response = self._http_client.get(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -178,7 +207,7 @@ class Client(metaclass=SingletonClient):
         }
 
         url_data = {
-            'url': f'{self._scheme}://{self._base_url}/api{endpoint}',
+            'url': f'{self._base_url}/{endpoint.removeprefix("/")}',
             'headers': self._headers,
             'params': _params,
         }

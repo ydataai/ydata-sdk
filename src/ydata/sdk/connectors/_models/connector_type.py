@@ -5,7 +5,7 @@ from typing import Union
 from ydata.sdk.common.exceptions import InvalidConnectorError
 
 
-class ConnectorType(Enum):
+class ConnectorType(str, Enum):
     AWS_S3 = "aws-s3"
     """AWS S3 connector"""
     AZURE_BLOB = "azure-blob"
