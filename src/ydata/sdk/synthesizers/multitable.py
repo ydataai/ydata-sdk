@@ -63,7 +63,7 @@ class MultiTableSynthesizer(BaseSynthesizer):
             X (DataSource): DataSource to Train
         """
 
-        self._fit_from_datasource(X)
+        self._fit_from_datasource(X, datatype=DataSourceType.MULTITABLE)
 
     def sample(self, frac: Union[int, float] = 1, write_connector: Optional[Union[Connector, UID]] = None) -> None:
         """Sample from a [`MultiTableSynthesizer`][ydata.sdk.synthesizers.MultiTableSynthesizer]

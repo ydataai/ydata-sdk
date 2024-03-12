@@ -3,7 +3,6 @@ from io import StringIO
 from time import sleep
 from typing import Dict, List, Optional, Union
 from uuid import uuid4
-from warnings import warn
 
 from pandas import DataFrame as pdDataFrame
 from pandas import read_csv
@@ -17,7 +16,6 @@ from ydata.sdk.common.exceptions import (AlreadyFittedError, DataSourceAttrsErro
                                          DataTypeMissingError, EmptyDataError, FittingError, InputError)
 from ydata.sdk.common.logger import create_logger
 from ydata.sdk.common.types import UID, Project
-from ydata.sdk.common.warnings import DataSourceTypeWarning
 from ydata.sdk.connectors import LocalConnector
 from ydata.sdk.datasources import DataSource, LocalDataSource
 from ydata.sdk.datasources._models.attributes import DataSourceAttrs
@@ -104,12 +102,11 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         if self._already_fitted():
             raise AlreadyFittedError()
 
-        _datatype = DataSourceType(datatype) if isinstance(
-            X, pdDataFrame) else DataSourceType(X.datatype)
+        datatype = DataSourceType(datatype)
 
         dataset_attrs = self._init_datasource_attributes(
             sortbykey, entities, generate_cols, exclude_cols, dtypes)
-        self._validate_datasource_attributes(X, dataset_attrs, _datatype, target)
+        self._validate_datasource_attributes(X, dataset_attrs, datatype, target)
 
         # If the training data is a pandas dataframe, we first need to create a data source and then the instance
         if isinstance(X, pdDataFrame):
@@ -121,12 +118,9 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             self._logger.info(
                 f'created local connector. creating datasource with {connector}')
             _X = LocalDataSource(connector=connector, project=self._project,
-                                 datatype=_datatype, client=self._client)
+                                 datatype=datatype, client=self._client)
             self._logger.info(f'created datasource {_X}')
         else:
-            if datatype != _datatype:
-                warn("When the training data is a DataSource, the argument `datatype` is ignored.",
-                     DataSourceTypeWarning)
             _X = X
 
         if dsState(_X.status.state) != dsState.AVAILABLE:
@@ -137,7 +131,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             dataset_attrs = DataSourceAttrs(**dataset_attrs)
 
         self._fit_from_datasource(
-            X=_X, dataset_attrs=dataset_attrs, target=target,
+            X=_X, datatype=datatype, dataset_attrs=dataset_attrs, target=target,
             anonymize=anonymize, privacy_level=privacy_level, condition_on=condition_on)
 
     @staticmethod
@@ -164,7 +158,6 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
             if datatype is None:
                 raise DataTypeMissingError(
                     "Argument `datatype` is mandatory for pandas.DataFrame training data")
-            datatype = DataSourceType(datatype)
         else:
             columns = [c.name for c in X.metadata.columns]
 
@@ -232,6 +225,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
     def _fit_from_datasource(
         self,
         X: DataSource,
+        datatype: DataSourceType,
         privacy_level: Optional[PrivacyLevel] = None,
         dataset_attrs: Optional[DataSourceAttrs] = None,
         target: Optional[str] = None,
@@ -245,9 +239,11 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
         if privacy_level:
             payload['privacyLevel'] = privacy_level.value
 
-        if X.metadata is not None and X.datatype is not None:
+        if X.metadata is not None:
             payload['metadata'] = self._metadata_to_payload(
-                DataSourceType(X.datatype), X.metadata, dataset_attrs, target)
+                datatype, X.metadata, dataset_attrs, target)
+
+        payload['type'] = str(datatype.value)
 
         if anonymize is not None:
             payload["extraData"]["anonymize"] = anonymize
