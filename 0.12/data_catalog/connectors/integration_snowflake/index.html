@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../upload_csv/">
+        <link rel="prev" href="../use_in_labs/">
       
       
-        <link rel="next" href="../create_syntheticdata_generator/">
+        <link rel="next" href="../../datasources/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
     
     
       
-        <title>How to create your first Relational database in Fabric's Catalog - YData Fabric</title>
+        <title>Snowflake - YData Fabric</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
   
@@ -87,11 +87,11 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -117,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-create-your-first-relational-database-in-fabrics-catalog" class="md-skip">
+        <a href="#integrate-fabric-with-snowflake-from-analytics-to-machine-learning" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +135,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="YData Fabric" class="md-header__button md-logo" aria-label="YData Fabric" data-md-component="logo">
+    <a href="../../.." title="YData Fabric" class="md-header__button md-logo" aria-label="YData Fabric" data-md-component="logo">
       
   <img src="https://assets.ydata.ai/logo_notext_nbg.png" alt="logo">
 
@@ -154,7 +154,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              How to create your first Relational database in Fabric's Catalog
+              Snowflake
             
           </span>
         </div>
@@ -247,7 +247,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -262,13 +262,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../get-started/" class="md-tabs__link">
           
   
     
@@ -284,11 +282,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../data_catalog/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -308,7 +308,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../sdk/" class="md-tabs__link">
+        <a href="../../../sdk/" class="md-tabs__link">
           
   
     
@@ -345,7 +345,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="YData Fabric" class="md-nav__button md-logo" aria-label="YData Fabric" data-md-component="logo">
+    <a href="../../.." title="YData Fabric" class="md-nav__button md-logo" aria-label="YData Fabric" data-md-component="logo">
       
   <img src="https://assets.ydata.ai/logo_notext_nbg.png" alt="logo">
 
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -391,8 +391,6 @@
       
   
   
-    
-  
   
   
     
@@ -409,24 +407,21 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../get-started/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -437,13 +432,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Get started with Fabric
@@ -456,10 +451,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -479,21 +472,18 @@
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -504,7 +494,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Quickstart
@@ -518,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upload_csv/" class="md-nav__link">
+      <a href="../../../get-started/upload_csv/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -536,19 +526,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../get-started/create_multitable_dataset/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -557,7 +538,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -570,7 +550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../create_syntheticdata_generator/" class="md-nav__link">
+      <a href="../../../get-started/create_syntheticdata_generator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -591,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../create_database_sd_generator/" class="md-nav__link">
+      <a href="../../../get-started/create_database_sd_generator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -612,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../create_lab/" class="md-nav__link">
+      <a href="../../../get-started/create_lab/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -633,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../create_pipeline/" class="md-nav__link">
+      <a href="../../../get-started/create_pipeline/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -662,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fabric_community/" class="md-nav__link">
+      <a href="../../../get-started/fabric_community/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -687,6 +667,8 @@
       
   
   
+    
+  
   
   
     
@@ -703,21 +685,24 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../data_catalog/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -728,13 +713,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Data catalog
@@ -747,6 +732,8 @@
                 
   
   
+    
+  
   
   
     
@@ -769,19 +756,22 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../data_catalog/connectors/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -792,13 +782,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             Connectors
@@ -814,7 +804,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data_catalog/connectors/create_connector/" class="md-nav__link">
+      <a href="../create_connector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -835,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data_catalog/connectors/supported_connections/" class="md-nav__link">
+      <a href="../supported_connections/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -856,7 +846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data_catalog/connectors/use_in_labs/" class="md-nav__link">
+      <a href="../use_in_labs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -874,8 +864,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -889,11 +881,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2_5" id="__nav_3_2_5_label" tabindex="0">
@@ -907,7 +899,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2_5">
             <span class="md-nav__icon md-icon"></span>
             Integrations examples
@@ -918,10 +910,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../data_catalog/connectors/integration_snowflake/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Snowflake
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -930,6 +942,101 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-of-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-snowflake-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up the Snowflake Connector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up the Snowflake Connector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-creation-through-the-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-step creation through the UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-it-inside-the-labs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use it inside the Labs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use it inside the Labs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#navigate-your-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Navigate your database
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-from-a-snowflake-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Read from a Snowflake instance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-to-a-snowflake-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write to a Snowflake instance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -973,10 +1080,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -985,7 +1095,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../data_catalog/datasources/" class="md-nav__link ">
+            <a href="../../datasources/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -996,7 +1106,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -1018,7 +1128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data_catalog/datasources/warnings/" class="md-nav__link">
+      <a href="../../datasources/warnings/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1039,7 +1149,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../data_catalog/datasources/pii/" class="md-nav__link">
+      <a href="../../datasources/pii/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1108,7 +1218,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../sdk/" class="md-nav__link ">
+            <a href="../../../sdk/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1141,7 +1251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/installation/" class="md-nav__link">
+      <a href="../../../sdk/installation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1162,7 +1272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/quickstart/" class="md-nav__link">
+      <a href="../../../sdk/quickstart/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1227,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/modules/connectors/" class="md-nav__link">
+      <a href="../../../sdk/modules/connectors/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1310,7 +1420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/examples/synthesize_tabular_data/" class="md-nav__link">
+      <a href="../../../sdk/examples/synthesize_tabular_data/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1331,7 +1441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/examples/synthesize_timeseries_data/" class="md-nav__link">
+      <a href="../../../sdk/examples/synthesize_timeseries_data/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1352,7 +1462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/examples/synthesizer_multitable/" class="md-nav__link">
+      <a href="../../../sdk/examples/synthesizer_multitable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1373,7 +1483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/examples/synthesize_with_anonymization/" class="md-nav__link">
+      <a href="../../../sdk/examples/synthesize_with_anonymization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1394,7 +1504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/examples/synthesize_with_privacy_control/" class="md-nav__link">
+      <a href="../../../sdk/examples/synthesize_with_privacy_control/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1415,7 +1525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/examples/synthesize_with_conditional_sampling/" class="md-nav__link">
+      <a href="../../../sdk/examples/synthesize_with_conditional_sampling/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1490,7 +1600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/changelog/" class="md-nav__link">
+      <a href="../../../sdk/reference/changelog/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1563,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/common/client/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/common/client/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1628,7 +1738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/connectors/connector/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/connectors/connector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1703,7 +1813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/datasources/datasource/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/datasources/datasource/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1724,7 +1834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/datasources/metadata/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/datasources/metadata/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1803,7 +1913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/synthesizers/base/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/synthesizers/base/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1824,7 +1934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/synthesizers/regular/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/synthesizers/regular/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1845,7 +1955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/synthesizers/timeseries/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/synthesizers/timeseries/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1866,7 +1976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/synthesizers/multitable/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/synthesizers/multitable/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1895,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sdk/reference/api/common/types/" class="md-nav__link">
+      <a href="../../../sdk/reference/api/common/types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1947,35 +2057,110 @@
                   
 
 
-<h1 id="how-to-create-your-first-relational-database-in-fabrics-catalog">How to create your first Relational database in Fabric's Catalog</h1>
-<p>To create your first multi-table dataset in the <strong>Data Catalog</strong>, you can start by clicking on <strong>"Add Dataset"</strong> from the Home section.
-Or click to <strong>Data Catalog</strong> (on the left side menu) and click <strong>“Add Dataset”</strong>.</p>
-<p><img alt="Create dataset with upload csv" src="../../assets/quickstart/upload_csv/welcome_add_dataset.png" style="width:75%" /></p>
-<p>After that the below modal will be shown. You will need to select a connector. To create a multi-table dataset, we need to choose an RDBMS connector like Azure SQL, Snowflake or MySQL.
-In this case let's select MySQL.</p>
-<p><img alt="Data Catalog connectors" src="../../assets/quickstart/upload_csv/data_catalog_connectors.png" style="width:40%" /></p>
-<p>Once you've selected the <strong>“MySQL”</strong> connector, a new screen will appear, enabling you to introduce the connection details such as database username, host, password as well as the database name.</p>
-<p><img alt="MySQL credentials" src="../../assets/quickstart/create_relational_database/mysql_credentials.png" style="width:60%" /></p>
-<p>With the <em>Connector</em> created, you'll be able to add a dataset and specify its properties:</p>
+<h1 id="integrate-fabric-with-snowflake-from-analytics-to-machine-learning">❄️ Integrate Fabric with Snowflake - from Analytics to Machine Learning</h1>
+<p>YData Fabric provides a seamless integration with Snowflake, allowing you to connect,
+query, and manage your data in Snowflake with ease. This section will guide you through the benefits,
+setup, and usage of the Snowflake connector within YData Fabric.</p>
+<h3 id="benefits-of-integration">Benefits of Integration</h3>
+<p>Integrating YData Fabric with Snowflake offers several key benefits:</p>
 <ul>
-<li><strong>Name:</strong> The name of your dataset;</li>
-<li><strong>Table:</strong> You can create a dataset with all the tables from the schema or select the tables that you need in your project.</li>
-<li><strong>Query:</strong> Create a single table dataset by providing a query</li>
+<li><strong>Scalability:</strong> Snowflake's architecture scales effortlessly with your data needs, while YData Fabric's tools ensure efficient data integration and management.</li>
+<li><strong>Performance:</strong> Leveraging Snowflake's high performance for data querying and YData Fabric's optimization techniques enhances overall data processing speed.</li>
+<li><strong>Security:</strong> Snowflake's robust security features, combined with YData Fabric's data governance capabilities, ensure your data remains secure and compliant.</li>
+<li><strong>Interoperability:</strong> YData Fabric simplifies the process of connecting to Snowflake, allowing you to quickly set up and start using the data without extensive configuration. Benefit from the unique Fabric functionalities like data preparation with Python, synthetic data generation and data profiling.</li>
 </ul>
-<p><img alt="Add dataset details" src="../../assets/quickstart/create_relational_database/mysql_dataset_creation.png" style="width:45%" /></p>
-<p>Now both the Connector to the MySQL Berka database and Berka dataset will be added to our Catalog.
-As soon as the status is green, you can navigate your Dataset. Click in <strong>Open</strong> dataset as per the image below.</p>
-<p><img alt="Explore dataset" src="../../assets/quickstart/create_relational_database/open_dataset.png" style="width:75%" /></p>
-<p>Within the <strong>Dataset</strong> details, you can gain valuable insights like your database schema.</p>
-<p><img alt="Database schema overview " src="../../assets/quickstart/create_relational_database/database_schema_overview.png" style="width:75%" /></p>
-<p>For each an every table you can explore the both an overview on the structure (number of columns, number of rows, etc.) but also a useful
-summary of the quality and warnings regarding your dataset behaviour.</p>
-<p><img alt="Dataset profiling" src="../../assets/quickstart/create_relational_database/table_overview.png" style="width:75%" /></p>
-<p><strong>Congrats!</strong> 🚀 You have now successfully created your first <strong>Connector</strong> and <strong>Multi-table Dataset</strong> in Fabric’s Data Catalog.
-To get the both the ID of your database and project you can decompose the URL from the Database schema overview page. The structure is as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    https://fabric.ydata.ai/rdbms/{your-dataset-id}?ns={your-project-id}
+<h2 id="setting-up-the-snowflake-connector">Setting Up the Snowflake Connector</h2>
+<p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg></span> <a href="https://youtube.com/clip/UgkxVTrEn2jY8GL-wqSXX3PByuUH5Q81Usih?si=xdpQ4eTCo_SEcvxp"><u>How to create a connector to Snowflake in Fabric?</u></a></p>
+<p>To create a Snowflake connector in YData Fabric Ui you need to meet the following pre-requisites and steps:</p>
+<div class="admonition note">
+<p class="admonition-title">Prerequisites</p>
+<p>Before setting up the connector, ensure you have the following:</p>
+<ul>
+<li>A Snowflake account with appropriate access permissions.</li>
+<li>YData Fabric installed and running in your environment.</li>
+<li>Credentials for Snowflake (username, password, account identifier, warehouse, database, schema).</li>
+</ul>
+</div>
+<h3 id="step-by-step-creation-through-the-ui">Step-by-step creation through the UI</h3>
+<p>To create a connector in YData Fabric, select the <em>"Connectors"</em> page from the left side menu, as illustrated in the image below.</p>
+<p><img alt="Select Connectors from Homepage" src="../../../assets/data_catalog/connectors/go_to_connector.png" style="width:75%" /></p>
+<p>Now, click in the <em>"Create Connector"</em> button and the following menu with the available connectors will be shown.</p>
+<p><img alt="Select Snowflake connector" src="../../../assets/data_catalog/connectors/select_snowflake_connector.png" style="width:50%" /></p>
+<p>After selecting the connector type <em>"Snowflake"</em> the below menu will be shown. This is where you can configure the connection to your Snowflake instance. For that you will need the following information:</p>
+<p><img _="," align="left" alt="Config Snowflake connector" src="../../../assets/data_catalog/connectors/snowflake_config.png" style="width:45%; padding-right:10px" /></p>
+<ul>
+<li><strong>Username:</strong> Your Snowflake username.</li>
+<li><strong>Password:</strong> Your Snowflake password.</li>
+<li><strong>Host/Account Identifier:</strong> Your Snowflake account identifier (e.g., xy12345.us-east-1).</li>
+<li><strong>Port:</strong> The Snowflake port number.</li>
+<li><strong>Database:</strong> The Snowflake database to connect to.</li>
+<li><strong>Schema:</strong> The schema within the database.</li>
+<li><strong>Warehouse:</strong> The Snowflake warehouse to use.</li>
+<li><strong>Display Name:</strong> A unique name for your connector.
+</br></br></br></br></br></li>
+</ul>
+<p>Test your connection and that's it! 🚀</p>
+<p>You are now ready to create different <strong>Datasources</strong> using this connector - read the data from a query, evaluate the quality of the data from a table or even
+read a full database and generate a synthetic replica of your data!
+Read more about <ins><a href="../../datasources/">Fabric Datasources in here</a></ins>.</p>
+<h3 id="use-it-inside-the-labs">Use it inside the Labs</h3>
+<p>👨‍💻 <ins><a href="https://github.com/ydataai/academy/blob/master/1%20-%20Data%20Catalog/1.%20Connectors/Snowflake.ipynb">Full code example and recipe can be found here</a></ins>.</p>
+<p>In case you prefer a Python interface, we also have connectors available through Fabric SDK inside the labs.
+For a seamless integration between the UI and the Labs environment, Fabric offers an SDK that allows you to re-use connectors, datasources and even synthesizers.</p>
+<p>Start by creating your code environment through the Labs. In case you need to get started with the Labs, <ins><a href="../../../get-started/create_lab/">check this step-by-step guide</a></ins>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    <span class="c1"># Importing YData&#39;s packages</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="kn">from</span> <span class="nn">ydata.labs</span> <span class="kn">import</span> <span class="n">Connectors</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="c1"># Getting a previously created Connector</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">connector</span> <span class="o">=</span> <span class="n">Connectors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">uid</span><span class="o">=</span><span class="s1">&#39;insert-connector-id&#39;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                               <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;indert-namespace-id&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">connector</span><span class="p">)</span>
 </code></pre></div>
-<p>Get ready for your journey of improved quality data for AI.</p>
+<h4 id="navigate-your-database">Navigate your database</h4>
+<p>Add here a short description</p>
+<div class="highlight"><span class="filename">List available schemas and get the metadata of a given schema</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="c1"># returns a list of schemas</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">schemas</span> <span class="o">=</span> <span class="n">connector</span><span class="o">.</span><span class="n">list_schemas</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="c1"># get the metadata of a database schema, including columns and relations between tables (PK and FK)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">schema</span> <span class="o">=</span> <span class="n">connector</span><span class="o">.</span><span class="n">get_database_schema</span><span class="p">(</span><span class="s1">&#39;PATIENTS&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="read-from-a-snowflake-instance">Read from a Snowflake instance</h4>
+<p>Using the Snowflake connector it is possible to:</p>
+<ul>
+<li>Get the data from a Snowflake table</li>
+<li>Get a sample from a Snowflake table</li>
+<li>Get the data from a query to a Snowflake instance</li>
+<li>Get the full data from a selected database</li>
+</ul>
+<div class="highlight"><span class="filename">Read full and a sample from a table</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    <span class="c1"># returns the whole data from a given table</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">table</span> <span class="o">=</span> <span class="n">connector</span><span class="o">.</span><span class="n">get_table</span><span class="p">(</span><span class="s1">&#39;cardio_test&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># Get a sample with n rows from a given table</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">table_sample</span> <span class="o">=</span> <span class="n">connector</span><span class="o">.</span><span class="n">get_table_sample</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="s1">&#39;cardio_test&#39;</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">table_sample</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Get the data from a query</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>    <span class="c1"># returns the whole data from a given table</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">query_output</span> <span class="o">=</span> <span class="n">connector</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM patients.cardio_test;&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">query_output</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="write-to-a-snowflake-instance">Write to a Snowflake instance</h4>
+<p>If you need to write your data into a Snowflake instance you can also leverage your Snowflake connector for the following actions:</p>
+<ul>
+<li>Write the data into a table</li>
+<li>Write a new database schema</li>
+</ul>
+<p>The <strong>if_exists</strong> parameter allow you to decide whether you want to <strong>append</strong>, <strong>replace</strong> or <strong>fail</strong> in case a table with the same name
+already exists in the schema.</p>
+<div class="highlight"><span class="filename">Writing a dataset to a table in a Snowflake schema</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="n">connector</span><span class="o">.</span><span class="n">write_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tables</span><span class="p">[</span><span class="s1">&#39;cardio_test&#39;</span><span class="p">],</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                          <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cardio&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                          <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;fail&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>table_names</strong> allow you to define a new name for the table in the database. If not provided it will be assumed the table names from your dataset.
+<div class="highlight"><span class="filename">Writing a full database to a Snowflake schema</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="n">connector</span><span class="o">.</span><span class="n">write_database</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">database</span><span class="p">,</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>                         <span class="n">schema_name</span><span class="o">=</span><span class="s1">&#39;new_cardio&#39;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                         <span class="n">table_names</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cardio_test&#39;</span><span class="p">:</span> <span class="s1">&#39;cardio&#39;</span><span class="p">})</span>
+</code></pre></div></p>
+<p>I hope you enjoyed this quick tutorial on seamlessly integrating Snowflake with your data preparation workflows. ❄️🚀</p>
 
 
 
@@ -2013,7 +2198,7 @@ To get the both the ID of your database and project you can decompose the URL fr
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../upload_csv/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to create your first Dataset from a CSV file">
+          <a href="../use_in_labs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Use a connector in Labs">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -2023,20 +2208,20 @@ To get the both the ID of your database and project you can decompose the URL fr
                 Previous
               </span>
               <div class="md-ellipsis">
-                How to create your first Dataset from a CSV file
+                Use a connector in Labs
               </div>
             </div>
           </a>
         
         
           
-          <a href="../create_syntheticdata_generator/" class="md-footer__link md-footer__link--next" aria-label="Next: How to create your first Synthetic Data generator">
+          <a href="../../datasources/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                How to create your first Synthetic Data generator
+                Overview
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2080,16 +2265,16 @@ To get the both the ID of your database and project you can decompose the URL fr
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.081f42fc.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       
-        <script src="../../javascripts/tablesort.js"></script>
+        <script src="../../../javascripts/tablesort.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
