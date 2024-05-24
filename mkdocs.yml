@@ -146,8 +146,6 @@ extra:
 watch:
   - src
 plugins:
-  - optimize:
-        print_gain_summary: false
   - search:
         lang: en
   - autorefs
