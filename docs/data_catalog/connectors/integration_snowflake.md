@@ -1,7 +1,7 @@
 # ❄️ Integrate Fabric with Snowflake - from Analytics to Machine Learning
 
-YData Fabric provides a seamless integration with Snowflake, allowing you to connect, 
-query, and manage your data in Snowflake with ease. This section will guide you through the benefits, 
+YData Fabric provides a seamless integration with Snowflake, allowing you to connect,
+query, and manage your data in Snowflake with ease. This section will guide you through the benefits,
 setup, and usage of the Snowflake connector within YData Fabric.
 
 ### Benefits of Integration
@@ -31,7 +31,7 @@ To create a connector in YData Fabric, select the *"Connectors"* page from the l
 
 ![Select Connectors from Homepage](../../assets/data_catalog/connectors/go_to_connector.png){: style="width:75%"}
 
-Now, click in the *"Create Connector"* button and the following menu with the available connectors will be shown. 
+Now, click in the *"Create Connector"* button and the following menu with the available connectors will be shown.
 
 ![Select Snowflake connector](../../assets/data_catalog/connectors/select_snowflake_connector.png){: style="width:50%"}
 
@@ -52,15 +52,15 @@ After selecting the connector type *"Snowflake"* the below menu will be shown. T
 Test your connection and that's it! 🚀
 
 You are now ready to create different **Datasources** using this connector - read the data from a query, evaluate the quality of the data from a table or even
-read a full database and generate a synthetic replica of your data!  
+read a full database and generate a synthetic replica of your data!
 Read more about ^^[Fabric Datasources in here](../datasources/index.md)^^.
 
 ### Use it inside the Labs
 
 👨‍💻 ^^[Full code example and recipe can be found here](https://github.com/ydataai/academy/blob/master/1%20-%20Data%20Catalog/1.%20Connectors/Snowflake.ipynb)^^.
 
-In case you prefer a Python interface, we also have connectors available through Fabric SDK inside the labs. 
-For a seamless integration between the UI and the Labs environment, Fabric offers an SDK that allows you to re-use connectors, datasources and even synthesizers. 
+In case you prefer a Python interface, we also have connectors available through Fabric SDK inside the labs.
+For a seamless integration between the UI and the Labs environment, Fabric offers an SDK that allows you to re-use connectors, datasources and even synthesizers.
 
 Start by creating your code environment through the Labs. In case you need to get started with the Labs, ^^[check this step-by-step guide](../../get-started/create_lab.md)^^.
 
@@ -68,7 +68,7 @@ Start by creating your code environment through the Labs. In case you need to ge
     # Importing YData's packages
     from ydata.labs import Connectors
     # Getting a previously created Connector
-    connector = Connectors.get(uid='insert-connector-id', 
+    connector = Connectors.get(uid='insert-connector-id',
                                namespace='indert-namespace-id')
     print(connector)
 ```
@@ -78,8 +78,8 @@ Add here a short description
 
 ```python title="List available schemas and get the metadata of a given schema"
     # returns a list of schemas
-    schemas = connector.list_schemas() 
-    
+    schemas = connector.list_schemas()
+
     # get the metadata of a database schema, including columns and relations between tables (PK and FK)
     schema = connector.get_database_schema('PATIENTS')
 ```
@@ -96,7 +96,7 @@ Using the Snowflake connector it is possible to:
     # returns the whole data from a given table
     table = connector.get_table('cardio_test')
     print(table)
-    
+
     # Get a sample with n rows from a given table
     table_sample = connector.get_table_sample(table='cardio_test', sample_size=50)
     print(table_sample)
@@ -114,11 +114,11 @@ If you need to write your data into a Snowflake instance you can also leverage y
 - Write the data into a table
 - Write a new database schema
 
-The **if_exists** parameter allow you to decide whether you want to **append**, **replace** or **fail** in case a table with the same name 
+The **if_exists** parameter allow you to decide whether you want to **append**, **replace** or **fail** in case a table with the same name
 already exists in the schema.
 
 ```python title='Writing a dataset to a table in a Snowflake schema'
-    connector.write_table(data=tables['cardio_test'], 
+    connector.write_table(data=tables['cardio_test'],
                           name='cardio',
                           if_exists='fail')
 ```
@@ -126,7 +126,7 @@ already exists in the schema.
 **table_names** allow you to define a new name for the table in the database. If not provided it will be assumed the table names from your dataset.
 ```python title='Writing a full database to a Snowflake schema'
     connector.write_database(data=database,
-                         schema_name='new_cardio', 
+                         schema_name='new_cardio',
                          table_names={'cardio_test': 'cardio'})
 ```
 

@@ -1,17 +1,17 @@
 # Overview
 
 YData Fabric Datasources are entities that represent specific data sets such as tables,
-file sets, or other structured formats within the YData Fabric platform. 
+file sets, or other structured formats within the YData Fabric platform.
 They offer a centralized framework for managing, cataloging, and profiling data,
 enhancing data management and quality.
 
 ## Benefits
 
 - **Summarized metadata information:** Fabric Datasources provide comprehensive metadata management, offering detailed
-information about each datasource, including schema details, descriptions, tags, and data lineage. 
+information about each datasource, including schema details, descriptions, tags, and data lineage.
 This metadata helps users understand the structure and context of their data.
 
-- **Data Quality Management:** Users can find data quality warnings, validation results, cleansing suggestions, and quality scores. 
+- **Data Quality Management:** Users can find data quality warnings, validation results, cleansing suggestions, and quality scores.
 These features help in identifying and addressing data quality issues automatically, ensuring reliable data
 for analysis and decision-making.
 

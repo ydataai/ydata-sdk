@@ -23,5 +23,5 @@ You can **review the automatic PII classification and add additional PII tags** 
 
 ???+ question "Need a solution to enable data sharing and comply with **GDPR** and **CCPA** regulations?"
     Using ^^[synthetic data](https://ydata.ai/products/synthetic_data)^^ has proven to foster a culture of data-sharing
-    within organizations, overcoming the limitations of traditional privacy methods and maximizing data value. 
+    within organizations, overcoming the limitations of traditional privacy methods and maximizing data value.
     Try ^^[Fabric Community Version](https://ydata.ai/ydata-fabric-free-trial)^^ to enable secure data sharing.
