@@ -36,32 +36,32 @@ nav:
       - Components:
           - "sdk/modules/connectors.md"
       - Examples:
-        - Generate Tabular Data: "sdk/examples/synthesize_tabular_data.md"
-        - Generate Time-Series Data: "sdk/examples/synthesize_timeseries_data.md"
-        - Generate MultiTable Data: "sdk/examples/synthesizer_multitable.md"
-        - Anonymization: "sdk/examples/synthesize_with_anonymization.md"
-        - Privacy Level: "sdk/examples/synthesize_with_privacy_control.md"
-        - Conditional Sampling: "sdk/examples/synthesize_with_conditional_sampling.md"
+          - Generate Tabular Data: "sdk/examples/synthesize_tabular_data.md"
+          - Generate Time-Series Data: "sdk/examples/synthesize_timeseries_data.md"
+          - Generate MultiTable Data: "sdk/examples/synthesizer_multitable.md"
+          - Anonymization: "sdk/examples/synthesize_with_anonymization.md"
+          - Privacy Level: "sdk/examples/synthesize_with_privacy_control.md"
+          - Conditional Sampling: "sdk/examples/synthesize_with_conditional_sampling.md"
       - Reference:
-        - Changelog: 'sdk/reference/changelog.md'
-        - API:
-          - Client: 'sdk/reference/api/common/client.md'
-          - Connectors:
-              - 'Connector': 'sdk/reference/api/connectors/connector.md'
-          - DataSources:
-              - 'DataSource': 'sdk/reference/api/datasources/datasource.md'
-              - 'Metadata': 'sdk/reference/api/datasources/metadata.md'
-          - Synthesizers:
-              - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
-              - Regular: 'sdk/reference/api/synthesizers/regular.md'
-              - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
-              - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
-          - Types: 'sdk/reference/api/common/types.md'
+          - Changelog: 'sdk/reference/changelog.md'
+          - API:
+              - Client: 'sdk/reference/api/common/client.md'
+              - Connectors:
+                  - 'Connector': 'sdk/reference/api/connectors/connector.md'
+              - DataSources:
+                  - 'DataSource': 'sdk/reference/api/datasources/datasource.md'
+                  - 'Metadata': 'sdk/reference/api/datasources/metadata.md'
+              - Synthesizers:
+                  - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
+                  - Regular: 'sdk/reference/api/synthesizers/regular.md'
+                  - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
+                  - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
+              - Types: 'sdk/reference/api/common/types.md'
+
 
 theme:
   name: material
   language: en
-  font: 'Roboto'
   palette:
     - scheme: ydata
       media: "(prefers-color-scheme: light)"
