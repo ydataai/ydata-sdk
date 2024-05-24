@@ -22,6 +22,13 @@ nav:
           - 'data_catalog/connectors/index.md'
           - How to create a connector?: 'data_catalog/connectors/create_connector.md'
           - Supported connectors: 'data_catalog/connectors/supported_connections.md'
+          - Use a connector in Labs: 'data_catalog/connectors/use_in_labs.md'
+          - Integrations examples:
+              - Snowflake: 'data_catalog/connectors/integration_snowflake.md'
+      - Datasources:
+          - 'data_catalog/datasources/index.md'
+          - Warnings: 'data_catalog/datasources/warnings.md'
+          - PII identification: 'data_catalog/datasources/pii.md'
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
@@ -36,20 +43,20 @@ nav:
         - Privacy Level: "sdk/examples/synthesize_with_privacy_control.md"
         - Conditional Sampling: "sdk/examples/synthesize_with_conditional_sampling.md"
       - Reference:
-          - Changelog: 'sdk/reference/changelog.md'
-          - API:
-              - Client: 'sdk/reference/api/common/client.md'
-              - Connectors:
-                  - 'Connector': 'sdk/reference/api/connectors/connector.md'
-              - DataSources:
-                  - 'DataSource': 'sdk/reference/api/datasources/datasource.md'
-                  - 'Metadata': 'sdk/reference/api/datasources/metadata.md'
-              - Synthesizers:
-                  - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
-                  - Regular: 'sdk/reference/api/synthesizers/regular.md'
-                  - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
-                  - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
-              - Types: 'sdk/reference/api/common/types.md'
+        - Changelog: 'sdk/reference/changelog.md'
+        - API:
+          - Client: 'sdk/reference/api/common/client.md'
+          - Connectors:
+              - 'Connector': 'sdk/reference/api/connectors/connector.md'
+          - DataSources:
+              - 'DataSource': 'sdk/reference/api/datasources/datasource.md'
+              - 'Metadata': 'sdk/reference/api/datasources/metadata.md'
+          - Synthesizers:
+              - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
+              - Regular: 'sdk/reference/api/synthesizers/regular.md'
+              - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
+              - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
+          - Types: 'sdk/reference/api/common/types.md'
 
 theme:
   name: material
