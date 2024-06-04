@@ -1,7 +1,6 @@
 from contextlib import suppress
 from os import environ
 from typing import Dict, Optional, Union
-from ast import literal_eval
 
 from httpx import Client as httpClient
 from httpx import HTTPStatusError, Response, Timeout
