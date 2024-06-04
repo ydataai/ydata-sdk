@@ -52,9 +52,15 @@ class Client(metaclass=SingletonClient):
 
     def __init__(self, credentials: Optional[Union[str, Dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
         self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL).removesuffix('/')
+        self._verify_ssl = bool(int(environ.get('YDATA_VERIFY_SSL', 1)))
         self._headers = {'Authorization': credentials}
-        self._http_client = httpClient(
-            headers=self._headers, timeout=Timeout(10, read=None))
+
+        if self._verify_ssl is False:
+            self._http_client = httpClient(
+                headers=self._headers, timeout=Timeout(10, read=None), verify=self._verify_ssl)
+        else:
+            self._http_client = httpClient(
+                headers=self._headers, timeout=Timeout(10, read=None))
 
         self._handshake()
 
