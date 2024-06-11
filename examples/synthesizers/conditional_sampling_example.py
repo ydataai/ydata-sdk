@@ -29,11 +29,19 @@ def main():
         n_samples=500,
         condition_on={
             "sex": {
-                "categories": ["Female"]
+                "categories": [{
+                    "category": 'Female',
+                    "percentage": 0.7
+                }]
             },
             "native-country": {
-                "categories": [("United-States", 0.6),
-                               ("Mexico", 0.4)]
+                "categories": [{
+                            "category": 'United-States',
+                            "percentage": 0.6
+                        }, {
+                            "category": 'Mexico',
+                            "percentage": 0.4
+                        }]
             },
             "age": {
                 "minimum": 55,

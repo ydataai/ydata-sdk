@@ -23,12 +23,17 @@ nav:
           - How to create a connector?: 'data_catalog/connectors/create_connector.md'
           - Supported connectors: 'data_catalog/connectors/supported_connections.md'
           - Use a connector in Labs: 'data_catalog/connectors/use_in_labs.md'
-          - Integrations examples:
-              - Snowflake: 'data_catalog/connectors/integration_snowflake.md'
       - Datasources:
           - 'data_catalog/datasources/index.md'
           - Warnings: 'data_catalog/datasources/warnings.md'
           - PII identification: 'data_catalog/datasources/pii.md'
+  - Integrations:
+    - Snowflake:
+      - 'integrations/snowflake/integration_snowflake.md'
+    - Databricks:
+        - 'integrations/databricks/overview.md'
+        - Connectors for Delta Lake & Unity Catalog: 'integrations/databricks/integration_connectors_catalog.md'
+        - YData SDK in Databricks notebooks: 'integrations/databricks/integration_with_sdk.md'
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
