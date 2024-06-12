@@ -8,7 +8,7 @@ from data augmentation to privacy preservation, and is particularly useful in sc
 real data is challenging. By leveraging synthetic time-series data, organizations can simulate various conditions and
 events, enhance model robustness, and ensure data privacy, making it a valuable tool for industries reliant on temporal
 data analysis.
-This type of data is prevalent in various fields, including finance, healthcare, energy, and IoT (Internet of Things). 
+This type of data is prevalent in various fields, including finance, healthcare, energy, and IoT (Internet of Things).
 
 ## Tutorials & Recipes
 To **get-started** with Synthetic Data Generation ^^[you can follow out quickstart guide](../../get-started/create_syntheticdata_generator.md)^^.

@@ -2,7 +2,7 @@
 
 ## Viewing Run details
 
-To view a specific Run, we need to go into the **Experiments** list and click on the desired Run. Alternatively, accessing **Runs** and selecting directly the desired run is possible. 
+To view a specific Run, we need to go into the **Experiments** list and click on the desired Run. Alternatively, accessing **Runs** and selecting directly the desired run is possible.
 
 ![Acessing Runs through its Experiment](Pipelines%2055c1a84b8a374deab72652d8f3fc375c/Untitled%202.png)
 
@@ -12,27 +12,27 @@ Acessing Runs through its Experiment
 
 Viewing the full list of Runs, for all Pipelines and Experiments. Runs can be filtered and sorted based on different fields (including Metrics).
 
-Once a Run is selected, its graph can be viewed (and in real-time, if the Run is being executing). The graph shows the execution status of each log. Clicking on each block will reveal the block’s details, including artifacts, various configuration details and logs (useful for troubleshooting). 
+Once a Run is selected, its graph can be viewed (and in real-time, if the Run is being executing). The graph shows the execution status of each log. Clicking on each block will reveal the block’s details, including artifacts, various configuration details and logs (useful for troubleshooting).
 
 ![The details page of a step, showing a profiling report (as HTML) as an Artifact](Pipelines%2055c1a84b8a374deab72652d8f3fc375c/Untitled%204.png)
 
 The details page of a step, showing a profiling report (as HTML) as an Artifact
 
-The **Run Output** tab includes outputs such as metrics or binary artifacts. 
+The **Run Output** tab includes outputs such as metrics or binary artifacts.
 
 ## Creating Runs
 
-Besides triggering Execution via the pipeline editor in Jupyter Lab or the Python SDK, the Pipelines management UI can also be used. 
+Besides triggering Execution via the pipeline editor in Jupyter Lab or the Python SDK, the Pipelines management UI can also be used.
 
 ### One-off
 
-To create a one-off run of a Pipeline, choose a Pipeline in the *Pipelines* section (including the specific Pipeline version, in case there are multiple definitions) and click *+ Create Run*. 
+To create a one-off run of a Pipeline, choose a Pipeline in the *Pipelines* section (including the specific Pipeline version, in case there are multiple definitions) and click *+ Create Run*.
 
 ![Creating a Run of a specific Pipeline](Pipelines%2055c1a84b8a374deab72652d8f3fc375c/Untitled%205.png)
 
 Creating a Run of a specific Pipeline
 
-To finish creating the Run, additional information is needed: 
+To finish creating the Run, additional information is needed:
 
 - a **Description** (optional)
 - the **Experiment** (mandatory and can be chosen from the list of existing ones)
@@ -113,11 +113,11 @@ It has 6 main sub-modules:
 
 An experiment is used to group together the runs of a single or different Pipelines. It is particularly useful for organization and Artifacts/Metrics comparison purposes.
 
-To create a new Experiment, access the *Experiments* section and click *+ Create Experiment*. An Experiment requires a name and an optional description. 
+To create a new Experiment, access the *Experiments* section and click *+ Create Experiment*. An Experiment requires a name and an optional description.
 
 ## Comparing Runs
 
-**Comparing runs is particularly useful in iterative data improvement scenarios**, as Artifacts, Metrics and Parameters can be directly compared side-by-side. Runs using different pre-processing techniques, settings, algorithms can be put against each other side-by-side in a visual and intuitive interface. 
+**Comparing runs is particularly useful in iterative data improvement scenarios**, as Artifacts, Metrics and Parameters can be directly compared side-by-side. Runs using different pre-processing techniques, settings, algorithms can be put against each other side-by-side in a visual and intuitive interface.
 
 To compare multiple Runs, select the Runs of interest (either from the *Experiments* or *Runs* pane) and select *Compare runs:*
 
@@ -129,7 +129,7 @@ Selecting Runs to compare from the Experiments list
 
 In case of this particular data quality improvement Pipeline, the Metrics of each Run are shown side by side.
 
-Up to 10 runs can be selected for side-by-side comparison. In case any step of the Run has logged Artifacts, the equivalent Artifacts are shown in a comparative interface. 
+Up to 10 runs can be selected for side-by-side comparison. In case any step of the Run has logged Artifacts, the equivalent Artifacts are shown in a comparative interface.
 
 ![Comparing the confusion matrices of three Runs of a Pipeline, which were logged as Artifacts during one of the Pipeline’s steps.](Pipelines%2055c1a84b8a374deab72652d8f3fc375c/Screenshot_from_2020-10-24_01-12-27.png)
 
@@ -139,13 +139,13 @@ Comparing the confusion matrices of three Runs of a Pipeline, which were logged 
 
 For full reproducibility purposes, it is possible to select a previous run and clone it. Cloned runs will use exactly the same runtime input parameters and settings. However, **any time dependent inputs (like the state of a remote data source at a particular point in time) will not be recreated**.
 
-To clone a Run, click the *Clone run* button available in a Run’s detail page or in the list of Runs/Experiment (when a single Run is selected). It will be possible to review the settings prior to triggering the execution. 
+To clone a Run, click the *Clone run* button available in a Run’s detail page or in the list of Runs/Experiment (when a single Run is selected). It will be possible to review the settings prior to triggering the execution.
 
 ## Archiving Runs
 
-Archiving a Run will move it to the Archived section the *Runs* and *Experiments* list. This section can be used to save older executions, to highlight best runs or to record anomalous executions which require further digging into. 
+Archiving a Run will move it to the Archived section the *Runs* and *Experiments* list. This section can be used to save older executions, to highlight best runs or to record anomalous executions which require further digging into.
 
-Archive a Run by clicking the *Archive* button from the Run’s details page (or from the list of Runs/Experiments when a Run is selected). 
+Archive a Run by clicking the *Archive* button from the Run’s details page (or from the list of Runs/Experiments when a Run is selected).
 
 ![The Archived section, which is in all ways similar to the list of Active buttons. The *Restore* button (highlighted) moves Runs between the two sections.](Pipelines%2055c1a84b8a374deab72652d8f3fc375c/Untitled%2010.png)
 
