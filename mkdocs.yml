@@ -27,6 +27,18 @@ nav:
           - 'data_catalog/datasources/index.md'
           - Warnings: 'data_catalog/datasources/warnings.md'
           - PII identification: 'data_catalog/datasources/pii.md'
+  - Synthetic data:
+      - 'synthetic_data/index.md'
+      - Tabular: 'synthetic_data/single_table/index.md'
+      - Time-series: 'synthetic_data/timeseries/index.md'
+      - Multi-Table: 'synthetic_data/relational_database/index.md'
+      - Text: 'synthetic_data/text/index.md'
+  - Labs:
+      - 'labs/index.md'
+      - Overview: 'labs/overview.md'
+  - Pipelines:
+      - 'pipelines/index.md'
+      - Concepts: 'pipelines/concepts.md'
   - Integrations:
     - Snowflake:
       - 'integrations/snowflake/integration_snowflake.md'

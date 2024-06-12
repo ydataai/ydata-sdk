@@ -1,6 +1,6 @@
 # Fabric coding environment
 
-**Labs** are on-demand, cloud-based data development environments with automatically provisioned hardware (multiple infrastructure configurations,
+^^[**YData Fabric Labs**](https://ydata.ai/products/fabric)^^ are on-demand, cloud-based data development environments with automatically provisioned hardware (multiple infrastructure configurations,
 including GPUs, are possible) and **full platform integration** via a Python interface (allowing access to Data Sources, Synthesizers, 
 and the Workspace’s shared files).
 
