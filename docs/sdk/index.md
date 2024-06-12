@@ -2,11 +2,9 @@
 ![Pythonversion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)
 [![downloads](https://pepy.tech/badge/ydata-sdk/month)](https://pepy.tech/project/ydata-sdk)
 
-!!! note "Fabric SDK for improved data quality everywhere!"
+!!! note "YData Fabric SDK for improved data quality everywhere!"
 
-    *ydata-sdk* is here! Create a YData account so you can start using today!
-
-    [Create account](https://ydata.ai/ydata-fabric-free-trial){ .md-button .md-button--ydata .md-button--stretch}
+    To start using create a Fabric community account at ^^[ydata.ai/register](https://ydata.ai/ydata-fabric-free-trial)^^
 
 ## Overview
 
