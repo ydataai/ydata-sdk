@@ -14,7 +14,7 @@ setup, and usage of the Databricks' available connector in Fabric.
 ## Delta Lake
 
 Databricks Delta Lake is an open-source storage layer that brings reliability to data lakes. Built on top of Apache Spark,
-Delta Lake provides ACID (Atomicity, Consistency, Isolation, Durability) transaction guarantees, 
+Delta Lake provides ACID (Atomicity, Consistency, Isolation, Durability) transaction guarantees,
 scalable metadata handling, and unifies streaming and batch data processing.
 
 In this tutorial it will be covered how you can leverage ^^[YData Fabric connectors](../../data_catalog/connectors/supported_connections.md)^^
@@ -34,7 +34,7 @@ Now, click in the *"Create Connector"* button and the following menu with the av
 ![Select Databricks Delta Lake connector](../../assets/integrations/select_delta_lake_connector.webp){: style="width:50%"}
 
 Depending on the cloud vendor that you have your Databricks' instance deployed, select the Delta Lake connector for AWS or Azure.
-After selecting the connector type *"Databricks Delta Lake"* the below menu will be shown. 
+After selecting the connector type *"Databricks Delta Lake"* the below menu will be shown.
 This is where you can configure the connection to your Delta Lake. For that you will need the following information:
 
 ![Config Delta Lake connector](../../assets/integrations/Delta_lake_aws_inputs.webp){: style="width:45%; padding-right:10px", align=left}
@@ -55,7 +55,7 @@ And finally, the name for your connector:
 </br></br>
 Test your connection and that's it! 🚀
 
-You are now ready to create different **Datasources** using this connector - read the data from a table, 
+You are now ready to create different **Datasources** using this connector - read the data from a table,
 evaluate the quality of the data or even read a full database and generate a synthetic replica of your data!
 Read more about ^^[Fabric Datasources in here](../datasources/index.md)^^.
 
@@ -63,11 +63,11 @@ Read more about ^^[Fabric Datasources in here](../datasources/index.md)^^.
 
 👨‍💻 ^^[Full code example and recipe can be found here](https://github.com/ydataai/academy/blob/master/1%20-%20Data%20Catalog/1.%20Connectors/Databricks%20_%20Delta%20Lake.ipynb)^^.
 
-In case you prefer a Python interface, we also have connectors available through Fabric SDK inside the labs. 
-For a seamless integration between the UI and the Labs environment, Fabric offers an SDK that allows you to re-use connectors, 
+In case you prefer a Python interface, we also have connectors available through Fabric SDK inside the labs.
+For a seamless integration between the UI and the Labs environment, Fabric offers an SDK that allows you to re-use connectors,
 datasources and even synthesizers.
 
-Start by creating your code environment through the Labs. 
+Start by creating your code environment through the Labs.
 In case you need to get started with the Labs, ^^[check this step-by-step guide](../../get-started/create_lab.md)^^.
 
 ```python
@@ -90,7 +90,7 @@ Using the Delta Lake connector it is possible to:
 Databricks Unity Catalog is a unified governance solution for all data and AI assets within the Databricks Lakehouse Platform.
 
 Databricks Unity Catalog leverages the concept of [Delta Sharing](https://www.databricks.com/product/delta-sharing),
-meaning this is a great way not only to ensure alignment between Catalogs but also to limit the access to data. 
+meaning this is a great way not only to ensure alignment between Catalogs but also to limit the access to data.
 This means that byt leveraging the Unity Catalog connector, users can only access a set of data assets that were authorized
 for a given Share.
 
@@ -99,7 +99,7 @@ for a given Share.
 :fontawesome-brands-youtube:{ .youtube } <a href="https://www.youtube.com/watch?v=_12AfMB8hiQ&t=2s"><u>How to create a connector to Databricks Unity Catalog in Fabric?</u></a>
 
 The process to create a new connector is similar to what we have covered before to create a new *Databricks Unity Catalog*
-connector in YData Fabric. 
+connector in YData Fabric.
 
 After selecting the connector *"Databricks Unity Catalog"*, you will be requested to upload your Delta Sharing token as
 depicted in the image below.
@@ -145,16 +145,16 @@ Using the Delta Lake connector it is possible to:
 
 ```python title="Read the data from a table"
     #This method reads all the data records in the table
-    table = connector.read_table(table_name='insert-table-name', 
-                                 schema_name='insert-schema-name', 
+    table = connector.read_table(table_name='insert-table-name',
+                                 schema_name='insert-schema-name',
                                  share_name='insert-share-name')
     print(table)
 ```
 
 ```python title="Read a data sample from a table"
     #This method reads all the data records in the table
-    table = connector.read_table(table_name='insert-table-name', 
-                                 schema_name='insert-schema-name', 
+    table = connector.read_table(table_name='insert-table-name',
+                                 schema_name='insert-schema-name',
                                  share_name='insert-share-name',
                                  sample_size=100)
     print(table)

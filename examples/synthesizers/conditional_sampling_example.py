@@ -36,12 +36,12 @@ def main():
             },
             "native-country": {
                 "categories": [{
-                            "category": 'United-States',
-                            "percentage": 0.6
-                        }, {
-                            "category": 'Mexico',
-                            "percentage": 0.4
-                        }]
+                    "category": 'United-States',
+                    "percentage": 0.6
+                }, {
+                    "category": 'Mexico',
+                    "percentage": 0.4
+                }]
             },
             "age": {
                 "minimum": 55,

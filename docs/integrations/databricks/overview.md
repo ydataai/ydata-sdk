@@ -1,6 +1,6 @@
 # Overview
 
-This sections provides a detailed guide on integrating ^^[YData Fabric](https://ydata.ai/products/fabric)^^ with Databricks. 
+This sections provides a detailed guide on integrating ^^[YData Fabric](https://ydata.ai/products/fabric)^^ with Databricks.
 By combining Databricks and YData Fabric, users gain a comprehensive AI solution.
 Fabric enables access to previously siloed data, enhances understanding,
 and improves data quality. Meanwhile, Databricks provides the scalability needed to deliver robust AI capabilities.
@@ -25,9 +25,9 @@ These connectors streamline data transfer and ensure seamless interoperability b
 - Secure data transfer
 - Data synchronization
 
-### SDK 
-The ^^[YData Fabric SDK](https://pypi.org/project/ydata-sdk/)^^ offers a programmatic approach to integrating with Databricks. 
-It provides developers with the tools and libraries needed to automate and customize data workflows between 
+### SDK
+The ^^[YData Fabric SDK](https://pypi.org/project/ydata-sdk/)^^ offers a programmatic approach to integrating with Databricks.
+It provides developers with the tools and libraries needed to automate and customize data workflows between
 YData Fabric and Databricks.
 
 **Key Features:**
@@ -51,7 +51,7 @@ with Databricks. This approach is ideal for applications requiring direct API ca
 
 ## Integration diagram
 
-The integration diagram below illustrates the interaction between **YData Fabric** and **Databricks**, 
+The integration diagram below illustrates the interaction between **YData Fabric** and **Databricks**,
 highlighting the data flow and key components involved in the integration process.
 
 ![Databricks diagram.png](..%2F..%2Fassets%2Fintegrations%2FDatabricks%20diagram.png)
