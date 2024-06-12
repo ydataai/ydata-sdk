@@ -14,6 +14,11 @@ are also available, jumpstarting data development. Additional libraries can be e
 
 ## Get started with your first lab
 
-🧪 Follow this [step-by-step guided tutorial to create your first Lab](../get-started/create_lab.md). 
+🧪 Follow this [step-by-step guided tutorial to create your first Lab](../get-started/create_lab.md).
 
-## Related Materials
+## Tutorials & recipes
+
+Leverage YData extensive collection of ^^[tutorials and recipes that you can find in YData Academy](https://github.com/ydataai/academy)^^. Quickstart or accelerate your data developments
+with recipes and tutorial use-cases.
+
+
