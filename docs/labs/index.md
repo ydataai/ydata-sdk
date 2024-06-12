@@ -20,5 +20,3 @@ are also available, jumpstarting data development. Additional libraries can be e
 
 Leverage YData extensive collection of ^^[tutorials and recipes that you can find in YData Academy](https://github.com/ydataai/academy)^^. Quickstart or accelerate your data developments
 with recipes and tutorial use-cases.
-
-
