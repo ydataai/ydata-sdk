@@ -1,23 +1,23 @@
 # Overview
 
-Labs exist for Data practitioners to tackle more complex use cases through a familiar environment supercharged with infrastructure, 
+Labs exist for Data practitioners to tackle more complex use cases through a familiar environment supercharged with infrastructure,
 integration with other Fabric modules and access to advanced synthesis and profiling technology via a familiar python interface.
 
-It is the preferred environment for Data practitioners to express their domain expertise with all the required tools, 
-technology and computational power at their fingertips. It is thus the natural continuation of the data understanding works which 
+It is the preferred environment for Data practitioners to express their domain expertise with all the required tools,
+technology and computational power at their fingertips. It is thus the natural continuation of the data understanding works which
 started in Data Sources.
 
 ## Supported IDE's and images
 
 ### IDEs
-YData Fabric supports integration with various Integrated Development Environments (IDEs) to enhance productivity and streamline workflows. 
+YData Fabric supports integration with various Integrated Development Environments (IDEs) to enhance productivity and streamline workflows.
 The supported IDEs include:
 
 - **Visual Studio Code (VS Code):** A highly versatile and widely-used code editor that offers robust support for numerous programming languages
 and frameworks. Its integration with Git and extensions like GitLens makes it ideal for version control and collaborative development.
-- **Jupyter Lab:** An interactive development environment that allows for notebook-based data science and machine learning workflows. 
+- **Jupyter Lab:** An interactive development environment that allows for notebook-based data science and machine learning workflows.
 It supports seamless Git integration through extensions and offers a user-friendly interface for managing code, data, and visualizations.
-- **H2O Flow:** A web-based interface specifically designed for machine learning and data analysis with the H2O platform. 
+- **H2O Flow:** A web-based interface specifically designed for machine learning and data analysis with the H2O platform.
 It provides a flow-based, interactive environment for building and deploying machine learning models.
 
 ### Labs images
@@ -66,7 +66,7 @@ for data developers. This integration allows you to track changes, manage projec
 
 ### Jupyter Lab
 
-Inside of Labs that use Jupyter Lab as IDE, you will find the ^^[*jupyterlab-git*](https://github.com/jupyterlab/jupyterlab-git)^^ 
+Inside of Labs that use Jupyter Lab as IDE, you will find the ^^[*jupyterlab-git*](https://github.com/jupyterlab/jupyterlab-git)^^
 extension installed in the environment.
 
 To create or clone a new repository you need to perform the following steps:
@@ -81,19 +81,19 @@ For more complex actions like forking and merging branches, see the gif below:
 ### Visual Code (VS Code)
 
 To clone or create a new git repository you can click in *"Clone Git Repository..."* and paste it in the text box in the top center area of screen
-as depicted in the image below. 
+as depicted in the image below.
 
 | Clone Git repository                                                           | Cloning a repository to your local env                       |
 |--------------------------------------------------------------------------------|--------------------------------------------------------------|
 | ![Vs code clone repo](../assets/labs/git_integration_vscode.webp) | ![Cloning vs code](../assets/labs/cloning_repo_vscode.webp) |
 
 ## Building Pipelines
-Building data pipelines and breaking them down into modular components can be challenging. 
-For instance, a typical machine learning or deep learning pipeline starts with a series of preprocessing steps, 
-followed by experimentation and optimization, and finally deployment. 
+Building data pipelines and breaking them down into modular components can be challenging.
+For instance, a typical machine learning or deep learning pipeline starts with a series of preprocessing steps,
+followed by experimentation and optimization, and finally deployment.
 Each of these stages presents unique challenges within the development lifecycle.
 
-Fabric Jupyter Labs simplifies this process by incorporating Elyra as the Pipeline Visual Editor. 
+Fabric Jupyter Labs simplifies this process by incorporating Elyra as the Pipeline Visual Editor.
 The visual editor enables users to build data pipelines from notebooks, Python scripts, and R scripts, making it easier to convert multiple notebooks
 or script files into batch jobs or workflows.
 

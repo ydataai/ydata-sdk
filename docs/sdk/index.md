@@ -3,7 +3,7 @@
 [![downloads](https://pepy.tech/badge/ydata-sdk/month)](https://pepy.tech/project/ydata-sdk)
 
 !!! note "YData Fabric SDK for improved data quality everywhere!"
-    
+
     To start using create a Fabric community account at ^^[ydata.ai/register](https://ydata.ai/ydata-fabric-free-trial)^^
 
 ## Overview

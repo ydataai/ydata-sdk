@@ -7,7 +7,7 @@ languages where data is limited. Additionally, synthetic text generation ensures
 without compromising sensitive information, thereby complying with data privacy regulations while enabling comprehensive data analysis and model training​
 
 !!! Note "Feature in Preview"
-    This feature is in preview and not available for all users. ^^[Contact us if you are interested in giving it a try](https://ydata.ai/contact-us)!^^ 
+    This feature is in preview and not available for all users. ^^[Contact us if you are interested in giving it a try](https://ydata.ai/contact-us)!^^
 
 ## Related Materials
 - :fontawesome-brands-youtube:{ .youtube } <a href="https://www.youtube.com/watch?v=sAQ3tNEOhow&t=91s"><u>How to generate Synthetic Text Data?</u></a>
