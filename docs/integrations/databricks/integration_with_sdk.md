@@ -1,15 +1,18 @@
 # YData SDK in Databricks Notebooks
 
-The YData SDK provides a powerful set of tools for integrating and enhancing data within Databricks notebooks. 
-This guide covers the installation, basic usage, and advanced features of the YData SDK, helping users maximize 
+The [YData Fabric SDK](https://pypi.org/project/ydata-sdk/) provides a powerful set of tools for integrating and enhancing data within Databricks notebooks. 
+This guide covers the installation, basic usage, and advanced features of the Fabric SDK, helping users maximize 
 the potential of their data for AI and machine learning applications.
 
-### Prerequisites
-Before using the YData SDK in Databricks notebooks, ensure the following prerequisites are met:
-- Access to a Databricks workspace
-- A valid YData Fabric account and API key
-- Basic knowledge of Python and Databricks notebooks
-- A safe connection between your Databricks cluster and Fabric
+👨‍💻 ^^[Full code example and recipe can be found here](https://raw.githubusercontent.com/ydataai/academy/master/5%20-%20Integrations/databricks/YData%20Fabric%20SDK%20in%20Databricks%20notebooks)^^.
+
+!!! note "Prerequisites"
+    Before using the YData Fabric SDK in Databricks notebooks, ensure the following prerequisites are met:
+
+    - Access to a Databricks workspace
+    - A valid YData Fabric account and API key
+    - Basic knowledge of Python and Databricks notebooks
+    - A safe connection between your Databricks cluster and Fabric
 
 **Best Practices**
 
@@ -31,7 +34,6 @@ Ensure the installation is successful before proceeding to the next steps.
 This section provides step-by-step instructions on connecting to YData Fabric and performing essential
 data operations using the YData SDK within Databricks notebooks. This includes establishing a secure connection
 to YData Fabric and accessing datasets.
-Here you can find the full tutorial notebook. (add here the link to academy)
 
 ### Connecting to YData Fabric
 First, establish a connection to YData Fabric using your API key:
@@ -62,12 +64,11 @@ dataset = DataSource.get('<DATASOURCE-ID>')
 
 ## Advanced Usage - Synthetic data generation
 
-This section explores one of the most powerful features of the YData SDK for enhancing and refining data
+This section explores one of the most powerful features of the Fabric SDK for enhancing and refining data
 within Databricks notebooks. This includes as generating synthetic data to augment
 datasets or to generate privacy-preserving data.
 By leveraging these advanced capabilities, users can significantly enhance the robustness and performance of their AI
 and machine learning models, unlocking the full potential of their data.
-Here you can find the [full tutorial notebook](). (add here the link to academy)
 
 ### Privacy-preserving
 Leveraging synthetic data allows to create privacy-preserving datasets that maintain real-world value, 
@@ -189,7 +190,7 @@ concatenated_df = df.union(synthetic_df)
 display(concatenated_df)
 ```
 
-Afterwards you can use your augmented dataset to train a [Machine Learning model using MLFlow](https://docs.databricks.com/en/mlflow/tracking-ex-scikit.html).
+Afterwards you can use your augmented dataset to train a ^^[Machine Learning model using MLFlow](https://docs.databricks.com/en/mlflow/tracking-ex-scikit.html)^^.
 
 
 

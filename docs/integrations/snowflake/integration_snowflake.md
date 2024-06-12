@@ -74,7 +74,8 @@ Start by creating your code environment through the Labs. In case you need to ge
 ```
 
 #### Navigate your database
-Add here a short description
+
+With your connector created you are now able to explore your database and available datasets.
 
 ```python title="List available schemas and get the metadata of a given schema"
     # returns a list of schemas
