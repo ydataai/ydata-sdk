@@ -6,18 +6,34 @@ dev_addr: 0.0.0.0:1235
 site_dir: "static/docs"
 nav:
   - Welcome: 'index.md'
-  - Get started with Fabric: "get-started/fabric_community.md"
-  - Synthetic Data:
-      - "synthetic_data/index.md"
-      - Single Table:
-          "synthetic_data/single_table/index.md"
-      - Time-Series:
-          "synthetic_data/timeseries/index.md"
-      - Relational databases:
-          "synthetic_data/relational_database/index.md"
-      - Synthetic data evaluation:
-        - Profiling compare: "synthetic_data/synthetic_data_quality/compare_profiling.md"
-        - PDF report: "synthetic_data/synthetic_data_quality/report_pdf.md"
+  - Get started with Fabric:
+      - "get-started/index.md"
+      - Quickstart:
+          - How to create your first Dataset from a CSV file: "get-started/upload_csv.md"
+          - How to create your first Relational database in Fabric's Catalog: "get-started/create_multitable_dataset.md"
+          - How to create your first Synthetic Data generator: "get-started/create_syntheticdata_generator.md"
+          - How to create your first Synthetic Data generator for databases: "get-started/create_database_sd_generator.md"
+          - How to create your first Lab: "get-started/create_lab.md"
+          - How to create your first Pipeline: "get-started/create_pipeline.md"
+      - Fabric Community: "get-started/fabric_community.md"
+  - Data catalog:
+      - 'data_catalog/index.md'
+      - Connectors:
+          - 'data_catalog/connectors/index.md'
+          - How to create a connector?: 'data_catalog/connectors/create_connector.md'
+          - Supported connectors: 'data_catalog/connectors/supported_connections.md'
+          - Use a connector in Labs: 'data_catalog/connectors/use_in_labs.md'
+      - Datasources:
+          - 'data_catalog/datasources/index.md'
+          - Warnings: 'data_catalog/datasources/warnings.md'
+          - PII identification: 'data_catalog/datasources/pii.md'
+  - Integrations:
+    - Snowflake:
+      - 'integrations/snowflake/integration_snowflake.md'
+    - Databricks:
+        - 'integrations/databricks/overview.md'
+        - Connectors for Delta Lake & Unity Catalog: 'integrations/databricks/integration_connectors_catalog.md'
+        - YData SDK in Databricks notebooks: 'integrations/databricks/integration_with_sdk.md'
   - SDK:
       - Overview: "sdk/index.md"
       - Installation: 'sdk/installation.md'
@@ -25,11 +41,12 @@ nav:
       - Components:
           - "sdk/modules/connectors.md"
       - Examples:
-        - Generate Tabular Data: "examples/synthesize_tabular_data.md"
-        - Generate Time-Series Data: "examples/synthesize_timeseries_data.md"
-        - Anonymization: "examples/synthesize_with_anonymization.md"
-        - Privacy Level: "examples/synthesize_with_privacy_control.md"
-        - Conditional Sampling: "examples/synthesize_with_conditional_sampling.md"
+          - Generate Tabular Data: "sdk/examples/synthesize_tabular_data.md"
+          - Generate Time-Series Data: "sdk/examples/synthesize_timeseries_data.md"
+          - Generate MultiTable Data: "sdk/examples/synthesizer_multitable.md"
+          - Anonymization: "sdk/examples/synthesize_with_anonymization.md"
+          - Privacy Level: "sdk/examples/synthesize_with_privacy_control.md"
+          - Conditional Sampling: "sdk/examples/synthesize_with_conditional_sampling.md"
       - Reference:
           - Changelog: 'sdk/reference/changelog.md'
           - API:
@@ -43,12 +60,13 @@ nav:
                   - Synthesizer: 'sdk/reference/api/synthesizers/base.md'
                   - Regular: 'sdk/reference/api/synthesizers/regular.md'
                   - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
+                  - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
               - Types: 'sdk/reference/api/common/types.md'
+
 
 theme:
   name: material
   language: en
-  font: 'Roboto'
   palette:
     - scheme: ydata
       media: "(prefers-color-scheme: light)"
@@ -137,7 +155,6 @@ plugins:
         lang: en
   - autorefs
   - mkdocstrings:
-      custom_templates: templates
       default_handler: python
       handlers:
         python:

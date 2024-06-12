@@ -1,0 +1,20 @@
+name: ydata-sdk
+channels:
+  - defaults
+dependencies:
+  - bzip2=1.0.8=h1de35cc_0
+  - ca-certificates=2023.08.22=hecd8cb5_0
+  - libffi=3.4.4=hecd8cb5_0
+  - ncurses=6.4=hcec6c5f_0
+  - openssl=3.0.12=hca72f7f_0
+  - pip=23.3.1=py310hecd8cb5_0
+  - python=3.10.13=h5ee71fb_0
+  - readline=8.2=hca72f7f_0
+  - setuptools=68.0.0=py310hecd8cb5_0
+  - sqlite=3.41.2=h6c40b1e_0
+  - tk=8.6.12=h5d9f67b_0
+  - tzdata=2023c=h04d1e81_0
+  - wheel=0.41.2=py310hecd8cb5_0
+  - xz=5.4.5=h6c40b1e_0
+  - zlib=1.2.13=h4dc903c_0
+prefix: /usr/local/Caskroom/miniconda/base/envs/ydata-sdk

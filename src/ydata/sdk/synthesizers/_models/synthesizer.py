@@ -1,11 +1,14 @@
-from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Optional
+
+from pydantic import Field
+
+from ydata.sdk.common.model import BaseModel
+
+from .status import Status
 
 
-@dataclass
-class Synthesizer:
-
-    uid: Optional[str] = None
-    author: Optional[str] = None
-    name: Optional[str] = None
-    status: Optional[Dict] = field(default_factory=dict)
+class Synthesizer(BaseModel):
+    uid: Optional[str] = Field(None)
+    author: Optional[str] = Field(None)
+    name: Optional[str] = Field(None)
+    status: Optional[Status] = Field(None)

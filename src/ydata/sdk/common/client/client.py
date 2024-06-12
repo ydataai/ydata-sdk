@@ -5,6 +5,7 @@ from typing import Dict, Optional, Union
 from httpx import Client as httpClient
 from httpx import HTTPStatusError, Response, Timeout
 from httpx import codes as http_codes
+from httpx._types import RequestContent
 from typeguard import typechecked
 
 from ydata.sdk.common.client.parser import LinkExtractor
@@ -47,26 +48,45 @@ class Client(metaclass=SingletonClient):
 
     codes = codes
 
+    DEFAULT_PROJECT: Optional[Project] = environ.get("DEFAULT_PROJECT", None)
+
     def __init__(self, credentials: Optional[Union[str, Dict]] = None, project: Optional[Project] = None, set_as_global: bool = False):
-        self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL)
-        self._scheme = 'https'
+        self._base_url = environ.get("YDATA_BASE_URL", DEFAULT_URL).removesuffix('/')
+        self._verify_ssl = bool(int(environ.get('YDATA_VERIFY_SSL', 1)))
         self._headers = {'Authorization': credentials}
-        self._http_client = httpClient(
-            headers=self._headers, timeout=Timeout(10, read=None))
+
+        if self._verify_ssl is False:
+            self._http_client = httpClient(
+                headers=self._headers, timeout=Timeout(10, read=None), verify=self._verify_ssl)
+        else:
+            self._http_client = httpClient(
+                headers=self._headers, timeout=Timeout(10, read=None))
 
         self._handshake()
 
-        self._project = project if project is not None else self._get_default_project(
+        self._default_project = project or Client.DEFAULT_PROJECT or self._get_default_project(
             credentials)
-        self.project = project
         if set_as_global:
             self.__set_global()
 
-    def post(self, endpoint: str, data: Optional[Dict] = None, json: Optional[Dict] = None, files: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
+    @property
+    def project(self) -> Project:
+        return Client.DEFAULT_PROJECT or self._default_project
+
+    @project.setter
+    def project(self, value: Project):
+        self._default_project = value
+
+    def post(
+        self, endpoint: str, content: Optional[RequestContent] = None, data: Optional[Dict] = None,
+        json: Optional[Dict] = None, project: Optional[Project] = None, files: Optional[Dict] = None,
+        raise_for_status: bool = True
+    ) -> Response:
         """POST request to the backend.
 
         Args:
             endpoint (str): POST endpoint
+            content (Optional[RequestContent])
             data (Optional[dict]): (optional) multipart form data
             json (Optional[dict]): (optional) json data
             files (Optional[dict]): (optional) files to be sent
@@ -75,7 +95,8 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint, data=data, json=json, files=files)
+        url_data = self.__build_url(
+            endpoint, data=data, json=json, files=files, project=project)
         response = self._http_client.post(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -83,7 +104,37 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get(self, endpoint: str, params: Optional[Dict] = None, cookies: Optional[Dict] = None, raise_for_status: bool = True) -> Response:
+    def patch(
+        self, endpoint: str, content: Optional[RequestContent] = None, data: Optional[Dict] = None,
+        json: Optional[Dict] = None, project: Optional[Project] = None, files: Optional[Dict] = None,
+        raise_for_status: bool = True
+    ) -> Response:
+        """PATCH request to the backend.
+
+        Args:
+            endpoint (str): POST endpoint
+            content (Optional[RequestContent])
+            data (Optional[dict]): (optional) multipart form data
+            json (Optional[dict]): (optional) json data
+            files (Optional[dict]): (optional) files to be sent
+            raise_for_status (bool): raise an exception on error
+
+        Returns:
+            Response object
+        """
+        url_data = self.__build_url(
+            endpoint, data=data, json=json, files=files, project=project)
+        response = self._http_client.patch(**url_data, content=content)
+
+        if response.status_code != Client.codes.OK and raise_for_status:
+            self.__raise_for_status(response)
+
+        return response
+
+    def get(
+        self, endpoint: str, params: Optional[Dict] = None, project: Optional[Project] = None,
+        cookies: Optional[Dict] = None, raise_for_status: bool = True
+    ) -> Response:
         """GET request to the backend.
 
         Args:
@@ -94,7 +145,8 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint, params=params, cookies=cookies)
+        url_data = self.__build_url(endpoint, params=params,
+                                    cookies=cookies, project=project)
         response = self._http_client.get(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -102,7 +154,9 @@ class Client(metaclass=SingletonClient):
 
         return response
 
-    def get_static_file(self, endpoint: str, raise_for_status: bool = True) -> Response:
+    def get_static_file(
+        self, endpoint: str, project: Optional[Project] = None, raise_for_status: bool = True
+    ) -> Response:
         """Retrieve a static file from the backend.
 
         Args:
@@ -112,8 +166,10 @@ class Client(metaclass=SingletonClient):
         Returns:
             Response object
         """
-        url_data = self.__build_url(endpoint)
-        url_data['url'] = f'{self._scheme}://{self._base_url}/static-content{endpoint}'
+        from urllib.parse import urlparse
+        url_data = self.__build_url(endpoint, project=project)
+        url_parse = urlparse(self._base_url)
+        url_data['url'] = f'{url_parse.scheme}://{url_parse.netloc}/static-content{endpoint}'
         response = self._http_client.get(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -138,7 +194,9 @@ class Client(metaclass=SingletonClient):
         data: Dict = response.json()
         return data['myWorkspace']
 
-    def __build_url(self, endpoint: str, params: Optional[Dict] = None, data: Optional[Dict] = None, json: Optional[Dict] = None, files: Optional[Dict] = None, cookies: Optional[Dict] = None) -> Dict:
+    def __build_url(self, endpoint: str, params: Optional[Dict] = None, data: Optional[Dict] = None,
+                    json: Optional[Dict] = None, project: Optional[Project] = None, files: Optional[Dict] = None,
+                    cookies: Optional[Dict] = None) -> Dict:
         """Build a request for the backend.
 
         Args:
@@ -153,11 +211,11 @@ class Client(metaclass=SingletonClient):
             dictionary containing the information to perform a request
         """
         _params = params if params is not None else {
-            'ns': self._project
+            'ns': project or self._default_project
         }
 
         url_data = {
-            'url': f'{self._scheme}://{self._base_url}/api{endpoint}',
+            'url': f'{self._base_url}/{endpoint.removeprefix("/")}',
             'headers': self._headers,
             'params': _params,
         }

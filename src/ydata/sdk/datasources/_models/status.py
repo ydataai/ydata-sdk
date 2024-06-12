@@ -1,6 +1,10 @@
-from pydantic import BaseModel
+from typing import Optional
+
+from pydantic import Field
 
 from ydata.core.enum import StringEnum
+from ydata.sdk.common.model import BaseModel
+from ydata.sdk.common.status import GenericStateErrorStatus
 
 
 class ValidationState(StringEnum):
@@ -27,7 +31,7 @@ class ProfilingState(StringEnum):
     AVAILABLE = 'available'
 
 
-class Status(StringEnum):
+class State(StringEnum):
     """Represent the status of a [`DataSource`][ydata.sdk.datasources.datasource.DataSource]."""
 
     AVAILABLE = 'available'
@@ -59,7 +63,17 @@ class Status(StringEnum):
     """
 
 
-class State(BaseModel):
-    validation: ValidationState
-    metadata: MetadataState
-    profiling: ProfilingState
+ValidationStatus = GenericStateErrorStatus[ValidationState]
+MetadataStatus = GenericStateErrorStatus[MetadataState]
+ProfilingStatus = GenericStateErrorStatus[ProfilingState]
+
+
+class Status(BaseModel):
+    state: Optional[State] = Field(None)
+    validation: Optional[ValidationStatus] = Field(None)
+    metadata: Optional[MetadataStatus] = Field(None)
+    profiling: Optional[ProfilingStatus] = Field(None)
+
+    @staticmethod
+    def unknown() -> "Status":
+        return Status(state=State.UNKNOWN)

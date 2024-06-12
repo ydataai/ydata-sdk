@@ -40,7 +40,6 @@ class RegularSynthesizer(BaseSynthesizer):
             exclude_cols: Optional[List[str]] = None,
             dtypes: Optional[Dict[str, Union[str, DataType]]] = None,
             target: Optional[str] = None,
-            name: Optional[str] = None,
             anonymize: Optional[dict] = None,
             condition_on: Optional[List[str]] = None) -> None:
         """Fit the synthesizer.
@@ -61,7 +60,7 @@ class RegularSynthesizer(BaseSynthesizer):
         """
         BaseSynthesizer.fit(self, X=X, datatype=DataSourceType.TABULAR, entities=entities,
                             generate_cols=generate_cols, exclude_cols=exclude_cols, dtypes=dtypes,
-                            target=target, name=name, anonymize=anonymize, privacy_level=privacy_level,
+                            target=target, anonymize=anonymize, privacy_level=privacy_level,
                             condition_on=condition_on)
 
     def __repr__(self):

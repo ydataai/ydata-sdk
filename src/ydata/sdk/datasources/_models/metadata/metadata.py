@@ -1,7 +1,8 @@
 from typing import List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 
+from ydata.sdk.common.model import BaseModel
 from ydata.sdk.datasources._models.metadata.column import Column
 from ydata.sdk.datasources._models.metadata.warnings import MetadataWarning
 
