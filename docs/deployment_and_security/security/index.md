@@ -7,7 +7,7 @@ Visit ^^[YData's Trust page](https://trust.ydata.ai)^^ to check all the Policies
 
 ## Hosting security
 **YData** is not a cloud service provider, however, we use providers which are hosted on their data centers, such as *Google*, *Microsoft* and *Amazon Web Services*,
-when the setup is not made on the customer premises. They are leading cloud infrastructure providers with top-class safety standards. 
+when the setup is not made on the customer premises. They are leading cloud infrastructure providers with top-class safety standards.
 They are able to respond quickly to both operational and security, including well-defined change management policies and procedures to determine when and how
 change occurs.
 
@@ -89,13 +89,13 @@ User uploaded information or data will be considered confidential, which is stor
 if available. Data for a limited time without user request, not allowed to come out.
 All data transmitted layer protection (TSL) and HTTP sent by users protected using Strike Transport Security (HSTS). The application is usable if encrypted
 communication is compromised.
-User uploaded data is not transferred from one data center to another. Encryption is used in many places to protect customer information, such as: 
+User uploaded data is not transferred from one data center to another. Encryption is used in many places to protect customer information, such as:
 IS-266 with encryption at rest, incomplete encryption (PGP) for system backups, KMS-based protection for privacy protection, and GPG encryption.
 Users can use the data stored for business or administrative purposes, but they have to go through many security levels, including multifactor authentication
 (MFA).
 
 ## Secure Build Materials (SBOM)
-To enhance transparency and facilitate security assessments, we provide access to Secure Build Materials (SBOM) for our products and services. 
+To enhance transparency and facilitate security assessments, we provide access to Secure Build Materials (SBOM) for our products and services.
 SBOM files offer detailed insights into the components, dependencies, and associated vulnerabilities within our software stack. These files enable stakeholders,
 including customers, auditors, and security researchers, to evaluate the security posture of our offerings comprehensively.
 For access to SBOM files and additional security-related information, please visit our Security Resources page at:
@@ -107,7 +107,7 @@ common threats such as cross-site scripting (CSS / XSS) and cross-site request f
 from another user's account.
 
 ## Laws and Regulations
-The cloud service providers used by YData are compatible with the General Data Protection Resolution (GDPR). 
+The cloud service providers used by YData are compatible with the General Data Protection Resolution (GDPR).
 GDPR is working to expand its products, methods and processes to fulfill its responsibilities as a data processor.
 YData's security and privacy teams have established a vendor management program that determines the need for YData to be approved when it involves third parties
 or external vendors. Our security team recognizes that the company’s information resources and vendor reliance are critical to our continued activities
@@ -121,9 +121,9 @@ obligations under the CCPA if there is access to personal data, while we make no
 - All the data is stored using cloud specific services to ensure security, privacy and compliance with YData’s customers requirements.
 
 ## Data Encryption
-The way YData’s customers communicate with the servers is through SSL / TLS connections, which are encrypted. 
-YData protects the servers where YData Fabric is deployed from DDOS, SQL injection and other fraudulent activities. 
-If one wants to interrupt the data transfer, one can only see a mixture of some characters, which is not possible to decrypt. 
+The way YData’s customers communicate with the servers is through SSL / TLS connections, which are encrypted.
+YData protects the servers where YData Fabric is deployed from DDOS, SQL injection and other fraudulent activities.
+If one wants to interrupt the data transfer, one can only see a mixture of some characters, which is not possible to decrypt.
 All data in databases is encrypted with industry standard AES-256.
 
 ## API Security
@@ -131,7 +131,7 @@ To use the API the user needs to have a *JWT* *token* that is automatically gene
 using a random key created during the deployment and only known by the service responsible for its provisioning.
 
 ## Availability and disaster recovery
-When using one of the cloud providers, the data stored in the bucket and database is distributed and copied to different servers. 
+When using one of the cloud providers, the data stored in the bucket and database is distributed and copied to different servers.
 If a bucket or database fails, it is usually recovered from a different server without targeting other users.Databases are backed up on a daily basis and
 can be restored if the software or server fails significantly. Backups are stored in various European and North American data centers (depending on the customer
 location) for extra protection.
@@ -142,6 +142,6 @@ not be able to recover it.
 The functionality of our applications and databases is monitored 24/7 through in-built monitoring tools provided by Google, Azure and Amazon Web Services. Internal errors or failures of our various integrations trigger logins and notifications. This usually helps us to identify the problem very quickly and remedy the situation.
 
 ## Full disclosure policy
-If something serious happens and your data is damaged as required by GDPR, we will disclose in full (such as a data breach). 
-Transparency is important to us and we will provide you with all the necessary information to properly assess the situation and potential impact. 
+If something serious happens and your data is damaged as required by GDPR, we will disclose in full (such as a data breach).
+Transparency is important to us and we will provide you with all the necessary information to properly assess the situation and potential impact.
 So far no customer data has been compromised and we aim to keep it that way.

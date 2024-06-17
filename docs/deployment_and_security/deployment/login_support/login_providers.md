@@ -90,10 +90,10 @@ The admin consent workflow is necessary to configure, so you can access the plat
 ![Access group/users](../../../assets/deployment_security/login_support/msft_access_users_groups.png){: style="width:100%"}
 2. Then, click in “Properties” and enable the **“Assignment required”**
 ![assigment required](../../../assets/deployment_security/login_support/msft_assignment_required.png){: style="width:50%"}
-3. To add users and/or groups, go to *“Users and Groups”* and click *“Add user/group”*. 
+3. To add users and/or groups, go to *“Users and Groups”* and click *“Add user/group”*.
 
 With the above steps, only the users and groups listed here can access YData Fabric. For more information check Microsoft's official documentation
-for ^^[Microsoft identy platform](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)^^ and 
+for ^^[Microsoft identy platform](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)^^ and
 ^^[Microsoft Entra](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow)^^.
 
 
@@ -104,16 +104,16 @@ for ^^[Microsoft identy platform](https://learn.microsoft.com/en-us/entra/identi
 or leave as the default.
 4. In the “**Integrate your app**” please set the attributes as the following:
     1. “**User Pool Name**” - a name of your choice
-    2. Tick the “**Use the Cognito Hosted UI**” check box. 
-    3. “**Domain type**”, you can use a cognito or a custom domain. 
+    2. Tick the “**Use the Cognito Hosted UI**” check box.
+    3. “**Domain type**”, you can use a cognito or a custom domain.
     4. “**Initial app client**” choose “**Public client**” and set a “**App client name**”
     5. For “**Client secret**”, choose “**Generate a client secret**”
     6. In the “**Allowed callback URLs**”, set your callback URL with the platform endpoint with a suffix `*/dex/callback*`
         For the provided example:
     === "If you are using the **DNS Public Endpoint**"
-    
+
         ![Google custom domain dns](../../../assets/deployment_security/login_support/cognito_public_dns.png){: style="width:60%"}
-    
+
     === "Or, if you are using the **DNS Custom Domain**"
 
         ![Public dns](../../../assets/deployment_security/login_support/cognito_private_dns.png){: style="width:60%"}
@@ -134,7 +134,7 @@ And copy and save the *"issuer* URL.
 4. Click **Create user**
 5. Create the users:
 ![Cognito create users](../../../assets/deployment_security/login_support/cognito_create_users.png){: style="width:60%"}
-6. The user will receive an e-mail with the temporary credentials. 
+6. The user will receive an e-mail with the temporary credentials.
 
 For more information check ^^[Amazon's Cognito official documentation on user pools](https://docs.aws.amazon.com/cognito/latest/developerguide/getting-started-user-pools.html)^
 and ^^[user pool app client](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html)^^.
@@ -146,9 +146,9 @@ and ^^[user pool app client](https://docs.aws.amazon.com/cognito/latest/develope
 `*/dex/callback`* correspondingly*.*
 For the provided example:
 === "If you are using the **DNS Public Endpoint**"
-    
+
     ![Google custom domain dns](../../../assets/deployment_security/login_support/github_public_dns.png){: style="width:40%"}
-    
+
 === "Or, if you are using the **DNS Custom Domain**"
 
     ![Public dns](../../../assets/deployment_security/login_support/github_custom_dns.png){: style="width:40%"}
@@ -156,11 +156,5 @@ For the provided example:
 5. Save the **Client ID** and **Client secret**
 6. For the org, use your GitHub organization name.
 
-Finally, use these credentials as inputs for to login **YData Fabric**. 
+Finally, use these credentials as inputs for to login **YData Fabric**.
 For more information check ^^[GitHub's official login documentation](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)^^.
-
-
-
-
-  
-

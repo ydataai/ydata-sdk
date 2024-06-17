@@ -1,8 +1,8 @@
 # Secure Build Materials (SBOM)
 
-To enhance transparency and facilitate security assessments, we provide access to Secure Build Materials (SBOM) for our products and services. 
+To enhance transparency and facilitate security assessments, we provide access to Secure Build Materials (SBOM) for our products and services.
 
-SBOM files offer detailed insights into the components, dependencies, and associated vulnerabilities within our software stack. 
+SBOM files offer detailed insights into the components, dependencies, and associated vulnerabilities within our software stack.
 These files enable stakeholders, including customers, auditors, and security researchers, to evaluate the security posture of our offerings comprehensively.
 
 ### All files
