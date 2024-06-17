@@ -1,7 +1,7 @@
 # Clean
 
 The following procedure explains how to delete the platform. The full procedure takes around 45m to 1h to be completed.
-To clean up **YData Fabric**, you will need to delete the CloudFormation stack and remove the subscription. 
+To clean up **YData Fabric**, you will need to delete the CloudFormation stack and remove the subscription.
 
 Please take in consideration that this will delete **everything associated with the installation**.
 
@@ -16,7 +16,7 @@ Please take in consideration that this will delete **everything associated with 
 - Select the Extension stack and click in the **Delete** button.
 
 !!! Note
-    
+
     This will disable the extension. If you are using this extension for any other project, please do not delete this stack.
 
 ![EKS cluster delete](../../../assets/deployment_security/aws/eks_cluster_delete.png){: style="width:65%"}

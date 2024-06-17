@@ -1,8 +1,8 @@
 # Integrations
 
-Recognizing the modern enterprise data stack comprises a vast array of services and tools, 
-**YData Fabric is augmented by a growing ecosystem of partners and integrations**, 
-acting both upstream and downstream in the lifecycle of an AI project. 
+Recognizing the modern enterprise data stack comprises a vast array of services and tools,
+**YData Fabric is augmented by a growing ecosystem of partners and integrations**,
+acting both upstream and downstream in the lifecycle of an AI project.
 
 The list below is a non-exhaustive compilation of MLOps, Data and Cloud Providers which smoothly integrate with Fabric:
 
@@ -23,12 +23,12 @@ The list below is a non-exhaustive compilation of MLOps, Data and Cloud Provider
     - ^^[👨‍💻 Check code example in YData Academy](https://github.com/ydataai/academy/tree/master/5%20-%20Integrations/algorithmia)^^
 
 - [**UbiOps**](https://ubiops.com/): Integration for easy model deployment
-    
-    - ^^[👨‍💻 Check code example in YData Academy](https://github.com/ydataai/academy/tree/master/5%20-%20Integrations/ubiops)^^ 
+
+    - ^^[👨‍💻 Check code example in YData Academy](https://github.com/ydataai/academy/tree/master/5%20-%20Integrations/ubiops)^^
 
 - [**Great Expectations**](https://greatexpectations.io/): Data profiling is integrated with Great Expectations
 - [**Azure ML**](https://azure.microsoft.com/pt-pt/services/machine-learning/): Integration for easy model deployment
-  
+
     - ^^[👨‍💻 Check code example in YData Academy](https://github.com/ydataai/academy/tree/master/5%20-%20Integrations/azure-ml)^^
 
 - [**AWS SageMaker**](https://aws.amazon.com/sagemaker/): Integration for easy model deployment

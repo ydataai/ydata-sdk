@@ -9,7 +9,7 @@ In the *CloudFormation* outputs you can find the relevant information of the EC2
 ![bastion host](../../../assets/deployment_security/aws/bastion_host_info.png){: style="width:65%"}
 
 ## Setting the SG ingress rule
-- To give access to the bastion host, please go to the **EC2 service → Security Groups**. 
+- To give access to the bastion host, please go to the **EC2 service → Security Groups**.
 - You can search for the security group ID provided on the template outputs:
 
 ![bastion host](../../../assets/deployment_security/aws/bastion_host_security_group.png){: style="width:65%"}
@@ -19,7 +19,6 @@ In the *CloudFormation* outputs you can find the relevant information of the EC2
 
 ![bastion host rules](../../../assets/deployment_security/aws/bastion_host_app_rules.png){: style="width:65%"}
 
-- For single IP source, an IP will be given to you on the support time via email. 
+- For single IP source, an IP will be given to you on the support time via email.
 ## Removing the SG ingress rule
 - As soon the support for the specific case ends, you must **remove the SG ingress rule** and click *Save* rules.
-
