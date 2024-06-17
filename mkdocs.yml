@@ -91,6 +91,7 @@ nav:
               - Login providers: 'deployment_and_security/deployment/login_support/login_providers.md'
       - Security:
           - 'deployment_and_security/security/index.md'
+          - Secure Build Materials (SBOM): 'deployment_and_security/security/security_building_materials.md'
 
 
 theme:
