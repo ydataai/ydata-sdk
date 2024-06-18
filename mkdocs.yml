@@ -40,6 +40,7 @@ nav:
       - 'pipelines/index.md'
       - Concepts: 'pipelines/concepts.md'
   - Integrations:
+    - 'integrations/index.md'
     - Snowflake:
       - 'integrations/snowflake/integration_snowflake.md'
     - Databricks:
@@ -74,6 +75,23 @@ nav:
                   - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
                   - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
               - Types: 'sdk/reference/api/common/types.md'
+  - Deployment & Security:
+      - 'deployment_and_security/index.md'
+      - Deployment:
+          - AWS:
+            - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/aws/pre_deploy_checklist.md'
+            - 🔌 Deploy: 'deployment_and_security/deployment/aws/deploy.md'
+            - 🔌 Updates: 'deployment_and_security/deployment/aws/update.md'
+            - 🌐 Regions: 'deployment_and_security/deployment/aws/regions.md'
+            - 💻 Instance types: 'deployment_and_security/deployment/aws/instance_types.md'
+            - 💻 Bastion host: 'deployment_and_security/deployment/aws/bastion_host.md'
+          - Azure: 'deployment_and_security/deployment/azure.md'
+          - Google: 'deployment_and_security/deployment/google.md'
+          - Login, support & monitoring:
+              - Login providers: 'deployment_and_security/deployment/login_support/login_providers.md'
+      - Security:
+          - 'deployment_and_security/security/index.md'
+          - Secure Build Materials (SBOM): 'deployment_and_security/security/security_building_materials.md'
 
 
 theme:
