@@ -85,7 +85,11 @@ nav:
             - 🌐 Regions: 'deployment_and_security/deployment/aws/regions.md'
             - 💻 Instance types: 'deployment_and_security/deployment/aws/instance_types.md'
             - 💻 Bastion host: 'deployment_and_security/deployment/aws/bastion_host.md'
-          - Azure: 'deployment_and_security/deployment/azure.md'
+            - 💰 Billing: 'deployment_and_security/deployment/aws/billing.md'
+          - Azure:
+              - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/azure/pre_deploy_checklist.md'
+              - 🔌 Deploy: 'deployment_and_security/deployment/azure/deploy.md'
+              - 💰 Billing: 'deployment_and_security/deployment/azure/billing.md'
           - Google: 'deployment_and_security/deployment/google.md'
           - Login, support & monitoring:
               - Login providers: 'deployment_and_security/deployment/login_support/login_providers.md'
