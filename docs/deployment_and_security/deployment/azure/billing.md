@@ -1,7 +1,7 @@
 # Billing
 After the installation, the client will be billed for all the infrastructure costs plus the usage metrics describe in the offer.
 
-Using a usage-based pricing model you will only pay for what you use. 
+Using a usage-based pricing model you will only pay for what you use.
 
 The following metrics are calculated and sent to Azure in order to charge you at the current offer pricing:
 
@@ -28,7 +28,7 @@ created resource groups during the deployment. This will aggregate all the resou
 ## Cost Estimations
 
 **YData Fabric** final cost can be estimated following the logic of a usage-based plan since it depends on your users and data. The following table provides
-a guideline of how to compute the total cost for different usage scenarios based on the deployed infrastructure. 
+a guideline of how to compute the total cost for different usage scenarios based on the deployed infrastructure.
 
 | AKS Nodes | Instance Type | vCPUs | Memory (GBi) | GPUs | Number of instances | % Usage/ CPU/Hour | % Usage/ Memory/Hour | % Usage/ GPU/Hour | Cost Azure/Hour | Cost Azure/Day | Cost YData/Hour | Cost YData/Day |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -41,6 +41,6 @@ a guideline of how to compute the total cost for different usage scenarios based
 | GPU Micro (labs) | Standard_NC6s_v3 | 6 | 112 | 1 | 0 | 0 | 0 | 0 | 3.8230 | 0 | 0 | 0 |
 | GPU Compute Micro (computing) | Standard_NC6s_v3 | 6 | 112 | 1 | 0 | 0 | 0 | 0 | 3.8230 | 0 | 0 | 0 |
 
-The example above illustrates a scenario where the Micro and Small instances are used. 
+The example above illustrates a scenario where the Micro and Small instances are used.
 It is also illustrated that despite the Nodes being available, they're not necessarily being used, hence billed - only when the infrastructure is required and actually used,
 it is measured and billed accordingly.

@@ -26,13 +26,13 @@ ensuring low latency and high availability for users worldwide.
     - West US - Washington [westus2]
     - Canada Central [canadacentral]
     - Sweden Central [swedencentral]*
-    
+
     If you need another region, please fill up a support case at ^^[support.ydata.ai](http://support.ydata.ai)^^.
-    
+
     **Regions without available GPU’s machine types at the time*
-    
+
 - **Application Name**: the Managed APP name
-- **Managed Resource Group**: the resource group created by the Managed APP and where all the infrastructure services will be created 
+- **Managed Resource Group**: the resource group created by the Managed APP and where all the infrastructure services will be created
 (this is created automatically).
 
 ## Permissions
@@ -50,7 +50,7 @@ Check and add (if needed) the necessary permissions to the subscription where th
   - Contributor
   ![azure contributor](../../../assets/deployment_security/azure/azure_contributor.png){: style="width:70%"}
 
-  And the following **permissions**: 
+  And the following **permissions**:
 
   - Microsoft.Authorization/roleAssignments/read
 
@@ -58,19 +58,19 @@ Check and add (if needed) the necessary permissions to the subscription where th
 
   ![azure role assignment](../../../assets/deployment_security/azure/azure_role_assignment.png){: style="width:30%"}
 
-- If not, please create a custom role with this two permissions and create the role assignment to the user in the subscription. 
+- If not, please create a custom role with this two permissions and create the role assignment to the user in the subscription.
 
 For more information check Azure's official documentation on ^^[Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)^^
-and [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor). 
+and [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor).
 
 ## Resource Providers
-Check and activate (if needed) resource providers for the subscription where the YData platform will be installed following the next steps. 
+Check and activate (if needed) resource providers for the subscription where the YData platform will be installed following the next steps.
 
 - Go to **Subscriptions**
 - Select the subscription where *YData Fabric* will be installed
 - Go to Resource Providers
 - Using the filter, check if you have the following resource providers registered. If not, please click the resource provider and click *“Register”*.
-  
+
     - **Microsoft.Compute**
     - **Microsoft.ContainerInstance**
 
@@ -120,7 +120,7 @@ Check and register (if needed) the required features.
 Read more in Azure's official documentation on ^^[Azure Kubernetes Services (AKS)](https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster#install-the-aks-preview-azure-cli-extension)^^.
 
 ## Resource compute quotas
-Check and set (if needed) new quotas for the region where the managed app will be installed. 
+Check and set (if needed) new quotas for the region where the managed app will be installed.
 
 - Go to **Subscriptions**.
 - Select the subscription where *YData Fabric* will be installed
@@ -148,17 +148,17 @@ Check and set (if needed) new quotas for the region where the managed app will b
 
 ![azure check quotas](../../../assets/deployment_security/azure/azure_request_quota.png){: style="width:60%"}
 
-Check ^^[Azure's official documentation on quotas](https://learn.microsoft.com/en-us/azure/quotas/view-quotas)^^, 
-^^[increase regional vCPU quotas](https://learn.microsoft.com/en-us/azure/quotas/regional-quota-requests)^^ and 
-^^[increase VM-family quotas](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests)^^. 
+Check ^^[Azure's official documentation on quotas](https://learn.microsoft.com/en-us/azure/quotas/view-quotas)^^,
+^^[increase regional vCPU quotas](https://learn.microsoft.com/en-us/azure/quotas/regional-quota-requests)^^ and
+^^[increase VM-family quotas](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests)^^.
 
 ## JIT Access
-The JIT Access feature will prevent YData Fabric from having write access to the managed app at any time. 
+The JIT Access feature will prevent YData Fabric from having write access to the managed app at any time.
 
 - To use the just-in-time access, you must have an ^^[Azure Active Directory P2 license](https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/subscription-requirements)^^.
 - Without this license and with the JIT enable, YData will not be able to give any closer support or make updates to the solution.
 
-To check your current license, go to the **Azure Portal → Azure Active Directory → Licenses** and check your license. 
+To check your current license, go to the **Azure Portal → Azure Active Directory → Licenses** and check your license.
 To activate the P2 license, click the **“Try/Buy”** button.
 
 ![azure licenses](../../../assets/deployment_security/azure/azure_licenses.png){: style="width:50%"}
@@ -166,7 +166,5 @@ To activate the P2 license, click the **“Try/Buy”** button.
 For more information check Azure's official documentation on ^^[assigning and removing licenses to Azure Active directory](https://learn.microsoft.com/en-us/entra/fundamentals/license-users-groups)^^.
 ^^[To learn how to enable JIT access and approve requests](https://learn.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/approve-just-in-time-access)^^.
 
-After accepting the request, the YData team will have access in order to make updates and give you closer support. 
+After accepting the request, the YData team will have access in order to make updates and give you closer support.
 Any other requests open a support case at ^^[support.ydata.ai](https://support.ydata.ai)^^.
-
-

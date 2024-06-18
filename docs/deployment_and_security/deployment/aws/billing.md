@@ -22,13 +22,13 @@ The following AWS services are mandatory for the platform to work and will be bi
 - ECS
 - Lambda
 
-To check the infrastructure costs of the platform, you can use the AWS Cost Explorer and filter by the tag Environment = YData. 
-This will aggregate all the resources deployed by the platform. 
+To check the infrastructure costs of the platform, you can use the AWS Cost Explorer and filter by the tag Environment = YData.
+This will aggregate all the resources deployed by the platform.
 
 ## Cost Estimations
 
 **YData Fabric** final cost can be estimated following the logic of a usage-based plan since it depends on your users and data. The following table provides
-a guideline of how to compute the total cost for different usage scenarios based on the deployed infrastructure. 
+a guideline of how to compute the total cost for different usage scenarios based on the deployed infrastructure.
 
 | EKS Nodes | Instance Type | vCPUs | Memory (GBi) | GPUs | Number of instances | % Usage/ CPU/Hour | % Usage/ Memory/Hour | % Usage/ GPU/Hour | Cost AWS/Hour | Cost AWS/Day | Cost YData/Hour | Cost YData/Day |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

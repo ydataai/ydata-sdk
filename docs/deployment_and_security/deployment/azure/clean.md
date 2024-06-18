@@ -7,7 +7,7 @@ Please take in consideration that this will delete **everything associated with 
 
 - Start by opening the resource group where the managed app is installed, select the **Managed Application** and click *"Delete"*.
 
-![azure Fabric resource group](../../../assets/deployment_security/azure/azure_ydata_resourcegroup.png){: style="width:75%"} 
-![azure Fabric delete group](../../../assets/deployment_security/azure/azure_delete_resource_group.png){: style="width:75%"} 
+![azure Fabric resource group](../../../assets/deployment_security/azure/azure_ydata_resourcegroup.png){: style="width:75%"}
+![azure Fabric delete group](../../../assets/deployment_security/azure/azure_delete_resource_group.png){: style="width:75%"}
 
-This will delete the managed app and the managed resource group where all the components are installed. 
+This will delete the managed app and the managed resource group where all the components are installed.
