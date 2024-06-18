@@ -6,7 +6,7 @@ to the platform after the installation. The full procedure takes around 45m to 1
 In order to install the platform in your account, the user must have basic knowledge with the used tools, such as CloudFormation,
 Route53 and Cognito.
 
-### 1. Configure the product
+### Configure the product
 
 !!! Note "Make sure that you comply with the pre-flight checks"
 
