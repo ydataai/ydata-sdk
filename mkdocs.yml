@@ -90,9 +90,11 @@ nav:
               - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/azure/pre_deploy_checklist.md'
               - 🔌 Deploy: 'deployment_and_security/deployment/azure/deploy.md'
               - 💰 Billing: 'deployment_and_security/deployment/azure/billing.md'
-          - Google: 'deployment_and_security/deployment/google.md'
+          - Google:
+              - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/google/pre_deploy_checklist.md'
           - Login, support & monitoring:
               - Login providers: 'deployment_and_security/deployment/login_support/login_providers.md'
+              - Support: 'deployment_and_security/deployment/login_support/support.md'
       - Security:
           - 'deployment_and_security/security/index.md'
           - Secure Build Materials (SBOM): 'deployment_and_security/security/security_building_materials.md'
