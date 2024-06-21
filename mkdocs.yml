@@ -173,8 +173,6 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 extra:
-  version:
-    provider: mike
   generator: false
   social:
     - icon: fontawesome/brands/linkedin
