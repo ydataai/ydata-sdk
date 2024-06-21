@@ -22,7 +22,6 @@ nav:
           - 'data_catalog/connectors/index.md'
           - How to create a connector?: 'data_catalog/connectors/create_connector.md'
           - Supported connectors: 'data_catalog/connectors/supported_connections.md'
-          - Use a connector in Labs: 'data_catalog/connectors/use_in_labs.md'
       - Datasources:
           - 'data_catalog/datasources/index.md'
           - Warnings: 'data_catalog/datasources/warnings.md'
@@ -61,7 +60,6 @@ nav:
           - Privacy Level: "sdk/examples/synthesize_with_privacy_control.md"
           - Conditional Sampling: "sdk/examples/synthesize_with_conditional_sampling.md"
       - Reference:
-          - Changelog: 'sdk/reference/changelog.md'
           - API:
               - Client: 'sdk/reference/api/common/client.md'
               - Connectors:
@@ -74,9 +72,7 @@ nav:
                   - Regular: 'sdk/reference/api/synthesizers/regular.md'
                   - TimeSeries: 'sdk/reference/api/synthesizers/timeseries.md'
                   - MultiTable: 'sdk/reference/api/synthesizers/multitable.md'
-              - Types: 'sdk/reference/api/common/types.md'
   - Deployment & Security:
-      - 'deployment_and_security/index.md'
       - Deployment:
           - AWS:
             - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/aws/pre_deploy_checklist.md'
@@ -178,8 +174,6 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 extra:
-  version:
-    provider: mike
   generator: false
   social:
     - icon: fontawesome/brands/linkedin
