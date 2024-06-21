@@ -1,6 +1,6 @@
 # Checklist and Prerequisites
 
-The deployment will be executed using terraform, and it is fully automated. 
+The deployment will be executed using terraform, and it is fully automated.
 It is triggered by YData’s team and the progress can be monitored on the client side.
 
 As a pre-condition, the client must create a service account and share it with YData’s team.
@@ -16,10 +16,10 @@ of the platform, and this access will only be used for this purpose.
 ### Observations & prerequisites
 
 - The deployment will create one public and private key to establish the connection to the bastion host.
-- With this deployment, a security group allowing YData’s IP to establish the connection to the bastion host 
+- With this deployment, a security group allowing YData’s IP to establish the connection to the bastion host
 via SSH will be created. This should be deleted after the deployment and added in case it is needed.
 - The Bastion host can be stopped after the deployment to prevent any charges and created/started to give support.
-- The private subnets will have a NAT Gateway attached – this is needed since the GKE needs access to the public internet 
+- The private subnets will have a NAT Gateway attached – this is needed since the GKE needs access to the public internet
 to connect the Data Sources and to pull images from the public registries.
 
 ## Basic Configuration
@@ -58,7 +58,7 @@ using the google cloud UI.
 
 ### GCloud CLI
 
-The following commands will create a new service account with the required permissions to complete the deployment. 
+The following commands will create a new service account with the required permissions to complete the deployment.
 The generated JSON file must be sent to YData.
 
 1. Download the following file: https://raw.githubusercontent.com/ydataai/gcp-deploy-permissions/main/clients_custom_role.yaml
@@ -67,12 +67,12 @@ The generated JSON file must be sent to YData.
 ``` shell
     export PROJECT_ID=
     export SERVICE_ACCOUNT_NAME=
-    
+
     gcloud config set project $PROJECT_ID
 ```
 
 - Create a new SA
-    
+
 ```shell
     gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name "GCP Service Account for the Ydata platform"
 ```
@@ -93,14 +93,14 @@ The generated JSON file must be sent to YData.
     gcloud projects add-iam-policy-binding $PROJECT_ID --member "serviceAccount:$SA_EMAIL" --role "projects/$PROJECT_ID/roles/ydata_platform_gcp_iam_role"
 ```
 
-- Activate the new SA locally 
+- Activate the new SA locally
 
   ```shell
       gcloud auth activate-service-account --project=$PROJECT_ID --key-file=gcp-ydata-platform-service-account.json
   ```
 
 - Test the new SA by setting the new account
-    
+
   ```shell
       gcloud config set account $SA_EMAIL
       gcloud config set project $PROJECT_ID
@@ -111,13 +111,13 @@ The generated JSON file must be sent to YData.
   ```shell
       gcloud auth list
   ```
-    
+
 - Try a command.
-  
+
 ```shell
     gcloud container clusters list
 ```
-    
+
 ### GCP Console
 
 Go to IAM -> Service Accounts -> Create Service Account
@@ -151,7 +151,7 @@ The transferred key will be used by YData.
 
 ## Resource Compute Quotas
 
-Check and set (if needed) new quotas for the region where Fabric will be installed. 
+Check and set (if needed) new quotas for the region where Fabric will be installed.
 
 - Go to IAM & Admin
 - Click “Quotas & System Limits” on the left
@@ -163,7 +163,7 @@ Check and set (if needed) new quotas for the region where Fabric will be install
 | C2D CPUs | 200** |  |
 | N2D CPUs | 24** |  |
 | Zonal & Regional 1-10 TiB (Enterprise) capacity (GB) per region | 1024GiB |  |
-***Each limit will depend on the platform usage and each client requirements.*  
+***Each limit will depend on the platform usage and each client requirements.*
 
 - If needed, request for a new limit to the Google's support team:
 
@@ -180,18 +180,18 @@ In GCP, it’s possible to connect to YData Fabric using your own DNS custom dom
 If you have your domain registered in GCP Cloud DNS, you can use the Zone Name and the Domain Name, and the Deployment will
 create a Managed Certificate and the Cloud DNS record pointing to the Load Balancer used to connect the platform.
 
-Otherwise, if you have the domain registered in another provider, it is recommended to create a *Public Cloud DNS Zone* 
+Otherwise, if you have the domain registered in another provider, it is recommended to create a *Public Cloud DNS Zone*
 and point and create a new record in your provider pointing to the NS of Google and pass this Zone Name and Domain name, so
 the deployment occurs without any issues.
 
 If you don’t want to create the Public Cloud DNS Zone you can point your to the IP available after the installation creating
-an A record. 
+an A record.
 
 These parameters will be used during the deployment process.
 
 ## Login Provider
 Choose how you want to login to the platform.
-You can log in to our app currently using the following providers - at **least one is required**, 
+You can log in to our app currently using the following providers - at **least one is required**,
 but you can choose multiple ones:
 - Google
 - Microsoft
@@ -199,8 +199,6 @@ but you can choose multiple ones:
 - GitHub
 
 You can find detailed instructions for each type of login provider in the [Login Providers page](../login_support/login_providers.md)
-After configuring your login provider, please save the values. This values will be used during the deployment process. 
+After configuring your login provider, please save the values. This values will be used during the deployment process.
 
 If you required another authentication method, please fill up a support case at ^^[support.ydata.ai](http://support.ydata.ai)^^.
-
-
