@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.29">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.76a95c52.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -2783,15 +2783,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#awsqsekscluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      AWSQS::EKS::Cluster
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3515,20 +3506,6 @@ For this regions you will need to use the region specific template and pass your
 <p>More detailed <ins><a href="../../login_support/login_providers/">instructions for each login provider can be found here</a></ins>.
 If you required another authentication method, please fill up a support case at <ins><a href="https://support.ydata.ai/">support.ydata.ai</a></ins></p>
 <p>After configuring your login provider, please save the values. This values will be used during the deployment process.</p>
-<h2 id="awsqsekscluster">AWSQS::EKS::Cluster</h2>
-<p>YData Fabric relies on an extension to configure the EKS cluster, so you will need to activate this extension before
-proceeding to the installation.</p>
-<p>To activate the extension, you can use our *<ins><a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://ydata-public-marketplace.s3.eu-central-1.amazonaws.com/1.15.22_2.33.3/awsqs-eks-cluster.yaml&amp;stackName=AWSQSEKSClusterExtension">CloudFormation template</a>*</ins>.
-This will open the CloudFormation template ready to create. Choose the correct region on the top. And create the stack!</p>
-<p>To check that the extension in properly installed, go to <strong>CloudFormation → Registry → Activated extensions</strong> - filter by <em>“Privately registered”</em>
-as depicted in the image below:
-<img alt="Cloud formation extensions" src="../../../../assets/deployment_security/aws/cloud_formation_registry.png" style="width:75%" /></p>
-<p>If the resource is listed, the extension in activated.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is extension is mandatory for the create, update and delete of the cluster. After activating this extension,
-please do not make changes or delete the stack.</p>
-</div>
 <p>As soon as the above steps are all completed, you are <ins><a href="../deploy/">ready to start the deployment</a></ins>.</p>
 
 
@@ -3637,7 +3614,7 @@ please do not make changes or delete the stack.</p>
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
       
