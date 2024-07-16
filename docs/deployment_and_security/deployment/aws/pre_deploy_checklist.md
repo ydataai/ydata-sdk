@@ -156,22 +156,4 @@ If you required another authentication method, please fill up a support case at 
 
 After configuring your login provider, please save the values. This values will be used during the deployment process.
 
-## AWSQS::EKS::Cluster
-YData Fabric relies on an extension to configure the EKS cluster, so you will need to activate this extension before
-proceeding to the installation.
-
-To activate the extension, you can use our *^^[CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://ydata-public-marketplace.s3.eu-central-1.amazonaws.com/1.15.22_2.33.3/awsqs-eks-cluster.yaml&stackName=AWSQSEKSClusterExtension)*^^.
-This will open the CloudFormation template ready to create. Choose the correct region on the top. And create the stack!
-
-To check that the extension in properly installed, go to **CloudFormation → Registry → Activated extensions** - filter by *“Privately registered”*
-as depicted in the image below:
-![Cloud formation extensions](../../../assets/deployment_security/aws/cloud_formation_registry.png){: style="width:75%"}
-
-If the resource is listed, the extension in activated.
-
-!!! Note
-
-    This is extension is mandatory for the create, update and delete of the cluster. After activating this extension,
-    please do not make changes or delete the stack.
-
 As soon as the above steps are all completed, you are ^^[ready to start the deployment](deploy.md)^^.
