@@ -32,6 +32,7 @@ nav:
       - Time-series: 'synthetic_data/timeseries/index.md'
       - Multi-Table: 'synthetic_data/relational_database/index.md'
       - Text: 'synthetic_data/text/index.md'
+      - Best practices: 'synthetic_data/best_practices.md'
   - Labs:
       - 'labs/index.md'
       - Overview: 'labs/overview.md'
@@ -188,6 +189,7 @@ plugins:
       default_handler: python
       handlers:
         python:
+          paths: [src/ydata/sdk]
           selection:
             filters: ["!^_", "!^__"]
           import:
