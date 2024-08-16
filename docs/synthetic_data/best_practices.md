@@ -9,7 +9,7 @@ data generation process, with a focus on avoiding common pitfalls.
 
 ### 1. Understanding the Use Case
 
-Before beginning the synthetic data generation process, it is essential to clearly define the use case. 
+Before beginning the synthetic data generation process, it is essential to clearly define the use case.
 The purpose of the synthetic data—whether for training machine learning models, testing algorithms, or validating data pipelines—will
 influence the structure, scale, and fidelity required.
 
@@ -17,7 +17,7 @@ influence the structure, scale, and fidelity required.
 
 *Understand and know your data*: Deeply understanding the characteristics and behaviors of the original dataset is crucial for configuring the synthetic data
 generation process to optimize outcomes. This understanding is also essential for validating and assessing the quality of the synthetic data.
-If your synthetic data fails to represent all classes from the original dataset, it could indicate that the original data lacks sufficient 
+If your synthetic data fails to represent all classes from the original dataset, it could indicate that the original data lacks sufficient
 records for those particular behaviors.
 
 - *Data Characteristics:* Identify the necessary size, format, and distribution of the data.
@@ -28,14 +28,14 @@ records for those particular behaviors.
 
 ### 2. Configuring the Data Schema & Relations
 
-Setting and configuring a concise and business aligned dataset schema is crucial for generating high-quality synthetic data. 
+Setting and configuring a concise and business aligned dataset schema is crucial for generating high-quality synthetic data.
 The schema should mirror the structure of the real-world data you aim to emulate, while ensuring the selected *PII Types* and *Data Types*
-are aligned with the use-case and applications.  
+are aligned with the use-case and applications.
 
 **Key Considerations:**
 
 - *Data Types:* Make sure to always verify the configured data types. After all learning a "Category" is a different from learning
-the distribution for a *Numerical* variable. 
+the distribution for a *Numerical* variable.
 
 - *Unique Identifiers:* Exclude unique identifiers (e.g., user IDs, transaction IDs) from the data generation process. These identifiers are typically arbitrary and do not carry meaningful information for the generative model to learn. Instead, generate them separately or replace them with randomized values.
 Documentation: Thoroughly document the schema, including all constraints and relationships, for future reference and reproducibility.
@@ -46,15 +46,15 @@ to configure the relation between tables (eg. x= a + b) as it will ensure that t
 ### 3. Avoiding Overfitting to the Original Data
 
 To ensure that the synthetic data is useful and generalizable, it is important to avoid overfitting the generative model to the
-original dataset. *YData Fabric* synthetic data generation process leverages the concept of Holdout in order to avoid overfitting, 
-but the effectiveness of the holdout might vary depending on the dataset behaviour and size. 
+original dataset. *YData Fabric* synthetic data generation process leverages the concept of Holdout in order to avoid overfitting,
+but the effectiveness of the holdout might vary depending on the dataset behaviour and size.
 
 **Key Considerations:**
 
 - *Excessive Fine-Tuning:* Avoid overly fine-tuning the generative model on your whole dataset, as this can lead to synthetic data that
 is too similar to the original, reducing its utility.
 
-- *Ignoring Variability:* Ensure that the synthetic data introduces enough variability to cover edge cases and rare events, rather 
+- *Ignoring Variability:* Ensure that the synthetic data introduces enough variability to cover edge cases and rare events, rather
 than merely replicating common patterns from the training data.
 
 ### 4. Ensuring Data Privacy
@@ -73,7 +73,7 @@ anonymous.
 ### 5. Validating the Synthetic Data
 
 Validation is a critical step in the synthetic data generation process.
-The synthetic data must be rigorously tested to ensure that it meets the necessary criteria for its intended use. 
+The synthetic data must be rigorously tested to ensure that it meets the necessary criteria for its intended use.
 
 **Key Considerations:**
 
@@ -83,7 +83,7 @@ real data. This is essential to ensure that the synthetic data is both realistic
 - *Using a Single Metric:* Avoid relying on a single validation metric. Validate the synthetic data across multiple dimensions, such as distribution, correlation, and predictive performance, to get a comprehensive view of its quality.
 
 YData Fabric synthetic data generation process offers an extensive and automated [synthetic data quality report and profiling
-compare](https://ydata.ai/synthetic-data-quality-metrics) to help with the data quality validation. 
+compare](https://ydata.ai/synthetic-data-quality-metrics) to help with the data quality validation.
 
 ### 6. Iterating and Refining the Process
 
