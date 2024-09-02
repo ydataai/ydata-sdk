@@ -47,6 +47,7 @@ to connect the Data Sources and to pull images from the public registries.
     - ^^[Serverless VPC Access API](https://console.cloud.google.com/apis/library/vpcaccess.googleapis.com)^^
     - ^^[Secret Manager API](https://console.cloud.google.com/apis/library/secretmanager.googleapis.com)^^
     - ^^[Cloud Scheduler API](https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com)^^
+    - ^^[Service Usage API](https://console.developers.google.com/apis/api/serviceusage.googleapis.com)^^
 
 ## Permissions
 
