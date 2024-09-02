@@ -56,7 +56,7 @@ Home = "https://github.com/ydataai/ydata-sdk"
 dev = [
     "twine",
     "build",
-    "pylint==2.15.10",
+    "pylint==2.17.7",
     "black==22.12.0",
     "flake8==6.0.0",
     "isort==5.12.0",
