@@ -31,6 +31,7 @@ def get_census() -> pdDataFrame:
             "hours-per-week",
             "native-country",
         ],
+        skipinitialspace=True
     )
 
     # Prepare missing values
