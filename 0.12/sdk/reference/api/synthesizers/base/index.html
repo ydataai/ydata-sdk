@@ -3397,7 +3397,7 @@
               Bases: <code><a class="autorefs autorefs-external" title="abc.ABC" href="https://docs.python.org/3/library/abc.html#abc.ABC">ABC</a></code>, <code><span title="ydata.sdk.utils.model_mixin.ModelFactoryMixin">ModelFactoryMixin</span></code></p>
 
 
-      <p>Main synthesizer class.</p>
+        <p>Main synthesizer class.</p>
 <p>This class cannot be directly instanciated because of the specificities between <a class="autorefs autorefs-internal" href="../regular/#ydata.sdk.synthesizers.regular.RegularSynthesizer"><code>RegularSynthesizer</code></a>, <a class="autorefs autorefs-internal" href="../timeseries/#ydata.sdk.synthesizers.timeseries.TimeSeriesSynthesizer"><code>TimeSeriesSynthesizer</code></a> or <a class="autorefs autorefs-internal" href="../multitable/#ydata.sdk.synthesizers.multitable.MultiTableSynthesizer"><code>MultiTableSynthesizer</code></a> <code>sample</code> methods.</p>
 <h3 id="ydata.sdk.synthesizers.synthesizer.BaseSynthesizer--methods">Methods</h3>
 <ul>
@@ -4260,7 +4260,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Get the status of a synthesizer instance.</p>
+        <p>Get the status of a synthesizer instance.</p>
 
 
     <p><span class="doc-section-title">Returns:</span></p>
@@ -4304,7 +4304,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Get the status of a synthesizer instance.</p>
+        <p>Get the status of a synthesizer instance.</p>
 
 
     <p><span class="doc-section-title">Returns:</span></p>
@@ -4345,7 +4345,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Fit the synthesizer.</p>
+        <p>Fit the synthesizer.</p>
 <p>The synthesizer accepts as training dataset either a pandas <a class="autorefs autorefs-external" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>DataFrame</code></a> directly or a YData <a class="autorefs autorefs-internal" href="../../datasources/datasource/#ydata.sdk.datasources.datasource.DataSource"><code>DataSource</code></a>.
 When the training dataset is a pandas <a class="autorefs autorefs-external" href="http://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame"><code>DataFrame</code></a>, the argument <code>datatype</code> is required as it cannot be deduced.</p>
 <p>The argument<code>sortbykey</code> is mandatory for <a class="autorefs autorefs-internal" href="../../datasources/datasource/#ydata.sdk.datasources.DataSourceType.TIMESERIES"><code>TimeSeries</code></a>.</p>
@@ -4695,7 +4695,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 
     <div class="doc doc-contents ">
 
-      <p>List the synthesizer instances.</p>
+        <p>List the synthesizer instances.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -4817,7 +4817,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 
     <div class="doc doc-contents ">
 
-      <p>Abstract method to sample from a synthesizer.</p>
+        <p>Abstract method to sample from a synthesizer.</p>
 
             <details class="quote">
               <summary>Source code in <code>ydata/sdk/synthesizers/synthesizer.py</code></summary>
@@ -4851,7 +4851,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
               Bases: <code><span title="ydata.core.enum.StringEnum">StringEnum</span></code></p>
 
 
-      <p>Privacy level exposed to the end-user.</p>
+        <p>Privacy level exposed to the end-user.</p>
 
 
 
@@ -4881,7 +4881,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 
     <div class="doc doc-contents ">
 
-      <p>Balanced privacy/fidelity</p>
+        <p>Balanced privacy/fidelity</p>
     </div>
 
 </div>
@@ -4903,7 +4903,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 
     <div class="doc doc-contents ">
 
-      <p>High fidelity</p>
+        <p>High fidelity</p>
     </div>
 
 </div>
@@ -4925,7 +4925,7 @@ The argument <code>exclude_cols</code> has precedence over <code>generate_cols</
 
     <div class="doc doc-contents ">
 
-      <p>High privacy</p>
+        <p>High privacy</p>
     </div>
 
 </div>
