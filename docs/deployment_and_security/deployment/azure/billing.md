@@ -32,7 +32,7 @@ a guideline of how to compute the total cost for different usage scenarios based
 
 | AKS Nodes | Instance Type | vCPUs | Memory (GBi) | GPUs | Number of instances | % Usage/ CPU/Hour | % Usage/ Memory/Hour | % Usage/ GPU/Hour | Cost Azure/Hour | Cost Azure/Day | Cost YData/Hour | Cost YData/Day |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| System | Standard_D8s_v3 | 8 | 32 | 0 | 2 | 30 | 30 | 0 | 0.4800 | 23.04 | 0.288 | 6.912 |
+| System | Standard_D2s_v3 | 8 | 32 | 0 | 2 | 30 | 30 | 0 | 0.4800 | 23.04 | 0.288 | 6.912 |
 | CPU Micro (labs) | Standard_D2s_v3 | 2 | 8 | 0 | 1 | 50 | 50 | 0 | 0.1200 | 2.88 | 0.06 | 1.44 |
 | CPU Small (labs) | Standard_D4s_v3 | 4 | 16 | 0 | 1 | 50 | 50 | 0 | 0.2400 | 5.76 | 0.12 | 2.88 |
 | CPU Medium (labs) | Standard_D8s_v3 | 8 | 32 | 0 | 0 | 0 | 0 | 0 | 0.4800 | 0 | 0 | 0 |
