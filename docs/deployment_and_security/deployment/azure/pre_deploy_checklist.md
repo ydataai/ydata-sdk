@@ -152,6 +152,8 @@ Check ^^[Azure's official documentation on quotas](https://learn.microsoft.com/e
 ^^[increase regional vCPU quotas](https://learn.microsoft.com/en-us/azure/quotas/regional-quota-requests)^^ and
 ^^[increase VM-family quotas](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests)^^.
 
+^^[More on available instance types can be found here](instance_types.md)^^.
+
 ## JIT Access
 The JIT Access feature will prevent YData Fabric from having write access to the managed app at any time.
 
