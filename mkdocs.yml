@@ -86,6 +86,7 @@ nav:
           - Azure:
               - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/azure/pre_deploy_checklist.md'
               - 🔌 Deploy: 'deployment_and_security/deployment/azure/deploy.md'
+              - 💻 Instance types: 'deployment_and_security/deployment/azure/instance_types.md'
               - 💰 Billing: 'deployment_and_security/deployment/azure/billing.md'
           - Google:
               - 🕒 Pre-deploy checklist: 'deployment_and_security/deployment/google/pre_deploy_checklist.md'
