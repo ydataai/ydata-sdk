@@ -26,7 +26,7 @@ from ydata.sdk.datasources._models.status import State as dsState
 from ydata.sdk.synthesizers._models.status import PrepareState, Status, TrainingState
 from ydata.sdk.synthesizers._models.synthesizer import Synthesizer as mSynthesizer
 from ydata.sdk.synthesizers._models.synthesizers_list import SynthesizersList
-from ydata.sdk.synthesizers.anonymizer import built_and_validate_anonimization
+from ydata.sdk.synthesizers.anonymizer import build_and_validate_anonimization
 from ydata.sdk.utils.model_mixin import ModelFactoryMixin
 
 
@@ -248,7 +248,7 @@ class BaseSynthesizer(ABC, ModelFactoryMixin):
 
         if anonymize is not None:
             # process and validated the anonymization config shared by the end user
-            anonymize = built_and_validate_anonimization(
+            anonymize = build_and_validate_anonimization(
                 anonimyze=anonymize, cols=[col.name for col in X.metadata.columns])
             payload["extraData"]["anonymize"] = anonymize
         if condition_on is not None:
