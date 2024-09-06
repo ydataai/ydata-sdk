@@ -30,7 +30,8 @@ def build_and_validate_anonimization(anonimyze: dict, cols: list) -> dict:
                                 """)
             else:
                 anon_type = anonimyze[k]['type']
-                anonimyze[k]['type'] = AnonymizerType.get_anonymizer_type(anon_type).value
+                anonimyze[k]['type'] = AnonymizerType.get_anonymizer_type(
+                    anon_type).value
         config = anonimyze
     else:
         config = {}
