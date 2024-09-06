@@ -49,9 +49,10 @@ repos:
       - id: python-check-blanket-noqa
         name: Enforce specifc code for noqua annotation
   - repo: https://github.com/hadialqattan/pycln
-    rev: v2.1.1
+    rev: v2.4.0
     hooks:
       - id: pycln
+        additional_dependencies: [setuptools]
         args: [--all]
         name: Remove unused imports (pycln)
   - repo: https://github.com/pre-commit/mirrors-autopep8
@@ -60,9 +61,10 @@ repos:
       - id: autopep8
         name: Code Formatter (autopep8)
   - repo: https://github.com/pycqa/flake8
-    rev: 4.0.1
+    rev: 6.1.0
     hooks:
       - id: flake8
+        additional_dependencies: [flake8-typing-imports==1.15.0]
         args: ["--max-line-length=88", "--extend-ignore=N803,N806,E501,Q000,W605"]
         name: Code checker (flake8)
   - repo: https://github.com/pycqa/isort
