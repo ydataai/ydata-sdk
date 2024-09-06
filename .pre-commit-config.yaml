@@ -52,6 +52,7 @@ repos:
     rev: v2.1.1
     hooks:
       - id: pycln
+        additional_dependencies: [setuptools]
         args: [--all]
         name: Remove unused imports (pycln)
   - repo: https://github.com/pre-commit/mirrors-autopep8
