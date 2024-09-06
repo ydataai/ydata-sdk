@@ -1,11 +1,11 @@
 import os
+import os
 
 from ydata.sdk.dataset import get_dataset
 from ydata.sdk.synthesizers import RegularSynthesizer
 
 # Do not forget to add your token as env variables
 os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
-
 
 def main():
     """In this example, we demonstrate how to train a synthesizer from a pandas
@@ -17,7 +17,7 @@ def main():
 
     # We initialize a regular synthesizer
     # As long as the synthesizer does not call `fit`, it exists only locally
-    synth = RegularSynthesizer()
+    synth = RegularSynthesizer(name="Titanic")
 
     # We define anonymization rules, which is a dictionary with format:
     # {column_name: anonymization_rule, ...}
@@ -28,10 +28,17 @@ def main():
         "Ticket": "[A-Z]{2}-[A-Z]{4}"
     }
 
+    # or a different option for anonymization configuration
+
+    rules = {
+        'Name': {'type': 'name'},
+        'Ticket': {'type': 'regex',
+                   'regex': '[A-Z]{2}-[A-Z]{4}'}
+    }
+
     # We train the synthesizer on our dataset
     synth.fit(
         X,
-        name="titanic_synthesizer",
         anonymize=rules
     )
 
