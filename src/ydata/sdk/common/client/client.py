@@ -169,8 +169,8 @@ class Client(metaclass=SingletonClient):
         from urllib.parse import urlparse
         url_data = self.__build_url(endpoint, project=project)
         url_parse = urlparse(self._base_url)
-        url_data['url'] = f'{
-            url_parse.scheme}://{url_parse.netloc}/static-content{endpoint}'
+        url_data['url'] = f"""{
+            url_parse.scheme}://{url_parse.netloc}/static-content{endpoint}"""
         response = self._http_client.get(**url_data)
 
         if response.status_code != Client.codes.OK and raise_for_status:
@@ -216,7 +216,7 @@ class Client(metaclass=SingletonClient):
         }
 
         url_data = {
-            'url': f'{self._base_url}/{endpoint.removeprefix("/")}',
+            'url': f"""{self._base_url}/{endpoint.removeprefix("/")}""",
             'headers': self._headers,
             'params': _params,
         }
