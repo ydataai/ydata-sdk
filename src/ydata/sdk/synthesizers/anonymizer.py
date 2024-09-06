@@ -4,7 +4,7 @@
 
 from ydata.datascience.common import AnonymizerType
 
-def built_and_validate_anonimization(anonimyze:dict, cols: list) -> dict:
+def build_and_validate_anonimization(anonimyze:dict, cols: list) -> dict:
     isnested = any(isinstance(i,dict) for i in anonimyze.values())
 
     if not all([True if k in cols else False for k in list(anonimyze.keys())]):
@@ -27,8 +27,8 @@ def built_and_validate_anonimization(anonimyze:dict, cols: list) -> dict:
                                 }
                                 """)
             else:
-                type = anonimyze[k]['type']
-                anonimyze[k]['type'] = AnonymizerType.get_anonymizer_type(type).value
+                anon_type = anonimyze[k]['type']
+                anonimyze[k]['type'] = AnonymizerType.get_anonymizer_type(anon_type).value
         config = anonimyze
     else:
         config = {}
