@@ -1,5 +1,5 @@
 from time import sleep
-from typing import Dict, Optional, Type, Union # noqa: TYP001
+from typing import Dict, Optional, Type, Union  # noqa: TYP001
 from uuid import uuid4
 
 from ydata.sdk.common.client import Client
