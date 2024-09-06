@@ -4,12 +4,14 @@
 
 from ydata.datascience.common import AnonymizerType
 
-def build_and_validate_anonimization(anonimyze:dict, cols: list) -> dict:
-    isnested = any(isinstance(i,dict) for i in anonimyze.values())
+
+def built_and_validate_anonimization(anonimyze: dict, cols: list) -> dict:
+    isnested = any(isinstance(i, dict) for i in anonimyze.values())
 
     if not all([True if k in cols else False for k in list(anonimyze.keys())]):
-        #AnonymizationConfigurationError
-        raise Exception('The keys in your configuration must exactly match the column names in the provided dataset. Please check and update your inputs to ensure they align.')
+        # AnonymizationConfigurationError
+        raise Exception(
+            'The keys in your configuration must exactly match the column names in the provided dataset. Please check and update your inputs to ensure they align.')
 
     if isnested:
         # Validate the format here.
@@ -32,8 +34,8 @@ def build_and_validate_anonimization(anonimyze:dict, cols: list) -> dict:
         config = anonimyze
     else:
         config = {}
-        for k,v in anonimyze.items():
-            print(k,v)
+        for k, v in anonimyze.items():
+            print(k, v)
             if AnonymizerType.get_anonymizer_type(v) is None:
                 col_config = {'type': AnonymizerType.REGEX.value, 'regex': v}
             else:

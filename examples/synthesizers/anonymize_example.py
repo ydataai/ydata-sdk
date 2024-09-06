@@ -1,11 +1,11 @@
 import os
-import os
 
 from ydata.sdk.dataset import get_dataset
 from ydata.sdk.synthesizers import RegularSynthesizer
 
 # Do not forget to add your token as env variables
 os.environ["YDATA_TOKEN"] = '<TOKEN>'  # Remove if already defined
+
 
 def main():
     """In this example, we demonstrate how to train a synthesizer from a pandas
