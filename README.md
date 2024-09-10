@@ -11,7 +11,7 @@
 ---
 🚀 YData SDK Version 1.0 Released! 🎉 - Data quality everywhere!
 
-*ydata-sdk* v1.0.0 is here! Create a [YData Fabric account](https://ydata.ai/ydata-fabric-free-trial) so you can start using today!
+*ydata-sdk* v1 is here! Create a [YData Fabric account](https://ydata.ai/ydata-fabric-free-trial) so you can start using today!
 
 We are excited to announce the release of YData Fabric SDK v1.0! This major release marks the beginning of long-term support for the package,
 ensuring stability, continuous improvements, and ongoing support for all users. YData SDK empowers developers with easy access to state-of-the-art
