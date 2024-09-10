@@ -2,12 +2,16 @@
 
 <a href="https://ydata.ai/products/fabric"><u>YData Fabric</u></a> is a **Data-Centric AI** development platform that accelerates AI development by helping data practitioners achieve production-quality data.
 
-
 Much like for software engineering the quality of code is a must for the success of software development, Fabric
 accounts for the data quality requirements for data-driven applications. It introduces standards, processes, and
 acceleration to empower data science, analytics, and data engineering teams.
 
 <p align="center"><img src="assets/overview/data_centric_approach.png" alt="Data-Centric AI Approach" width="900"></p>
+
+!!! note "🚀 YData SDK Version 1.0 Released! 🎉"
+    We are excited to announce the release of YData Fabric SDK v1.0! This major release marks the beginning of long-term support for the package,
+    ensuring stability, continuous improvements, and ongoing support for all users. YData SDK empowers developers with easy access to state-of-the-art 
+    data quality tools and generative AI capabilities. Stay tuned for more updates and new features!
 
 ### Try Fabric
 - <a href="get-started/fabric_community/"><u>Get started with Fabric Community</u></a>
