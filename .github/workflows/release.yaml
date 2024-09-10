@@ -95,20 +95,23 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         retention-days: 1
-        name: compiled-wheels
+        name: compiled-wheels-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.python-version }}
         path: wheels/
 
 
   upload-assets:
     name: Upload Assets to Release
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     needs: compile-wheels
 
     steps:
     - uses: actions/download-artifact@v4
       with:
-        name: compiled-wheels
+        name: compiled-wheels-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.python-version }}
         path: dist/
 
     - uses: AButler/upload-release-assets@v3.0
@@ -121,13 +124,16 @@ jobs:
   publish-pypi:
     name: Publish packages to PyPi
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     needs: compile-wheels
 
     steps:
     - uses: actions/download-artifact@v4
       with:
-        name: compiled-wheels
+        name: compiled-wheels-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.python-version }}
         path: dist/
 
     - uses: pypa/gh-action-pypi-publish@v1.10.1
