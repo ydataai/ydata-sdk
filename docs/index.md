@@ -10,7 +10,7 @@ acceleration to empower data science, analytics, and data engineering teams.
 
 !!! note "🚀 YData SDK Version 1.0 Released! 🎉"
     We are excited to announce the release of YData Fabric SDK v1.0! This major release marks the beginning of long-term support for the package,
-    ensuring stability, continuous improvements, and ongoing support for all users. YData SDK empowers developers with easy access to state-of-the-art 
+    ensuring stability, continuous improvements, and ongoing support for all users. YData SDK empowers developers with easy access to state-of-the-art
     data quality tools and generative AI capabilities. Stay tuned for more updates and new features!
 
 ### Try Fabric
