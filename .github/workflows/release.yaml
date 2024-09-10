@@ -42,7 +42,7 @@ jobs:
       run: make package version=${{ github.ref_name }}
 
     - name: Upload Pipeline Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         retention-days: 1
         name: built-artifacts
@@ -83,7 +83,7 @@ jobs:
         python -m pip install --upgrade pip
         make install-dev
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: built-artifacts
         path: dist/
@@ -92,7 +92,7 @@ jobs:
       run: make wheel version=${{ github.ref_name }}
 
     - name: Upload Wheel
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         retention-days: 1
         name: compiled-wheels
@@ -106,7 +106,7 @@ jobs:
     needs: compile-wheels
 
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: compiled-wheels
         path: dist/
@@ -125,7 +125,7 @@ jobs:
     needs: compile-wheels
 
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: compiled-wheels
         path: dist/
