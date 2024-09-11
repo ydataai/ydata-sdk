@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../warnings/">
+      
+      
+        <link rel="next" href="../pii/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -111,6 +115,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#profiling" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -269,10 +278,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../../" class="md-tabs__link">
           
   
@@ -770,6 +781,8 @@
       
   
   
+    
+  
   
   
     
@@ -786,16 +799,19 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
@@ -811,13 +827,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Data catalog
@@ -848,10 +864,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -871,7 +890,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -940,6 +959,8 @@
                 
   
   
+    
+  
   
   
     
@@ -953,19 +974,24 @@
       
         
       
+        
+      
     
     
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
         
           
           
@@ -981,13 +1007,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             Datasources
@@ -1012,6 +1038,145 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Profiling
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Profiling
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-structures-supported" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Structures supported
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#univariate-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Univariate profiling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multivariate-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multivariate profiling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multivariate profiling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#correlations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Correlations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outliers **
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3223,9 +3388,79 @@
                   
 
 
-  <h1>Profiling</h1>
-
-
+<h1 id="profiling">Profiling</h1>
+<figure>
+<p><img alt="YData Fabric Profiling tab" src="../../../assets/data_catalog/datasources/Fabric_profiling.png" width="700" />
+   </p>
+<figcaption>Profiling sections</figcaption>
+</figure>
+<h2 id="data-structures-supported">Data Structures supported</h2>
+<p>The profiling offers comprehensive insights into various types of data, including tabular, time-series text and image data.</p>
+<ul>
+<li><strong>Tabular data:</strong> when dealing with tabular data, such as spreadsheets or databases, the profiling provides valuable statistics on data distribution, central tendencies, and categorical variable frequencies.
+It identifies multivariate relations such as correlations and interactions in a visual manner. It also identifies missing data.</li>
+<li><strong>Time-series data:</strong> when dealing with data with temporal dimensions, the profiling extends its capabilities to capture trends, seasonality, cyclic patterns and missing data gaps.
+It can reveal information about data volatility, periodicity, and anomalies, facilitating a deeper understanding of time-dependent trends.</li>
+<li><strong>Text:</strong>  when it comes to text data, such as strings or documents, the profiling offers insightful statistics on the distribution of word frequencies, common phrases, and unique words.</li>
+</ul>
+<h2 id="data-types">Data types</h2>
+<p>Types, are a powerful abstraction for effective data analysis, allowing analysis under higher level lenses.
+Fabric Profiling is backed by a powerful type system developed specifically for data analysis that allows an automated detection for different data types.
+Currently, the following types are recognized:</p>
+<ul>
+<li>Numerical</li>
+<li>Categorical</li>
+<li>Date (and Datetime)</li>
+<li>String</li>
+<li>Time-series</li>
+<li>LongText</li>
+</ul>
+<h2 id="univariate-profiling">Univariate profiling</h2>
+<p>This section provides a comprehensive overview of individual variables within a given dataset, this feature is particularly useful for exploratory data analysis (EDA)
+as it automatically calculated detailed statistics, visualizations, and insights for each variable in the dataset. It offers information such as data type, missing values, unique values, basic descriptive statistics
+, histogram plots, and distribution plots. This allows data analysts and scientists to quickly understand the characteristics of each variable, identify potential data quality issues, and gain initial insights into the data's distribution and variability.</p>
+<h2 id="multivariate-profiling">Multivariate profiling</h2>
+<figure>
+<p><img alt="Multivariate profiling ydata-profiling" src="../_static/img/multivariate_profiling.png" width="700" />
+   </p>
+<figcaption>Multivariate profiling metrics and visualization</figcaption>
+</figure>
+<p>This section provides essentials insights into the relationships between variables through correlations matrices and interactions.
+The correlation view computes and presents correlation coefficients between pairs of numerical variables, helping to identify potential linear relationships.
+This assists data analysts and scientists in understanding how variables change together and highlights possible multi collinearity issues.</p>
+<p>On the other hand, the interactions section goes beyond correlation by exploring potential nonlinear relationships and interactions between variables, providing a more comprehensive understanding of how variables interact with one another.
+This can be crucial in identifying hidden patterns that might not be captured through traditional correlation analysis.</p>
+<h3 id="correlations">Correlations</h3>
+<figure>
+<p><img alt="YData Fabric Correlations tab" src="../../../assets/data_catalog/datasources/fabric_correlations.png" width="700" />
+   </p>
+<figcaption>Correlations section</figcaption>
+</figure>
+<p>Fabric's intuitive correlation matrix and heatmap visualizations empower users to drill down into specific variable interactions and understand
+their dependencies. Additionally, Fabric’s real-time interactivity allows users to adjust filters and refine their analysis dynamically, supporting deeper insights into correlations across complex datasets.</p>
+<p>Fabric Correlations are calculated pairwise and depending on the type schema:
+- numerical to numerical variable: Spearman correlation coefficient
+- categorical to categorical variable: Cramer's V association coefficient
+- numerical to categorical: Cramer's V association coefficient with the numerical variable discretized automatically</p>
+<h3 id="interactions">Interactions</h3>
+<p>The interactions plot visually represents how two variables influence each other across different sections of the data.
+It goes beyond simple correlations by providing an interactive view of how one variable changes in relation to another.
+This plot helps users detect non-linear relationships and complex patterns, allowing for deeper insights during Exploratory Data Analysis (EDA).
+By dynamically highlighting these variable pair interactions, the interactions profile enables users to refine their understanding of data relationships,
+guiding more informed decisions in the data preparation process.</p>
+<h2 id="missing-data">Missing data</h2>
+<p>This section offers valuable insights into the presence and distribution of missing data within a dataset. It can be particularly helpful for data preprocessing and quality assesment as
+provides a comprehensive summary of missing values across variables, indicating the percentage of missing data for each variable. Additionally, it displays a visual representation of missing data patterns through bar plots and heatmaps,
+allowing users to quickly identify which variables have the most significant amount of missing information.</p>
+<h2 id="outliers">Outliers **</h2>
+<figure>
+<p><img alt="Outliers profiling" src="../_static/img/outliers.png" width="700" />
+   </p>
+<figcaption>Outliers identification</figcaption>
+</figure>
+<p>This section provides a comprehensive profiling over the potential dataset outliers. You can validate and observe outliers presence and deviation from the general distribution of numerical variables
+based on observed variance.
+The identification of outliers allows the data analyst or scientist to assess whether they are genuine data anomalies or erroneous entries, allowing for informed decisions on whether to retain, transform, or exclude these points in further analyses.</p>
 
 
 
@@ -3258,6 +3493,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../warnings/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Warnings">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Warnings
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../pii/" class="md-footer__link md-footer__link--next" aria-label="Next: PII identification">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                PII identification
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
