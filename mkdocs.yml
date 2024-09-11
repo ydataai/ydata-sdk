@@ -25,6 +25,7 @@ nav:
       - Datasources:
           - 'data_catalog/datasources/index.md'
           - Warnings: 'data_catalog/datasources/warnings.md'
+          - Profiling: 'data_catalog/datasources/profiling.md'
           - PII identification: 'data_catalog/datasources/pii.md'
   - Synthetic data:
       - 'synthetic_data/index.md'
