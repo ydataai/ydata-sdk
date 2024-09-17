@@ -63,7 +63,7 @@ This includes a visual representation of the tables, columns, and relationships 
 Fabric automatically scans the database for potential issues and displays database-specific warnings.
 
 <figure markdown>
-![Database shcema overview](../../assets/data_catalog/database_schema_overview.png){: style="height:630px;width:700px"}
+![Database shcema overview](../../assets/data_catalog/database_schema_overview.png){: style="height:550px;width:700px"}
 </figure>
 
 These warnings help users identify problems that could impact data integrity, such as:
