@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.35">
     
     
       
@@ -3400,18 +3400,32 @@
 <p>Fabric currently supports the following warnings:</p>
 <ul>
 <li><strong>Constant:</strong> the column presents the same value for all observations</li>
+<li>High: A high warning is raised whenever all the variables in a column have the same value</li>
 <li><strong>Zeros:</strong>  the column presents the value “0” for several observations</li>
+<li>Moderate: A moderate warning is raised if a column has between <strong>10%</strong> and <strong>25%</strong> of zeros</li>
+<li>High: A high warning is raised if a column has more than <strong>50%</strong> records as zeros</li>
 <li><strong>Unique:</strong> the column contains only unique/distinct values</li>
+<li>High: A high warnins is raised if all the values of a column are different</li>
 <li><strong>Cardinality:</strong> the columns (categorical) has a large number of distinct values</li>
+<li>Moderate: A moderate warning is raised if a column has a cardinality equivalent to between 75% and 90% of the number of rows</li>
+<li>High: A high warning is raised if a column has a cardinality equivalent to more than 90% of the number of rows</li>
 <li><strong>Infinity:</strong> the column presents infinite (<span class="arithmatex">\(\inf\)</span>) values</li>
+<li>High: A high warning is raised is all the values of a column are inf</li>
 <li><strong>Constant_length</strong>: the column (text) has constant length</li>
+<li>High: A high warning is raised is all the values of a column have the same string length</li>
 <li><strong>Correlation:</strong> the columns is highly correlated with other(s)</li>
 <li><strong>Skeweness</strong>: the column distribution (numerical) is skewed</li>
+<li>Moderate: A moderate warning is raised if the value for the calculated skewness is between [-1, -0.5] or [0.5, 1]</li>
+<li>High: A high warning is raised if the value for the calculated skewness is lower than -1 or bigger than 1.</li>
 <li><strong>Missings:</strong> the column presents several missing values</li>
+<li>Moderate: A moderate warning is raised if a column has a cardinality equivalent to between 30% and 60% of the number of rows</li>
+<li>High: A high warning is raised if a column has a cardinality equivalent to more than 60% of the number of rows</li>
 <li><strong>Non-stationarity:</strong> the column (time series) presents statistical properties that change through time</li>
 <li><strong>Seasonal:</strong> the column (time series) exhibits a seasonal pattern</li>
-<li><strong>Uniform:</strong> the column (numerical) follows a uniform distribution</li>
-<li><strong>Imbalance:</strong> the column (categorical) presents a high imbalance ratio between existing categories</li>
+<li><strong>Imbalance:</strong> the column (categorical) presents a high imbalance ratio between existing categories
+  Imbalancement is calculated as <em>imbalanced_score</em>: 1 - (entropy(value_counts) / log2(number_categories))</li>
+<li>Moderate: A moderate warning is raised if <em>imbalanced_score</em> between 0.15 and 5.</li>
+<li>High: A high warning is raised if <em>imbalanced_score</em> between 0.5 and 1.</li>
 </ul>
 <p>Fabric further enables the <strong>interactive exploration of warnings</strong>, filtering over specific warnings and severity types (i.e., <strong>Moderate</strong> and <strong>High</strong>):</p>
 <figure>
@@ -3565,7 +3579,7 @@ For every table, users can view a detailed overview that includes:</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "header.autohide", "navigation.tabs", "navigation.sections", "navigation.indexes", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.56dfad97.min.js"></script>
