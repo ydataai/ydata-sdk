@@ -50,12 +50,12 @@ Fabric currently supports the following warnings:
   - High: A high warning is raised if the value for the calculated skewness is lower than -1 or bigger than 1.
 - **Missings:** the column presents several missing values
   - Moderate: A moderate warning is raised if a column has a cardinality equivalent to between 30% and 60% of the number of rows
-  - High: A high warning is raised if a column has a cardinality equivalent to more than 60% of the number of rows 
+  - High: A high warning is raised if a column has a cardinality equivalent to more than 60% of the number of rows
 - **Non-stationarity:** the column (time series) presents statistical properties that change through time
 - **Seasonal:** the column (time series) exhibits a seasonal pattern
 - **Imbalance:** the column (categorical) presents a high imbalance ratio between existing categories
   Imbalancement is calculated as *imbalanced_score*: 1 - (entropy(value_counts) / log2(number_categories))
-  - Moderate: A moderate warning is raised if *imbalanced_score* between 0.15 and 5. 
+  - Moderate: A moderate warning is raised if *imbalanced_score* between 0.15 and 5.
   - High: A high warning is raised if *imbalanced_score* between 0.5 and 1.
 
 Fabric further enables the **interactive exploration of warnings**, filtering over specific warnings and severity types (i.e., **Moderate** and **High**):
