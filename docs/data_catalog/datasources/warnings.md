@@ -31,18 +31,32 @@ To enable data-centric development, Fabric **automatically detects and signals p
 Fabric currently supports the following warnings:
 
 - **Constant:** the column presents the same value for all observations
+  - High: A high warning is raised whenever all the variables in a column have the same value
 - **Zeros:**  the column presents the value “0” for several observations
+  - Moderate: A moderate warning is raised if a column has between **10%** and **25%** of zeros
+  - High: A high warning is raised if a column has more than **50%** records as zeros
 - **Unique:** the column contains only unique/distinct values
+  - High: A high warnins is raised if all the values of a column are different
 - **Cardinality:** the columns (categorical) has a large number of distinct values
+  - Moderate: A moderate warning is raised if a column has a cardinality equivalent to between 75% and 90% of the number of rows
+  - High: A high warning is raised if a column has a cardinality equivalent to more than 90% of the number of rows
 - **Infinity:** the column presents infinite ($\inf$) values
+  - High: A high warning is raised is all the values of a column are inf
 - **Constant_length**: the column (text) has constant length
+  - High: A high warning is raised is all the values of a column have the same string length
 - **Correlation:** the columns is highly correlated with other(s)
 - **Skeweness**: the column distribution (numerical) is skewed
+  - Moderate: A moderate warning is raised if the value for the calculated skewness is between [-1, -0.5] or [0.5, 1]
+  - High: A high warning is raised if the value for the calculated skewness is lower than -1 or bigger than 1.
 - **Missings:** the column presents several missing values
+  - Moderate: A moderate warning is raised if a column has a cardinality equivalent to between 30% and 60% of the number of rows
+  - High: A high warning is raised if a column has a cardinality equivalent to more than 60% of the number of rows
 - **Non-stationarity:** the column (time series) presents statistical properties that change through time
 - **Seasonal:** the column (time series) exhibits a seasonal pattern
-- **Uniform:** the column (numerical) follows a uniform distribution
 - **Imbalance:** the column (categorical) presents a high imbalance ratio between existing categories
+  Imbalancement is calculated as *imbalanced_score*: 1 - (entropy(value_counts) / log2(number_categories))
+  - Moderate: A moderate warning is raised if *imbalanced_score* between 0.15 and 5.
+  - High: A high warning is raised if *imbalanced_score* between 0.5 and 1.
 
 Fabric further enables the **interactive exploration of warnings**, filtering over specific warnings and severity types (i.e., **Moderate** and **High**):
 
