@@ -1,7 +1,5 @@
 # 🌐 Regions
 
-**Use the Cognito Unsupported Regions template*.
-
 | Name | ID | Supported | Notes |
 | --- | --- | --- | --- |
 | N. Virginia | us-east-1 | ✅ | ➖ |
