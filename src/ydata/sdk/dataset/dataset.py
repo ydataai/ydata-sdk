@@ -5,6 +5,7 @@ from pandas import read_csv, to_datetime
 
 from ydata.sdk.utils.cache import cache_file
 
+
 def get_timeseries() -> pdDataFrame:
     def generate_multivariate_multientity_timeseries(num_rows=1000, num_entities=5, num_timesteps=10):
         """Generates a multivariate, multi-entity time series dataset.
@@ -26,7 +27,8 @@ def get_timeseries() -> pdDataFrame:
                     'time': t
                 }
                 for feature in range(3):
-                    row[f'feature_{feature}'] = np.random.rand()  # Simulate some random data
+                    # Simulate some random data
+                    row[f'feature_{feature}'] = np.random.rand()
                 data.append(row)
 
         # Adding more rows to meet the desired number of rows
@@ -46,6 +48,7 @@ def get_timeseries() -> pdDataFrame:
         return df
 
     return generate_multivariate_multientity_timeseries()
+
 
 def get_census() -> pdDataFrame:
     file_name = cache_file(
