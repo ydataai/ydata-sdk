@@ -37,7 +37,7 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    "httpx==0.23.3",
+    "httpx==0.28.1",
     "ydata-core>=0.2.0",
     "pandas>=1.5.0",
     "prettytable==3.6.0",
