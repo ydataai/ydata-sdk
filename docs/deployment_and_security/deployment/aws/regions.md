@@ -1,16 +1,14 @@
 # 🌐 Regions
 
-**Use the Cognito Unsupported Regions template*.
-
 | Name | ID | Supported | Notes |
 | --- | --- | --- | --- |
 | N. Virginia | us-east-1 | ✅ | ➖ |
 | Ohio | us-east-2 | ✅ | ➖ |
 | N. California | us-west-1 | ✅ | ➖ |
 | Oregon | us-west-2 | ✅ | ➖ |
-| Cape Town | af-south-1 | ✅ | Cognito is not supported at the moment* |
+| Cape Town | af-south-1 | ✅ | ➖ |
 | Melbourne | ap-southeast-4 | 🔴 | No GPU machine types available at the moment |
-| Hong Kong | ap-east-1 | ✅ | Cognito is not supported at the moment* |
+| Hong Kong | ap-east-1 | ✅ | ➖ |
 | Hyderabad | ap-south-2 | 🔴 | No GPU machine types available at the moment |
 | Jakarta | ap-southeast-3 | 🔴 | No GPU machine types available at the moment |
 | Mumbai | ap-south-1 | ✅ | ➖ |
