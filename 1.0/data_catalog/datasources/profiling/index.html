@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
     
     
       
@@ -3443,11 +3443,6 @@ Currently, the following types are recognized:</p>
 as it automatically calculated detailed statistics, visualizations, and insights for each variable in the dataset. It offers information such as data type, missing values, unique values, basic descriptive statistics
 , histogram plots, and distribution plots. This allows data analysts and scientists to quickly understand the characteristics of each variable, identify potential data quality issues, and gain initial insights into the data's distribution and variability.</p>
 <h2 id="multivariate-profiling">Multivariate profiling</h2>
-<figure>
-<p><img alt="Multivariate profiling ydata-profiling" src="../_static/img/multivariate_profiling.png" width="700" />
-   </p>
-<figcaption>Multivariate profiling metrics and visualization</figcaption>
-</figure>
 <p>This section provides essentials insights into the relationships between variables through correlations matrices and interactions.
 The correlation view computes and presents correlation coefficients between pairs of numerical variables, helping to identify potential linear relationships.
 This assists data analysts and scientists in understanding how variables change together and highlights possible multi collinearity issues.</p>
@@ -3466,6 +3461,11 @@ their dependencies. Additionally, Fabric’s real-time interactivity allows user
 - categorical to categorical variable: Cramer's V association coefficient
 - numerical to categorical: Cramer's V association coefficient with the numerical variable discretized automatically</p>
 <h3 id="interactions">Interactions</h3>
+<figure>
+<p><img alt="YData Fabric Correlations tab" src="../../../assets/data_catalog/datasources/fabric_interactions.png" width="700" />
+   </p>
+<figcaption>Correlations section</figcaption>
+</figure>
 <p>The interactions plot visually represents how two variables influence each other across different sections of the data.
 It goes beyond simple correlations by providing an interactive view of how one variable changes in relation to another.
 This plot helps users detect non-linear relationships and complex patterns, allowing for deeper insights during Exploratory Data Analysis (EDA).
@@ -3477,9 +3477,9 @@ provides a comprehensive summary of missing values across variables, indicating 
 allowing users to quickly identify which variables have the most significant amount of missing information.</p>
 <h2 id="outliers">Outliers **</h2>
 <figure>
-<p><img alt="Outliers profiling" src="../_static/img/outliers.png" width="700" />
+<p><img alt="YData Fabric Profiling tab" src="../../../assets/data_catalog/datasources/fabric_outliers.png" width="700" />
    </p>
-<figcaption>Outliers identification</figcaption>
+<figcaption>Profiling sections</figcaption>
 </figure>
 <p>This section provides a comprehensive profiling over the potential dataset outliers. You can validate and observe outliers presence and deviation from the general distribution of numerical variables
 based on observed variance.
